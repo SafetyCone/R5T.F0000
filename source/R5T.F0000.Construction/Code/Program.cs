@@ -7,7 +7,7 @@ namespace R5T.F0000.Construction
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Instances.GuidFormatDemonstration.ShowFormats();
         }
     }
 }
