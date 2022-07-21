@@ -24,6 +24,16 @@ namespace R5T.F0000
             return output;
         }
 
+        public string Describe(params char[] characters)
+        {
+
+        }
+
+        public string Describe(IEnumerable<char> characters)
+        {
+            
+        }
+
         public char[] GetAsciiCharactersWhere(
             Func<char, bool> predicate)
         {
@@ -77,8 +87,6 @@ namespace R5T.F0000
                 '' => characterName.FormFeed, // 012
                 '\r' => characterName.CarriageReturn, // 013
                 ' ' => characterName.Space, // 032
-                '\x85' => characterName.NextLine, // 133
-                ' ' => characterName.NonBreakingSpace, // 160
 
                 '0' => characterName.Zero, // 048
                 '1' => characterName.One, // 049
@@ -90,6 +98,9 @@ namespace R5T.F0000
                 '7' => characterName.Seven, // 055
                 '8' => characterName.Eight, // 056
                 '9' => characterName.Nine, // 057
+
+                '\x85' => characterName.NextLine, // 133
+                ' ' => characterName.NonBreakingSpace, // 160
 
                 _ => characterName.Unknown, // No number, place-holder value that can be removed once ALL characters are present.
             };
@@ -246,6 +257,73 @@ namespace R5T.F0000
         public bool IsWhitespace(char character)
         {
             var output = Char.IsWhiteSpace(character);
+            return output;
+        }
+
+        public string List(
+            string separator,
+            string ifEmptyDescription,
+            params char[] characters)
+        {
+            var output = this.List(
+                separator,
+                ifEmptyDescription,
+                characters.AsEnumerable());
+
+            return output;
+        }
+
+        public string List(
+            string separator,
+            params char[] characters)
+        {
+            var output = this.List(
+                separator,
+                characters.AsEnumerable());
+
+            return output;
+        }
+
+        public string List(params char[] characters)
+        {
+            var output = this.List(characters.AsEnumerable());
+
+            return output;
+        }
+
+        public string List(
+            string separator,
+            string ifEmptyDescription,
+            IEnumerable<char> characters)
+        {
+            if (characters.None())
+            {
+                return ifEmptyDescription;
+            }
+
+            var output = System.String.Join(separator, characters);
+            return output;
+        }
+
+        public string List(
+            string separator,
+            IEnumerable<char> characters)
+        {
+            var output = this.List(
+                separator,
+                Instances.Descriptions.IfEmpty,
+                characters);
+
+            return output;
+        }
+
+        public string List(IEnumerable<char> characters)
+        {
+            var output = this.List(
+                Instances.Strings.CommaSeparatedListSpacedSeparator,
+                Instances.Descriptions.IfEmpty,
+                characters);
+
             return output;
         }
 
