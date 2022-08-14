@@ -26,12 +26,18 @@ namespace R5T.F0000
 
         public string Describe(params char[] characters)
         {
-
+            var output = this.Describe(characters.AsEnumerable());
+            return output;
         }
 
         public string Describe(IEnumerable<char> characters)
         {
-            
+            var strings = characters
+                .Select(xChar => this.Describe(xChar))
+                ;
+
+            var output = System.String.Join(Instances.Characters.NewLine, strings);
+            return output;
         }
 
         public char[] GetAsciiCharactersWhere(
@@ -81,12 +87,52 @@ namespace R5T.F0000
             {
                 '\0' => characterName.Null, // 000
                 '' => characterName.StartOfHeading, // 001
+                '' => characterName.StartOfText, // 002
+                '' => characterName.EndOfText, // 003
+                '' => characterName.EndOfTransmission, // 004
+                '' => characterName.Enquiry, // 005
+                '' => characterName.Acknowledgment, // 006
+                '' => characterName.Bell, // 007
+                '' => characterName.Backspace, // 008
                 '\t' => characterName.Tab, // 009
                 '\n' => characterName.LineFeed, // 010
                 '' => characterName.VerticalTab, // 011
                 '' => characterName.FormFeed, // 012
                 '\r' => characterName.CarriageReturn, // 013
+                '' => characterName.ShiftOut, // 014
+                '' => characterName.ShiftIn, // 015
+                '' => characterName.DataLineEscape, // 016
+                '' => characterName.DeviceControl1, // 017
+                '' => characterName.DeviceControl2, // 018
+                '' => characterName.DeviceControl3, // 019
+                '' => characterName.DeviceControl4, // 020
+                '' => characterName.NegativeAcknowledgment, // 021
+                '' => characterName.SynchronousIdle, // 022
+                '' => characterName.EndOfTransmitBlock, // 023
+                '' => characterName.Cancel, // 024
+                '' => characterName.EndOfMedium, // 025
+                '' => characterName.Substitute, // 026
+                '' => characterName.Escape, // 027
+                '' => characterName.FileSeparator, // 028
+                '' => characterName.GroupSeparator, // 029
+                '' => characterName.RecordSeparator, // 030
+                '' => characterName.UnitSeparator, // 031
                 ' ' => characterName.Space, // 032
+                '!' => characterName.ExclamationMark, // 033,
+                '"' => characterName.DoubleQuote, // 034
+                '#' => characterName.Pound, // 035
+                '$' => characterName.Dollar, // 036
+                '%' => characterName.Percent, // 037
+                '&' => characterName.Ampersand, // 038
+                '\'' => characterName.SingleQuote, // 039 
+                '(' => characterName.OpenParenthesis, // 040
+                ')' => characterName.CloseParenthesis, // 041
+                '*' => characterName.Asterix, // 042
+                '+' => characterName.Plus, // 043
+                ',' => characterName.Comma, // 044
+                '-' => characterName.Hyphen, // 045
+                '.' => characterName.Period, // 046
+                '/' => characterName.Slash, // 047
 
                 '0' => characterName.Zero, // 048
                 '1' => characterName.One, // 049
@@ -98,6 +144,27 @@ namespace R5T.F0000
                 '7' => characterName.Seven, // 055
                 '8' => characterName.Eight, // 056
                 '9' => characterName.Nine, // 057
+
+                ':' => characterName.Colon, // 058
+                ';' => characterName.Semicolon, // 059
+                '<' => characterName.LessThan, // 060
+                '=' => characterName.Equals, // 061
+                '>' => characterName.GreaterThan, // 062
+                '?' => characterName.QuestionMark, // 063
+                '@' => characterName.At, // 064
+
+                '[' => characterName.OpenBracket, // 091
+                '\\' => characterName.Backslash, // 092
+                ']' => characterName.CloseBracket, // 093
+                '^' => characterName.Caret, // 094
+                '_' => characterName.Underscore, // 095
+                '`' => characterName.Backtick, // 096
+
+                '{' => characterName.OpenBrace, // 0123
+                '|' => characterName.Pipe, // 124
+                '}' => characterName.CloseBrace, // 0125
+                '~' => characterName.Tilde, // 0126
+                '' => characterName.Delete, // 0127
 
                 '\x85' => characterName.NextLine, // 133
                 ' ' => characterName.NonBreakingSpace, // 160

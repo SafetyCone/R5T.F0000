@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 using R5T.T0141;
 
@@ -12,7 +13,19 @@ namespace R5T.F0000.Construction
 		/// <summary>
 		/// Shows an example Guid value in multiple formats.
 		/// </summary>
-		public void ShowFormats()
+		public void ShowFormats_FileOutput()
+        {
+			var outputFilePath = @"C:\Temp\Guid Formats.txt";
+
+			using var writer = new StreamWriter(outputFilePath)
+			{
+				AutoFlush = true,
+			};
+
+			IGuidFormatDemonstration.ShowFormats(writer);
+        }
+
+		private static void ShowFormats(TextWriter writer)
         {
 			var formatFunctionsByFormatName = new Dictionary<string, Func<Guid, string>>
 			{
@@ -28,13 +41,13 @@ namespace R5T.F0000.Construction
 				{ "X", Instances.GuidOperator.ToString_X_Format },
 			};
 
-			var guidString = Instances.Example.GuidString;
+			var guidString = Instances.Examples.GuidString;
 			var guid = Instances.GuidOperator.Parse(guidString);
 
-            foreach (var pair in formatFunctionsByFormatName)
-            {
-				Console.WriteLine($"{pair.Key}:\n{pair.Value(guid)}\n");
-            }
-        }
+			foreach (var pair in formatFunctionsByFormatName)
+			{
+				writer.WriteLine($"{pair.Key}:{Environment.NewLine}{pair.Value(guid)}{Environment.NewLine}");
+			}
+		}
 	}
 }

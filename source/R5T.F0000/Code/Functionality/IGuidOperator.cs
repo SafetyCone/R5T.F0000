@@ -7,9 +7,58 @@ using GuidDocumentation = R5T.Y0000.Documentation.ForGuid;
 
 namespace R5T.F0000
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Prior work:
+    /// * R5T.B0000.IGuidOperator
+    /// * R5T.T0055.IGuidOperator
+    /// * R5T.D0004.IGuidProvider
+    /// </remarks>
     [FunctionalityMarker]
     public interface IGuidOperator : IFunctionalityMarker
     {
+        public Guid GetDefault()
+        {
+            var output = new Guid();
+            return output;
+        }
+
+        public bool IsDefault(Guid guid)
+        {
+            var output = guid == default;
+            return output;
+        }
+
+        public Guid New()
+        {
+            var output = Guid.NewGuid();
+            return output;
+        }
+
+        /// <summary>
+        /// Returns a new Guid use the specified random (for seeded Guids, useful in testing).
+        /// </summary>
+        /// <remarks>
+        /// Source: https://stackoverflow.com/a/13188409/10658484
+        /// </remarks>
+        public Guid New(Random random)
+        {
+            var guidBytes = new byte[16];
+
+            random.NextBytes(guidBytes);
+
+            var output = new Guid(guidBytes);
+            return output;
+        }
+
+        public Guid Parse(string guidString)
+        {
+            var output = Guid.Parse(guidString);
+            return output;
+        }
+
         /// <summary>
         /// <inheritdoc cref="GuidDocumentation.B_Format"/>
         /// </summary>
@@ -90,12 +139,6 @@ namespace R5T.F0000
         public string ToString(Guid guid)
         {
             var output = guid.ToString();
-            return output;
-        }
-
-        public Guid Parse(string guidString)
-        {
-            var output = Guid.Parse(guidString);
             return output;
         }
     }
