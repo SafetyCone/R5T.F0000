@@ -157,6 +157,41 @@ namespace R5T.F0000
             return output;
         }
 
+        public bool StartsWith(string @string, string start)
+        {
+            var isNull = @string is null;
+            var startIsNull = start is null;
+
+            if(isNull)
+            {
+                // If the string is null, then it all depends on the start. If the start is null, then true, else false.
+                return startIsNull;
+            }
+            // Now we know the string is not null.
+
+            if(startIsNull)
+            {
+                // If the string is not null, but the start is null, then false.
+                return false;
+            }
+            // Now we know the start is not null.
+
+            var isTooShort = @string.Length < start.Length;
+            if(isTooShort)
+            {
+                return false;
+            }
+            // Now we know it is at least of the right length.
+
+            // Use a span to avoid creating an extra string on the heap.
+            var output = MemoryExtensions.Equals(
+                @string.AsSpan(0, start.Length),
+                start,
+                StringComparison.Ordinal);
+
+            return output;
+        }
+
         public string Trim(string @string)
         {
 			var output = @string.Trim();

@@ -8,6 +8,22 @@ namespace R5T.F0000
 	[FunctionalityMarker]
 	public partial interface IFileNameOperator : IFunctionalityMarker
 	{
+		public string AppendToFileNameStem(
+			string fileName,
+			string appendix)
+		{
+			var fileNameStem = Instances.FileNameOperator.GetFileNameStem(fileName);
+			var fileExtension = Instances.FileNameOperator.GetFileExtension(fileName);
+
+			var newFileNameStem = fileNameStem + appendix;
+
+			var newFileName = Instances.FileNameOperator.GetFileName(
+				newFileNameStem,
+				fileExtension);
+
+			return newFileName;
+		}
+
 		public string GetFileExtension(string fileName)
         {
 			var output = Instances.FileExtensionOperator.GetFileExtension(fileName);

@@ -1,5 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 using R5T.T0132;
 
@@ -15,7 +19,68 @@ namespace R5T.F0000
 	[FunctionalityMarker]
 	public partial interface IFileSystemOperator : IFunctionalityMarker
 	{
-		public void CopyFile(
+        public async Task ClearFile(string filePath)
+        {
+            await File.WriteAllTextAsync(
+                filePath,
+                System.String.Empty);
+        }
+
+        public void ClearFile_Synchronous(string filePath)
+        {
+            File.WriteAllText(
+                filePath,
+                System.String.Empty);
+        }
+
+        /// <summary>
+        /// Copies a directory.
+        /// </summary>
+        /// <remarks>
+        /// It is BONKERS that C# does not have a built-in implementation of copying directories. Wut?!?
+        /// </remarks>
+        public void CopyDirectory(
+            string sourceDirectoryPath,
+            string destinationDirectoryPath,
+            bool recursive = true)
+        {
+            /// Adapted from: https://docs.microsoft.com/en-us/dotnet/standard/io/how-to-copy-directories
+
+            // Get information about the source directory
+            var directory = new DirectoryInfo(sourceDirectoryPath);
+
+            // Check if the source directory exists
+            if (!directory.Exists)
+            {
+                throw new DirectoryNotFoundException($"Source directory not found: {directory.FullName}");
+            }
+
+            // Cache directories before we start copying.
+            DirectoryInfo[] subDirectories = directory.GetDirectories();
+
+            // Create the destination directory
+            Directory.CreateDirectory(destinationDirectoryPath);
+
+            // Get the files in the source directory and copy to the destination directory
+            foreach (FileInfo file in directory.GetFiles())
+            {
+                string targetFilePath = Path.Combine(destinationDirectoryPath, file.Name);
+                file.CopyTo(targetFilePath);
+            }
+
+            // If recursive and copying subdirectories, recursively call this method
+            if (recursive)
+            {
+                foreach (DirectoryInfo subDirectory in subDirectories)
+                {
+                    string newDestinationDirectoryPath = Path.Combine(destinationDirectoryPath, subDirectory.Name);
+
+                    this.CopyDirectory(subDirectory.FullName, newDestinationDirectoryPath, true);
+                }
+            }
+        }
+
+        public void CopyFile(
 			string sourceFilePath,
 			string destinationFilePath)
         {
@@ -53,6 +118,11 @@ namespace R5T.F0000
             {
                 this.DeleteDirectory_Robust(directoryPath);
             }
+        }
+
+        public void DeleteFile_OkIfNotExists(string filePath)
+        {
+            File.Delete(filePath);
         }
 
         /// <summary>
@@ -106,10 +176,104 @@ namespace R5T.F0000
             }
         }
 
+        public IEnumerable<string> EnumerateAllChildDirectoryPaths(string directoryPath)
+        {
+            var output = this.EnumerateChildDirectoryPaths(
+                directoryPath,
+                Instances.SearchPatterns.All);
+
+            return output;
+        }
+
+        public IEnumerable<string> EnumerateAllChildFilePaths(
+            string directoryPath)
+        {
+            var output = this.EnumerateChildFilePaths(
+                directoryPath,
+                Instances.SearchPatterns.All);
+
+            return output;
+        }
+
+        public IEnumerable<string> EnumerateChildDirectoryPaths(
+            string directoryPath,
+            string searchPattern)
+        {
+            var output = Directory.EnumerateDirectories(directoryPath, searchPattern, SearchOption.TopDirectoryOnly);
+            return output;
+        }
+
+        public IEnumerable<string> EnumerateChildFilePaths(
+            string directoryPath,
+            string searchPattern)
+        {
+            var output = Directory.EnumerateFiles(directoryPath, searchPattern, SearchOption.TopDirectoryOnly);
+            return output;
+        }
+
+        public IEnumerable<string> EnumerateChildFilePathsByRegex(
+            string directoryPath,
+            string regexPattern)
+        {
+            var output = Directory.EnumerateFiles(directoryPath, Instances.SearchPatterns.All, SearchOption.TopDirectoryOnly)
+                .Where(x => Regex.IsMatch(x, regexPattern))
+                ;
+
+            return output;
+        }
+
+        public IEnumerable<string> EnumerateChildFilePathsByRegexOnFileName(
+            string directoryPath,
+            string regexPattern)
+        {
+            var output = Directory.EnumerateFiles(directoryPath, Instances.SearchPatterns.All, SearchOption.TopDirectoryOnly)
+                .Where(x => Regex.IsMatch(new FileInfo(x).Name, regexPattern))
+                ;
+
+            return output;
+        }
+
         public bool FileExists(string filePath)
         {
             var output = File.Exists(filePath);
             return output;
+        }
+
+        public string[] FindChildFilesInDirectoryByFileExtension(
+            string directoryPath,
+            string fileExtension)
+        {
+            var searchPattern = Instances.SearchPatternGenerator.AllFilesWithExtension(fileExtension);
+
+            var output = this.FindChildFilesInDirectory(directoryPath, searchPattern)
+                .ToArray();
+
+            return output;
+        }
+
+        public IEnumerable<string> FindChildFilesInDirectory(
+            string directoryPath,
+            string searchPattern)
+        {
+            var output = this.EnumerateChildFilePaths(directoryPath, searchPattern);
+            return output;
+        }
+
+        public IEnumerable<string> FindChildFilesInDirectoryByRegexOnFileName(
+            string directoryPath,
+            string regexPattern)
+        {
+            var output = this.EnumerateChildFilePathsByRegexOnFileName(directoryPath, regexPattern);
+            return output;
+        }
+
+        public void VerifyFileExists(string filePath)
+        {
+            var fileExists = this.FileExists(filePath);
+            if(!fileExists)
+            {
+                throw new FileNotFoundException("File did not exists.", filePath);
+            }
         }
     }
 }
