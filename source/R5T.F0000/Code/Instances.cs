@@ -26,6 +26,7 @@ namespace R5T.F0000
         public static IExitCodeOperator ExitCodeOperator { get; } = F0000.ExitCodeOperator.Instance;
         public static IFileExtensionOperator FileExtensionOperator { get; } = F0000.FileExtensionOperator.Instance;
         public static IFileNameOperator FileNameOperator { get; } = F0000.FileNameOperator.Instance;
+        public static IFileOperator FileOperator { get; } = F0000.FileOperator.Instance;
         public static IFileSystemOperator FileSystemOperator { get; } = F0000.FileSystemOperator.Instance;
         public static IIndex Index { get; } = F0000.Index.Instance;
         public static IIndexOperator IndexOperator { get; } = F0000.IndexOperator.Instance;
@@ -47,5 +48,8 @@ namespace R5T.F0000
         public static IUrlOperator UrlOperator { get; } = F0000.UrlOperator.Instance;
         public static IVersionOperator VersionOperator { get; } = F0000.VersionOperator.Instance;
         public static IVersions Versions { get; } = F0000.Versions.Instance;
+        public static IXmlNamespaceNames XmlNamespaceNames { get; } = F0000.XmlNamespaceNames.Instance;
+        public static IXmlOperator XmlOperator { get; } = F0000.XmlOperator.Instance;
+        public static IXmlStrings XmlStrings { get; } = F0000.XmlStrings.Instance;
     }
 }
