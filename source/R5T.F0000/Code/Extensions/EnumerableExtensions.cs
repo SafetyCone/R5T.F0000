@@ -8,6 +8,12 @@ namespace System.Linq
 {
     public static class EnumerableExtensions
     {
+        public static IEnumerable<T> Clear<T>(this IEnumerable<T> enumerable)
+        {
+            var output = Instances.EnumerableOperator.Clear(enumerable);
+            return output;
+        }
+
         public static IEnumerable<T> ExceptLast<T>(this IEnumerable<T> enumerable, int numberOfElements)
         {
             var output = Instances.EnumerableOperator.ExceptLast(enumerable, numberOfElements);

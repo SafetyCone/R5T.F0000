@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static SearchPatternGenerator Instance { get; } = new();
+	    public static ISearchPatternGenerator Instance { get; } = new SearchPatternGenerator();
 
 	    private SearchPatternGenerator()
 	    {

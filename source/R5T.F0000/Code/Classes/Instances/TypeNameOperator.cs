@@ -7,11 +7,12 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static TypeNameOperator Instance { get; } = new();
+	    public static ITypeNameOperator Instance { get; } = new TypeNameOperator();
 
 	    private TypeNameOperator()
 	    {
-        }
+			
+		}
 
 	    #endregion
 	}

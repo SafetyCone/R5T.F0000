@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static Index Instance { get; } = new();
+	    public static IIndex Instance { get; } = new Index();
 
 	    private Index()
 	    {

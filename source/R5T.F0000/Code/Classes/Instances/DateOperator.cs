@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static DateOperator Instance { get; } = new();
+	    public static IDateOperator Instance { get; } = new DateOperator();
 
 	    private DateOperator()
 	    {

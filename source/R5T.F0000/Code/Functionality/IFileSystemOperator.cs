@@ -176,6 +176,11 @@ namespace R5T.F0000
             }
         }
 
+        public void EnsureDirectoryExists(string directoryPath)
+        {
+            this.CreateDirectory_OkIfAlreadyExists(directoryPath);
+        }
+
         public IEnumerable<string> EnumerateAllChildDirectoryPaths(string directoryPath)
         {
             var output = this.EnumerateChildDirectoryPaths(
@@ -265,6 +270,18 @@ namespace R5T.F0000
         {
             var output = this.EnumerateChildFilePathsByRegexOnFileName(directoryPath, regexPattern);
             return output;
+        }
+
+        public string ReadText(string textFilePath)
+        {
+            var text = File.ReadAllText(textFilePath);
+            return text;
+        }
+
+        public string[] ReadText_Lines(string textFilePath)
+        {
+            var lines = File.ReadAllLines(textFilePath);
+            return lines;
         }
 
         public void VerifyFileExists(string filePath)

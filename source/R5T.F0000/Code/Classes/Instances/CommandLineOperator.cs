@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static CommandLineOperator Instance { get; } = new();
+	    public static ICommandLineOperator Instance { get; } = new CommandLineOperator();
 
 	    private CommandLineOperator()
 	    {

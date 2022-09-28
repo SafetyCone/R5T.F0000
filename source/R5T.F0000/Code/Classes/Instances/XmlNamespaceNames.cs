@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static XmlNamespaceNames Instance { get; } = new();
+	    public static IXmlNamespaceNames Instance { get; } = new XmlNamespaceNames();
 
 	    private XmlNamespaceNames()
 	    {

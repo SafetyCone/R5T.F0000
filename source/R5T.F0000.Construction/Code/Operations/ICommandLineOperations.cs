@@ -1,16 +1,26 @@
 using System;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-using R5T.T0141;
+using R5T.T0132;
 
 
 namespace R5T.F0000.Construction
 {
-	[ExplorationsMarker]
-	public partial interface ICommandLineExplorations : IExplorationsMarker
+	[FunctionalityMarker]
+	public partial interface ICommandLineOperations : IFunctionalityMarker
 	{
+		public void EchoCurrentDirectoryAtCommandLine()
+        {
+			var echoText = "%CD%";
+
+			// Should just output the current directory path. For example: "C:\Code\DEV\Git\GitHub\SafetyCone\R5T.F0000\source\R5T.F0000.Construction\bin\Debug\net5.0"
+			CommandLineOperator.Instance.Run_Synchronous(
+                Instances.ExecutableNames.Command,
+                //"cmd.exe",
+                $"/c echo \"{echoText}\"");
+        }
+
 		public async Task RunEchoingExecutable()
 		{
 			var executableFilePath = Instances.ExecutableFilePaths.EchoingExecutableFilePath;
@@ -22,7 +32,7 @@ namespace R5T.F0000.Construction
 				out var standardInput);
 
 			var waitingForProcessExit = process.WaitForExitAsync();
-			
+
 			Thread.Sleep(Instances.Durations.Short);
 
 			// Write input to the process, should receive output to the parent process console from above.
@@ -58,7 +68,7 @@ namespace R5T.F0000.Construction
 		}
 
 		public void RunEchoingExecutableSynchronously()
-        {
+		{
 			var executableFilePath = Instances.ExecutableFilePaths.EchoingExecutableFilePath;
 
 			using var process = Instances.DotnetCommandLineOperator.Start(
@@ -99,7 +109,7 @@ namespace R5T.F0000.Construction
 		}
 
 		public void RunMinimalExecutable()
-        {
+		{
 			var executableFilePath = Instances.ExecutableFilePaths.MinimalExecutableFilePath;
 
 			using var process = F0000.Instances.CommandLineOperator.Start(
@@ -112,6 +122,6 @@ namespace R5T.F0000.Construction
 			process.WaitForExit();
 
 			Console.WriteLine($"Process exit code: {process.ExitCode}");
-        }
+		}
 	}
 }

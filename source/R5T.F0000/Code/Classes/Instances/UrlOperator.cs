@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static UrlOperator Instance { get; } = new();
+	    public static IUrlOperator Instance { get; } = new UrlOperator();
 
 	    private UrlOperator()
 	    {

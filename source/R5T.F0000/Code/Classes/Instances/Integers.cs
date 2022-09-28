@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static Integers Instance { get; } = new();
+	    public static IIntegers Instance { get; } = new Integers();
 
 	    private Integers()
 	    {

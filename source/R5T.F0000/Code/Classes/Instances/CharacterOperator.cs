@@ -7,7 +7,7 @@ namespace R5T.F0000
     {
         #region Infrastructure
 
-        public static CharacterOperator Instance { get; } = new();
+        public static ICharacterOperator Instance { get; } = new CharacterOperator();
 
         private CharacterOperator()
         {

@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static FileExtensionOperator Instance { get; } = new();
+	    public static IFileExtensionOperator Instance { get; } = new FileExtensionOperator();
 
 	    private FileExtensionOperator()
 	    {

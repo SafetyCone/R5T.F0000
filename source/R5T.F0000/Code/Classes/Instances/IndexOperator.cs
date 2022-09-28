@@ -7,7 +7,7 @@ namespace R5T.F0000
     {
         #region Infrastructure
 
-        public static IndexOperator Instance { get; } = new();
+        public static IIndexOperator Instance { get; } = new IndexOperator();
 
         private IndexOperator()
         {

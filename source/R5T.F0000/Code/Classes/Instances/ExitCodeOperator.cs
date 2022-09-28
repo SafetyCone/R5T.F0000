@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static ExitCodeOperator Instance { get; } = new();
+	    public static IExitCodeOperator Instance { get; } = new ExitCodeOperator();
 
 	    private ExitCodeOperator()
 	    {

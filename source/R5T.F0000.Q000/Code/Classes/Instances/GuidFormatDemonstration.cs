@@ -1,7 +1,7 @@
 using System;
 
 
-namespace R5T.F0000.Construction
+namespace R5T.F0000.Q000
 {
 	public class GuidFormatDemonstration : IGuidFormatDemonstration
 	{

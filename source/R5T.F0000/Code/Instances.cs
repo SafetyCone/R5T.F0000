@@ -8,6 +8,7 @@ namespace R5T.F0000
     public static class Instances
     {
         public static IArrayOperator ArrayOperator { get; } = F0000.ArrayOperator.Instance;
+        public static IBooleanOperator BooleanOperator { get; } = F0000.BooleanOperator.Instance;
         public static ICharacterIndexes CharacterIndexes { get; } = Z0000.CharacterIndexes.Instance;
         public static ICharacterNames CharacterNames { get; } = Z0000.CharacterNames.Instance;
         public static ICharacters Characters { get; } = Z0000.Characters.Instance;
@@ -18,6 +19,7 @@ namespace R5T.F0000
         public static IDescriptions Descriptions { get; } = F0000.Descriptions.Instance;
         public static IDictionaryOperator DictionaryOperator { get; } = F0000.DictionaryOperator.Instance;
         public static IEnumerableOperator EnumerableOperator { get; } = F0000.EnumerableOperator.Instance;
+        public static IEnumerationOperator EnumerationOperator { get; } = F0000.EnumerationOperator.Instance;
         public static IEnvironmentOperator EnvironmentOperator { get; } = F0000.EnvironmentOperator.Instance;
         public static IExceptionMessageOperator ExceptionMessageOperator { get; } = F0000.ExceptionMessageOperator.Instance;
         public static IExceptionOperator ExceptionOperator { get; } = F0000.ExceptionOperator.Instance;
@@ -51,5 +53,6 @@ namespace R5T.F0000
         public static IXmlNamespaceNames XmlNamespaceNames { get; } = F0000.XmlNamespaceNames.Instance;
         public static IXmlOperator XmlOperator { get; } = F0000.XmlOperator.Instance;
         public static IXmlStrings XmlStrings { get; } = F0000.XmlStrings.Instance;
+        public static IXPathGenerator XPathGenerator { get; } = F0000.XPathGenerator.Instance;
     }
 }

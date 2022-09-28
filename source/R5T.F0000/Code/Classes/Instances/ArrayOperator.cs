@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static ArrayOperator Instance { get; } = new();
+	    public static IArrayOperator Instance { get; } = new ArrayOperator();
 
 	    private ArrayOperator()
 	    {

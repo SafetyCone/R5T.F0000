@@ -36,6 +36,14 @@ namespace R5T.F0000
 			return output;
         }
 
+		public string GetTypeNameOf<T>(T instance)
+        {
+			var type = this.GetTypeOf(instance);
+
+			var output = this.GetNameOf(type);
+			return output;
+        }
+
 		/// <summary>
 		/// Gets the type of the <typeparamref name="T"/>.
 		/// Note: same as the typeof() operator.
@@ -43,6 +51,12 @@ namespace R5T.F0000
 		public Type GetTypeOf<T>()
         {
 			var output = typeof(T);
+			return output;
+        }
+
+		public Type GetTypeOf<T>(T instance)
+        {
+			var output = instance.GetType();
 			return output;
         }
 	}

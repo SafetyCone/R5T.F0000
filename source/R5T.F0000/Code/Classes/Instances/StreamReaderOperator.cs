@@ -7,7 +7,7 @@ namespace R5T.F0002
 	{
 		#region Infrastructure
 
-	    public static StreamReaderOperator Instance { get; } = new();
+	    public static IStreamReaderOperator Instance { get; } = new StreamReaderOperator();
 
 	    private StreamReaderOperator()
 	    {

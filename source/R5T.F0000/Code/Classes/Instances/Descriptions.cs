@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static Descriptions Instance { get; } = new();
+	    public static IDescriptions Instance { get; } = new Descriptions();
 
 	    private Descriptions()
 	    {

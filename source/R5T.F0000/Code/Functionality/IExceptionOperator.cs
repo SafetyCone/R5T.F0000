@@ -9,6 +9,22 @@ namespace R5T.F0000
 	[FunctionalityMarker]
 	public partial interface IExceptionOperator : IFunctionalityMarker
 	{
+		public Exception GetUnhandledValueException(string value)
+        {
+			var message = $"Unhandled value: {value}";
+
+			return new Exception(message);
+		}
+
+		public Exception GetUnhandledValueException(
+			string value,
+			string preface)
+		{
+			var message = $"{preface}: {value}";
+
+			return new Exception(message);
+		}
+
 		public Exception GetErrorDataReceivedException(DataReceivedEventArgs eventArgs)
         {
 			var exception = new Exception(Instances.ExceptionMessageOperator.MessageIfMessageIsNull(

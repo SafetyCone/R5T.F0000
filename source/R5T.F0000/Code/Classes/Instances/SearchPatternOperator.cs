@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static SearchPatternOperator Instance { get; } = new();
+	    public static ISearchPatternOperator Instance { get; } = new SearchPatternOperator();
 
 	    private SearchPatternOperator()
 	    {

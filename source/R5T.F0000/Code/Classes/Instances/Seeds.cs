@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static Seeds Instance { get; } = new();
+	    public static ISeeds Instance { get; } = new Seeds();
 
 	    private Seeds()
 	    {

@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static EnvironmentOperator Instance { get; } = new();
+	    public static IEnvironmentOperator Instance { get; } = new EnvironmentOperator();
 
 	    private EnvironmentOperator()
 	    {

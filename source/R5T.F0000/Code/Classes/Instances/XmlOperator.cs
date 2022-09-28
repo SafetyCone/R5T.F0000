@@ -7,12 +7,29 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static XmlOperator Instance { get; } = new();
+	    public static IXmlOperator Instance { get; } = new XmlOperator();
 
 	    private XmlOperator()
 	    {
         }
 
 	    #endregion
+	}
+
+
+	namespace Implementations
+	{
+		public class XmlOperator : IXmlOperator
+		{
+			#region Infrastructure
+
+			public static IXmlOperator Instance { get; } = new XmlOperator();
+
+			private XmlOperator()
+			{
+			}
+
+			#endregion
+		}
 	}
 }

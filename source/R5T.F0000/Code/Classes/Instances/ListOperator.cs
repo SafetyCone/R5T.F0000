@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static ListOperator Instance { get; } = new();
+	    public static IListOperator Instance { get; } = new ListOperator();
 
 	    private ListOperator()
 	    {

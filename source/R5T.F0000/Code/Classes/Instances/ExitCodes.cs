@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static ExitCodes Instance { get; } = new();
+	    public static IExitCodes Instance { get; } = new ExitCodes();
 
 	    private ExitCodes()
 	    {

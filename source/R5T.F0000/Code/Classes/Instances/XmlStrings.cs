@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static XmlStrings Instance { get; } = new();
+	    public static IXmlStrings Instance { get; } = new XmlStrings();
 
 	    private XmlStrings()
 	    {

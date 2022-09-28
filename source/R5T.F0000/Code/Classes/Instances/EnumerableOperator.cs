@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static EnumerableOperator Instance { get; } = new();
+	    public static IEnumerableOperator Instance { get; } = new EnumerableOperator();
 
 	    private EnumerableOperator()
 	    {

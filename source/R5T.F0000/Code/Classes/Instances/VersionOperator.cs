@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static VersionOperator Instance { get; } = new();
+	    public static IVersionOperator Instance { get; } = new VersionOperator();
 
 	    private VersionOperator()
 	    {

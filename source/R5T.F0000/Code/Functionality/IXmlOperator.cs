@@ -9,6 +9,22 @@ namespace R5T.F0000
 	[FunctionalityMarker]
 	public partial interface IXmlOperator : IFunctionalityMarker
 	{
+		private static Implementations.IXmlOperator Implementations { get; } = F0000.Implementations.XmlOperator.Instance;
+
+
+		/// <summary>
+		/// Creates an <see cref="XElement"/> with the child name, adds it to the parent, and returns the child.
+		/// </summary>
+		/// <returns>The child <see cref="XElement"/>.</returns>
+		public XElement AddChild(XElement parentElement, string childName)
+        {
+			var child = this.CreateElement(childName);
+
+			parentElement.Add(child);
+
+			return child;
+        }
+
 		public XAttribute CreateAttribute(string name, string value)
         {
 			var output = new XAttribute(name, value);
@@ -50,6 +66,15 @@ namespace R5T.F0000
 
             return output;
 		}
+
+		/// <summary>
+		/// Quality-of-life overload for <see cref="CreateNewDocument_WithoutDefaultDeclaration()"/>
+		/// </summary>
+		public XDocument CreateNewDocument_Empty()
+        {
+			var document = this.CreateNewDocument_WithoutDefaultDeclaration();
+			return document;
+        }
 
 		public XDocument CreateNewDocument_WithoutDefaultDeclaration(
 			XElement root)
@@ -131,6 +156,12 @@ namespace R5T.F0000
 			return output;
 		}
 
+		public string EncodeText(string text)
+        {
+			var encodedText = Implementations.EncodeText_Custom(text);
+			return encodedText;
+        }
+
 		public XName GetLocalName(
 			XNamespace @namespace,
 			string localName)
@@ -207,6 +238,30 @@ namespace R5T.F0000
         {
 			var output = this.GetXmlnsNamespace();
 			return output;
+        }
+
+		/// <summary>
+		/// Quality-of-life overload for <see cref="Write(XDocument, string)"/>.
+		/// </summary>
+		public void Save(
+			XDocument xDocument,
+			string xmlFilePath)
+        {
+			this.Write(
+				xDocument,
+				xmlFilePath);
+        }
+
+		/// <summary>
+		/// Chooses <see cref="WriteToFile_EmptyIsOk(XDocument, string)"/> as the default.
+		/// </summary>
+		public void Write(
+			XDocument xDocument,
+			string xmlFilePath)
+        {
+			this.WriteToFile_EmptyIsOk(
+				xDocument,
+				xmlFilePath);
         }
 
 		/// <summary>

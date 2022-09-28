@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static Messages Instance { get; } = new();
+	    public static IMessages Instance { get; } = new Messages();
 
 	    private Messages()
 	    {

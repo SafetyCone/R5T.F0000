@@ -8,11 +8,10 @@ namespace R5T.F0000.Construction
     {
         static async Task Main()
         {
-            //Instances.CommandLineExplorations.RunMinimalExecutable();
-            //Instances.CommandLineExplorations.RunEchoingExecutableSynchronously();
-            await Instances.CommandLineExplorations.RunEchoingExecutable();
-
-            //Instances.GuidFormatDemonstration.ShowFormats_FileOutput();
+            Instances.CommandLineOperations.EchoCurrentDirectoryAtCommandLine();
+            //Instances.CommandLineOperations.RunMinimalExecutable();
+            //Instances.CommandLineOperations.RunEchoingExecutableSynchronously();
+            //await Instances.CommandLineOperations.RunEchoingExecutable();
         }
     }
 }

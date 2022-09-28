@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static NamespacedTypeNameOperator Instance { get; } = new();
+	    public static INamespacedTypeNameOperator Instance { get; } = new NamespacedTypeNameOperator();
 
 	    private NamespacedTypeNameOperator()
 	    {

@@ -9,5 +9,9 @@ namespace R5T.F0000.Construction
 	public partial interface IExecutableNames : IValuesMarker
 	{
 		public string Dotnet => "dotnet";
+		/// <summary>
+		/// "cmd" (which is short for "cmd.exe")
+		/// </summary>
+		public string Command => "cmd";
 	}
 }

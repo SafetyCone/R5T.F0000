@@ -30,6 +30,31 @@ namespace R5T.F0000
             return wasFound;
         }
 
+        public string Enquote(string @string)
+        {
+            var output = $"\"{@string}\"";
+            return output;
+        }
+
+        public string EnsureEnquoted(string @string)
+        {
+            var firstChar = @string.First();
+            var lastChar = @string.Last();
+
+            var firstQuoteToken = firstChar == Instances.Characters.Quote
+                ? Instances.Strings.Empty
+                : Instances.Strings.Quote
+                ;
+
+            var lastQuoteToken = lastChar == Instances.Characters.Quote
+                ? Instances.Strings.Empty
+                : Instances.Strings.Quote
+                ;
+
+            var output = $"{firstQuoteToken}{@string}{lastQuoteToken}";
+            return output;
+        }
+
         /// <summary>
         /// The default <see cref="System.String.GetHashCode()"/> is non-deterministic.
         /// This method just calls that method.
@@ -72,6 +97,15 @@ namespace R5T.F0000
         {
 			var output = @string[^1];
 			return output;
+        }
+
+        /// <summary>
+        /// A quality-of-life overload for <see cref="IsNotNullAndNotEmpty(string)"/>.
+        /// </summary>
+        public bool HasValue(string @string)
+        {
+            var output = this.IsNotNullAndNotEmpty(@string);
+            return output;
         }
 
         public int IndexOfAny(

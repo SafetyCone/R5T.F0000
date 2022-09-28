@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static String Instance { get; } = new();
+	    public static IString Instance { get; } = new String();
 
 	    private String()
 	    {

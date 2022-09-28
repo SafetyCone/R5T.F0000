@@ -11,7 +11,7 @@ namespace R5T.F0000
 		/// <summary>
 		/// The default version (for assuming when no version is present) is 1.0.0.
 		/// </summary>
-		public Version Default => new(1, 0, 0);
+		public Version Default => new Version(1, 0, 0);
 
 		/// <summary>
 		/// The none version is just null (since Version is a reference type).
@@ -20,7 +20,7 @@ namespace R5T.F0000
 
 #pragma warning disable IDE1006 // Naming Styles
 
-        public Version _1_0_0 => new(1, 0, 0);
+        public Version _1_0_0 => new Version(1, 0, 0);
 
 #pragma warning restore IDE1006 // Naming Styles
     }

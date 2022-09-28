@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static ExceptionOperator Instance { get; } = new();
+	    public static IExceptionOperator Instance { get; } = new ExceptionOperator();
 
 	    private ExceptionOperator()
 	    {

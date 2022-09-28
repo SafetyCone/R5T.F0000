@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
+using System.Extensions;
+
 using R5T.T0132;
 
 
@@ -78,7 +80,7 @@ namespace R5T.F0000
             DataReceivedEventHandler receiveOutputData,
             bool redirectStandardInput = false)
         {
-            ProcessStartInfo startInfo = new(command, arguments)
+            ProcessStartInfo startInfo = new ProcessStartInfo(command, arguments)
             {
                 UseShellExecute = false,
                 CreateNoWindow = true,
@@ -86,7 +88,7 @@ namespace R5T.F0000
                 RedirectStandardOutput = true,
             };
 
-            Process process = new()
+            Process process = new Process()
             {
                 StartInfo = startInfo
             };
@@ -111,7 +113,7 @@ namespace R5T.F0000
             DataReceivedEventHandler receiveErrorData,
             bool redirectStandardInput = false)
         {
-            ProcessStartInfo startInfo = new(command, arguments)
+            ProcessStartInfo startInfo = new ProcessStartInfo(command, arguments)
             {
                 UseShellExecute = false,
                 CreateNoWindow = true,
@@ -120,7 +122,7 @@ namespace R5T.F0000
                 RedirectStandardOutput = true,
             };
 
-            Process process = new()
+            Process process = new Process()
             {
                 StartInfo = startInfo
             };
@@ -141,13 +143,13 @@ namespace R5T.F0000
             string command,
             string arguments)
         {
-            ProcessStartInfo startInfo = new(command, arguments)
+            ProcessStartInfo startInfo = new ProcessStartInfo(command, arguments)
             {
                 UseShellExecute = false,
                 CreateNoWindow = true,
             };
 
-            Process process = new()
+            Process process = new Process()
             {
                 StartInfo = startInfo
             };
@@ -193,7 +195,7 @@ namespace R5T.F0000
             string arguments,
             DataReceivedEventHandler receiveOutputData)
         {
-            List<Exception> exceptions = new();
+            List<Exception> exceptions = new List<Exception>();
 
             var exitCode = this.Run_Synchronous(
                 command,
@@ -234,22 +236,13 @@ namespace R5T.F0000
             return exitCode;
         }
 
-        //public int Run_Synchronous(
-        //    string command,
-        //    string arguments,
-        //    DataReceivedEventHandler receiveOutputData,
-        //    DataReceivedEventHandler receiveErrorData)
-        //{
-
-        //}
-
         public int Run_Synchronous(
             string command,
             string arguments,
             DataReceivedEventHandler receiveOutputData,
             DataReceivedEventHandler receiveErrorData)
         {
-            ProcessStartInfo startInfo = new(command, arguments)
+            ProcessStartInfo startInfo = new ProcessStartInfo(command, arguments)
             {
                 UseShellExecute = false,
                 CreateNoWindow = true,
@@ -257,7 +250,7 @@ namespace R5T.F0000
                 RedirectStandardOutput = true
             };
 
-            Process process = new()
+            Process process = new Process()
             {
                 StartInfo = startInfo
             };
@@ -287,7 +280,7 @@ namespace R5T.F0000
             DataReceivedEventHandler receiveOutputData,
             DataReceivedEventHandler receiveErrorData)
         {
-            ProcessStartInfo startInfo = new(command, arguments)
+            ProcessStartInfo startInfo = new ProcessStartInfo(command, arguments)
             {
                 UseShellExecute = false,
                 CreateNoWindow = true,
@@ -296,7 +289,7 @@ namespace R5T.F0000
                 RedirectStandardInput = true
             };
 
-            Process process = new()
+            Process process = new Process()
             {
                 StartInfo = startInfo
             };

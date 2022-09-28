@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static NowOperator Instance { get; } = new();
+	    public static INowOperator Instance { get; } = new NowOperator();
 
 	    private NowOperator()
 	    {

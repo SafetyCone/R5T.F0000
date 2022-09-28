@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static RandomOperator Instance { get; } = new();
+	    public static IRandomOperator Instance { get; } = new RandomOperator();
 
 	    private RandomOperator()
 	    {

@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static TextOperator Instance { get; } = new();
+	    public static ITextOperator Instance { get; } = new TextOperator();
 
 	    private TextOperator()
 	    {

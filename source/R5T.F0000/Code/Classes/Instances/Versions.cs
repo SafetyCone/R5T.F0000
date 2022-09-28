@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static Versions Instance { get; } = new();
+	    public static IVersions Instance { get; } = new Versions();
 
 	    private Versions()
 	    {

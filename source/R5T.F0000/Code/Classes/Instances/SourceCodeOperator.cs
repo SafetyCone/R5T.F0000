@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static SourceCodeOperator Instance { get; } = new();
+	    public static ISourceCodeOperator Instance { get; } = new SourceCodeOperator();
 
 	    private SourceCodeOperator()
 	    {

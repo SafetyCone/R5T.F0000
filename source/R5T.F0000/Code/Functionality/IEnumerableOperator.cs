@@ -10,6 +10,15 @@ namespace R5T.F0000
 	[FunctionalityMarker]
 	public partial interface IEnumerableOperator : IFunctionalityMarker
 	{
+		/// <summary>
+		/// Returns a new enumerable (does not clear the input enumerable, but provides a clean slate for future operations).
+		/// </summary>
+		public IEnumerable<T> Clear<T>(IEnumerable<T> enumerable)
+        {
+			var output = Enumerable.Empty<T>();
+			return output;
+        }
+
 		public IEnumerable<T> ExceptLast<T>(IEnumerable<T> enumerable, int numberOfElements)
         {
 			// Use SkipLast().
@@ -23,6 +32,17 @@ namespace R5T.F0000
 			var output = this.ExceptLast(enumerable, 1);
 			return output;
 		}
+
+		public IEnumerable<T> From<T>(T instance)
+        {
+			yield return instance;
+        }
+
+		public bool HasAny<T>(IEnumerable<T> items)
+        {
+			var output = items.Any();
+			return output;
+        }
 
 		public bool None<T>(IEnumerable<T> items)
         {

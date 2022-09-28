@@ -5,7 +5,7 @@ using System.IO;
 using R5T.T0141;
 
 
-namespace R5T.F0000.Construction
+namespace R5T.F0000.Q000
 {
 	[DemonstrationsMarker]
 	public partial interface IGuidFormatDemonstration : IDemonstrationsMarker

@@ -7,7 +7,7 @@ namespace R5T.F0000
 	{
 		#region Infrastructure
 
-	    public static DictionaryOperator Instance { get; } = new();
+	    public static IDictionaryOperator Instance { get; } = new DictionaryOperator();
 
 	    private DictionaryOperator()
 	    {
