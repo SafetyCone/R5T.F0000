@@ -32,5 +32,11 @@ namespace R5T.F0000
 			var output = $"{dateTime:yyyyMMdd HHmmss}";
 			return output;
 		}
+
+		public DateTime ToUtc(DateTime local)
+        {
+			var utc = local.ToUniversalTime();
+			return utc;
+        }
 	}
 }

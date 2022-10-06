@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 
 using R5T.T0132;
 
@@ -16,10 +17,32 @@ namespace R5T.F0000
 			return output;
         }
 
+		/// <summary>
+		/// Quality-of-life overload for <see cref="GetNamespacedTypeName(Type)"/>.
+		/// </summary>
+		public string GetNamespacedTypeName_ForType(Type type)
+        {
+			return this.GetNamespacedTypeName(type);
+        }
+
 		public string GetNamespacedTypeName(Type type)
 		{
 			var output = type.FullName;
 			return output;
+		}
+
+		public string GetNamespacedTypeName(TypeInfo typeInfo)
+		{
+			var output = this.GetNamespacedTypeName(typeInfo as Type);
+			return output;
+		}
+
+		/// <summary>
+		/// Quality-of-life overload for <see cref="GetNamespacedTypeName(TypeInfo)"/>.
+		/// </summary>
+		public string GetNamespacedTypeName_ForTypeInfo(TypeInfo typeInfo)
+		{
+			return this.GetNamespacedTypeName(typeInfo);
 		}
 
 		public string GetNameOf<T>()

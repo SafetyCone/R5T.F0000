@@ -33,5 +33,11 @@ namespace R5T.F0000
 
 			return exception;
 		}
+
+		public ArgumentException New_ArgumentException(string message)
+		{
+			var exception = new ArgumentException(message);
+			return exception;
+		}
 	}
 }

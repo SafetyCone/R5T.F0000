@@ -38,6 +38,16 @@ namespace R5T.F0000
 			return output;
         }
 
+		public string GetNamespaceName(string namespacedTypeName)
+        {
+			var tokenSeparatorChar = this.GetTokenSeparator_Character();
+
+			var lastTokenSeparatorIndex = namespacedTypeName.LastIndexOf(tokenSeparatorChar);
+
+			var namespaceName = namespacedTypeName[..(lastTokenSeparatorIndex)];
+			return namespaceName;
+        }
+
 		public string GetTypeName(string namespacedTypeName)
         {
 			var nameparts = this.GetNameParts(namespacedTypeName);

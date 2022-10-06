@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 using R5T.T0132;
 
@@ -99,6 +100,14 @@ namespace R5T.F0000
 			return output;
         }
 
+        public string GetString(StringBuilder stringBuilder, Action<StringBuilder> modifier)
+        {
+            modifier(stringBuilder);
+
+            var output = stringBuilder.ToString();
+            return output;
+        }
+
         /// <summary>
         /// A quality-of-life overload for <see cref="IsNotNullAndNotEmpty(string)"/>.
         /// </summary>
@@ -139,6 +148,15 @@ namespace R5T.F0000
             }
 
             return Instances.String.IndexOfNotFound;
+        }
+
+        /// <summary>
+        /// Quality-of-life overload for <see cref="WasFound(int)"/>.
+        /// </summary>
+        public bool IsFound(int index)
+        {
+            var output = this.WasFound(index);
+            return output;
         }
 
         public bool IsNotNullAndNotEmpty(string @string)
@@ -182,6 +200,23 @@ namespace R5T.F0000
         public bool NotFound(int index)
         {
             var output = index == Instances.String.IndexOfNotFound;
+            return output;
+        }
+
+        public IEnumerable<string> OrderAlphabetically(IEnumerable<string> items)
+        {
+            var output = items.OrderBy(x => x);
+            return output;
+        }
+
+        public IEnumerable<string> OrderAlphabetically_OnlyIfDebug(IEnumerable<string> items)
+        {
+            var output = items
+#if DEBUG
+                .OrderAlphabetically()
+#endif
+                ;
+
             return output;
         }
 

@@ -39,7 +39,7 @@ namespace R5T.F0000
             return output;
         }
 
-        public DateTime GetNow_UTC()
+        public DateTime GetNow_Utc()
         {
             var output = DateTime.UtcNow;
             return output;
@@ -64,20 +64,51 @@ namespace R5T.F0000
             return output;
         }
 
-        public DateTime GetToday_Local()
+        public DateTime GetTomorrow(DateTime dateTime)
         {
-            var now = this.GetNow_Local();
-
-            var today = this.GetDay(now);
-            return today;
+            var tomorrow = dateTime.AddDays(1);
+            return tomorrow;
         }
 
-        public DateTime GetToday_UTC()
+        public DateTime GetTomorrow_Local()
         {
-            var now = this.GetNow_Local();
+            var todayLocal = this.GetToday_Local();
 
-            var today = this.GetDay(now);
-            return today;
+            var tomorrowLocal = this.GetTomorrow(todayLocal);
+            return tomorrowLocal;
+        }
+
+        public DateTime GetTomorrow_Utc()
+        {
+            var todayUtc = this.GetToday_Utc();
+
+            var tomorrowUtc = this.GetTomorrow(todayUtc);
+            return tomorrowUtc;
+        }
+
+        /// <summary>
+        /// Chooses <see cref="GetTomorrow_Local"/> as the default.
+        /// </summary>
+        public DateTime GetTomorrow()
+        {
+            var tomorrow = this.GetTomorrow_Local();
+            return tomorrow;
+        }
+
+        public DateTime GetToday_Local()
+        {
+            var nowLocal = this.GetNow_Local();
+
+            var todayLocal = this.GetDay(nowLocal);
+            return todayLocal;
+        }
+
+        public DateTime GetToday_Utc()
+        {
+            var nowUtc = this.GetNow_Utc();
+
+            var todayUtc = this.GetDay(nowUtc);
+            return todayUtc;
         }
 
         /// <summary>
@@ -85,8 +116,8 @@ namespace R5T.F0000
         /// </summary>
         public DateTime GetToday()
         {
-            var output = this.GetToday_Local();
-            return output;
+            var today = this.GetToday_Local();
+            return today;
         }
 
         public DateTime GetYesterday()

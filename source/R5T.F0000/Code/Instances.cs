@@ -15,6 +15,9 @@ namespace R5T.F0000
         public static ICharacterSets CharacterSets { get; } = Z0000.CharacterSets.Instance;
         public static ICommandLineArgumentsOperator CommandLineArgumentsOperator { get; } = F0000.CommandLineArgumentsOperator.Instance;
         public static ICommandLineOperator CommandLineOperator { get; } = F0000.CommandLineOperator.Instance;
+        public static IComparisonOperator ComparisonOperator { get; } = F0000.ComparisonOperator.Instance;
+        public static IComparisonResults ComparisonResults { get; } = F0000.ComparisonResults.Instance;
+        public static IDateTimeOffsetOperator DateTimeOffsetOperator { get; } = F0000.DateTimeOffsetOperator.Instance;
         public static IDateTimeOperator DateTimeOperator { get; } = F0000.DateTimeOperator.Instance;
         public static IDescriptions Descriptions { get; } = F0000.Descriptions.Instance;
         public static IDictionaryOperator DictionaryOperator { get; } = F0000.DictionaryOperator.Instance;
@@ -37,22 +40,27 @@ namespace R5T.F0000
         public static IMessages Messages { get; } = F0000.Messages.Instance;
         public static INamespacedTypeNameOperator NamespacedTypeNameOperator { get; } = F0000.NamespacedTypeNameOperator.Instance;
         public static INowOperator NowOperator { get; } = F0000.NowOperator.Instance;
+        public static IObjectOperator ObjectOperator { get; } = F0000.ObjectOperator.Instance;
         public static ISearchPatterns SearchPatterns { get; } = F0000.SearchPatterns.Instance;
         public static ISearchPatternGenerator SearchPatternGenerator { get; } = F0000.SearchPatternGenerator.Instance;
         public static ISeeds Seeds { get; } = F0000.Seeds.Instance;
         public static ISourceCodeOperator SourceCodeOperator { get; } = F0000.SourceCodeOperator.Instance;
+        public static IStackOperator StackOperator { get; } = F0000.StackOperator.Instance;
         public static IString String { get; } = F0000.String.Instance;
         public static IStringOperator StringOperator { get; } = F0000.StringOperator.Instance;
         public static IStrings Strings { get; } = Z0000.Strings.Instance;
         public static ITextOperator TextOperator { get; } = F0000.TextOperator.Instance;
+        public static ITimeSpanOperator TimeSpanOperator { get; } = F0000.TimeSpanOperator.Instance;
         public static ITypeNameOperator TypeNameOperator { get; } = F0000.TypeNameOperator.Instance;
         public static ITypeOperator TypeOperator { get; } = F0000.TypeOperator.Instance;
         public static IUrlOperator UrlOperator { get; } = F0000.UrlOperator.Instance;
         public static IVersionOperator VersionOperator { get; } = F0000.VersionOperator.Instance;
         public static IVersions Versions { get; } = F0000.Versions.Instance;
+        public static IWasFoundOperator WasFoundOperator { get; } = F0000.WasFoundOperator.Instance;
         public static IXmlNamespaceNames XmlNamespaceNames { get; } = F0000.XmlNamespaceNames.Instance;
         public static IXmlOperator XmlOperator { get; } = F0000.XmlOperator.Instance;
         public static IXmlStrings XmlStrings { get; } = F0000.XmlStrings.Instance;
+        public static IXmlWriterSettingsOperator XmlWriterSettingsOperator { get; } = F0000.XmlWriterSettingsOperator.Instance;
         public static IXPathGenerator XPathGenerator { get; } = F0000.XPathGenerator.Instance;
     }
 }

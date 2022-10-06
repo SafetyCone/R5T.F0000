@@ -1,0 +1,36 @@
+using System;
+using System.IO;
+
+using R5T.T0132;
+
+
+namespace R5T.F0000
+{
+	[FunctionalityMarker]
+	public partial interface IFileStreamOperator : IFunctionalityMarker
+	{
+        /// <summary>
+        /// Eases construction of a new <see cref="FileStream"/> with a best-practice implementation of handling the overwrite parameter.
+        /// </summary>
+        public FileStream NewWrite(string filePath, bool overwrite = true)
+        {
+            FileMode fileMode = FileMode.Create;
+            if (!overwrite)
+            {
+                fileMode = FileMode.CreateNew;
+            }
+
+            var fileStream = new FileStream(filePath, fileMode);
+            return fileStream;
+        }
+
+        /// <summary>
+        /// Eases construction of a new <see cref="FileStream"/> for reading.
+        /// </summary>
+        public FileStream NewRead(string filePath)
+        {
+            var fileStream = new FileStream(filePath, FileMode.Open);
+            return fileStream;
+        }
+    }
+}

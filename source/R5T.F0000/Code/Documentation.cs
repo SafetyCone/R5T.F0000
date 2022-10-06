@@ -8,5 +8,9 @@ namespace R5T.F0000
     /// </summary>
     public static class Documentation
     {
+        /// <summary>
+        /// For x.CompareTo(y) in <see cref="IComparable{T}.CompareTo(T)"/>.
+        /// </summary>
+        public static readonly object CompareToXY;
     }
 }

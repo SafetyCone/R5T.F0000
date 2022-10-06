@@ -240,6 +240,21 @@ namespace R5T.F0000
 			return output;
         }
 
+		public XDocument Load_XDocument(string xmlFilePath)
+        {
+			var xDocument = XDocument.Load(xmlFilePath, LoadOptions.None);
+			return xDocument;
+        }
+
+		/// <summary>
+		/// Chooses <see cref="Load_XDocument(string)"/> as the default.
+		/// </summary>
+		public XDocument Load(string xmlFilePath)
+        {
+			var xDocument = this.Load_XDocument(xmlFilePath);
+			return xDocument;
+        }
+
 		/// <summary>
 		/// Quality-of-life overload for <see cref="Write(XDocument, string)"/>.
 		/// </summary>

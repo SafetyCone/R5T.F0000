@@ -80,6 +80,21 @@ namespace R5T.F0000
             }
         }
 
+        public void CopyFiles(IEnumerable<FileCopyPair> fileCopyPairs)
+        {
+            foreach (var fileCopyPair in fileCopyPairs)
+            {
+                this.CopyFile(fileCopyPair);
+            }
+        }
+
+        public void CopyFile(FileCopyPair fileCopyPair)
+        {
+            this.CopyFile(
+                fileCopyPair.SourceFilePath,
+                fileCopyPair.DestinationFilePath);
+        }
+
         public void CopyFile(
 			string sourceFilePath,
 			string destinationFilePath)
@@ -106,7 +121,7 @@ namespace R5T.F0000
             Directory.CreateDirectory(directoryPath);
         }
 
-		public bool DirectoryExists(string directoryPath)
+        public bool DirectoryExists(string directoryPath)
         {
 			var output = Directory.Exists(directoryPath);
 			return output;
@@ -174,6 +189,13 @@ namespace R5T.F0000
             {
                 this.DisableReadOnly(subdirectory);
             }
+        }
+
+        public void EnsureDirectoryForFilePathExists(string filePath)
+        {
+            var directoryPath = PathOperator.Instance.GetParentDirectoryPath(filePath);
+
+            Instances.FileSystemOperator.CreateDirectory_OkIfAlreadyExists(directoryPath);
         }
 
         public void EnsureDirectoryExists(string directoryPath)

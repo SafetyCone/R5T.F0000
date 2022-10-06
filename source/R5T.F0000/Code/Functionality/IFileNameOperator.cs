@@ -24,6 +24,23 @@ namespace R5T.F0000
 			return newFileName;
 		}
 
+		public string GetBackupCopyFileNameStem(string fileNameStem)
+		{
+			var output = $"{fileNameStem}-BAK";
+			return output;
+		}
+
+		public string GetBackupCopyFileName(string fileName)
+		{
+			var fileNameStem = this.GetFileNameStem(fileName);
+			var fileExtension = this.GetFileExtension(fileName);
+
+			var backupCopyFileNameStem = this.GetBackupCopyFileNameStem(fileNameStem);
+
+			var backupCopyFileName = this.GetFileName(backupCopyFileNameStem, fileExtension);
+			return backupCopyFileName;
+		}
+
 		public string GetFileExtension(string fileName)
         {
 			var output = Instances.FileExtensionOperator.GetFileExtension(fileName);

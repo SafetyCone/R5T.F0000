@@ -224,6 +224,16 @@ namespace R5T.F0000
         }
 
         public int Run_Synchronous(
+            string command)
+        {
+            var exitCode = this.Run_Synchronous(
+                command,
+                null);
+
+            return exitCode;
+        }
+
+        public int Run_Synchronous(
             string command,
             string arguments)
         {
@@ -272,6 +282,25 @@ namespace R5T.F0000
             process.Close();
 
             return exitCode;
+        }
+
+        public Task<int> Run(
+            string command)
+        {
+            return this.Run(
+                command,
+                null);
+        }
+
+        public Task<int> Run(
+            string command,
+            string arguments)
+        {
+            return this.Run(
+                command,
+                arguments,
+                this.Default_DataReceivedHandler,
+                this.Default_DataReceivedHandler);
         }
 
         public async Task<int> Run(
