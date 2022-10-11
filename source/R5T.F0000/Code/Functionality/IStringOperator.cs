@@ -151,6 +151,15 @@ namespace R5T.F0000
         }
 
         /// <summary>
+        /// Determines if the input is specifically the <see cref="Z0000.IStrings.Empty"/> string.
+        /// </summary>
+        public bool IsEmpty(string value)
+        {
+            var isEmpty = value == Instances.Strings.Empty;
+            return isEmpty;
+        }
+
+        /// <summary>
         /// Quality-of-life overload for <see cref="WasFound(int)"/>.
         /// </summary>
         public bool IsFound(int index)
@@ -265,6 +274,15 @@ namespace R5T.F0000
         {
 			var output = @string.Trim();
 			return output;
+        }
+
+        public IEnumerable<string> Trim(IEnumerable<string> strings)
+        {
+            var output = strings
+                .Select(@string => this.Trim(@string))
+                ;
+
+            return output;
         }
 
 		public bool WasFound(int index)

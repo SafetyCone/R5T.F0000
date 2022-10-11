@@ -32,6 +32,7 @@ namespace R5T.F0000
         public static IFileExtensionOperator FileExtensionOperator { get; } = F0000.FileExtensionOperator.Instance;
         public static IFileNameOperator FileNameOperator { get; } = F0000.FileNameOperator.Instance;
         public static IFileOperator FileOperator { get; } = F0000.FileOperator.Instance;
+        public static IFileStreamOperator FileStreamOperator { get; } = F0000.FileStreamOperator.Instance;
         public static IFileSystemOperator FileSystemOperator { get; } = F0000.FileSystemOperator.Instance;
         public static IIndex Index { get; } = F0000.Index.Instance;
         public static IIndexOperator IndexOperator { get; } = F0000.IndexOperator.Instance;
