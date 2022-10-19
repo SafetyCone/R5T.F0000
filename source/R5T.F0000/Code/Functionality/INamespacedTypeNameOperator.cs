@@ -9,6 +9,17 @@ namespace R5T.F0000
 	[FunctionalityMarker]
 	public partial interface INamespacedTypeNameOperator : IFunctionalityMarker
 	{
+		public string Combine(params string[] tokens)
+        {
+			var tokenSeparator = this.GetTokenSeparator();
+
+			var output = Instances.StringOperator.Join(
+				tokenSeparator,
+				tokens);
+
+			return output;
+		}
+
 		public string GetTokenSeparator_String()
         {
 			var output = Instances.Strings.Period;
@@ -37,6 +48,26 @@ namespace R5T.F0000
 			var output = namespacedTypeName.Split(tokenSeparator);
 			return output;
         }
+
+		public string GetNamespacedTypeName(
+			string namespaceName,
+			string typeName)
+        {
+			var namespacedTypeName = this.Combine(namespaceName, typeName);
+			return namespacedTypeName;
+		}
+
+		/// <summary>
+		/// Handles generic type names.
+		/// </summary>
+		public string GetNamespacedTypeName_FromFullName(string fullTypeName)
+		{
+			var parts = fullTypeName.Split(
+				Instances.Characters.OpenBrace);
+
+			var namespacedTypeName = parts.First();
+			return namespacedTypeName;
+		}
 
 		public string GetNamespaceName(string namespacedTypeName)
         {

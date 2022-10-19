@@ -18,19 +18,37 @@ namespace R5T.F0000
             return representation;
         }
 
-        public string ToString_Camelcase(bool value)
+        public string ToString_Upper(bool value)
         {
-            /// Default behavior produces the <see cref="Z0000.IStrings.True_Camelcase"/> and <see cref="Z0000.IStrings.False_Camelcase"/> values.
-            var representation = value.ToString();
+            var representation = value
+                ? Z0000.Instances.Strings.True_Uppercase
+                : Z0000.Instances.Strings.False_UpperCase
+                ;
+
             return representation;
         }
 
         /// <summary>
-        /// Chooses <see cref="ToString_Camelcase(bool)"/> as the default to match the <see cref="Boolean.ToString()"/> behavior.
+        /// Pascal case matches the default <see cref="Boolean.ToString()"/> behavior.
+        /// </summary>
+        public string ToString_PascalCase(bool value)
+        {
+            /// Note: default <see cref="Boolean.ToString()"/> behavior produces the Pascal case values.
+            var representation = value
+                ? Z0000.Instances.Strings.True_PascalCase
+                : Z0000.Instances.Strings.False_PascalCase
+                ;
+
+            return representation;
+        }
+
+        /// <summary>
+        /// Chooses <see cref="ToString_PascalCase(bool)"/> as the default to match the <see cref="Boolean.ToString()"/> behavior.
         /// </summary>
         public string ToString(bool value)
         {
-            var representation = this.ToString_Camelcase(value);
+            /// Default <see cref="Boolean.ToString()"/> behavior produces the <see cref="Z0000.IStrings.True_PascalCase"/> and <see cref="Z0000.IStrings.False_PascalCase"/> values.
+            var representation = this.ToString_PascalCase(value);
             return representation;
         }
     }

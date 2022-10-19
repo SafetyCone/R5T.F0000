@@ -141,9 +141,63 @@ namespace R5T.F0000
 			return output;
         }
 
+		public WasFound<T> HasNth<T>(IEnumerable<T> items, int n)
+        {
+			var itemsEnumerator = items.GetEnumerator();
+            for (int i = 0; i < n; i++)
+            {
+				var hasNext = itemsEnumerator.MoveNext();
+				if(!hasNext)
+                {
+					return WasFound.NotFound<T>();
+                }
+            }
+
+			var nth = itemsEnumerator.Current;
+
+			return WasFound.Found(nth);
+        }
+
+		public T Nth<T>(IEnumerable<T> items, int n)
+        {
+			var wasFound = this.HasNth(items, n);
+			if(!wasFound)
+            {
+				throw new InvalidOperationException($"Enumerable did not have an Nth (N = {n}) element.");
+            }
+
+			return wasFound.Result;
+        }
+
+		public T NthOrDefault<T>(IEnumerable<T> items, int n)
+		{
+			var wasFound = this.HasNth(items, n);
+
+			var output = wasFound.ResultOrDefaultIfNotFound();
+			return output;
+		}
+
 		public IEnumerable<T> OrderAlphabetically<T>(IEnumerable<T> items, Func<T, string> keySelector)
 		{
 			var output = items.OrderBy(keySelector);
+			return output;
+		}
+
+		public WasFound<T> HasSecond<T>(IEnumerable<T> enumerable)
+        {
+			var output = this.HasNth(enumerable, 2);
+			return output;
+        }
+
+		public T Second<T>(IEnumerable<T> enumerable)
+		{
+			var output = this.Nth(enumerable, 2);
+			return output;
+		}
+
+		public T SecondOrDefault<T>(IEnumerable<T> enumerable)
+		{
+			var output = this.NthOrDefault(enumerable, 2);
 			return output;
 		}
 
@@ -152,6 +206,50 @@ namespace R5T.F0000
 			var output = enumerable.Skip(1);
 			return output;
 		}
+
+		public bool StartsWith<T>(
+			IEnumerable<T> enumerable,
+			IEnumerable<T> start,
+			IEqualityComparer<T> equalityComparer)
+        {
+			var enumerableEnumeration = enumerable.GetEnumerator();
+			var startEnumerator = start.GetEnumerator();
+
+			while(startEnumerator.MoveNext())
+            {
+				var enumerableHasNext = enumerableEnumeration.MoveNext();
+				if(!enumerableHasNext)
+                {
+					// Enumerable is too short.
+					return false;
+                }
+
+				var enumerableCurrent = enumerableEnumeration.Current;
+				var startCurrent = startEnumerator.Current;
+
+				var currentIsEqual = equalityComparer.Equals(enumerableCurrent, startCurrent);
+				if (!currentIsEqual)
+				{
+					return false;
+				}
+            }
+
+			return true;
+        }
+
+		public bool StartsWith<T>(
+			IEnumerable<T> enumerable,
+			IEnumerable<T> start)
+        {
+			var equalityComparer = EqualityComparer<T>.Default;
+
+			var output = this.StartsWith(
+				enumerable,
+				start,
+				equalityComparer);
+
+			return output;
+        }
 
 		public IEnumerable<T> TakeFirst<T>(IEnumerable<T> enumerable)
 		{

@@ -28,5 +28,56 @@ namespace R5T.F0000
 				list,
 				items.AsEnumerable());
 		}
+
+		public WasFound<T> HasNth<T>(IList<T> list, int n)
+		{
+			var count = list.Count;
+
+			if(n > count)
+            {
+				return WasFound.NotFound<T>();
+            }
+
+			var nth = list[n - 1];
+
+			return WasFound.Found(nth);
+		}
+
+		public T Nth<T>(IList<T> list, int n)
+		{
+			var wasFound = this.HasNth(list, n);
+			if (!wasFound)
+			{
+				throw new InvalidOperationException($"List did not have an Nth (N = {n}) element.");
+			}
+
+			return wasFound.Result;
+		}
+
+		public T NthOrDefault<T>(IList<T> list, int n)
+		{
+			var wasFound = this.HasNth(list, n);
+
+			var output = wasFound.ResultOrDefaultIfNotFound();
+			return output;
+		}
+
+		public WasFound<T> HasSecond<T>(IList<T> list)
+		{
+			var output = this.HasNth(list, 2);
+			return output;
+		}
+
+		public T Second<T>(IList<T> list)
+		{
+			var output = this.Nth(list, 2);
+			return output;
+		}
+
+		public T SecondOrDefault<T>(IList<T> list)
+		{
+			var output = this.NthOrDefault(list, 2);
+			return output;
+		}
 	}
 }

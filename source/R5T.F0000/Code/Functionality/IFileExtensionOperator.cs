@@ -57,5 +57,19 @@ namespace R5T.F0000
 			var output = Instances.FileNameOperator.GetFileNameStem(fileName);
 			return output;
         }
+
+		/// <summary>
+		/// Quality-of-life alias for <see cref="IPathOperator.HasFileExtension(string, string)"/>.
+		/// </summary>
+		public bool HasFileExtension(
+			string filePath,
+			string fileExtension)
+		{
+			var output = Instances.PathOperator.HasFileExtension(
+				filePath,
+				fileExtension);
+
+			return output;
+		}
 	}
 }

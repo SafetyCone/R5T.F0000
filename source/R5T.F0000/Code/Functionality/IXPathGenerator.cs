@@ -8,10 +8,10 @@ namespace R5T.F0000
 	[FunctionalityMarker]
 	public partial interface IXPathGenerator : IFunctionalityMarker
 	{
-		public string FromCurrentNode_SelectChildWithGrandchild(string childName, string grandChildName)
-        {
-			var xPath  = $"./{childName}[{grandChildName}]";
-			return xPath;
-        }
+		//public string FromCurrentNode_SelectChildWithGrandchild(string childName, string grandChildName)
+  //      {
+		//	var xPath  = $"./{childName}[{grandChildName}]";
+		//	return xPath;
+  //      }
 	}
 }

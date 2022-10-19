@@ -193,7 +193,7 @@ namespace R5T.F0000
 
         public void EnsureDirectoryForFilePathExists(string filePath)
         {
-            var directoryPath = PathOperator.Instance.GetParentDirectoryPath(filePath);
+            var directoryPath = PathOperator.Instance.GetFileParentDirectoryPath(filePath);
 
             Instances.FileSystemOperator.CreateDirectory_OkIfAlreadyExists(directoryPath);
         }
@@ -306,6 +306,9 @@ namespace R5T.F0000
             return lines;
         }
 
+        /// <summary>
+        /// Tests whether a file exists, and if it doesn't, throws a <see cref="FileNotFoundException"/>.
+        /// </summary>
         public void VerifyFileExists(string filePath)
         {
             var fileExists = this.FileExists(filePath);

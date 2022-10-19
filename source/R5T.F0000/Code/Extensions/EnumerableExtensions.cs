@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+using R5T.F0000;
+
 using Instances = R5T.F0000.Instances;
 
 
@@ -93,6 +95,42 @@ namespace System.Linq
             return output;
         }
 
+        public static WasFound<T> HasNth<T>(this IEnumerable<T> items, int n)
+        {
+            var output = Instances.EnumerableOperator.HasNth(items, n);
+            return output;
+        }
+
+        public static T Nth<T>(this IEnumerable<T> items, int n)
+        {
+            var output = Instances.EnumerableOperator.Nth(items, n);
+            return output;
+        }
+
+        public static T NthOrDefault<T>(this IEnumerable<T> items, int n)
+        {
+            var output = Instances.EnumerableOperator.NthOrDefault(items, n);
+            return output;
+        }
+
+        public static WasFound<T> HasSecond<T>(this IEnumerable<T> enumerable)
+        {
+            var output = Instances.EnumerableOperator.HasSecond(enumerable);
+            return output;
+        }
+
+        public static T Second<T>(this IEnumerable<T> enumerable)
+        {
+            var output = Instances.EnumerableOperator.Second(enumerable);
+            return output;
+        }
+
+        public static T SecondOrDefault<T>(this IEnumerable<T> enumerable)
+        {
+            var output = Instances.EnumerableOperator.SecondOrDefault(enumerable);
+            return output;
+        }
+
         public static IEnumerable<T> OrderAlphabetically<T>(this IEnumerable<T> items, Func<T, string> keySelector)
         {
             var output = Instances.EnumerableOperator.OrderAlphabetically(items, keySelector);
@@ -102,6 +140,28 @@ namespace System.Linq
         public static IEnumerable<T> SkipFirst<T>(this IEnumerable<T> enumerable)
         {
             var output = Instances.EnumerableOperator.SkipFirst(enumerable);
+            return output;
+        }
+
+        public static bool StartsWith<T>(this IEnumerable<T> enumerable,
+            IEnumerable<T> start,
+            IEqualityComparer<T> equalityComparer)
+        {
+            var output = Instances.EnumerableOperator.StartsWith(
+                enumerable,
+                start,
+                equalityComparer);
+
+            return output;
+        }
+
+        public static bool StartsWith<T>(this IEnumerable<T> enumerable,
+            IEnumerable<T> start)
+        {
+            var output = Instances.EnumerableOperator.StartsWith(
+                enumerable,
+                start);
+
             return output;
         }
 

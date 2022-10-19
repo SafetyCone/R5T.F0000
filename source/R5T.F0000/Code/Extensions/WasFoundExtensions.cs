@@ -9,12 +9,9 @@ namespace System
 {
     public static class WasFoundExtensions
     {
-        public static bool AnyWereFound<TKey, TValue>(this IDictionary<TKey, WasFound<TValue>> wasFoundByValue)
+        public static bool AnyWereFound<T>(this IEnumerable<WasFound<T>> wasFounds)
         {
-            var output = wasFoundByValue
-                .Where(xPair => xPair.Value.Exists)
-                .Any();
-
+            var output = Instances.WasFoundOperator.AnyWereFound(wasFounds);
             return output;
         }
 
@@ -29,18 +26,9 @@ namespace System
         //    return output;
         //}
 
-        public static bool AnyNotFound<TKey, TValue>(this IDictionary<TKey, WasFound<TValue>> wasFoundByValue)
-        {
-            var output = wasFoundByValue.Values.AnyNotFound();
-            return output;
-        }
-
         public static bool AnyNotFound<T>(this IEnumerable<WasFound<T>> wasFounds)
         {
-            var output = wasFounds
-                .Where(xWasFound => !xWasFound.Exists)
-                .Any();
-
+            var output = Instances.WasFoundOperator.AnyNotFound(wasFounds);
             return output;
         }
 
@@ -83,12 +71,13 @@ namespace System
 
         public static bool IsFound<T>(this WasFound<T> wasFound)
         {
-            return wasFound.Exists;
+            var output = Instances.WasFoundOperator.IsFound(wasFound);
+            return output;
         }
 
         public static bool IsNotFound<T>(this WasFound<T> wasFound)
         {
-            var output = !wasFound.Exists;
+            var output = Instances.WasFoundOperator.IsNotFound(wasFound);
             return output;
         }
 
@@ -109,13 +98,18 @@ namespace System
             return output;
         }
 
+        public static T ResultOrDefaultIfNotFound<T>(this WasFound<T> wasFound)
+        {
+            var output = Instances.WasFoundOperator.ResultOrDefaultIfNotFound(wasFound);
+            return output;
+        }
+
         public static T ResultOrIfNotFound<T>(this WasFound<T> wasFound,
             T orIfNotFound)
         {
-            var output = wasFound
-                ? wasFound.Result
-                : orIfNotFound
-                ;
+            var output = Instances.WasFoundOperator.ResultOrIfNotFound(
+                wasFound,
+                orIfNotFound);
 
             return output;
         }
@@ -123,10 +117,9 @@ namespace System
         public static T ResultOrIfNotFound<T>(this WasFound<T> wasFound,
             Func<T> orIfNotFound)
         {
-            var output = wasFound
-                ? wasFound.Result
-                : orIfNotFound()
-                ;
+            var output = Instances.WasFoundOperator.ResultOrIfNotFound(
+               wasFound,
+               orIfNotFound);
 
             return output;
         }
@@ -157,21 +150,21 @@ namespace System.Linq
             return output;
         }
 
-        public static IEnumerable<WasFound<T>> WhereFound<T>(this IEnumerable<WasFound<T>> items)
+        public static IEnumerable<TValue> ValuesFound<TValue>(this IEnumerable<WasFound<TValue>> wasFounds)
         {
-            var output = items
-                .Where(x => x.Exists)
-                ;
-
+            var output = Instances.WasFoundOperator.ValuesFound(wasFounds);
             return output;
         }
 
-        public static IEnumerable<WasFound<T>> WhereNotFound<T>(this IEnumerable<WasFound<T>> items)
+        public static IEnumerable<WasFound<T>> WhereIsFound<T>(this IEnumerable<WasFound<T>> wasFounds)
         {
-            var output = items
-                .Where(x => !x.Exists)
-                ;
+            var output = Instances.WasFoundOperator.WhereIsFound(wasFounds);
+            return output;
+        }
 
+        public static IEnumerable<WasFound<T>> WhereIsNotFound<T>(this IEnumerable<WasFound<T>> wasFounds)
+        {
+            var output = Instances.WasFoundOperator.WhereIsNotFound(wasFounds);
             return output;
         }
     }

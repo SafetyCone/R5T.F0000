@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 
 using R5T.T0132;
@@ -11,19 +13,6 @@ namespace R5T.F0000
 	{
 		private static Implementations.IXmlOperator Implementations { get; } = F0000.Implementations.XmlOperator.Instance;
 
-
-		/// <summary>
-		/// Creates an <see cref="XElement"/> with the child name, adds it to the parent, and returns the child.
-		/// </summary>
-		/// <returns>The child <see cref="XElement"/>.</returns>
-		public XElement AddChild(XElement parentElement, string childName)
-        {
-			var child = this.CreateElement(childName);
-
-			parentElement.Add(child);
-
-			return child;
-        }
 
 		public XAttribute CreateAttribute(string name, string value)
         {
@@ -38,12 +27,6 @@ namespace R5T.F0000
 				Instances.XmlStrings.Encoding_UTF8,
 				Instances.XmlStrings.Standalone_Default);
 
-			return output;
-        }
-
-		public XElement CreateElement(string name)
-        {
-			var output = new XElement(name);
 			return output;
         }
 
@@ -140,7 +123,7 @@ namespace R5T.F0000
         {
 			var document = Instances.XmlOperator.CreateNewDocument();
 
-			var root = Instances.XmlOperator.CreateElement(rootElementName);
+			var root = Instances.XElementOperator.CreateElement(rootElementName);
 
 			document.Add(root);
 

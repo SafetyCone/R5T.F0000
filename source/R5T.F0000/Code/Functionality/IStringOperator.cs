@@ -31,6 +31,27 @@ namespace R5T.F0000
             return wasFound;
         }
 
+        public bool EndsWith(
+            string @string,
+            string ending)
+        {
+            var endingLength = ending.Length;
+
+            var stringLength = @string.Length;
+            var stringIsLongEnough = stringLength >= endingLength;
+            if(!stringIsLongEnough)
+            {
+                return false;
+            }
+
+            var stringEnding = this.GetLastNCharacters(
+                @string,
+                endingLength);
+
+            var output = stringEnding == ending;
+            return output;
+        }
+
         public string Enquote(string @string)
         {
             var output = $"\"{@string}\"";
@@ -92,6 +113,14 @@ namespace R5T.F0000
 
                 return hash1 + (hash2 * 1566083941);
             }
+        }
+
+        public string GetLastNCharacters(
+            string @string,
+            int numberOfCharacters)
+        {
+            var output = @string[^numberOfCharacters..];
+            return output;
         }
 
         public char GetLastCharacter(string @string)

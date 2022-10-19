@@ -30,6 +30,7 @@ namespace R5T.F0000
         public static IExitCodes ExitCodes { get; } = F0000.ExitCodes.Instance;
         public static IExitCodeOperator ExitCodeOperator { get; } = F0000.ExitCodeOperator.Instance;
         public static IFileExtensionOperator FileExtensionOperator { get; } = F0000.FileExtensionOperator.Instance;
+        public static IFileExtensions FileExtensions { get; } = F0000.FileExtensions.Instance;
         public static IFileNameOperator FileNameOperator { get; } = F0000.FileNameOperator.Instance;
         public static IFileOperator FileOperator { get; } = F0000.FileOperator.Instance;
         public static IFileStreamOperator FileStreamOperator { get; } = F0000.FileStreamOperator.Instance;
@@ -42,6 +43,7 @@ namespace R5T.F0000
         public static INamespacedTypeNameOperator NamespacedTypeNameOperator { get; } = F0000.NamespacedTypeNameOperator.Instance;
         public static INowOperator NowOperator { get; } = F0000.NowOperator.Instance;
         public static IObjectOperator ObjectOperator { get; } = F0000.ObjectOperator.Instance;
+        public static IPathOperator PathOperator { get; } = F0000.PathOperator.Instance;
         public static ISearchPatterns SearchPatterns { get; } = F0000.SearchPatterns.Instance;
         public static ISearchPatternGenerator SearchPatternGenerator { get; } = F0000.SearchPatternGenerator.Instance;
         public static ISeeds Seeds { get; } = F0000.Seeds.Instance;
@@ -50,14 +52,17 @@ namespace R5T.F0000
         public static IString String { get; } = F0000.String.Instance;
         public static IStringOperator StringOperator { get; } = F0000.StringOperator.Instance;
         public static IStrings Strings { get; } = Z0000.Strings.Instance;
+        public static ISyncOverAsyncOperator SyncOverAsyncOperator { get; } = F0000.SyncOverAsyncOperator.Instance;
         public static ITextOperator TextOperator { get; } = F0000.TextOperator.Instance;
         public static ITimeSpanOperator TimeSpanOperator { get; } = F0000.TimeSpanOperator.Instance;
         public static ITypeNameOperator TypeNameOperator { get; } = F0000.TypeNameOperator.Instance;
         public static ITypeOperator TypeOperator { get; } = F0000.TypeOperator.Instance;
         public static IUrlOperator UrlOperator { get; } = F0000.UrlOperator.Instance;
+        public static IValues Values { get; } = F0000.Values.Instance;
         public static IVersionOperator VersionOperator { get; } = F0000.VersionOperator.Instance;
         public static IVersions Versions { get; } = F0000.Versions.Instance;
         public static IWasFoundOperator WasFoundOperator { get; } = F0000.WasFoundOperator.Instance;
+        public static IXElementOperator XElementOperator { get; } = F0000.XElementOperator.Instance;
         public static IXmlNamespaceNames XmlNamespaceNames { get; } = F0000.XmlNamespaceNames.Instance;
         public static IXmlOperator XmlOperator { get; } = F0000.XmlOperator.Instance;
         public static IXmlStrings XmlStrings { get; } = F0000.XmlStrings.Instance;

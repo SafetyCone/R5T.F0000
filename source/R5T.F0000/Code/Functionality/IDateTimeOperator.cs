@@ -27,6 +27,9 @@ namespace R5T.F0000
 			return output;
 		}
 
+		/// <summary>
+		/// Example output: 20221014 151201
+		/// </summary>
 		public string ToString_YYYYMMDD_HHMMSS(DateTime dateTime)
 		{
 			var output = $"{dateTime:yyyyMMdd HHmmss}";
