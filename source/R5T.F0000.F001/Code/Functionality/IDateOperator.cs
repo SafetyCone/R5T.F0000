@@ -59,5 +59,11 @@ namespace R5T.F0000.F001
 			var today = this.GetTomorrow_Local();
 			return today;
 		}
+
+		public string ToString_YYYY_MM_DD_Dash(DateOnly date)
+        {
+			var representation = $"{date:yyyy-MM-dd}";
+			return representation;
+        }
 	}
 }

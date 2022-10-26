@@ -38,7 +38,7 @@ namespace R5T.F0000
         {
             get
             {
-                var output = this.Exception != null;
+                var output = Exception != null;
                 return output;
             }
         }
@@ -46,9 +46,9 @@ namespace R5T.F0000
 
         public ResultOrException(T result, bool hasResult, Exception exception)
         {
-            this.Result = result;
-            this.HasResult = hasResult;
-            this.Exception = exception;
+            Result = result;
+            HasResult = hasResult;
+            Exception = exception;
         }
 
         public ResultOrException(T result)
@@ -63,11 +63,11 @@ namespace R5T.F0000
 
         public override string ToString()
         {
-            var hasException = this.HasException;
+            var hasException = HasException;
 
             var representation = hasException
-                ? $"\n\t{this.Exception.Message}\n\tResult: {this.Result}"
-                : this.Result.ToString()
+                ? $"\n\t{Exception.Message}\n\tResult: {Result}"
+                : Result.ToString()
                 ;
 
             return representation;
@@ -76,9 +76,9 @@ namespace R5T.F0000
         public bool Equals(ResultOrException<T> other)
         {
             var output = true
-                && this.HasResult == other.HasResult
-                && this.Result.Equals(other.Result)
-                && this.Exception == other.Exception
+                && HasResult == other.HasResult
+                && Result.Equals(other.Result)
+                && Exception == other.Exception
                 ;
 
             return output;
@@ -108,11 +108,11 @@ namespace R5T.F0000
             {
                 var result = resultConstructor();
 
-                output = ResultOrException.From(result);
+                output = From(result);
             }
             catch (Exception exception)
             {
-                output = ResultOrException.From<T>(exception);
+                output = From<T>(exception);
             }
 
             return output;

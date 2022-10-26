@@ -52,20 +52,34 @@ namespace R5T.F0000
 
 		public Task<byte[]> ReadBytes(string filePath)
 		{
-			return File.ReadAllBytesAsync(filePath);
+			var fileBytes = File.ReadAllBytesAsync(filePath);
+			return fileBytes;
 		}
 
 		public byte[] ReadBytes_Synchronous(string filePath)
         {
-			var bytes = File.ReadAllBytes(filePath);
-			return bytes;
+			var fileBytes = File.ReadAllBytes(filePath);
+			return fileBytes;
         }
 
-		public string ReadText(string filePath)
+		public async Task<MemoryStream> ReadBytesInMemory(string filePath)
+		{
+			var fileBytes = await this.ReadBytes(filePath);
+
+            var memoryStream = Instances.MemoryStreamOperator.FromBytes(fileBytes);
+			return memoryStream;
+        }
+
+        public string ReadText_Synchronous(string filePath)
         {
 			var text = File.ReadAllText(filePath);
 			return text;
         }
+
+		public Task<string> ReadText(string filePath)
+		{
+			return File.ReadAllTextAsync(filePath);
+		}
 
 		/// <summary>
 		/// WCreates a file with nothing in it.
@@ -77,7 +91,16 @@ namespace R5T.F0000
 				Instances.Strings.Empty);
         }
 
-		public void WriteLines(
+		public Task WriteLines(
+			string textFilePath,
+			IEnumerable<string> lines)
+		{
+			return File.WriteAllLinesAsync(
+				textFilePath,
+				lines);
+		}
+
+		public void WriteLines_Synchronous(
 			string textFilePath,
 			IEnumerable<string> lines)
 		{

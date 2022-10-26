@@ -52,6 +52,14 @@ namespace R5T.F0000
             var output = new Guid(guidBytes);
             return output;
         }
+        
+        public Guid NewSeededGuid(int seed = ISeeds.Default_Constant)
+        {
+            var random = RandomOperator.Instance.WithSeed(seed);
+
+            var guid = this.New(random);
+            return guid;
+        }
 
         public Guid Parse(string guidString)
         {

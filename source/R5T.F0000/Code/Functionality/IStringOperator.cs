@@ -77,6 +77,17 @@ namespace R5T.F0000
             return output;
         }
 
+        public string Format(
+            string template,
+            params object[] objects)
+        {
+            var output = System.String.Format(
+                template,
+                objects);
+
+            return output;
+        }
+
         /// <summary>
         /// The default <see cref="System.String.GetHashCode()"/> is non-deterministic.
         /// This method just calls that method.
@@ -255,6 +266,14 @@ namespace R5T.F0000
 #endif
                 ;
 
+            return output;
+        }
+
+        public string PrefixWith(
+            string prefix,
+            string @string)
+        {
+            var output = prefix + @string;
             return output;
         }
 

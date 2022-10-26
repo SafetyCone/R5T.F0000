@@ -11,7 +11,10 @@ namespace R5T.F0000
 	{
         public DateTime From_YYYYMMDD(string yyyymmdd)
         {
-            var output = DateTime.ParseExact(yyyymmdd, "yyyyMMdd", CultureInfo.InvariantCulture);
+            var output = this.ParseExact(
+                yyyymmdd,
+                Instances.DateTimeFormats.YYYYMMDD);
+
             return output;
         }
 
@@ -128,16 +131,84 @@ namespace R5T.F0000
             return yesterday;
         }
 
+        public string GetYYYYMMDDFormatTemplate()
+        {
+            var yyyyMMddFormatTemplate = $"{{0:{Instances.DateTimeFormats.YYYYMMDD}}}";
+            return yyyyMMddFormatTemplate;
+        }
+
         public bool IsDefault(DateTime dateTime)
         {
             var output = dateTime == default;
             return output;
         }
 
+        public WasFound<DateTime> IsYYYYMMDD(string possibleYYYYMMDD)
+        {
+            var isYYYYMMDD = this.TryParseExact(
+                possibleYYYYMMDD,
+                Instances.DateTimeFormats.YYYYMMDD,
+                out var dateTime);
+
+            var output = WasFound.From(isYYYYMMDD, dateTime);
+            return output;
+        }
+
+        public DateTime ParseExact(
+            string dateTimeString,
+            string format)
+        {
+            var dateTime = DateTime.ParseExact(
+                dateTimeString,
+                format,
+                Instances.FormatProviders.Default);
+
+            return dateTime;
+        }
+
         public string ToString_YYYYMMDD(DateTime dateTime)
         {
-            var output = $"{dateTime:yyyyMMdd}";
+            var yyyyMMddFormatTemplate = this.GetYYYYMMDDFormatTemplate();
+
+            var output = Instances.StringOperator.Format(yyyyMMddFormatTemplate, dateTime);
             return output;
+        }
+
+        /// <summary>
+        /// Chooses <see cref="ToString_YYYYMMDD_HHMMSS_Space(DateTime)"/> as the default.
+        /// </summary>
+        public string ToString_YYYYMMDD_HHMMSS(DateTime dateTime)
+        {
+            var output = this.ToString_YYYYMMDD_HHMMSS_Space(dateTime);
+            return output;
+        }
+
+        public string ToString_YYYYMMDD_HHMMSS_Dash(DateTime dateTime)
+        {
+            var output = $"{dateTime:yyyyMMdd-hhmmss}";
+            return output;
+        }
+
+        public string ToString_YYYYMMDD_HHMMSS_Space(DateTime dateTime)
+        {
+            var output = $"{dateTime:yyyyMMdd hhmmss}";
+            return output;
+        }
+
+        public bool TryParseExact(
+            string @string,
+            string format,
+            out DateTime dateTime)
+        {
+            var isDateTimeWithFormat = DateTime.TryParseExact(
+                @string,
+                format,
+                Instances.FormatProviders.Default,
+                // Use none to match the old behavior.
+                DateTimeStyles.None,
+                out dateTime);
+
+            return isDateTimeWithFormat;
         }
     }
 }

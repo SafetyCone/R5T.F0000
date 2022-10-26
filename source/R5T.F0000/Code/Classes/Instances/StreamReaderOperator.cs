@@ -1,7 +1,7 @@
 using System;
 
 
-namespace R5T.F0002
+namespace R5T.F0000
 {
 	public class StreamReaderOperator : IStreamReaderOperator
 	{

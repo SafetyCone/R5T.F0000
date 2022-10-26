@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
 using R5T.T0132;
 
@@ -12,6 +14,24 @@ namespace R5T.F0000
 		public DateTime From_YYYYMMDD(string YYYYMMDD)
 		{
 			var output = DateTime.ParseExact(YYYYMMDD, "yyyyMMdd", CultureInfo.InvariantCulture);
+			return output;
+		}
+
+		/// <summary>
+		/// Oldest first, to youngest last.
+		/// </summary>
+		public IEnumerable<DateTime> OrderChronologically(IEnumerable<DateTime> dates)
+        {
+			var output = dates.OrderBy(x => x);
+			return output;
+        }
+
+		/// <summary>
+		/// Youngest first, to oldest last.
+		/// </summary>
+		public IEnumerable<DateTime> OrderReverseChronologically(IEnumerable<DateTime> dates)
+		{
+			var output = dates.OrderByDescending(x => x);
 			return output;
 		}
 

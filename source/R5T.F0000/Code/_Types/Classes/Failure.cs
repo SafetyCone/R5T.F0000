@@ -13,8 +13,8 @@ namespace R5T.F0000
             T value,
             string message)
         {
-            this.Value = value;
-            this.Message = message;
+            Value = value;
+            Message = message;
         }
     }
 

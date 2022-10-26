@@ -17,10 +17,12 @@ namespace R5T.F0000
         public static ICommandLineOperator CommandLineOperator { get; } = F0000.CommandLineOperator.Instance;
         public static IComparisonOperator ComparisonOperator { get; } = F0000.ComparisonOperator.Instance;
         public static IComparisonResults ComparisonResults { get; } = F0000.ComparisonResults.Instance;
+        public static IDateTimeFormats DateTimeFormats { get; } = F0000.DateTimeFormats.Instance;
         public static IDateTimeOffsetOperator DateTimeOffsetOperator { get; } = F0000.DateTimeOffsetOperator.Instance;
         public static IDateTimeOperator DateTimeOperator { get; } = F0000.DateTimeOperator.Instance;
         public static IDescriptions Descriptions { get; } = F0000.Descriptions.Instance;
         public static IDictionaryOperator DictionaryOperator { get; } = F0000.DictionaryOperator.Instance;
+        public static IDirectoryInfoOperator DirectoryInfoOperator { get; } = F0000.DirectoryInfoOperator.Instance;
         public static IEnumerableOperator EnumerableOperator { get; } = F0000.EnumerableOperator.Instance;
         public static IEnumerationOperator EnumerationOperator { get; } = F0000.EnumerationOperator.Instance;
         public static IEnvironmentOperator EnvironmentOperator { get; } = F0000.EnvironmentOperator.Instance;
@@ -35,10 +37,12 @@ namespace R5T.F0000
         public static IFileOperator FileOperator { get; } = F0000.FileOperator.Instance;
         public static IFileStreamOperator FileStreamOperator { get; } = F0000.FileStreamOperator.Instance;
         public static IFileSystemOperator FileSystemOperator { get; } = F0000.FileSystemOperator.Instance;
+        public static IFormatProviders FormatProviders { get; } = F0000.FormatProviders.Instance;
         public static IIndex Index { get; } = F0000.Index.Instance;
         public static IIndexOperator IndexOperator { get; } = F0000.IndexOperator.Instance;
         public static IIntegers Integers { get; } = F0000.Integers.Instance;
         public static IListOperator ListOperator { get; } = F0000.ListOperator.Instance;
+        public static IMemoryStreamOperator MemoryStreamOperator { get; } = F0000.MemoryStreamOperator.Instance;
         public static IMessages Messages { get; } = F0000.Messages.Instance;
         public static INamespacedTypeNameOperator NamespacedTypeNameOperator { get; } = F0000.NamespacedTypeNameOperator.Instance;
         public static INowOperator NowOperator { get; } = F0000.NowOperator.Instance;
@@ -55,6 +59,7 @@ namespace R5T.F0000
         public static ISyncOverAsyncOperator SyncOverAsyncOperator { get; } = F0000.SyncOverAsyncOperator.Instance;
         public static ITextOperator TextOperator { get; } = F0000.TextOperator.Instance;
         public static ITimeSpanOperator TimeSpanOperator { get; } = F0000.TimeSpanOperator.Instance;
+        public static ITypeNameAffixes TypeNameAffixes { get; } = F0000.TypeNameAffixes.Instance;
         public static ITypeNameOperator TypeNameOperator { get; } = F0000.TypeNameOperator.Instance;
         public static ITypeOperator TypeOperator { get; } = F0000.TypeOperator.Instance;
         public static IUrlOperator UrlOperator { get; } = F0000.UrlOperator.Instance;

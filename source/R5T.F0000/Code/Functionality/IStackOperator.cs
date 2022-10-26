@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 
+using R5T.F0000;
 using R5T.T0132;
 
 
 namespace R5T.F0000
 {
-	[FunctionalityMarker]
+    [FunctionalityMarker]
 	public partial interface IStackOperator : IFunctionalityMarker
 	{
         public bool IsNotEmpty<T>(Stack<T> stack)

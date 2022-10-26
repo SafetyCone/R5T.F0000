@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
+using R5T.F0000;
+
 using R5T.T0132;
 
 
@@ -292,6 +294,42 @@ namespace R5T.F0000
         {
             var output = this.EnumerateChildFilePathsByRegexOnFileName(directoryPath, regexPattern);
             return output;
+        }
+
+        public IEnumerable<string> FindFilesInDirectoryOrParentDirectories(
+            string directoryPath,
+            string searchPattern)
+        {
+            var childFilePaths = this.FindChildFilesInDirectory(
+                directoryPath,
+                searchPattern);
+
+            var directoryInfo = this.GetDirectoryInfo(directoryPath);
+
+            var isRootDirectory = directoryInfo.IsRoot();
+
+            var parentFilePaths = isRootDirectory
+                ? Instances.EnumerableOperator.Empty<string>()
+                : this.FindFilesInDirectoryOrParentDirectories(
+                    Instances.DirectoryInfoOperator.GetParentDirectoryPath(directoryInfo),
+                    searchPattern);
+
+            var filePaths = childFilePaths.Concat(parentFilePaths);
+            return filePaths;
+        }
+
+        public DirectoryInfo GetDirectoryInfo(string directoryPath)
+        {
+            var directoryInfo = new DirectoryInfo(directoryPath);
+            return directoryInfo;
+        }
+
+        public bool IsRootDirectory(string directoryPath)
+        {
+            var directoryInfo = this.GetDirectoryInfo(directoryPath);
+
+            var isRootDirectory = Instances.DirectoryInfoOperator.IsRootDirectory(directoryInfo);
+            return isRootDirectory;
         }
 
         public string ReadText(string textFilePath)

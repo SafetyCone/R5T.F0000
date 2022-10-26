@@ -40,7 +40,7 @@ namespace R5T.F0000
         {
             get
             {
-                return this.zExists;
+                return zExists;
             }
         }
         public T Result { get; set; }
@@ -52,13 +52,13 @@ namespace R5T.F0000
 
         public WasFound(bool exists, T result)
         {
-            this.zExists = exists;
-            this.Result = result;
+            zExists = exists;
+            Result = result;
         }
 
         public override string ToString()
         {
-            var representation = $"{this.Exists}, {this.Result}";
+            var representation = $"{Exists}, {Result}";
             return representation;
         }
     }
@@ -115,6 +115,12 @@ namespace R5T.F0000
         public static WasFound<T> NotFound<T>()
         {
             var wasFound = new WasFound<T>(false, default);
+            return wasFound;
+        }
+
+        public static WasFound<T> NotFound<T>(T value)
+        {
+            var wasFound = new WasFound<T>(false, value);
             return wasFound;
         }
     }
