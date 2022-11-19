@@ -21,6 +21,17 @@ namespace System.Linq
             return Instances.EnumerableOperator.Append(enumerable, appendix);
         }
 
+        public static IEnumerable<T> AppendIf<T>(this IEnumerable<T> enumerable,
+            bool value,
+            IEnumerable<T> appendixIfTrue,
+            IEnumerable<T> appendixIfFalse)
+        {
+            return Instances.EnumerableOperator.AppendIf(enumerable,
+                value,
+                appendixIfTrue,
+                appendixIfFalse);
+        }
+
         public static IEnumerable<T> AppendRange<T>(this IEnumerable<T> enumerable, IEnumerable<T> appendix)
         {
             return Instances.EnumerableOperator.AppendRange(enumerable, appendix);
@@ -168,6 +179,12 @@ namespace System.Linq
         public static IEnumerable<T> TakeFirst<T>(this IEnumerable<T> enumerable)
         {
             var output = Instances.EnumerableOperator.TakeFirst(enumerable);
+            return output;
+        }
+
+        public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> pairs)
+        {
+            var output = EnumerableOperator.Instance.ToDictionary(pairs);
             return output;
         }
     }

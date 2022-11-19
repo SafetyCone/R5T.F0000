@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml.Linq;
 
 using R5T.F0000;
@@ -12,6 +11,12 @@ namespace System
 {
     public static class XElementExtensions
     {
+        public static IEnumerable<XElement> Children(this XElement element)
+        {
+            var output = Instances.XElementOperator.GetChildren(element);
+            return output;
+        }
+
         public static XElement GetChild<TElement>(this TElement element, string childName)
             where TElement : XElement
         {
@@ -89,6 +94,7 @@ namespace System.Linq
 {
     public static class XElementExtensions
     {
+        /// <inheritdoc cref="IXElementOperator.WhereNameIs(IEnumerable{XElement}, string)"/>
         public static IEnumerable<XElement> WhereNameIs(this IEnumerable<XElement> xElements,
             string name)
         {

@@ -14,5 +14,13 @@ namespace R5T.F0000
             var output = @object as TOutput;
             return output;
         }
+
+        public void ModifyIf<T>(T @object, bool condition, Action<T> modifyAction)
+        {
+            if(condition)
+            {
+                modifyAction(@object);
+            }
+        }
     }
 }

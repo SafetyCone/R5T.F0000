@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using R5T.T0132;
+using R5T.Z0000;
 
 
 namespace R5T.F0000
@@ -11,6 +12,21 @@ namespace R5T.F0000
 	[FunctionalityMarker]
 	public interface IStringOperator : IFunctionalityMarker
 	{
+        /// <summary>
+        /// Quality-of-life overload for <see cref="StartsWith(string, string)"/>.
+        /// </summary>
+        public bool BeginsWith(string @string, string start)
+        {
+            var output = this.StartsWith(@string, start);
+            return output;
+        }
+
+        public bool Contains(string @string, string subString)
+        {
+            var output = @string.Contains(subString);
+            return output;
+        }
+
         public bool ContainsAny(
             string @string,
             string[] searchStrings)
@@ -154,6 +170,15 @@ namespace R5T.F0000
         public bool HasValue(string @string)
         {
             var output = this.IsNotNullAndNotEmpty(@string);
+            return output;
+        }
+
+        /// <summary>
+        /// Prefixes a tab to the string.
+        /// </summary>
+        public string Indent(string @string)
+        {
+            var output = $"{Strings.Instance.Tab}{@string}";
             return output;
         }
 

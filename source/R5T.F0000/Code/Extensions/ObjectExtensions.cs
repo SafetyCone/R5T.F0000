@@ -25,6 +25,18 @@ namespace System.Extensions
             return @object;
         }
 
+        public static T ModifyIf<T>(this T @object,
+            bool condition,
+            Action<T> modifyAction)
+        {
+            ObjectOperator.Instance.ModifyIf(
+                @object,
+                condition,
+                modifyAction);
+
+            return @object;
+        }
+
         public static WasFound<T> WasFound<T>(this T value)
         {
             var output = R5T.F0000.WasFound.From(value);

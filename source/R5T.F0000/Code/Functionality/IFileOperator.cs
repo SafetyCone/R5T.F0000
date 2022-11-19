@@ -27,6 +27,16 @@ namespace R5T.F0000
 			return lines;
 		}
 
+		public async Task CopyToFile(
+			string filePath,
+			Stream stream)
+        {
+			using var fileStream = FileStreamOperator.Instance.NewWrite(
+				filePath);
+
+			await stream.CopyToAsync(fileStream);
+        }
+
 		public bool HasByteOrderMark(
 			string filePath)
         {
@@ -79,6 +89,14 @@ namespace R5T.F0000
 		public Task<string> ReadText(string filePath)
 		{
 			return File.ReadAllTextAsync(filePath);
+		}
+
+		public void WriteAllLines_Synchronous(
+			string filePath,
+			IEnumerable<string> lines,
+			bool overwrite = IValues.DefaultOverwriteValue_Const)
+		{
+			StreamWriterOperator.Instance.WriteAllLines_Synchronous(filePath, lines, overwrite);
 		}
 
 		/// <summary>

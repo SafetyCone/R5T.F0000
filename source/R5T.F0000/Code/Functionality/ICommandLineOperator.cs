@@ -246,6 +246,25 @@ namespace R5T.F0000
             return exitCode;
         }
 
+        public void Run_ThrowIfErrorOrFailure_Synchronous(
+            string command,
+            string arguments)
+        {
+            List<Exception> exceptions = new List<Exception>();
+
+            var exitCode = F0000.Instances.CommandLineOperator.Run_Synchronous(
+                command,
+                arguments,
+                this.Default_OutputReceivedHandler,
+                this.GetErrorReceivedEventHandler(exceptions));
+
+            var isFailure = F0000.Instances.ExitCodeOperator.IsFailure(exitCode);
+            if (isFailure && exceptions.Any())
+            {
+                throw new AggregateException($"The command had error output. Exit code: {exitCode}", exceptions);
+            }
+        }
+
         public int Run_Synchronous(
             string command,
             string arguments,

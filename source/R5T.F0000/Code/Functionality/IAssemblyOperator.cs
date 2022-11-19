@@ -21,6 +21,17 @@ namespace R5T.F0000
             types.ForEach(typeInfo => action(typeInfo));
         }
 
+        public void ForAllTypes(
+            Assembly assembly,
+            Action<TypeInfo> action)
+        {
+            this.ForTypes(
+                assembly,
+                // Select all types.
+                type => true,
+                action);
+        }
+
         public IEnumerable<TypeInfo> SelectTypes(
             Assembly assembly,
             Func<TypeInfo, bool> typeSelector)

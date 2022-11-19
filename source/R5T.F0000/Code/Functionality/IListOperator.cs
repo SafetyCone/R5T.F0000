@@ -30,6 +30,20 @@ namespace R5T.F0000
 				items.AsEnumerable());
 		}
 
+		public bool EqualCounts<T>(
+			IList<T> a,
+			IList<T> b)
+		{
+			var lengthsAreEqual = a.Count == b.Count;
+			return lengthsAreEqual;
+		}
+
+		public bool IsEmpty<T>(IList<T> values)
+		{
+			var output = values.Count == 0;
+			return output;
+		}
+
 		public WasFound<T> HasNth<T>(IList<T> list, int n)
 		{
 			var count = list.Count;
@@ -79,6 +93,17 @@ namespace R5T.F0000
 		{
 			var output = this.NthOrDefault(list, 2);
 			return output;
+		}
+
+		public void VerifyEqualCounts<T>(
+			IList<T> a,
+			IList<T> b)
+		{
+			var lengthsAreEqual = this.EqualCounts(a, b);
+			if (!lengthsAreEqual)
+			{
+				throw ExceptionOperator.Instance.GetListCountsUnequalException(a, b);
+			}
 		}
 	}
 }

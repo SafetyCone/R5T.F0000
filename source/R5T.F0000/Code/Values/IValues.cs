@@ -22,6 +22,10 @@ namespace R5T.F0000
 		/// 0xBF, 191, ¿
 		/// </summary>
 		public byte[] ByteOrderMark => IValues.zByteOrderMark.Value;
-		public const bool DefaultOverwriteValue = true;
+		public const bool DefaultOverwriteValue_Const = true;
+		public bool DefaultOverwriteValue => IValues.DefaultOverwriteValue_Const;
+
+		public const int NoLimitMaximumResultsCount_Constant = -1;
+		public int NoLimitMaximumResultsCount => IValues.NoLimitMaximumResultsCount_Constant;
 	}
 }

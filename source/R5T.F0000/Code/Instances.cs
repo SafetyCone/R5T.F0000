@@ -11,6 +11,7 @@ namespace R5T.F0000
         public static IBooleanOperator BooleanOperator { get; } = F0000.BooleanOperator.Instance;
         public static ICharacterIndexes CharacterIndexes { get; } = Z0000.CharacterIndexes.Instance;
         public static ICharacterNames CharacterNames { get; } = Z0000.CharacterNames.Instance;
+        public static ICharacterOperator CharacterOperator { get; } = F0000.CharacterOperator.Instance;
         public static ICharacters Characters { get; } = Z0000.Characters.Instance;
         public static ICharacterSets CharacterSets { get; } = Z0000.CharacterSets.Instance;
         public static ICommandLineArgumentsOperator CommandLineArgumentsOperator { get; } = F0000.CommandLineArgumentsOperator.Instance;

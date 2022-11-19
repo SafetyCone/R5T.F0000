@@ -26,7 +26,7 @@ namespace R5T.F0000
 
 		public string GetBackupCopyFileNameStem(string fileNameStem)
 		{
-			var output = $"{fileNameStem}-BAK";
+			var output = $"{fileNameStem}-{FileNameAffixes.Instance.BAK}";
 			return output;
 		}
 

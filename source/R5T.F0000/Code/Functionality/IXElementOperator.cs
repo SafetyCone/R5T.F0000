@@ -32,7 +32,7 @@ namespace R5T.F0000
 		}
 
 		/// <summary>
-		/// Use the <see cref="XName.LocalName"/> by default.
+		/// Uses the <see cref="XName.LocalName"/>.
 		/// </summary>
 		public IEnumerable<XElement> WhereNameIs(
 			IEnumerable<XElement> xElements,
@@ -105,6 +105,12 @@ namespace R5T.F0000
 		{
 			var wasFound = this.GetChild_Single(element, childName);
 			return wasFound;
+		}
+
+		public IEnumerable<XElement> GetChildren(XElement element)
+		{
+			var output = element.Elements();
+			return output;
 		}
 
 		public WasFound<XElement> HasChild_Single<TElement>(TElement element, string childName)

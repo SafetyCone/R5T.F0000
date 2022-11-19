@@ -52,5 +52,17 @@ namespace R5T.F0000
 			var output = this.GetExecutableFilePath_ViaCommandLineArgumentValue();
 			return output;
         }
+
+		/// <summary>
+		/// Gets the directory path of the directory containing the executable file.
+		/// </summary>
+		/// <returns>The non-directory indicated directory path of the directory containing the executable file.</returns>
+		public string GetExecutableDirectoryPath()
+        {
+			var executableFilePath = this.GetExecutableFilePath();
+
+			var executableDirectoryPath = PathOperator.Instance.GetFileParentDirectoryPath(executableFilePath);
+			return executableDirectoryPath;
+        }
 	}
 }

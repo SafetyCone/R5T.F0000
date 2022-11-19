@@ -4,6 +4,16 @@ using System.Collections.Generic;
 using Instances = R5T.F0000.Instances;
 
 
+public static class StringExtensions
+{
+    public static bool IsNotNullAndNotEmpty(this string @string)
+    {
+        var isNotNullAndNotEmpty = Instances.StringOperator.IsNotNullAndNotEmpty(@string);
+        return isNotNullAndNotEmpty;
+    }
+}
+
+
 namespace System.Linq
 {
     public static class StringExtensions

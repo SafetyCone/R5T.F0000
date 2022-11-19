@@ -327,6 +327,27 @@ namespace R5T.F0000
             return output;
         }
 
+        public string Join(IEnumerable<char> characters, string separator)
+        {
+            var characterStrings = characters
+                .Select(character => character.ToString())
+                ;
+
+            var output = Instances.StringOperator.Join(
+                separator,
+                characterStrings);
+
+            return output;
+        }
+
+        public string Join(IEnumerable<char> characters)
+        {
+            var separator = Instances.Strings.CommaSeparatedListSpacedSeparator;
+
+            var output = this.Join(characters, separator);
+            return output;
+        }
+
         public string List(
             string separator,
             string ifEmptyDescription,
@@ -391,6 +412,12 @@ namespace R5T.F0000
                 Instances.Descriptions.IfEmpty,
                 characters);
 
+            return output;
+        }
+
+        public IEnumerable<char> OrderAlphabetically(IEnumerable<char> characters)
+        {
+            var output = characters.OrderBy(x => x);
             return output;
         }
 
