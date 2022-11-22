@@ -8,6 +8,12 @@ namespace R5T.F0000
 	[FunctionalityMarker]
 	public partial interface IBooleanOperator : IFunctionalityMarker
 	{
+        public bool From(string valueString)
+        {
+            var output = Boolean.Parse(valueString);
+            return output;
+        }
+
         public string ToString_Lower(bool value)
         {
             var representation = value

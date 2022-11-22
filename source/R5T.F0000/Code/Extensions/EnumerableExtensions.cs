@@ -78,6 +78,12 @@ namespace System.Linq
             return output;
         }
 
+        public static IEnumerable<string> ExplicitNoneIfNone(this IEnumerable<string> strings)
+        {
+            var output = Instances.EnumerableOperator.ExplicitNoneIfNone(strings);
+            return output;
+        }
+
         public static void ForEach<T>(this IEnumerable<T> enumerable, Action<T> action)
         {
             Instances.EnumerableOperator.ForEach(enumerable, action);

@@ -96,7 +96,9 @@ namespace R5T.F0000
 			IEnumerable<string> lines,
 			bool overwrite = IValues.DefaultOverwriteValue_Const)
 		{
-			StreamWriterOperator.Instance.WriteAllLines_Synchronous(filePath, lines, overwrite);
+            FileSystemOperator.Instance.EnsureDirectoryForFilePathExists(filePath);
+
+            StreamWriterOperator.Instance.WriteAllLines_Synchronous(filePath, lines, overwrite);
 		}
 
 		/// <summary>
@@ -104,7 +106,9 @@ namespace R5T.F0000
 		/// </summary>
 		public void WriteAnEmptyFile(string textFilePath)
         {
-			this.WriteText(
+            FileSystemOperator.Instance.EnsureDirectoryForFilePathExists(textFilePath);
+
+            this.WriteText(
 				textFilePath,
 				Instances.Strings.Empty);
         }
@@ -113,7 +117,9 @@ namespace R5T.F0000
 			string textFilePath,
 			IEnumerable<string> lines)
 		{
-			return File.WriteAllLinesAsync(
+            FileSystemOperator.Instance.EnsureDirectoryForFilePathExists(textFilePath);
+
+            return File.WriteAllLinesAsync(
 				textFilePath,
 				lines);
 		}
@@ -122,7 +128,9 @@ namespace R5T.F0000
 			string textFilePath,
 			IEnumerable<string> lines)
 		{
-			File.WriteAllLines(
+            FileSystemOperator.Instance.EnsureDirectoryForFilePathExists(textFilePath);
+
+            File.WriteAllLines(
 				textFilePath,
 				lines);
 		}
@@ -131,6 +139,8 @@ namespace R5T.F0000
 			string textFilePath,
 			string text)
         {
+			FileSystemOperator.Instance.EnsureDirectoryForFilePathExists(textFilePath);
+
 			File.WriteAllText(
 				textFilePath,
 				text);

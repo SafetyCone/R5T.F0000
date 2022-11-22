@@ -127,6 +127,20 @@ namespace R5T.F0000
 			}
 		}
 
+		public IEnumerable<string> ExplicitNoneIfNone(IEnumerable<string> strings)
+		{
+			var any = strings.Any();
+
+			if(any)
+			{
+				return strings;
+			}
+			else
+			{
+				return this.From(Values.Instance.ExplicitNone);
+			}
+		}
+
 		public IEnumerable<T> From<T>(T instance)
 		{
 			yield return instance;

@@ -113,6 +113,20 @@ namespace R5T.F0000
         }
 
         /// <summary>
+        /// Throws an exception if the directory already exists.
+        /// </summary>
+        public void CreateDirectory_NonIdempotent(string directoryPath)
+        {
+            var directoryExists = this.DirectoryExists(directoryPath);
+            if(directoryExists)
+            {
+                throw new Exception("Directory already existed.");
+            }
+
+            this.CreateDirectory_OkIfAlreadyExists(directoryPath);
+        }
+
+        /// <summary>
         /// Creates a directory idempotently (meaning there is no problem with issuing the command multiple times). 
         /// Note: The system method <see cref="Directory.CreateDirectory(string)"/> does not throw an exception if you create a directory that already exists. However, it's hard to remember this fact. Thus, this method name makes that fact explicit.
         /// </summary>
@@ -127,6 +141,20 @@ namespace R5T.F0000
         {
 			var output = Directory.Exists(directoryPath);
 			return output;
+        }
+
+        /// <summary>
+        /// Non-idempotently deletes a directory.
+        /// An exception is thrown if the directory does not exist.
+        /// </summary>
+        public void DeleteDirectory_NonIdempotent(string directoryPath)
+        {
+            if (!this.DirectoryExists(directoryPath))
+            {
+                throw new DirectoryNotFoundException(directoryPath);
+            }
+
+            this.DeleteDirectory_Robust(directoryPath);
         }
 
         public void DeleteDirectory_OkIfNotExists(string directoryPath)
@@ -322,6 +350,25 @@ namespace R5T.F0000
         {
             var directoryInfo = new DirectoryInfo(directoryPath);
             return directoryInfo;
+        }
+
+        /// <summary>
+        /// Cleans out (deletes, then creates) a directory path.
+        /// </summary>
+        public async Task InClearedDirectoryContext(
+            string temporaryDirectoryPath,
+            Func<string, Task> directoryPathAction)
+        {
+            FileSystemOperator.Instance.DeleteDirectory_OkIfNotExists(
+                temporaryDirectoryPath);
+
+            // Wait for the file-system to process the deletion.
+            await Task.Delay(100);
+
+            FileSystemOperator.Instance.CreateDirectory_NonIdempotent(
+                temporaryDirectoryPath);
+
+            await directoryPathAction(temporaryDirectoryPath);
         }
 
         public bool IsRootDirectory(string directoryPath)

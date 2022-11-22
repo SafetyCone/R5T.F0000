@@ -27,5 +27,8 @@ namespace R5T.F0000
 
 		public const int NoLimitMaximumResultsCount_Constant = -1;
 		public int NoLimitMaximumResultsCount => IValues.NoLimitMaximumResultsCount_Constant;
+
+		public const string ExplicitNone_Constant = "<None>";
+		public string ExplicitNone => IValues.ExplicitNone_Constant;
 	}
 }
