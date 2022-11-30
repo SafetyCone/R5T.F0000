@@ -14,6 +14,8 @@ namespace R5T.F0000
         /// </summary>
         public FileStream NewWrite(string filePath, bool overwrite = true)
         {
+            FileSystemOperator.Instance.EnsureDirectoryForFilePathExists(filePath);
+
             FileMode fileMode = FileMode.Create;
             if (!overwrite)
             {

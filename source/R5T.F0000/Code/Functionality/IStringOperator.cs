@@ -271,6 +271,12 @@ namespace R5T.F0000
             return output;
         }
 
+        public string Lower(string @string)
+        {
+            var output = @string.ToLowerInvariant();
+            return output;
+        }
+
         public bool NotFound(int index)
         {
             var output = index == Instances.String.IndexOfNotFound;
