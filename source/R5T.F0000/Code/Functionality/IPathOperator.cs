@@ -9,6 +9,14 @@ namespace R5T.F0000
 	[FunctionalityMarker]
 	public partial interface IPathOperator : IFunctionalityMarker
 	{
+        public string GetDirectoryName_FromDirectoryPath(string directoryPath)
+        {
+            var directoryInfo = new DirectoryInfo(directoryPath);
+
+            var directoryName = directoryInfo.Name;
+            return directoryName;
+        }
+
         /// <summary>
         /// Gets the combined path of a file.
         /// </summary>

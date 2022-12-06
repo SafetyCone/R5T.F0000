@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 using R5T.F0000;
 
 
@@ -41,6 +41,19 @@ namespace System.Extensions
         {
             var output = R5T.F0000.WasFound.From(value);
             return output;
+        }
+    }
+}
+
+
+
+namespace System.Linq
+{
+    public static class ObjectExtensions
+    {
+        public static IEnumerable<T> ToEnumerable<T>(this T instance)
+        {
+            yield return instance;
         }
     }
 }

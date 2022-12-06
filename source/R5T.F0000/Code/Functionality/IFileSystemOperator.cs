@@ -97,16 +97,41 @@ namespace R5T.F0000
                 fileCopyPair.DestinationFilePath);
         }
 
+        /// <summary>
+        /// Chooses <see cref="CopyFile_OverwriteAllowed(string, string)"/> as the default.
+        /// </summary>
         public void CopyFile(
 			string sourceFilePath,
 			string destinationFilePath)
         {
-			File.Copy(
-				sourceFilePath,
-				destinationFilePath,
-				true);
+            this.CopyFile_OverwriteAllowed(
+                sourceFilePath,
+                destinationFilePath);
         }
 
+        public void CopyFile_OverwriteAllowed(
+            string sourceFilePath,
+            string destinationFilePath)
+        {
+            File.Copy(
+                sourceFilePath,
+                destinationFilePath,
+                true);
+        }
+
+        public void CopyFile_OverwriteForbidden(
+            string sourceFilePath,
+            string destinationFilePath)
+        {
+            File.Copy(
+                sourceFilePath,
+                destinationFilePath,
+                false);
+        }
+
+        /// <summary>
+        /// Chooses <see cref="CreateDirectory_OkIfAlreadyExists(string)"/> as the default.
+        /// </summary>
         public void CreateDirectory(string directoryPath)
         {
             this.CreateDirectory_OkIfAlreadyExists(directoryPath);
@@ -157,12 +182,17 @@ namespace R5T.F0000
             this.DeleteDirectory_Robust(directoryPath);
         }
 
-        public void DeleteDirectory_OkIfNotExists(string directoryPath)
+        public void DeleteDirectory_Idempotent(string directoryPath)
         {
             if (this.DirectoryExists(directoryPath))
             {
                 this.DeleteDirectory_Robust(directoryPath);
             }
+        }
+
+        public void DeleteDirectory_OkIfNotExists(string directoryPath)
+        {
+            this.DeleteDirectory_Idempotent(directoryPath);
         }
 
         public void DeleteFile_OkIfNotExists(string filePath)
@@ -352,6 +382,19 @@ namespace R5T.F0000
             return directoryInfo;
         }
 
+        public async Task ClearDirectory(
+            string directoryPath)
+        {
+            FileSystemOperator.Instance.DeleteDirectory_OkIfNotExists(
+                directoryPath);
+
+            // Wait for the file-system to process the deletion.
+            await Task.Delay(100);
+
+            FileSystemOperator.Instance.CreateDirectory_NonIdempotent(
+                directoryPath);
+        }
+
         /// <summary>
         /// Cleans out (deletes, then creates) a directory path.
         /// </summary>
@@ -359,14 +402,7 @@ namespace R5T.F0000
             string temporaryDirectoryPath,
             Func<string, Task> directoryPathAction)
         {
-            FileSystemOperator.Instance.DeleteDirectory_OkIfNotExists(
-                temporaryDirectoryPath);
-
-            // Wait for the file-system to process the deletion.
-            await Task.Delay(100);
-
-            FileSystemOperator.Instance.CreateDirectory_NonIdempotent(
-                temporaryDirectoryPath);
+            await this.ClearDirectory(temporaryDirectoryPath);   
 
             await directoryPathAction(temporaryDirectoryPath);
         }

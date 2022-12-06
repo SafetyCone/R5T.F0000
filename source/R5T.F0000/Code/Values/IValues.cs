@@ -25,6 +25,11 @@ namespace R5T.F0000
 		public const bool DefaultOverwriteValue_Const = true;
 		public bool DefaultOverwriteValue => IValues.DefaultOverwriteValue_Const;
 
+		/// <summary>
+		/// The value for the command line to have no arguments is null.
+		/// </summary>
+		public string EmptyCommandArguments => null;
+
 		public const int NoLimitMaximumResultsCount_Constant = -1;
 		public int NoLimitMaximumResultsCount => IValues.NoLimitMaximumResultsCount_Constant;
 

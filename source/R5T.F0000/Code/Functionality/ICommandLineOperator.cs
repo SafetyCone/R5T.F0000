@@ -228,7 +228,7 @@ namespace R5T.F0000
         {
             var exitCode = this.Run_Synchronous(
                 command,
-                null);
+                Values.Instance.EmptyCommandArguments);
 
             return exitCode;
         }
@@ -263,6 +263,34 @@ namespace R5T.F0000
             {
                 throw new AggregateException($"The command had error output. Exit code: {exitCode}", exceptions);
             }
+        }
+
+        public void Run_Synchronous_NoWait(
+            string command)
+        {
+            this.Run_Synchronous_NoWait(
+                command,
+                Values.Instance.EmptyCommandArguments);
+        }
+
+        public void Run_Synchronous_NoWait(
+            string command,
+            string arguments)
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo(command, arguments)
+            {
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                RedirectStandardError = true,
+                RedirectStandardOutput = true
+            };
+
+            Process process = new Process()
+            {
+                StartInfo = startInfo
+            };
+
+            process.Start();
         }
 
         public int Run_Synchronous(

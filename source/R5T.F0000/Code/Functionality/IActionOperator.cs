@@ -64,5 +64,20 @@ namespace R5T.F0000
 		{
 			this.Run_OkIfDefault(action, value);
 		}
-	}
+
+        public async Task Run(Func<Task> action)
+        {
+            await this.Run_OkIfDefault(action);
+        }
+
+        public async Task Run_OkIfDefault(Func<Task> action)
+        {
+            if (action == default)
+            {
+                return;
+            }
+
+            await action();
+        }
+    }
 }
