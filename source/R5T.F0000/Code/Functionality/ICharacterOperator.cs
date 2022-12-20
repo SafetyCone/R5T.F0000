@@ -213,6 +213,15 @@ namespace R5T.F0000
         }
 
         /// <summary>
+        /// Quality-of-life overload for <see cref="IsUppercase(char)"/>.
+        /// </summary>
+        public bool IsCapitalized(char character)
+        {
+            var output = this.IsUppercase(character);
+            return output;
+        }
+
+        /// <summary>
         /// <inheritdoc cref="Glossary.ForCharacterClasses.Character" path="/definition"/>
         /// </summary>
         public bool IsCharacter(char character)

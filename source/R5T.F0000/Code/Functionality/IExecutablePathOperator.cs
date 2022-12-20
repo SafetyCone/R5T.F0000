@@ -61,8 +61,14 @@ namespace R5T.F0000
         {
 			var executableFilePath = this.GetExecutableFilePath();
 
-			var executableDirectoryPath = PathOperator.Instance.GetFileParentDirectoryPath(executableFilePath);
+			var executableDirectoryPath = this.GetExecutableDirectoryPath(executableFilePath);
 			return executableDirectoryPath;
         }
-	}
+
+        public string GetExecutableDirectoryPath(string executableFilePath)
+		{
+            var executableDirectoryPath = PathOperator.Instance.GetFileParentDirectoryPath(executableFilePath);
+            return executableDirectoryPath;
+        }
+    }
 }

@@ -113,6 +113,12 @@ namespace R5T.F0000
 			return output;
 		}
 
+		public string GetName(XElement xElement)
+		{
+			var name = xElement.Name.LocalName;
+			return name;
+		}
+
 		public WasFound<XElement> HasChild_Single<TElement>(TElement element, string childName)
 			where TElement : XElement
 		{

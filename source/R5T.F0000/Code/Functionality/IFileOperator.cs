@@ -4,7 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 
 using R5T.T0132;
-
+using R5T.Z0000;
 
 namespace R5T.F0000
 {
@@ -14,20 +14,42 @@ namespace R5T.F0000
 		/// <summary>
 		/// Actually reads all lines. The <see cref="File.ReadLines(string)"/> method omits blank lines, instead adding the new line character to the previous line!
 		/// </summary>
-		public string[] ActuallyReadAllLines(string filePath)
+		public async Task<string[]> ActuallyReadAllLines(string filePath)
 		{
-			var text = File.ReadAllText(filePath);
+			var text = await File.ReadAllTextAsync(filePath);
 
-			if (Instances.StringOperator.IsEmpty(text))
-			{
-				return Array.Empty<string>();
-			}
+            var lines = this.GetLinesFromText(text);
+            return lines;
+        }
 
-			var lines = text.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
+        /// <inheritdoc cref="ActuallyReadAllLines(string)"/>
+        public string[] ActuallyReadAllLines_Synchronous(string filePath)
+        {
+            var text = File.ReadAllText(filePath);
+
+			var lines = this.GetLinesFromText(text);
 			return lines;
-		}
+        }
 
-		public async Task CopyToFile(
+		public string[] GetLinesFromText(string text)
+		{
+            if (Instances.StringOperator.IsEmpty(text))
+            {
+                return Array.Empty<string>();
+            }
+
+            var lines = text.Split(
+                new[]
+                {
+                    Strings.Instance.NewLine_NonWindows,
+                    Strings.Instance.NewLine_Windows,
+                },
+                StringSplitOptions.None);
+
+            return lines;
+        }
+
+        public async Task CopyToFile(
 			string filePath,
 			Stream stream)
         {
@@ -51,12 +73,19 @@ namespace R5T.F0000
 			return hasByteOrderMark;
         }
 
-		/// <summary>
-		/// Ease of use name for the <see cref="ActuallyReadAllLines(string)"/> method.
-		/// </summary>
-		public string[] ReadAllLines_Synchronous(string filePath)
+        /// <summary>
+        /// Ease of use name for the <see cref="ActuallyReadAllLines(string)"/> method.
+        /// </summary>
+        public async Task<string[]> ReadAllLines(string filePath)
+        {
+            var lines = await this.ActuallyReadAllLines(filePath);
+            return lines;
+        }
+
+        /// <inheritdoc cref="ReadAllLines(string)"/>
+        public string[] ReadAllLines_Synchronous(string filePath)
 		{
-			var lines = this.ActuallyReadAllLines(filePath);
+			var lines = this.ActuallyReadAllLines_Synchronous(filePath);
 			return lines;
 		}
 

@@ -1,5 +1,5 @@
 using System;
-
+using System.IO;
 using R5T.T0132;
 
 
@@ -53,6 +53,14 @@ namespace R5T.F0000
 
 			var output = $"{fileNameStem}{fileExtensionSeparator}{fileExtension}";
 			return output;
+		}
+
+		public string GetFileName_FromFilePath(string filePath)
+		{
+			var fileInfo = new FileInfo(filePath);
+
+			var fileName = fileInfo.Name;
+			return fileName;
 		}
 
 		public string GetFileNameStem(string fileName)

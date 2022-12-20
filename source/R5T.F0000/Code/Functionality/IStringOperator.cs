@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 using R5T.T0132;
@@ -12,6 +14,15 @@ namespace R5T.F0000
 	[FunctionalityMarker]
 	public interface IStringOperator : IFunctionalityMarker
 	{
+        private static Internal.IStringOperator Internal => F0000.Internal.StringOperator.Instance;
+
+
+        public string Append(string @string, string appendix)
+        {
+            var output = @string + appendix;
+            return output;
+        }
+
         /// <summary>
         /// Quality-of-life overload for <see cref="StartsWith(string, string)"/>.
         /// </summary>
@@ -93,6 +104,86 @@ namespace R5T.F0000
             return output;
         }
 
+        /// <summary>
+        /// Returns the string, without the ending.
+        /// </summary>
+        public string ExceptEnding_Strict(
+            string @string,
+            string ending)
+        {
+            var endsWithEnding = this.EndsWith(
+                @string,
+                ending);
+
+            if (!endsWithEnding)
+            {
+                throw new ArgumentException($"String '{@string}' did not end with ending '{endsWithEnding}'.", nameof(@string));
+            }
+
+            var output = @string[..^ending.Length];
+            return output;
+        }
+
+        /// <summary>
+        /// Quality-of-life overload for <see cref="ExceptEnding_Strict(string, string)"/>.
+        /// </summary>
+        public string ExceptEnding(
+            string @string,
+            string ending)
+        {
+            var output = this.ExceptEnding_Strict(
+                @string,
+                ending);
+
+            return output;
+        }
+
+        /// <summary>
+        /// Robustly returns null or empty for null or empty (respectively).
+        /// </summary>
+        public string ExceptFirst_Robust(string @string)
+        {
+            var isNullOrEmpty = this.IsNullOrEmpty(@string);
+            if(isNullOrEmpty)
+            {
+                return @string;
+            }
+
+            var output = Internal.ExceptFirst_Unchecked(@string);
+            return output;
+        }
+
+        /// <summary>
+        /// Similar to the String.Length property and the LINQ Count() extension, throws an exception if the string is null or empty.
+        /// </summary>
+        public string ExceptFirst_Strict(string @string)
+        {
+            var isNull = this.IsNull(@string);
+            if(isNull)
+            {
+                throw new ArgumentNullException(nameof(@string));
+            }
+
+            var isEmpty = this.IsEmpty(@string);
+            if(isEmpty)
+            {
+                throw new ArgumentOutOfRangeException(nameof(@string), "Input string was empty.");
+            }
+
+            var output = Internal.ExceptFirst_Unchecked(@string);
+            return output;
+        }
+
+        /// <summary>
+        /// Chooses <see cref="ExceptFirst_Strict(string)"/> as the default.
+        /// Check your string lengths!
+        /// </summary>
+        public string ExceptFirst(string @string)
+        {
+            var output = this.ExceptFirst_Strict(@string);
+            return output;
+        }
+
         public string Format(
             string template,
             params object[] objects)
@@ -155,6 +246,8 @@ namespace R5T.F0000
 			var output = @string[^1];
 			return output;
         }
+
+        
 
         public string GetString(StringBuilder stringBuilder, Action<StringBuilder> modifier)
         {
@@ -224,6 +317,12 @@ namespace R5T.F0000
             return isEmpty;
         }
 
+        public bool IsNotEmpty(string value)
+        {
+            var isEmpty = value != Instances.Strings.Empty;
+            return isEmpty;
+        }
+
         /// <summary>
         /// Quality-of-life overload for <see cref="WasFound(int)"/>.
         /// </summary>
@@ -239,6 +338,16 @@ namespace R5T.F0000
 
             var isNotNullAndNotEmpty = !isNullOrEmpty;
             return isNotNullAndNotEmpty;
+        }
+
+        public bool IsNull(string @string)
+        {
+            // Use  instead of:
+            // * == null - Equality operator eventually just uses Object.ReferenceEquals().
+            // * Object.Equals() - Should be Object.ReferenceEquals() instead.
+            // * Object.ReferenceEquals() - IDE0041 message is produced, indicating preference for "is null".
+            var output = @string is null;
+            return output;
         }
 
         public bool IsNullOrEmpty(string @string)
@@ -349,6 +458,20 @@ namespace R5T.F0000
             return output;
         }
 
+        /// <summary>
+        /// Quality-of-life overload for <see cref="Append(string, string)"/>.
+        /// </summary>
+        public string Suffix(
+            string @string,
+            string suffix)
+        {
+            var output = this.Append(
+                @string,
+                suffix);
+
+            return output;
+        }
+
         public string Trim(string @string)
         {
 			var output = @string.Trim();
@@ -370,4 +493,17 @@ namespace R5T.F0000
 			return output;
         }
 	}
+}
+
+
+namespace R5T.F0000.Internal
+{
+    public partial interface IStringOperator
+    {
+        public string ExceptFirst_Unchecked(string @string)
+        {
+            var output = @string[1..];
+            return output;
+        }
+    }
 }

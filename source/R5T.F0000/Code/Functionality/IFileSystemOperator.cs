@@ -197,6 +197,15 @@ namespace R5T.F0000
 
         public void DeleteFile_OkIfNotExists(string filePath)
         {
+            var directoryForFileDirectoryPath = PathOperator.Instance.GetFileParentDirectoryPath(filePath);
+
+            var directoryExists = this.DirectoryExists(directoryForFileDirectoryPath);
+            if (!directoryExists)
+            {
+                // No need to delete file if directory containing it does not exist!
+                return;
+            }
+
             File.Delete(filePath);
         }
 
@@ -436,6 +445,19 @@ namespace R5T.F0000
             if(!fileExists)
             {
                 throw new FileNotFoundException("File did not exists.", filePath);
+            }
+        }
+
+        /// <summary>
+        /// Tests whether a file exists, and if it does, throws a <see cref="FileNotFoundException"/>.
+        /// Yes, it's weird if throws <see cref="FileNotFoundException"/>, but that exception type already exists.
+        /// </summary>
+        public void VerifyFileDoesNotExists(string filePath)
+        {
+            var fileExists = this.FileExists(filePath);
+            if (fileExists)
+            {
+                throw new FileNotFoundException("File exists.", filePath);
             }
         }
     }

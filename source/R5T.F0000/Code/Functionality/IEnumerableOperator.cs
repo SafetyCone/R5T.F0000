@@ -146,7 +146,15 @@ namespace R5T.F0000
 			yield return instance;
 		}
 
-		public bool HasAny<T>(IEnumerable<T> items)
+        public IEnumerable<T> From<T>(params T[] instances)
+        {
+			foreach (var instance in instances)
+			{
+				yield return instance;
+			}
+        }
+
+        public bool HasAny<T>(IEnumerable<T> items)
 		{
 			var output = items.Any();
 			return output;

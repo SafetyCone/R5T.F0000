@@ -19,5 +19,11 @@ namespace R5T.F0000
             var output = lastIndex_Inclusive + 1;
             return output;
         }
+
+        public bool IsFound(int index)
+        {
+            var output = Index.Instance.NotFound != index;
+            return output;
+        }
     }
 }

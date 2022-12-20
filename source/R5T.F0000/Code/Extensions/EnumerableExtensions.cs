@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 using R5T.F0000;
@@ -152,6 +153,27 @@ namespace System.Linq
         {
             var output = Instances.EnumerableOperator.OrderAlphabetically(items, keySelector);
             return output;
+        }
+
+        public static IEnumerable<T> OrderByNames<T>(this IEnumerable<T> items,
+            Func<T, string> nameSelector,
+            IEnumerable<string> orderedNames)
+        {
+            var output = OrderOperator.Instance.OrderByNames(
+                items,
+                nameSelector,
+                orderedNames);
+
+            return output;
+        }
+
+        public static IEnumerable<T> OrderByNames<T>(this IEnumerable<T> items,
+            Func<T, string> nameSelector,
+            params string[] orderedNames)
+        {
+            return items.OrderByNames(
+                nameSelector,
+                orderedNames.AsEnumerable());
         }
 
         public static IEnumerable<T> SkipFirst<T>(this IEnumerable<T> enumerable)

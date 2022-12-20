@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using R5T.F0000;
+
 using Instances = R5T.F0000.Instances;
 
 
@@ -18,6 +20,15 @@ namespace System.Linq
 {
     public static class StringExtensions
     {
+        public static IEnumerable<string> ExceptIfEmpty(this IEnumerable<string> strings)
+        {
+            var output = strings
+                .Where(StringOperator.Instance.IsNotEmpty)
+                ;
+
+            return output;
+        }
+
         public static IEnumerable<string> OrderAlphabetically(this IEnumerable<string> strings)
         {
             var output = Instances.StringOperator.OrderAlphabetically(strings);

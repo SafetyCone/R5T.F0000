@@ -17,3 +17,21 @@ namespace R5T.F0000
 	    #endregion
 	}
 }
+
+
+namespace R5T.F0000.Internal
+{
+    public class TypeNameOperator : ITypeNameOperator
+    {
+        #region Infrastructure
+
+        public static ITypeNameOperator Instance { get; } = new TypeNameOperator();
+
+        private TypeNameOperator()
+        {
+
+        }
+
+        #endregion
+    }
+}

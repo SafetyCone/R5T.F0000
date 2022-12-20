@@ -34,5 +34,11 @@ namespace R5T.F0000
             var fileStream = new FileStream(filePath, FileMode.Open);
             return fileStream;
         }
+
+        public FileStream OpenRead(string filePath)
+        {
+            var fileStream = File.OpenRead(filePath);
+            return fileStream;
+        }
     }
 }
