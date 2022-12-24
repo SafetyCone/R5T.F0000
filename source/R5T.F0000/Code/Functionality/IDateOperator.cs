@@ -131,6 +131,20 @@ namespace R5T.F0000
             return yesterday;
         }
 
+        public string GetFormatTemplate(string format)
+        {
+            var formatTemplate = $"{{0:{format}}}";
+            return formatTemplate;
+        }
+
+        public string FormatDateTime(DateTime dateTime, string format)
+        {
+            var formatTemplate = this.GetFormatTemplate(format);
+
+            var output = Instances.StringOperator.Format(formatTemplate, dateTime);
+            return output;
+        }
+
         public string GetYYYYMMDDFormatTemplate()
         {
             var yyyyMMddFormatTemplate = $"{{0:{Instances.DateTimeFormats.YYYYMMDD}}}";
@@ -192,6 +206,15 @@ namespace R5T.F0000
         public string ToString_YYYYMMDD_HHMMSS_Space(DateTime dateTime)
         {
             var output = $"{dateTime:yyyyMMdd hhmmss}";
+            return output;
+        }
+
+        public string ToString_YYYY_MM_DD_Dashed(DateTime dateTime)
+        {
+            var output = this.FormatDateTime(
+                dateTime,
+                Instances.DateTimeFormats.YYYY_MM_DD_Dashed);
+
             return output;
         }
 

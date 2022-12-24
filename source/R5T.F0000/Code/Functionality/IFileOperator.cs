@@ -142,26 +142,38 @@ namespace R5T.F0000
 				Instances.Strings.Empty);
         }
 
-		public Task WriteLines(
+        /// <summary>
+        /// Writes the provided lines (and only the provided lines, with no trailing blank line) to a file.
+        /// </summary>
+        public Task WriteLines(
 			string textFilePath,
 			IEnumerable<string> lines)
 		{
             FileSystemOperator.Instance.EnsureDirectoryForFilePathExists(textFilePath);
 
-            return File.WriteAllLinesAsync(
+            var text = StringOperator.Instance.Join(
+                Instances.Characters.NewLine,
+                lines);
+
+            return File.WriteAllTextAsync(
 				textFilePath,
-				lines);
+				text);
 		}
 
+		/// <inheritdoc cref="WriteLines(string, IEnumerable{string})"/>
 		public void WriteLines_Synchronous(
 			string textFilePath,
 			IEnumerable<string> lines)
 		{
             FileSystemOperator.Instance.EnsureDirectoryForFilePathExists(textFilePath);
 
-            File.WriteAllLines(
-				textFilePath,
+			var text = StringOperator.Instance.Join(
+				Instances.Characters.NewLine,
 				lines);
+
+            File.WriteAllText(
+				textFilePath,
+				text);
 		}
 
 		public void WriteText(

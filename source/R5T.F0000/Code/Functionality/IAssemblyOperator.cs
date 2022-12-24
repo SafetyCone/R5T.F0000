@@ -42,5 +42,33 @@ namespace R5T.F0000
 
             return output;
         }
+
+        public TypeInfo GetType(
+            Assembly assembly,
+            string namespacedTypeName)
+        {
+            var hasType = this.HasType(
+                assembly,
+                namespacedTypeName);
+
+            var typeInfo = WasFoundOperator.Instance.ResultOrExceptionIfNotFound(
+                hasType,
+                $"{namespacedTypeName}: type not found.");
+
+            return typeInfo;
+        }
+
+        public WasFound<TypeInfo> HasType(
+            Assembly assembly,
+            string namespacedTypeName)
+        {
+            var typeOrDefault = this.SelectTypes(
+                assembly,
+                TypeOperator.Instance.WhereNamespacedTypeNameIs(namespacedTypeName))
+                .SingleOrDefault();
+
+            var wasFound = WasFound.From(typeOrDefault);
+            return wasFound;
+        }
     }
 }

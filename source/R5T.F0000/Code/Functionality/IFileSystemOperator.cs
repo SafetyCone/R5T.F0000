@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
-
-using R5T.F0000;
 
 using R5T.T0132;
 
@@ -329,6 +328,36 @@ namespace R5T.F0000
             return output;
         }
 
+        public IEnumerable<FileInfo> EnumerateFiles(
+            string directoryPath,
+            Func<DirectoryInfo, bool> subDirectoryRecursionPredicate)
+        {
+            var directoryInfo = new DirectoryInfo(directoryPath);
+
+            foreach (var fileInfo in directoryInfo.GetFiles())
+            {
+                yield return fileInfo;
+            }
+
+            foreach (var subDirectoryInfo in directoryInfo.GetDirectories())
+            {
+                var recurseInfoSubDirectory = subDirectoryRecursionPredicate(subDirectoryInfo);
+                if (recurseInfoSubDirectory)
+                {
+                    var subDirectoryPath = subDirectoryInfo.GetDirectoryPath();
+
+                    var subFiles = this.EnumerateFiles(
+                        subDirectoryPath,
+                        subDirectoryRecursionPredicate);
+
+                    foreach (var subFile in subFiles)
+                    {
+                        yield return subFile;
+                    }
+                }
+            }
+        }
+
         public bool FileExists(string filePath)
         {
             var output = File.Exists(filePath);
@@ -391,6 +420,23 @@ namespace R5T.F0000
             return directoryInfo;
         }
 
+        /// <summary>
+        /// Finds the file in the directory (and all sub-directories) that was the last to be modified, and return its modified time.
+        /// </summary>
+        public DateTime GetLastModifiedTime_ForDirectory_Local(
+            string directoryPath,
+            Func<DirectoryInfo, bool> subDirectoryRecursionPredicate)
+        {
+            var output = this.EnumerateFiles(
+                directoryPath,
+                subDirectoryRecursionPredicate)
+                .OrderByDescending(x => x.LastWriteTimeUtc)
+                .First()
+                .LastWriteTime;
+
+            return output;
+        }
+
         public async Task ClearDirectory(
             string directoryPath)
         {
@@ -399,6 +445,19 @@ namespace R5T.F0000
 
             // Wait for the file-system to process the deletion.
             await Task.Delay(100);
+
+            FileSystemOperator.Instance.CreateDirectory_NonIdempotent(
+                directoryPath);
+        }
+
+        public void ClearDirectory_Synchronous(
+            string directoryPath)
+        {
+            FileSystemOperator.Instance.DeleteDirectory_OkIfNotExists(
+                directoryPath);
+
+            // Wait for the file-system to process the deletion.
+            Thread.Sleep(100);
 
             FileSystemOperator.Instance.CreateDirectory_NonIdempotent(
                 directoryPath);

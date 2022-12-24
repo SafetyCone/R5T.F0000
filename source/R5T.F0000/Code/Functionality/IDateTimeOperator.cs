@@ -11,6 +11,12 @@ namespace R5T.F0000
 	[FunctionalityMarker]
 	public partial interface IDateTimeOperator : IFunctionalityMarker
 	{
+		public DateTime GetDate(DateTime dateTime)
+		{
+			var output = dateTime.Date;
+			return output;
+		}
+
 		public DateTime From_YYYYMMDD(string YYYYMMDD)
 		{
 			var output = DateTime.ParseExact(YYYYMMDD, "yyyyMMdd", CultureInfo.InvariantCulture);

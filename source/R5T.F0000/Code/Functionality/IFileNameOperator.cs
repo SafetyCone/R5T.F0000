@@ -55,6 +55,7 @@ namespace R5T.F0000
 			return output;
 		}
 
+		[Obsolete("Warning: uses System.IO.FileInfo, which has issues with paths of a different OS type.")]
 		public string GetFileName_FromFilePath(string filePath)
 		{
 			var fileInfo = new FileInfo(filePath);

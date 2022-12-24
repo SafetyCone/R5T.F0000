@@ -9,6 +9,9 @@ namespace R5T.F0000
 	[FunctionalityMarker]
 	public partial interface IDirectoryInfoOperator : IFunctionalityMarker
 	{
+        /// <summary>
+        /// Gets the directory path.
+        /// </summary>
         public string GetDirectoryPath(DirectoryInfo directoryInfo)
         {
             var directoryPath = directoryInfo.FullName;

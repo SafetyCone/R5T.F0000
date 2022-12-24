@@ -6,6 +6,7 @@ using Instances = R5T.F0000.Instances;
 
 public static class DirectoryInfoExtensions
 {
+    /// <inheritdoc cref="R5T.F0000.IDirectoryInfoOperator.GetDirectoryPath(DirectoryInfo)"/>
     public static string GetDirectoryPath(this DirectoryInfo directoryInfo)
     {
         var directoryPath = Instances.DirectoryInfoOperator.GetDirectoryPath(directoryInfo);

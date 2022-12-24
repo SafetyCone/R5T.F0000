@@ -127,10 +127,37 @@ namespace R5T.F0000
 			return isGeneric;
 		}
 
-		/// <summary>
-		/// <inheritdoc cref = "Y0000.Glossary.ForType.ClosedGeneric" path="/definition"/>
-		/// </summary>
-		public bool IsClosedGeneric(Type type)
+		public WasFound<MethodInfo> HasMethod_Declarared(
+			TypeInfo typeInfo,
+			string methodName)
+		{
+			var methodOrDefault = typeInfo.DeclaredMethods
+				.Where(method => method.Name == methodName)
+				.SingleOrDefault();
+
+			var wasFound = WasFound.From(methodOrDefault);
+			return wasFound;
+		}
+
+        public MethodInfo GetMethod_Declarared(
+            TypeInfo typeInfo,
+            string methodName)
+        {
+			var hasMethod = this.HasMethod_Declarared(
+				typeInfo,
+				methodName);
+
+			var method = WasFoundOperator.Instance.ResultOrExceptionIfNotFound(
+				hasMethod,
+				$"{methodName}: method with name not found on type '{this.GetNamespacedTypeName(typeInfo)}'.");
+
+			return method;
+        }
+
+        /// <summary>
+        /// <inheritdoc cref = "Y0000.Glossary.ForType.ClosedGeneric" path="/definition"/>
+        /// </summary>
+        public bool IsClosedGeneric(Type type)
 		{
 			// If the type is not at least a constructed generic type, then it cannot be a closed generic type.
 			// This test will determine closed/open for all generic types with only a single type parameter: if any construction has been done to the definition, and there is only a single parameter, then the single paramter has been filled-in, meaning all parameters have been filled-in.
@@ -194,6 +221,17 @@ namespace R5T.F0000
 		{
 			var output = type.IsTypeDefinition;
 			return output;
+		}
+
+		public Func<TypeInfo, bool> WhereNamespacedTypeNameIs(string namespacedTypeName)
+		{
+			return typeInfo =>
+			{
+				var namespacedTypeNameForTypeInfo = this.GetNamespacedTypeName_ForTypeInfo(typeInfo);
+
+				var output = namespacedTypeNameForTypeInfo == namespacedTypeName;
+				return output;
+            };
 		}
 	}
 }
