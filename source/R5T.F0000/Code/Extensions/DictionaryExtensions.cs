@@ -14,5 +14,18 @@ namespace System.Extensions
         {
             DictionaryOperator.Instance.AddOrReplaceValue(dictionary, key, value);
         }
+
+        public static WasFound<TValue> HasValue<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key)
+        {
+            var containsKey = dictionary.ContainsKey(key);
+
+            var value = containsKey
+                ? dictionary[key]
+                : default
+                ;
+
+            var output = WasFound.From(containsKey, value);
+            return output;
+        }
     }
 }

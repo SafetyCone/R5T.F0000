@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
-
+using System.Threading.Tasks;
 using R5T.T0132;
 
 using Glossary = R5T.Y0000.Glossary;
@@ -30,14 +33,63 @@ namespace R5T.F0000
             return output;
         }
 
+        /// <summary>
+        /// Quality-of-life overload for <see cref="DescribeToText(IEnumerable{char})"/>.
+        /// </summary>
         public string Describe(IEnumerable<char> characters)
         {
-            var strings = characters
-                .Select(xChar => this.Describe(xChar))
+            var output = this.DescribeToText(characters);
+            return output;
+        }
+
+        public string DescribeToText(IEnumerable<char> characters)
+        {
+            var lines = characters
+                .Select(character => this.Describe(character))
                 ;
 
-            var output = System.String.Join(Instances.Characters.NewLine, strings);
-            return output;
+            var text = TextOperator.Instance.JoinLines(lines);
+            return text;
+        }
+
+        public void DescribeTo_Synchronous(
+            TextWriter writer,
+            IEnumerable<char> characters)
+        {
+            var text = this.DescribeToText(characters);
+
+            writer.WriteLine(text);
+        }
+
+        public async Task DescribeTo(
+           TextWriter writer,
+           IEnumerable<char> characters)
+        {
+            var text = this.DescribeToText(characters);
+
+            await writer.WriteLineAsync(text);
+        }
+
+        public void DescribeToFile_Synchronous(
+            string filePath,
+            IEnumerable<char> characters)
+        {
+            using var fileWriter = StreamWriterOperator.Instance.NewWrite(filePath);
+
+            this.DescribeTo_Synchronous(
+                fileWriter,
+                characters);
+        }
+
+        public async Task DescribeToFile(
+            string filePath,
+            IEnumerable<char> characters)
+        {
+            using var fileWriter = StreamWriterOperator.Instance.NewWrite(filePath);
+
+            await this.DescribeTo(
+                fileWriter,
+                characters);
         }
 
         public char[] GetAsciiCharactersWhere(
@@ -383,7 +435,8 @@ namespace R5T.F0000
 
         public string List(params char[] characters)
         {
-            var output = this.List(characters.AsEnumerable());
+            var output = this.List(
+                characters.AsEnumerable());
 
             return output;
         }

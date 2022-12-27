@@ -180,11 +180,11 @@ namespace R5T.F0000
             return dateTime;
         }
 
-        public string ToString_YYYYMMDD(DateTime dateTime)
+        public string ToString_YYYYMMDD(DateTime date)
         {
             var yyyyMMddFormatTemplate = this.GetYYYYMMDDFormatTemplate();
 
-            var output = Instances.StringOperator.Format(yyyyMMddFormatTemplate, dateTime);
+            var output = Instances.StringOperator.Format(yyyyMMddFormatTemplate, date);
             return output;
         }
 

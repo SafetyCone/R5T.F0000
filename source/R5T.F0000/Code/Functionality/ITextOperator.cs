@@ -63,6 +63,18 @@ namespace R5T.F0000
         }
 
 		/// <summary>
+		/// Joins lines using the <see cref="Z0000.IStrings.NewLine"/> separator into a single string of text.
+		/// </summary>
+		public string JoinLines(IEnumerable<string> lines)
+		{
+			var output = StringOperator.Instance.Join(
+				Instances.Strings.NewLine,
+				lines);
+
+			return output;
+		}
+
+		/// <summary>
 		/// Assumes that the inputs are, in fact, sentences.
 		/// </summary>
 		public string JoinSentences(IEnumerable<string> sentences)

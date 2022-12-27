@@ -35,6 +35,24 @@ namespace R5T.F0000
         }
 
         /// <summary>
+        /// Returns the result of <see cref="Path.GetInvalidFileNameChars"/>.
+        /// </summary>
+        public char[] GetInvalidFileNameCharacters()
+        {
+            var output = Path.GetInvalidFileNameChars();
+            return output;
+        }
+
+        /// <summary>
+        /// Returns the result of <see cref="Path.GetInvalidPathChars"/>.
+        /// </summary>
+        public char[] GetInvalidPathCharacters()
+        {
+            var output = Path.GetInvalidPathChars();
+            return output;
+        }
+
+        /// <summary>
         /// Gets the directory path of the directory containing a specified file.
         /// </summary>
         /// <returns>The non-directory indicated directory path of the file's parent directory.</returns>

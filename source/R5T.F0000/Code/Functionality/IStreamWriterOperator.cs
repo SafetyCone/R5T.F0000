@@ -51,6 +51,9 @@ namespace R5T.F0000
             return output;
         }
 
+        /// <summary>
+        /// Gets a new file stream opened for writing.
+        /// </summary>
         public StreamWriter NewWrite(string filePath, bool overwrite = IValues.DefaultOverwriteValue_Const)
         {
             var stream = Instances.FileStreamOperator.NewWrite(filePath, overwrite);

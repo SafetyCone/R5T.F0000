@@ -417,6 +417,37 @@ namespace R5T.F0000
             return output;
         }
 
+        public string Replace(string @string, char newCharacter, char oldCharacter)
+        {
+            var output = @string.Replace(
+                oldCharacter,
+                newCharacter);
+
+            return output;
+        }
+
+        public string Replace(string @string, char newCharacter, IEnumerable<char> oldCharacters)
+        {
+            var currentString = @string;
+
+            foreach (var oldCharacter in oldCharacters)
+            {
+                currentString = this.Replace(currentString, newCharacter, oldCharacter);
+            }
+
+            return currentString;
+        }
+
+        public string Replace(string @string, char newCharacter, params char[] oldCharacters)
+        {
+            var output = this.Replace(
+                @string,
+                newCharacter,
+                oldCharacters.AsEnumerable());
+
+            return output;
+        }
+
         public string[] Split(char separator, string @string, StringSplitOptions options = StringSplitOptions.None)
         {
             var output = @string.Split(separator, options);
