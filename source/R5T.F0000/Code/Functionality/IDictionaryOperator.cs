@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
-using R5T.F0000;
 using R5T.T0132;
 
 
@@ -85,6 +85,27 @@ namespace R5T.F0000
         {
             var output = pairs.Count == 0;
             return output;
+        }
+
+        public string[] OutputToLines<TValue>(IEnumerable<KeyValuePair<string, TValue>> stringsByString)
+            where TValue : IEnumerable<string>
+        {
+            var output = stringsByString
+                .SelectMany(pair => EnumerableOperator.Instance.From(pair.Key)
+                    .AppendRange(pair.Value
+                        .Select(x => $"\t{x}")))
+                .Now();
+
+            return output;
+        }
+
+        public string OutputToText<TValue>(IEnumerable<KeyValuePair<string, TValue>> stringsByString)
+            where TValue : IEnumerable<string>
+        {
+            var lines = this.OutputToLines(stringsByString);
+
+            var text = TextOperator.Instance.JoinLines(lines);
+            return text;
         }
 
         public void VerifyEqualCounts<TKey, TValue>(
