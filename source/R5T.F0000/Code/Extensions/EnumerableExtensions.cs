@@ -210,10 +210,25 @@ namespace System.Linq
             return output;
         }
 
+        public static IEnumerable<T> Transform<T>(this IEnumerable<T> enumerable,
+            Func<IEnumerable<T>, IEnumerable<T>> transformer)
+        {
+            var output = EnumerableOperator.Instance.Transform(
+                enumerable,
+                transformer);
+
+            return output;
+        }
+
         public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> pairs)
         {
             var output = EnumerableOperator.Instance.ToDictionary(pairs);
             return output;
+        }
+
+        public static IEnumerable<(T1, T2)> ZipWithEqualLengthRequirement<T1, T2>(this IEnumerable<T1> first, IEnumerable<T2> second)
+        {
+            return EnumerableOperator.Instance.ZipWithEqualLengthRequirement(first, second);
         }
     }
 }

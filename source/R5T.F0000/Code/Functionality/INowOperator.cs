@@ -53,5 +53,30 @@ namespace R5T.F0000
             var output = now.Date;
             return output;
         }
+
+		/// <summary>
+		/// Chooses <see cref="GetCurrentYear_Local"/> as the default.
+		/// </summary>
+        public int GetCurrentYear()
+        {
+			var currentYear = this.GetCurrentYear_Local();
+            return currentYear;
+        }
+
+        public int GetCurrentYear_Local()
+		{
+			var nowLocal = this.GetNow_Local();
+
+			var currentYear = nowLocal.Year;
+			return currentYear;
+		}
+
+        public int GetCurrentYear_Utc()
+        {
+            var nowLocal = this.GetNow_Utc();
+
+            var currentYear = nowLocal.Year;
+            return currentYear;
+        }
     }
 }

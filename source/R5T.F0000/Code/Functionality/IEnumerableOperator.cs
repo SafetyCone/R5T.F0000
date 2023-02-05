@@ -294,6 +294,14 @@ namespace R5T.F0000
 			return output;
 		}
 
+		public IEnumerable<T> Transform<T>(
+			IEnumerable<T> enumerable,
+			Func<IEnumerable<T>, IEnumerable<T>> transformer)
+		{
+			var output = transformer(enumerable);
+			return output;
+		}
+
 		public Dictionary<TKey, TValue> ToDictionary<TKey, TValue>(IEnumerable<KeyValuePair<TKey, TValue>> pairs)
 		{
 			var output = pairs.ToDictionary(
@@ -420,5 +428,29 @@ namespace R5T.F0000
 		{
 			return this.Zip_OkIfUnequalLengths(first, second, resultSelector);
 		}
-	}
+
+        public IEnumerable<(T1, T2)> ZipWithEqualLengthRequirement<T1, T2>(IEnumerable<T1> first, IEnumerable<T2> second)
+        {
+            var firstEnumerator = first.GetEnumerator();
+            var secondEnumerator = second.GetEnumerator();
+
+            while (firstEnumerator.MoveNext())
+            {
+                var secondIsAvailable = secondEnumerator.MoveNext();
+                if (!secondIsAvailable)
+                {
+                    throw new InvalidOperationException("The second enumeration did not have as many elements as the first.");
+                }
+
+                yield return (firstEnumerator.Current, secondEnumerator.Current);
+            }
+
+            // At this point, we are all out of elements in the first enumeration. We should be out of elements in the second as well.
+            var secondIsAvailableAfterFirstIsExhausted = secondEnumerator.MoveNext();
+            if (secondIsAvailableAfterFirstIsExhausted)
+            {
+                throw new InvalidOperationException("The second enumeration had more elements than the first.");
+            }
+        }
+    }
 }

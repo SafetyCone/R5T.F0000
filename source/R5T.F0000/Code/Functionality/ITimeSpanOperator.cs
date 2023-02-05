@@ -18,5 +18,13 @@ namespace R5T.F0000
 			var offsetFromUtc = DateTimeOffset.Now.Offset;
 			return offsetFromUtc;
         }
+
+		public string ToString_NumberOfSeconds_WithMilliseconds(TimeSpan timeSpan)
+		{
+			var totalSeconds = timeSpan.TotalSeconds;
+
+			var representation = Instances.DoubleOperator.ToString_WithThreeDecimalPlaces(totalSeconds);
+			return representation;
+		}
 	}
 }
