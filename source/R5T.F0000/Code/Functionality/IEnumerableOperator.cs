@@ -23,6 +23,30 @@ namespace R5T.F0000
 			return enumerable.Concat(appendix);
 		}
 
+        public IEnumerable<T> AppendIf<T>(IEnumerable<T> enumerable,
+            bool value,
+            IEnumerable<T> appendix)
+        {
+			var output = value
+				? Instances.EnumerableOperator.Append(enumerable, appendix)
+				: enumerable
+				;
+
+			return output;
+        }
+
+        public IEnumerable<T> AppendIf<T>(IEnumerable<T> enumerable,
+			bool value,
+			params T[] appendices)
+		{
+			var output = this.AppendIf(
+				enumerable,
+				value,
+				appendices.AsEnumerable());
+
+			return output;
+		}
+
 		public IEnumerable<T> AppendIf<T>(IEnumerable<T> enumerable,
 			bool value,
 			IEnumerable<T> appendixIfTrue,
@@ -160,7 +184,30 @@ namespace R5T.F0000
 			return output;
 		}
 
-		public bool None<T>(IEnumerable<T> items)
+        public WasFound<T> HasNth<T>(IEnumerable<T> items, int n)
+        {
+            var itemsEnumerator = items.GetEnumerator();
+            for (int i = 0; i < n; i++)
+            {
+                var hasNext = itemsEnumerator.MoveNext();
+                if (!hasNext)
+                {
+                    return WasFound.NotFound<T>();
+                }
+            }
+
+            var nth = itemsEnumerator.Current;
+
+            return WasFound.Found(nth);
+        }
+
+        public WasFound<T> HasSecond<T>(IEnumerable<T> enumerable)
+        {
+            var output = this.HasNth(enumerable, 2);
+            return output;
+        }
+
+        public bool None<T>(IEnumerable<T> items)
 		{
 			var any = items.Any();
 
@@ -178,24 +225,7 @@ namespace R5T.F0000
 			return output;
 		}
 
-		public WasFound<T> HasNth<T>(IEnumerable<T> items, int n)
-		{
-			var itemsEnumerator = items.GetEnumerator();
-			for (int i = 0; i < n; i++)
-			{
-				var hasNext = itemsEnumerator.MoveNext();
-				if (!hasNext)
-				{
-					return WasFound.NotFound<T>();
-				}
-			}
-
-			var nth = itemsEnumerator.Current;
-
-			return WasFound.Found(nth);
-		}
-
-		public T Nth<T>(IEnumerable<T> items, int n)
+        public T Nth<T>(IEnumerable<T> items, int n)
 		{
 			var wasFound = this.HasNth(items, n);
 			if (!wasFound)
@@ -220,10 +250,9 @@ namespace R5T.F0000
 			return output;
 		}
 
-		public WasFound<T> HasSecond<T>(IEnumerable<T> enumerable)
+		public IEnumerable<T> Repeat<T>(T instance, int count)
 		{
-			var output = this.HasNth(enumerable, 2);
-			return output;
+			return Enumerable.Repeat(instance, count);
 		}
 
 		public T Second<T>(IEnumerable<T> enumerable)

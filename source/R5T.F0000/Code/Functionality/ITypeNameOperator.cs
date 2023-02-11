@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-
+using System.Threading.Tasks.Sources;
 using R5T.T0132;
 
 
@@ -109,6 +109,27 @@ namespace R5T.F0000
             return output;
         }
 
+        /// <summary>
+        /// Retursn the type name stem for a type name of either an interface or a class.
+        /// Determines if the type interface-indicated, and if so, handles it.
+        /// Otherwise if the type is not interface-indicated, it is assumed to be a class name, which is also handled.
+        /// </summary>
+        public string GetTypeNameStem_HandleInterface(string typeName)
+        {
+            var isInterfaceIndicated = this.Is_InterfaceIndicatedTypeName(typeName);
+
+            var typeNameStem = isInterfaceIndicated
+                // No need to check whether the type is interface-indicated since we have already done that.
+                ? Internal.GetTypeNameStemForInterfaceName_Unchecked(typeName)
+                // If not interface-indicated, then the type is assumed to be a class name.
+                // The type name stem of a class name is just the class name.
+                : typeName
+                ;
+
+            return typeNameStem;
+        }
+
+        /// <inheritdoc cref="Internal.ITypeNameOperator.GetTypeNameStemForInterfaceName_Unchecked(string)"/>
         public string GetTypeNameStemForInterfaceName(string interfaceTypeName)
         {
             // Verify the input is an interface name.
@@ -152,6 +173,18 @@ namespace R5T.F0000
         }
 
         public bool Is_InterfaceTypeName(string typeName)
+        {
+            var output = this.Is_InterfaceIndicatedTypeName(typeName);
+            return output;
+        }
+
+        /// <summary>
+        /// Determines if a type name is interface-indicated, which is:
+        /// 1. The length is at least two characters.
+        /// 2. Starts with an 'I'
+        /// 3. The second letter is also capitalized, like "IEnumerable" for example would be.
+        /// </summary>
+        public bool Is_InterfaceIndicatedTypeName(string typeName)
         {
             // Must not be empty.
             var isEmpty = StringOperator.Instance.IsEmpty(typeName);
@@ -244,6 +277,10 @@ namespace R5T.F0000.Internal
     [FunctionalityMarker]
     public partial interface ITypeNameOperator : IFunctionalityMarker
 	{
+        /// <summary>
+        /// Removes the first letter of the interface type name to get the type name stem.
+        /// For example, the type name stem of "IEnumerable" would be "Enumerable".
+        /// </summary>
         public string GetTypeNameStemForInterfaceName_Unchecked(string interfaceTypeName)
         {
             var output = StringOperator.Instance.ExceptFirst_Unchecked(interfaceTypeName);

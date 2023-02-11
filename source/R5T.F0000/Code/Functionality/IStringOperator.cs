@@ -247,13 +247,27 @@ namespace R5T.F0000
 			return output;
         }
 
-        
+        public string GetSpaces(int count)
+        {
+            var output = new string(
+                Instances.Characters.Space,
+                count);
+
+            return output;
+        }
 
         public string GetString(StringBuilder stringBuilder, Action<StringBuilder> modifier)
         {
             modifier(stringBuilder);
 
             var output = stringBuilder.ToString();
+            return output;
+        }
+
+        public string GetTabAsSpaces(
+            int count = Z0000.IValues.DefaultTabSpacesCount_Const)
+        {
+            var output = this.GetSpaces(count);
             return output;
         }
 

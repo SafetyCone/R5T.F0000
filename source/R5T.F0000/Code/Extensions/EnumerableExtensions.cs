@@ -24,6 +24,26 @@ namespace System.Linq
 
         public static IEnumerable<T> AppendIf<T>(this IEnumerable<T> enumerable,
             bool value,
+            IEnumerable<T> appendix)
+        {
+            return Instances.EnumerableOperator.AppendIf(
+                enumerable,
+                value,
+                appendix);
+        }
+
+        public static IEnumerable<T> AppendIf<T>(this IEnumerable<T> enumerable,
+            bool value,
+            params T[] appendices)
+        {
+            return Instances.EnumerableOperator.AppendIf(
+                enumerable,
+                value,
+                appendices);
+        }
+
+        public static IEnumerable<T> AppendIf<T>(this IEnumerable<T> enumerable,
+            bool value,
             IEnumerable<T> appendixIfTrue,
             IEnumerable<T> appendixIfFalse)
         {
@@ -34,6 +54,11 @@ namespace System.Linq
         }
 
         public static IEnumerable<T> AppendRange<T>(this IEnumerable<T> enumerable, IEnumerable<T> appendix)
+        {
+            return Instances.EnumerableOperator.AppendRange(enumerable, appendix);
+        }
+
+        public static IEnumerable<T> AppendRange2<T>(this IEnumerable<T> enumerable, IEnumerable<T> appendix)
         {
             return Instances.EnumerableOperator.AppendRange(enumerable, appendix);
         }
@@ -155,6 +180,12 @@ namespace System.Linq
             return output;
         }
 
+        public static IEnumerable<T> OrderAlphabetically2<T>(this IEnumerable<T> items, Func<T, string> keySelector)
+        {
+            var output = Instances.EnumerableOperator.OrderAlphabetically(items, keySelector);
+            return output;
+        }
+
         public static IEnumerable<T> OrderByNames<T>(this IEnumerable<T> items,
             Func<T, string> nameSelector,
             IEnumerable<string> orderedNames)
@@ -205,6 +236,12 @@ namespace System.Linq
         }
 
         public static IEnumerable<T> TakeFirst<T>(this IEnumerable<T> enumerable)
+        {
+            var output = Instances.EnumerableOperator.TakeFirst(enumerable);
+            return output;
+        }
+
+        public static IEnumerable<T> TakeFirst2<T>(this IEnumerable<T> enumerable)
         {
             var output = Instances.EnumerableOperator.TakeFirst(enumerable);
             return output;

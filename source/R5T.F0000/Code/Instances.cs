@@ -57,7 +57,7 @@ namespace R5T.F0000
         public static IStackOperator StackOperator => F0000.StackOperator.Instance;
         public static IString String => F0000.String.Instance;
         public static IStringOperator StringOperator => F0000.StringOperator.Instance;
-        public static IStrings Strings => Z0000.Strings.Instance;
+        public static IStrings Strings => F0000.Strings.Instance;
         public static ISyncOverAsyncOperator SyncOverAsyncOperator => F0000.SyncOverAsyncOperator.Instance;
         public static ITextOperator TextOperator => F0000.TextOperator.Instance;
         public static ITimeSpanOperator TimeSpanOperator => F0000.TimeSpanOperator.Instance;
