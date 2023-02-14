@@ -86,6 +86,16 @@ namespace System.Linq
             return output;
         }
 
+        /// <summary>
+        /// A method for use when in an environment where a System.LINQ Except() method is avaiable.
+        /// </summary>
+        public static IEnumerable<T> Except2<T>(this IEnumerable<T> items, T item)
+            where T : IEquatable<T>
+        {
+            var output = Instances.EnumerableOperator.Except(items, item);
+            return output;
+        }
+
         public static IEnumerable<T> Except<T>(this IEnumerable<T> items, T item, IEqualityComparer<T> equalityComparer)
         {
             var output = Instances.EnumerableOperator.Except(items, item, equalityComparer);

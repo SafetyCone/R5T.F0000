@@ -62,5 +62,11 @@ namespace R5T.F0000
 
             writer.WriteLine($"{Environment.CurrentManagedThreadId}: current managed thread ID");
         }
+
+        public Version GetDotnetRuntimeVersion()
+        {
+            var output = Environment.Version;
+            return output;
+        }
 	}
 }
