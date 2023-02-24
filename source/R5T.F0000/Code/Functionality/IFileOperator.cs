@@ -73,6 +73,16 @@ namespace R5T.F0000
 			return hasByteOrderMark;
         }
 
+		public StreamWriter NewWrite_Text(
+			string filePath,
+            bool overwrite = IValues.DefaultOverwriteValue_Const)
+		{
+			var output = StreamWriterOperator.Instance.NewWrite(
+				filePath);
+
+			return output;
+		}
+
         /// <summary>
         /// Ease of use name for the <see cref="ActuallyReadAllLines(string)"/> method.
         /// </summary>

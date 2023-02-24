@@ -9,6 +9,14 @@ namespace R5T.F0000
 	[FunctionalityMarker]
 	public partial interface ITextOperator : IFunctionalityMarker
 	{
+		public string MakeLine(
+			string text,
+			string newLine)
+		{
+			var line = text + newLine;
+			return line;
+		}
+
 		public bool EndsWithPeriod(string text)
         {
 			var lastCharacter = text.Last();

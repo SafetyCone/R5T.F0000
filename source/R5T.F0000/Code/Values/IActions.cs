@@ -9,8 +9,10 @@ namespace R5T.F0000
     [ValuesMarker]
     public partial interface IActions<T> : IValuesMarker, IFunctionalityMarker
     {
+        public const Action<T> Null_Constant = null;
+
         public Action<T> DoNothing => ActionOperations.Instance.DoNothing;
-        public Action<T> Null => ActionOperations.Instance.DoNothing;
+        public Action<T> Null => null;
         public Action<T> None => ActionOperations.Instance.DoNothing;
     }
 }

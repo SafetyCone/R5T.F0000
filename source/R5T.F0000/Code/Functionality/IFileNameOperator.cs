@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+
 using R5T.T0132;
 
 
@@ -22,6 +23,31 @@ namespace R5T.F0000
 				fileExtension);
 
 			return newFileName;
+		}
+
+		/// <summary>
+		/// Get the assemby file name stem given an assembly name.
+		/// </summary>
+        public string Get_AssemblyFileNameStem(string assemblyName)
+		{
+			// The file name stem is just the assembly name.
+			var assemblyFileNameStem = assemblyName;
+			return assemblyFileNameStem;
+		}
+
+        /// <summary>
+        /// Returns the DLL file name given the assembly name.
+        /// </summary>
+        public string Get_AssemblyFileName(string assemblyName)
+		{
+			// Just append the "dll" file extension to the assembly name.
+			var assemblyFileNameStem = this.Get_AssemblyFileNameStem(assemblyName);
+
+			var assemblyFileName = Instances.FileNameOperator.GetFileName(
+				assemblyFileNameStem,
+				Instances.FileExtensions.Dll);
+
+			return assemblyFileName;
 		}
 
 		public string GetBackupCopyFileNameStem(string fileNameStem)

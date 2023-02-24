@@ -12,7 +12,9 @@ namespace R5T.F0000
         /// <summary>
         /// Eases construction of a new <see cref="FileStream"/> with a best-practice implementation of handling the overwrite parameter.
         /// </summary>
-        public FileStream NewWrite(string filePath, bool overwrite = true)
+        public FileStream NewWrite(
+            string filePath,
+            bool overwrite = IValues.DefaultOverwriteValue_Const)
         {
             FileSystemOperator.Instance.EnsureDirectoryForFilePathExists(filePath);
 

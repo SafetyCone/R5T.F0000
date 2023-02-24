@@ -54,7 +54,9 @@ namespace R5T.F0000
         /// <summary>
         /// Gets a new file stream opened for writing.
         /// </summary>
-        public StreamWriter NewWrite(string filePath, bool overwrite = IValues.DefaultOverwriteValue_Const)
+        public StreamWriter NewWrite(
+            string filePath,
+            bool overwrite = IValues.DefaultOverwriteValue_Const)
         {
             var stream = Instances.FileStreamOperator.NewWrite(filePath, overwrite);
 
@@ -93,12 +95,12 @@ namespace R5T.F0000
 
         public Task WriteAllLines(StreamWriter writer, IEnumerable<string> lines)
         {
-            return this.WriteAllLines(writer, lines, Instances.Strings.NewLineForEnvironment);
+            return this.WriteAllLines(writer, lines, Instances.Strings.NewLine_ForEnvironment);
         }
 
         public void WriteAllLines_Synchronous(StreamWriter writer, IEnumerable<string> lines)
         {
-            this.WriteAllLines_Synchronous(writer, lines, Instances.Strings.NewLineForEnvironment);
+            this.WriteAllLines_Synchronous(writer, lines, Instances.Strings.NewLine_ForEnvironment);
         }
 
         public async Task WriteAllLines(string filePath, IEnumerable<string> lines, string lineSeparator, bool overwrite = IValues.DefaultOverwriteValue_Const)
@@ -117,12 +119,12 @@ namespace R5T.F0000
 
         public Task WriteAllLines(string filePath, IEnumerable<string> lines, bool overwrite = IValues.DefaultOverwriteValue_Const)
         {
-            return this.WriteAllLines(filePath, lines, Instances.Strings.NewLineForEnvironment, overwrite);
+            return this.WriteAllLines(filePath, lines, Instances.Strings.NewLine_ForEnvironment, overwrite);
         }
 
         public void WriteAllLines_Synchronous(string filePath, IEnumerable<string> lines, bool overwrite = IValues.DefaultOverwriteValue_Const)
         {
-            this.WriteAllLines_Synchronous(filePath, lines, Instances.Strings.NewLineForEnvironment, overwrite);
+            this.WriteAllLines_Synchronous(filePath, lines, Instances.Strings.NewLine_ForEnvironment, overwrite);
         }
     }
 }

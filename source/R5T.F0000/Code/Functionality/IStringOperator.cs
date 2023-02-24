@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 
 using R5T.T0132;
-using R5T.Z0000;
 
 
 namespace R5T.F0000
@@ -56,6 +54,21 @@ namespace R5T.F0000
 
             var wasFound = this.WasFound(index);
             return wasFound;
+        }
+
+        public string Convert_StructuredString_ToFormatString(string structuredString)
+        {
+            var count = 0;
+
+            var formatString = Regex.Replace(
+                structuredString,
+                RegularExpressionPatterns.Instance.AnythingInsideBraces,
+                match =>
+                {
+                    return $"{{{count++}}}";
+                });
+
+            return formatString;
         }
 
         public bool EndsWith(
@@ -192,6 +205,16 @@ namespace R5T.F0000
                 template,
                 objects);
 
+            return output;
+        }
+
+        public string FormatStructuredString(
+            string structuredString,
+            params object[] arguments)
+        {
+            var stringFormatMessage = Instances.StringOperator.Convert_StructuredString_ToFormatString(structuredString);
+
+            var output = System.String.Format(stringFormatMessage, arguments);
             return output;
         }
 
