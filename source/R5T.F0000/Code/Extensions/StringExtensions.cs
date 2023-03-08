@@ -41,6 +41,7 @@ namespace System.Linq
             return output;
         }
 
+        /// <inheritdoc cref="IStringOperator.Trim(string)"/>
         public static IEnumerable<string> Trim(this IEnumerable<string> strings)
         {
             var output = Instances.StringOperator.Trim(strings);

@@ -30,6 +30,14 @@ namespace R5T.F0000
             return output;
         }
 
+        public bool Contains(
+            char character,
+            string @string)
+        {
+            var output = @string.Contains(character);
+            return output;
+        }
+
         public bool Contains(string @string, string subString)
         {
             var output = @string.Contains(subString);
@@ -40,7 +48,7 @@ namespace R5T.F0000
             string @string,
             string[] searchStrings)
         {
-            var index = this.IndexOfAny(@string, searchStrings);
+            var index = this.IndexOfAny_OrNotFound(@string, searchStrings);
 
             var wasFound = this.WasFound(index);
             return wasFound;
@@ -50,7 +58,7 @@ namespace R5T.F0000
             string @string,
             char[] searchCharacters)
         {
-            var index = this.IndexOfAny(@string, searchCharacters);
+            var index = this.IndexOfAny_OrNotFound(@string, searchCharacters);
 
             var wasFound = this.WasFound(index);
             return wasFound;
@@ -218,6 +226,67 @@ namespace R5T.F0000
             return output;
         }
 
+        public string FromIndex_Exclusive(
+            int index,
+            string @string)
+        {
+            var output = @string[(index + 1)..];
+            return output;
+        }
+
+        public string FromIndex_Inclusive(
+            int index,
+            string @string)
+        {
+            var output = @string[index..];
+            return output;
+        }
+
+        /// <summary>
+        /// Chooses <see cref="FromIndex_Inclusive(int, string)"/> as the default (since the matches the range-operator behavior).
+        /// </summary>
+        public string FromIndex(
+            int index,
+            string @string)
+        {
+            var output = this.FromIndex_Inclusive(index, @string);
+            return output;
+        }
+
+        public int Get_CountOf(
+            char character,
+            string @string)
+        {
+            var count = 0;
+
+            for (int iCharacter = 0; iCharacter < @string.Length; iCharacter++)
+            {
+                var currentCharacter = @string[iCharacter];
+
+                if(currentCharacter == character)
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
+        public string Get_FirstNCharacters(string @string, int numberOfCharacters)
+        {
+            var output = @string[..numberOfCharacters];
+            return output;
+        }
+
+        /// <summary>
+        /// Gets the first N characters as a string, given the index of the first character to exclude.
+        /// </summary>
+        public string Get_FirstNCharacters_ByExclusiveIndex(string @string, int exclusiveIndex)
+        {
+            var output = @string[..exclusiveIndex];
+            return output;
+        }
+
         /// <summary>
         /// The default <see cref="System.String.GetHashCode()"/> is non-deterministic.
         /// This method just calls that method.
@@ -270,6 +339,19 @@ namespace R5T.F0000
 			return output;
         }
 
+        public int Get_LastIndexOf(
+            char character,
+            string @string)
+        {
+            var lastIndexWasFound = this.LastIndexOf(
+                character,
+                @string);
+
+            return WasFoundOperator.Instance.ResultOrExceptionIfNotFound(
+                lastIndexWasFound,
+                () => new ArgumentException($"Character '{character}' not found in string.", nameof(character)));
+        }
+
         public string GetSpaces(int count)
         {
             var output = new string(
@@ -284,6 +366,36 @@ namespace R5T.F0000
             modifier(stringBuilder);
 
             var output = stringBuilder.ToString();
+            return output;
+        }
+
+        public string Get_Substring_Exclusive(
+            int startIndex_Exclusive,
+            string @string)
+        {
+            var output = @string[(startIndex_Exclusive + 1)..];
+            return output;
+        }
+
+        public string Get_Substring_Exclusive_Exclusive(
+            int startIndex_Exclusive,
+            int endIndex_Exclusive,
+            string @string)
+        {
+            var length = endIndex_Exclusive - startIndex_Exclusive;
+
+            var output = @string.Substring(startIndex_Exclusive + 1, length - 1);
+            return output;
+        }
+
+        public string Get_Substring_Inclusive_Inclusive(
+            int startIndex_Inclusive,
+            int endIndex_Inclusive,
+            string @string)
+        {
+            var length = endIndex_Inclusive - startIndex_Inclusive;
+
+            var output = @string.Substring(startIndex_Inclusive, length);
             return output;
         }
 
@@ -312,7 +424,28 @@ namespace R5T.F0000
             return output;
         }
 
-        public int IndexOfAny(
+        public WasFound<int> IndexOf(
+            char character,
+            string @string)
+        {
+            var indexOrNotFound = this.IndexOf_OrNotFound(
+                character,
+                @string);
+
+            var output = Internal.WasFound(indexOrNotFound);
+            return output;
+        }
+
+        /// <inheritdoc cref="System.String.IndexOf(char)"/>
+        public int IndexOf_OrNotFound(
+            char character,
+            string @string)
+        {
+            var output = @string.IndexOf(character);
+            return output;
+        }
+
+        public int IndexOfAny_OrNotFound(
             string @string,
             string[] searchStrings)
         {
@@ -330,9 +463,21 @@ namespace R5T.F0000
             return Instances.String.IndexOfNotFound;
         }
 
-        public int IndexOfAny(
+        public WasFound<int> IndexOfAny(
             string @string,
-            char[] searchCharacters)
+            params char[] searchCharacters)
+        {
+            var indexOrNotFound = this.IndexOfAny_OrNotFound(
+                @string,
+                searchCharacters);
+
+            var output = Internal.WasFound(indexOrNotFound);
+            return output;
+        }
+
+        public int IndexOfAny_OrNotFound(
+            string @string,
+            params char[] searchCharacters)
         {
             var index = @string.IndexOfAny(searchCharacters);
 
@@ -416,6 +561,26 @@ namespace R5T.F0000
             var output = this.Join(separator, strings.AsEnumerable());
             return output;
         }
+
+        public WasFound<int> LastIndexOf(
+            char character,
+            string @string)
+        {
+            var lastIndexOrNotFound = this.LastIndexOf_OrNotFound(
+                character,
+                @string);
+
+            var output = Internal.WasFound(lastIndexOrNotFound);
+            return output;
+        }
+
+        public int LastIndexOf_OrNotFound(
+            char character,
+            string @string)
+        {
+            var lastIndexOf = @string.LastIndexOf(character);
+            return lastIndexOf;
+        }            
 
         public string Lower(string @string)
         {
@@ -540,18 +705,37 @@ namespace R5T.F0000
             return output;
         }
 
+        public string ToIndex_Exclusive(
+            int index,
+            string @string)
+        {
+            var output = @string[..index];
+            return output;
+        }
+
+        /// <inheritdoc cref="System.String.Trim()"/>
         public string Trim(string @string)
         {
 			var output = @string.Trim();
 			return output;
         }
 
+        /// <inheritdoc cref="Trim(string)"/>
         public IEnumerable<string> Trim(IEnumerable<string> strings)
         {
             var output = strings
                 .Select(@string => this.Trim(@string))
                 ;
 
+            return output;
+        }
+
+        /// <inheritdoc cref="System.String.Trim(char[])"/>
+        public string Trim(
+            string @string,
+            params char[] characters)
+        {
+            var output = @string.Trim(characters);
             return output;
         }
 
@@ -571,6 +755,17 @@ namespace R5T.F0000.Internal
         public string ExceptFirst_Unchecked(string @string)
         {
             var output = @string[1..];
+            return output;
+        }
+
+        public WasFound<int> WasFound(int indexOrNotFound)
+        {
+            var wasFound = F0000.StringOperator.Instance.WasFound(indexOrNotFound);
+
+            var output = F0000.WasFound.From(
+                wasFound,
+                indexOrNotFound);
+
             return output;
         }
     }

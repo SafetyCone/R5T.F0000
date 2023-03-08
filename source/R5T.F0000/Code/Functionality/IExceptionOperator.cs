@@ -10,6 +10,9 @@ namespace R5T.F0000
 	[FunctionalityMarker]
 	public partial interface IExceptionOperator : IFunctionalityMarker
 	{
+		private static Internal.IExceptionOperator Internal => F0000.Internal.ExceptionOperator.Instance;
+
+
 		/// <summary>
 		/// <inheritdoc cref="Documentation.ArrayLengthsNotActuallyChecked" path="/summary"/>
 		/// Just gets the exception assuming that is the case.
@@ -73,14 +76,12 @@ namespace R5T.F0000
 			return output;
 		}
 
-		public Exception GetUnhandledValueException(string value)
+		public UnhandledValueException<TValue> Get_UnhandledValueException<TValue>(TValue value)
 		{
-			var message = $"Unhandled value: {value}";
-
-			return new Exception(message);
+			return new UnhandledValueException<TValue>(value);
 		}
 
-		public Exception GetUnhandledValueException(
+		public Exception Get_UnhandledValueException(
 			string value,
 			string preface)
 		{
@@ -95,4 +96,20 @@ namespace R5T.F0000
 			return exception;
 		}
 	}
+}
+
+
+namespace R5T.F0000.Internal
+{
+	[FunctionalityMarker]
+	public partial interface IExceptionOperator : IFunctionalityMarker
+	{
+        public string Get_UnhandledValueExceptionMessage<TValue>(TValue value)
+        {
+            var typeName = Instances.TypeOperator.GetTypeNameOf(value);
+
+            var message = $"Unhandled value:\nt'{value}': value\nt{typeName}: type name";
+            return message;
+        } 
+    }
 }

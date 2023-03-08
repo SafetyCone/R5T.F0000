@@ -89,6 +89,19 @@ namespace R5T.F0000
             return wasFound.Result;
         }
 
+        public T ResultOrExceptionIfNotFound<T, TException>(WasFound<T> wasFound,
+            Func<TException> exceptionConstructor)
+            where TException : Exception
+        {
+            if (!wasFound)
+            {
+                var exception = exceptionConstructor();
+                throw exception;
+            }
+
+            return wasFound.Result;
+        }
+
         public T ResultOrExceptionIfNotFound<T>(WasFound<T> wasFound,
             string message)
         {

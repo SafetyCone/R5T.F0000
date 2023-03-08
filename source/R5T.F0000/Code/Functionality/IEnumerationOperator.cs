@@ -32,7 +32,7 @@ namespace R5T.F0000
         public string UnexpectedEnumerationValueMessage<TEnum>(TEnum unexpectedValue)
             where TEnum : Enum
         {
-            var output = $@"Unexpected enumeration value: '{unexpectedValue}' for enumeration type {typeof(TEnum).FullName}";
+            var output = $"Unexpected enumeration value: '{unexpectedValue}' for enumeration type {typeof(TEnum).FullName}";
             return output;
         }
 

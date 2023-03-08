@@ -8,6 +8,11 @@ namespace R5T.F0000
 	[FunctionalityMarker]
 	public partial interface IArrayOperator : IFunctionalityMarker
 	{
+		public T[] Get_NewEmpty<T>()
+		{
+			return new T[0];
+		}
+
 		public T[] From<T>(T value)
 		{
 			var output = new[]
