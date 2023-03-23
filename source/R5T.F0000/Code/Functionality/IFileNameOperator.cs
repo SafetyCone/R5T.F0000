@@ -25,9 +25,24 @@ namespace R5T.F0000
 			return newFileName;
 		}
 
-		/// <summary>
-		/// Get the assemby file name stem given an assembly name.
-		/// </summary>
+        /// <summary>
+        /// Returns the XML documentation file name given the assembly name.
+        /// </summary>
+        public string Get_AssemblyDocumentationFileName(string assemblyName)
+        {
+            // Just append the "dll" file extension to the assembly name.
+            var assemblyFileNameStem = this.Get_AssemblyFileNameStem(assemblyName);
+
+            var assemblyDocumentationFileName = Instances.FileNameOperator.GetFileName(
+                assemblyFileNameStem,
+                Instances.FileExtensions.Xml);
+
+            return assemblyDocumentationFileName;
+        }
+
+        /// <summary>
+        /// Get the assemby file name stem given an assembly name.
+        /// </summary>
         public string Get_AssemblyFileNameStem(string assemblyName)
 		{
 			// The file name stem is just the assembly name.

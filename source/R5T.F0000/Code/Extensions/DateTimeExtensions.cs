@@ -21,3 +21,22 @@ namespace System.Linq
         }
     }
 }
+
+
+namespace R5T.F0000.Extensions
+{
+    public static class DateTimeExtensions
+    {
+        public static string ToYYYYMMDD(this DateTime value)
+        {
+            var output = Instances.DateOperator.ToString_YYYYMMDD(value);
+            return output;
+        }
+
+        public static string ToYYYYMMDD_HHMMSS(this DateTime value)
+        {
+            var output = Instances.DateOperator.ToString_YYYYMMDD_HHMMSS(value);
+            return output;
+        }
+    }
+}

@@ -9,6 +9,8 @@ namespace R5T.F0000
 	public partial interface IDateTimeFormats : IValuesMarker
 	{
 		public string YYYYMMDD => "yyyyMMdd";
+        public string YYYYMMDD_HHMMSS => "yyyyMMdd HHmmss";
+        public string YYYYMMDD_HHMMSS_Dashed => "yyyyMMdd-HHmmss";
         public string YYYY_MM_DD_Dashed => "yyyy-MM-dd";
     }
 }

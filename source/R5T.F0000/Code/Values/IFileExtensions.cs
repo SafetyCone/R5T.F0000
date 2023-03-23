@@ -10,5 +10,7 @@ namespace R5T.F0000
 	{
 		public string Dll => "dll";
 		public string Xml => "xml";
+
+		public string Assembly => this.Dll;
 	}
 }

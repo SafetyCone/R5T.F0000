@@ -18,7 +18,9 @@ namespace R5T.F0000
         public static ICommandLineOperator CommandLineOperator => F0000.CommandLineOperator.Instance;
         public static IComparisonOperator ComparisonOperator => F0000.ComparisonOperator.Instance;
         public static IComparisonResults ComparisonResults => F0000.ComparisonResults.Instance;
+        public static IDateOperator DateOperator => F0000.DateOperator.Instance;
         public static IDateTimeFormats DateTimeFormats => F0000.DateTimeFormats.Instance;
+        public static IDateTimeFormatTemplates DateTimeFormatTemplates => F0000.DateTimeFormatTemplates.Instance;
         public static IDateTimeOffsetOperator DateTimeOffsetOperator => F0000.DateTimeOffsetOperator.Instance;
         public static IDateTimeOperator DateTimeOperator => F0000.DateTimeOperator.Instance;
         public static IDescriptions Descriptions => F0000.Descriptions.Instance;

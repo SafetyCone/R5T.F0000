@@ -9,6 +9,7 @@ namespace R5T.F0000
     public partial interface IStrings : IValuesMarker,
         Z0000.IStrings
     {
+        public string TextDisplaySectionSeparator => "\n***\n";
         public string Tab_AsSpaces => Instances.StringOperator.GetTabAsSpaces();
     }
 }

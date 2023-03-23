@@ -12,20 +12,24 @@ namespace System.Extensions
             TKey key,
             TValue value)
         {
-            DictionaryOperator.Instance.AddOrReplaceValue(dictionary, key, value);
+            Instances.DictionaryOperator.AddOrReplaceValue(dictionary, key, value);
+        }
+
+        public static void AddValue<TKey, TValue>(this IDictionary<TKey, List<TValue>> dictionary,
+            TKey key,
+            TValue value)
+        {
+            Instances.DictionaryOperator.AddValue(
+                dictionary,
+                key,
+                value);
         }
 
         public static WasFound<TValue> HasValue<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key)
         {
-            var containsKey = dictionary.ContainsKey(key);
-
-            var value = containsKey
-                ? dictionary[key]
-                : default
-                ;
-
-            var output = WasFound.From(containsKey, value);
-            return output;
+            return Instances.DictionaryOperator.HasValue(
+                dictionary,
+                key);
         }
     }
 }

@@ -27,6 +27,22 @@ namespace R5T.F0000
             }
         }
 
+        public void AddValue<TKey, TValue>(
+            IDictionary<TKey, List<TValue>> dictionary,
+            TKey key,
+            TValue value)
+        {
+            var hasValue = dictionary.TryGetValue(key, out List<TValue> list);
+            if(!hasValue)
+            {
+                list = new List<TValue>();
+
+                dictionary.Add(key, list);
+            }
+
+            list.Add(value);
+        }
+
         public TValue AddAndReturnValue<TKey, TValue>(IDictionary<TKey, TValue> dictionary,
             TKey key,
             TValue value)
@@ -79,6 +95,21 @@ namespace R5T.F0000
         {
             var message = $"Key not found: '{key}'";
             return message;
+        }
+
+        public WasFound<TValue> HasValue<TKey, TValue>(
+            Dictionary<TKey, TValue> dictionary,
+            TKey key)
+        {
+            var containsKey = dictionary.ContainsKey(key);
+
+            var value = containsKey
+                ? dictionary[key]
+                : default
+                ;
+
+            var output = WasFound.From(containsKey, value);
+            return output;
         }
 
         public bool IsEmpty<TKey, TValue>(IDictionary<TKey, TValue> pairs)
