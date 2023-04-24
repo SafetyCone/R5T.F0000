@@ -104,6 +104,42 @@ namespace System
             return output;
         }
 
+        public static T ResultOrExceptionIfNotFound<T>(this WasFound<T> wasFound,
+            Exception exception)
+        {
+            return Instances.WasFoundOperator.ResultOrExceptionIfNotFound(wasFound, exception);
+        }
+
+        public static T ResultOrExceptionIfNotFound<T>(this WasFound<T> wasFound,
+            Func<Exception> exceptionConstructor)
+        {
+            return Instances.WasFoundOperator.ResultOrExceptionIfNotFound(wasFound, exceptionConstructor);
+        }
+
+        public static T ResultOrExceptionIfNotFound<T, TException>(WasFound<T> wasFound,
+            Func<TException> exceptionConstructor)
+            where TException : Exception
+        {
+            return Instances.WasFoundOperator.ResultOrExceptionIfNotFound(wasFound, exceptionConstructor);
+        }
+
+        public static T ResultOrExceptionIfNotFound<T>(this WasFound<T> wasFound,
+            string message)
+        {
+            return Instances.WasFoundOperator.ResultOrExceptionIfNotFound(wasFound,
+                () => new Exception(message));
+        }
+
+        public static T ResultOrExceptionIfNotFound<T>(this WasFound<T> wasFound)
+        {
+            return Instances.WasFoundOperator.ResultOrExceptionIfNotFound(wasFound);
+        }
+
+        public static T Get_Result<T>(this WasFound<T> wasFound)
+        {
+            return Instances.WasFoundOperator.Get_Result(wasFound);
+        }
+
         public static T ResultOrIfNotFound<T>(this WasFound<T> wasFound,
             T orIfNotFound)
         {

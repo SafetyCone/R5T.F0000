@@ -49,3 +49,15 @@ namespace System.Linq
         }
     }
 }
+
+
+namespace R5T.F0000.Extensions
+{
+    public static class StringExtensions
+    {
+        public static IEnumerable<string> Tabinate(this IEnumerable<string> strings)
+        {
+            return Instances.TextOperator.Tabinate(strings);
+        }
+    }
+}

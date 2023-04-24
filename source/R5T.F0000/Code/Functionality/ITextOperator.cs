@@ -70,14 +70,28 @@ namespace R5T.F0000
 			return output;
         }
 
-		/// <summary>
-		/// Joins lines using the <see cref="Z0000.IStrings.NewLine"/> separator into a single string of text.
-		/// </summary>
-		public string JoinLines(IEnumerable<string> lines)
+        /// <summary>
+        /// Joins lines using the specified line separator into a single string of text.
+        /// </summary>
+        public string JoinLines(
+			IEnumerable<string> lines,
+			string lineSeparator)
+        {
+            var output = StringOperator.Instance.Join(
+                lineSeparator,
+                lines);
+
+            return output;
+        }
+
+        /// <summary>
+        /// Joins lines using the <see cref="Z0000.IStrings.NewLine"/> separator into a single string of text.
+        /// </summary>
+        public string JoinLines(IEnumerable<string> lines)
 		{
-			var output = StringOperator.Instance.Join(
-				Instances.Strings.NewLine,
-				lines);
+			var output = this.JoinLines(
+				lines,
+				Instances.Strings.NewLine);
 
 			return output;
 		}
@@ -99,5 +113,10 @@ namespace R5T.F0000
 			var output = this.JoinSentences(sentences.AsEnumerable());
 			return output;
         }
+
+		public IEnumerable<string> Tabinate(IEnumerable<string> strings)
+		{
+			return strings.Select(x => $"\t{x}");
+		}
 	}
 }

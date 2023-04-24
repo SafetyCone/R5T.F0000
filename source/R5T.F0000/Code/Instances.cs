@@ -58,6 +58,7 @@ namespace R5T.F0000
         public static ISourceCodeOperator SourceCodeOperator => F0000.SourceCodeOperator.Instance;
         public static IStackOperator StackOperator => F0000.StackOperator.Instance;
         public static IString String => F0000.String.Instance;
+        public static IStringBuilderOperator StringBuilderOperator => F0000.StringBuilderOperator.Instance;
         public static IStringOperator StringOperator => F0000.StringOperator.Instance;
         public static IStrings Strings => F0000.Strings.Instance;
         public static ISyncOverAsyncOperator SyncOverAsyncOperator => F0000.SyncOverAsyncOperator.Instance;

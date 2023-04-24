@@ -111,6 +111,19 @@ namespace R5T.F0000
             return output;
         }
 
+        public T ResultOrExceptionIfNotFound<T>(WasFound<T> wasFound)
+        {
+            var output = this.ResultOrExceptionIfNotFound(wasFound,
+                () => new Exception("Result did not exist."));
+
+            return output;
+        }
+
+        public T Get_Result<T>(WasFound<T> wasFound)
+        {
+            return this.ResultOrExceptionIfNotFound(wasFound);
+        }
+
         public T ResultOrIfNotFound<T>(
             WasFound<T> wasFound,
             T orIfNotFound)

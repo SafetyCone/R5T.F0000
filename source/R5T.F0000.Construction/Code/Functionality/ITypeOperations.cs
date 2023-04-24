@@ -87,7 +87,7 @@ namespace R5T.F0000.Construction
 
 		public void IsClosedGeneric_ForOpenGeneric()
 		{
-			var type = Instances.ExampleTypes.OpenGeneric;
+			var type = Instances.ExampleTypes.OpenGenericClass;
 
 			var isClosed = Instances.TypeOperator.IsClosedGeneric(type);
 
@@ -122,7 +122,7 @@ namespace R5T.F0000.Construction
 
 		public void IsOpenGeneric_ForOpenGeneric()
         {
-			var type = Instances.ExampleTypes.OpenGeneric;
+			var type = Instances.ExampleTypes.OpenGenericClass;
 
 			var isOpen = Instances.TypeOperator.IsOpenGeneric(type);
 
@@ -140,7 +140,7 @@ namespace R5T.F0000.Construction
 
 		public void IsGeneric_ForOpenGeneric()
         {
-			var type = Instances.ExampleTypes.OpenGeneric;
+			var type = Instances.ExampleTypes.OpenGenericClass;
 
 			var isGeneric = Instances.TypeOperator.IsGeneric(type);
 

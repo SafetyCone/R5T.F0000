@@ -361,6 +361,16 @@ namespace R5T.F0000
             return output;
         }
 
+        public StringComparison Get_StringComparison(bool capitalizationSensitive)
+        {
+            var stringComparison = capitalizationSensitive
+                ? StringComparison.InvariantCulture
+                : StringComparison.InvariantCultureIgnoreCase
+                ;
+
+            return stringComparison;
+        }
+
         public string GetString(StringBuilder stringBuilder, Action<StringBuilder> modifier)
         {
             modifier(stringBuilder);
@@ -369,12 +379,35 @@ namespace R5T.F0000
             return output;
         }
 
-        public string Get_Substring_Exclusive(
+        public string Get_Substring_Upto_Exclusive(
+            int endIndex_Exclusive,
+            string @string)
+        {
+            var output = @string[..(endIndex_Exclusive)];
+            return output;
+        }
+
+        /// <summary>
+        /// Gets a substring, starting at an index and going to the end.
+        /// </summary>
+        public string Get_Substring_From_Exclusive(
             int startIndex_Exclusive,
             string @string)
         {
             var output = @string[(startIndex_Exclusive + 1)..];
             return output;
+        }
+
+        /// <summary>
+        /// Chooses <see cref="Get_Substring_From_Exclusive(int, string)"/> as the default.
+        /// </summary>
+        public string Get_Substring_Exclusive(
+            int startIndex_Exclusive,
+            string @string)
+        {
+            return this.Get_Substring_From_Exclusive(
+                startIndex_Exclusive,
+                @string);
         }
 
         public string Get_Substring_Exclusive_Exclusive(
@@ -436,12 +469,36 @@ namespace R5T.F0000
             return output;
         }
 
+        public WasFound<int> IndexOf(
+            char character,
+            string @string,
+            int startIndex)
+        {
+            var indexOrNotFound = this.IndexOf_OrNotFound(
+                character,
+                @string,
+                startIndex);
+
+            var output = Internal.WasFound(indexOrNotFound);
+            return output;
+        }
+
         /// <inheritdoc cref="System.String.IndexOf(char)"/>
         public int IndexOf_OrNotFound(
             char character,
             string @string)
         {
             var output = @string.IndexOf(character);
+            return output;
+        }
+
+        /// <inheritdoc cref="System.String.IndexOf(char, int)"/>
+        public int IndexOf_OrNotFound(
+            char character,
+            string @string,
+            int startIndex)
+        {
+            var output = @string.IndexOf(character, startIndex);
             return output;
         }
 
@@ -586,6 +643,11 @@ namespace R5T.F0000
         {
             var output = @string.ToLowerInvariant();
             return output;
+        }
+
+        public StringBuilder New()
+        {
+            return new StringBuilder();
         }
 
         public bool NotFound(int index)

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using R5T.F0000;
-
 using R5T.T0132;
 
 
@@ -13,6 +11,15 @@ namespace R5T.F0000
 	[FunctionalityMarker]
 	public partial interface IEnumerableOperator : IFunctionalityMarker
 	{
+		public IEnumerable<T> Append<T>(
+			IEnumerable<T> enumerable,
+			Func<T> itemConstructor)
+		{
+			var item = itemConstructor();
+
+			return enumerable.Append(item);
+		}
+
 		public IEnumerable<T> Append<T>(IEnumerable<T> enumerable, IEnumerable<T> appendix)
 		{
 			return enumerable.Concat(appendix);
@@ -47,7 +54,24 @@ namespace R5T.F0000
 			return output;
 		}
 
-		public IEnumerable<T> AppendIf<T>(IEnumerable<T> enumerable,
+        public IEnumerable<T> AppendIf<T>(IEnumerable<T> enumerable,
+            bool value,
+            params Func<T>[] appendixConstructors)
+        {
+            var appendices = value
+                ? appendixConstructors.Select(x => x())
+                : Instances.EnumerableOperator.Empty<T>()
+                ;
+
+			var output = this.AppendIf(
+				enumerable,
+				value,
+				appendices);
+
+            return output;
+        }
+
+        public IEnumerable<T> AppendIf<T>(IEnumerable<T> enumerable,
 			bool value,
 			IEnumerable<T> appendixIfTrue,
 			IEnumerable<T> appendixIfFalse)
@@ -206,6 +230,11 @@ namespace R5T.F0000
             var output = this.HasNth(enumerable, 2);
             return output;
         }
+
+		public IEnumerable<T> New<T>()
+		{
+			return Enumerable.Empty<T>();
+		}
 
         public bool None<T>(IEnumerable<T> items)
 		{

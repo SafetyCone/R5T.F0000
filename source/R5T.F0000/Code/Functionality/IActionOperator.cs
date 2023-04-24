@@ -47,6 +47,11 @@ namespace R5T.F0000
 
         public void Run<TValue>(TValue value, IEnumerable<Action<TValue>> actions)
         {
+            if(actions == default)
+            {
+                return;
+            }
+
             foreach (var action in actions)
             {
                 this.Run(value, action);

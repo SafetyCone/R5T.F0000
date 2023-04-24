@@ -31,7 +31,10 @@ namespace R5T.F0000
 			return executableFilePath;
         }
 
-		public string GetExecutableFilePath_ViaEntryAssemblyLocation()
+        /// <summary>
+        /// Get the current executable's path location from the entry assembly provided by <see cref="Assembly.GetEntryAssembly"/>.
+        /// </summary>
+        public string GetExecutableFilePath_ViaEntryAssemblyLocation()
         {
 			var entryAssembly = Assembly.GetEntryAssembly();
 
@@ -47,7 +50,7 @@ namespace R5T.F0000
 		/// There are multiple ways to get the location of the executable, and depending on context (unit test, debugging in Visual Studio, or production) different locations are returned.
 		/// The command line argument is chosen as the default since this is the way the program is actually run by the operating system.
 		/// </remarks>
-		public string GetExecutableFilePath()
+		public string Get_ExecutableFilePath()
         {
 			var output = this.GetExecutableFilePath_ViaCommandLineArgumentValue();
 			return output;
@@ -59,7 +62,7 @@ namespace R5T.F0000
 		/// <returns>The non-directory indicated directory path of the directory containing the executable file.</returns>
 		public string GetExecutableDirectoryPath()
         {
-			var executableFilePath = this.GetExecutableFilePath();
+			var executableFilePath = this.Get_ExecutableFilePath();
 
 			var executableDirectoryPath = this.GetExecutableDirectoryPath(executableFilePath);
 			return executableDirectoryPath;

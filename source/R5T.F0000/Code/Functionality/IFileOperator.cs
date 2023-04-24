@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 using R5T.T0132;
@@ -141,15 +142,27 @@ namespace R5T.F0000
 		}
 
 		/// <summary>
-		/// WCreates a file with nothing in it.
+		/// Creates a file with nothing in it.
 		/// </summary>
-		public void WriteAnEmptyFile(string textFilePath)
+		public async Task WriteAnEmptyFile(string textFilePath)
         {
             FileSystemOperator.Instance.EnsureDirectoryForFilePathExists(textFilePath);
 
-            this.WriteText(
+            await this.WriteText(
 				textFilePath,
 				Instances.Strings.Empty);
+        }
+
+        /// <summary>
+        /// Creates a file with nothing in it.
+        /// </summary>
+        public void WriteAnEmptyFile_Synchronous(string textFilePath)
+        {
+            FileSystemOperator.Instance.EnsureDirectoryForFilePathExists(textFilePath);
+
+            this.WriteText_Synchronous(
+                textFilePath,
+                Instances.Strings.Empty);
         }
 
         /// <summary>
@@ -170,8 +183,18 @@ namespace R5T.F0000
 				text);
 		}
 
-		/// <inheritdoc cref="WriteLines(string, IEnumerable{string})"/>
-		public void WriteLines_Synchronous(
+        /// <inheritdoc cref="WriteLines(string, IEnumerable{string})"/>
+        public void WriteLines_Synchronous(
+            string textFilePath,
+            params string[] lines)
+		{
+			this.WriteLines_Synchronous(
+				textFilePath,
+				lines.AsEnumerable());
+		}
+
+        /// <inheritdoc cref="WriteLines(string, IEnumerable{string})"/>
+        public void WriteLines_Synchronous(
 			string textFilePath,
 			IEnumerable<string> lines)
 		{
@@ -186,7 +209,7 @@ namespace R5T.F0000
 				text);
 		}
 
-		public void WriteText(
+		public void WriteText_Synchronous(
 			string textFilePath,
 			string text)
         {
@@ -196,5 +219,16 @@ namespace R5T.F0000
 				textFilePath,
 				text);
         }
-	}
+
+        public async Task WriteText(
+            string textFilePath,
+            string text)
+        {
+            FileSystemOperator.Instance.EnsureDirectoryForFilePathExists(textFilePath);
+
+            await File.WriteAllTextAsync(
+                textFilePath,
+                text);
+        }
+    }
 }

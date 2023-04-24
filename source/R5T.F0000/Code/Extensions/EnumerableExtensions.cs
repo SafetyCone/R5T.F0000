@@ -1,12 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 using R5T.F0000;
 
 using Instances = R5T.F0000.Instances;
 
+
+namespace R5T.F0000.Extensions
+{
+    public static class EnumerableExtensions
+    {
+        public static IEnumerable<T> Append<T>(this IEnumerable<T> enumerable,
+            Func<T> itemConstructor)
+        {
+            return Instances.EnumerableOperator.Append(enumerable, itemConstructor);
+        }
+    }
+}
 
 namespace System.Linq
 {
@@ -40,6 +51,19 @@ namespace System.Linq
                 enumerable,
                 value,
                 appendices);
+        }
+
+        /// <summary>
+        /// Delays execution of the appendix constructor until after the value is true.
+        /// </summary>
+        public static IEnumerable<T> AppendIf<T>(this IEnumerable<T> enumerable,
+            bool value,
+            params Func<T>[] appendixConstructors)
+        {
+            return Instances.EnumerableOperator.AppendIf(
+                enumerable,
+                value,
+                appendixConstructors);
         }
 
         public static IEnumerable<T> AppendIf<T>(this IEnumerable<T> enumerable,

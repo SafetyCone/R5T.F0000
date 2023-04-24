@@ -150,6 +150,12 @@ namespace R5T.F0000
 			}
 		}
 
+		public Version Parse(string versionString)
+		{
+			var output = Version.Parse(versionString);
+			return output;
+		}
+
 		/// <summary>
 		/// Will return X.Y.Z, and will not throw if the version defines fewer tokens.
 		/// </summary>
@@ -161,10 +167,13 @@ namespace R5T.F0000
 			return output;
         }
 
-		/// <summary>
-		/// Chooses <see cref="ToString_Major_Minor_Build_FewerTokensOk(Version)"/> as the default.
+        /// <summary>
+		/// <inheritdoc cref="ToString_Major_Minor_Build_FewerTokensOk(Version)" path="/summary"/>
 		/// </summary>
-		public string ToString_Major_Minor_Build(Version version)
+		/// <remarks>
+        /// Chooses <see cref="ToString_Major_Minor_Build_FewerTokensOk(Version)"/> as the default.
+        /// </remarks>
+        public string ToString_Major_Minor_Build(Version version)
         {
 			var output = this.ToString_Major_Minor_Build_FewerTokensOk(version);
 			return output;
