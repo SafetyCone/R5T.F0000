@@ -22,6 +22,14 @@ namespace R5T.F0000
             return value;
         }
 
+        public TEnum[] Get_Values<TEnum>()
+        {
+            var array = Enum.GetValues(typeof(TEnum));
+
+            var values = array as TEnum[];
+            return values;
+        }
+
         /// <summary>
         /// Gets a message indicating the the input value of the <typeparamref name="TEnum"/> enumeration was unexpected.
         /// This is useful in producing an error in the default case for switch statements based on enumeration values.

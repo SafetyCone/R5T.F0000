@@ -354,7 +354,7 @@ namespace R5T.F0000
 
         public string GetSpaces(int count)
         {
-            var output = new string(
+            var output = this.Repeat(
                 Instances.Characters.Space,
                 count);
 
@@ -432,6 +432,10 @@ namespace R5T.F0000
             return output;
         }
 
+        /// <summary>
+        /// Get a tab as a number of spaces.
+        /// <inheritdoc cref="Z0000.IValues.DefaultTabSpacesCount_Const" path="/summary"/>
+        /// </summary>
         public string GetTabAsSpaces(
             int count = Z0000.IValues.DefaultTabSpacesCount_Const)
         {
@@ -681,6 +685,12 @@ namespace R5T.F0000
             return output;
         }
 
+        public string Repeat(char character, int count)
+        {
+            var output = new string(character, count);
+            return output;
+        }
+
         public string Replace(string @string, char newCharacter, char oldCharacter)
         {
             var output = @string.Replace(
@@ -713,6 +723,12 @@ namespace R5T.F0000
         }
 
         public string[] Split(char separator, string @string, StringSplitOptions options = StringSplitOptions.None)
+        {
+            var output = @string.Split(separator, options);
+            return output;
+        }
+
+        public string[] Split(string separator, string @string, StringSplitOptions options = StringSplitOptions.None)
         {
             var output = @string.Split(separator, options);
             return output;
