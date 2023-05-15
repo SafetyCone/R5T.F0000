@@ -31,8 +31,8 @@ namespace R5T.F0000
         }
 
         public bool Contains(
-            char character,
-            string @string)
+            string @string,
+            char character)
         {
             var output = @string.Contains(character);
             return output;

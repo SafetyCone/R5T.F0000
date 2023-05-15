@@ -23,9 +23,17 @@ namespace System.Linq
             return output;
         }
 
+        /// <inheritdoc cref="R5T.F0000.ICharacterOperator.OrderAlphabetically(IEnumerable{char})"/>
         public static IEnumerable<char> OrderAlphabetically(this IEnumerable<char> characters)
         {
             var output = Instances.CharacterOperator.OrderAlphabetically(characters);
+            return output;
+        }
+
+        /// <inheritdoc cref="R5T.F0000.ICharacterOperator.OrderNumerically(IEnumerable{char})"/>
+        public static IEnumerable<char> OrderNumerically(this IEnumerable<char> characters)
+        {
+            var output = Instances.CharacterOperator.OrderNumerically(characters);
             return output;
         }
     }

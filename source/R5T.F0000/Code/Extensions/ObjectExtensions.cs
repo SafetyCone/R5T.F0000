@@ -47,8 +47,23 @@ namespace System.Extensions
 }
 
 
+namespace R5T.F0000.ArrayExtensions
+{
+    /// <inheritdoc cref="R5T.F0000.Extensions.ForObject.ObjectExtensions"/>
+    public static class ObjectExtensions
+    {
+        public static T[] ToArray<T>(this T value)
+        {
+            return Instances.ArrayOperator.From(value);
+        }
+    }
+}
+
 namespace R5T.F0000.Extensions.ForObject
 {
+    /// <summary>
+    /// A special namespace is used since object-extensions are dangerous since they are likely to pollute the intellisense of every variable.
+    /// </summary>
     public static class ObjectExtensions
     {
         public static TOutput As<TInput, TOutput>(this TInput @object)

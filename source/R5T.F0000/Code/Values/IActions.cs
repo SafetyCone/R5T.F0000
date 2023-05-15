@@ -11,8 +11,8 @@ namespace R5T.F0000
     {
         public const Action<T> Null_Constant = null;
 
-        public Action<T> DoNothing => ActionOperations.Instance.DoNothing;
+        public Action<T> DoNothing => ActionOperations.Instance.DoNothing_Synchronous;
         public Action<T> Null => null;
-        public Action<T> None => ActionOperations.Instance.DoNothing;
+        public Action<T> None => ActionOperations.Instance.DoNothing_Synchronous;
     }
 }

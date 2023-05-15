@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+
 using R5T.T0132;
 
 using Glossary = R5T.Y0000.Glossary;
@@ -27,6 +26,7 @@ namespace R5T.F0000
             return output;
         }
 
+        /// <inheritdoc cref="Describe(char)"/>
         public string Describe(params char[] characters)
         {
             var output = this.Describe(characters.AsEnumerable());
@@ -35,6 +35,9 @@ namespace R5T.F0000
 
         /// <summary>
         /// Quality-of-life overload for <see cref="DescribeToText(IEnumerable{char})"/>.
+        /// <para>
+        /// <inheritdoc cref="DescribeToText(IEnumerable{char})" path="/summary"/>
+        /// </para>
         /// </summary>
         public string Describe(IEnumerable<char> characters)
         {
@@ -42,6 +45,7 @@ namespace R5T.F0000
             return output;
         }
 
+        /// <inheritdoc cref="Describe(char)"/>
         public string DescribeToText(IEnumerable<char> characters)
         {
             var lines = characters
@@ -52,6 +56,7 @@ namespace R5T.F0000
             return text;
         }
 
+        /// <inheritdoc cref="Describe(char)"/>
         public void DescribeTo_Synchronous(
             TextWriter writer,
             IEnumerable<char> characters)
@@ -61,6 +66,7 @@ namespace R5T.F0000
             writer.WriteLine(text);
         }
 
+        /// <inheritdoc cref="Describe(char)"/>
         public async Task DescribeTo(
            TextWriter writer,
            IEnumerable<char> characters)
@@ -70,6 +76,7 @@ namespace R5T.F0000
             await writer.WriteLineAsync(text);
         }
 
+        /// <inheritdoc cref="Describe(char)"/>
         public void DescribeToFile_Synchronous(
             string filePath,
             IEnumerable<char> characters)
@@ -81,6 +88,7 @@ namespace R5T.F0000
                 characters);
         }
 
+        /// <inheritdoc cref="Describe(char)"/>
         public async Task DescribeToFile(
             string filePath,
             IEnumerable<char> characters)
@@ -477,7 +485,20 @@ namespace R5T.F0000
             return output;
         }
 
+        /// <summary>
+        /// Orders characters alphabetically (which is 0-9, then A-Z, then a-z).
+        /// </summary>
         public IEnumerable<char> OrderAlphabetically(IEnumerable<char> characters)
+        {
+            var output = characters.OrderBy(x => x);
+            return output;
+        }
+
+        /// <summary>
+        /// Orders characters by their integer values (ASCII values).
+        /// Note: this is the same as alphabetical order.
+        /// </summary>
+        public IEnumerable<char> OrderNumerically(IEnumerable<char> characters)
         {
             var output = characters.OrderBy(x => x);
             return output;

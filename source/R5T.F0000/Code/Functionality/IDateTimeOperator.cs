@@ -43,6 +43,12 @@ namespace R5T.F0000
 			return output;
 		}
 
+        public DateTime Get_Zero()
+        {
+            var output = new DateTime();
+            return output;
+        }
+
         public DateTime Get_Today()
         {
             var output = Instances.DateOperator.GetToday();

@@ -55,6 +55,14 @@ namespace R5T.F0000.Extensions
 {
     public static class StringExtensions
     {
+        public static string Join(this IEnumerable<string> strings,
+            string separator)
+        {
+            return Instances.StringOperator.Join(
+                separator,
+                strings);
+        }
+
         public static IEnumerable<string> Tabinate(this IEnumerable<string> strings)
         {
             return Instances.TextOperator.Tabinate(strings);

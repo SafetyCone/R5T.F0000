@@ -508,15 +508,26 @@ namespace R5T.F0000
         }
 
         /// <summary>
-        /// Tests whether a file exists, and if it does, throws a <see cref="FileNotFoundException"/>.
-        /// Yes, it's weird if throws <see cref="FileNotFoundException"/>, but that exception type already exists.
+        /// Tests whether a file exists, and if it does, throws an <see cref="Exception"/>.
         /// </summary>
         public void VerifyFileDoesNotExists(string filePath)
         {
             var fileExists = this.FileExists(filePath);
             if (fileExists)
             {
-                throw new FileNotFoundException("File exists.", filePath);
+                throw new Exception($"File exists:\n{filePath}");
+            }
+        }
+
+        /// <summary>
+        /// Tests whether a directory exists, and if it does, throws a <see cref="Exception"/>.
+        /// </summary>
+        public void Verify_DirectoryDoesNotExists(string filePath)
+        {
+            var fileExists = this.DirectoryExists(filePath);
+            if (fileExists)
+            {
+                throw new Exception($"Directory exists:\n{filePath}");
             }
         }
     }

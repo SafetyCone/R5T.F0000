@@ -72,8 +72,12 @@ namespace R5T.F0000
         }
 
         /// <summary>
-        /// Default assumes a reference type.
+        /// Compares the value to the default for the type of the value using the default equality comparer (<see cref="EqualityComparer{T}.Default"/>).
+        /// If the value is the default value, then the value was not found.
         /// </summary>
+        /// <remarks>
+        /// If you instead want to indicate that a value <strong>was</strong> found, but that the default value was found, use <see cref="From{T}(bool, T)"/>.
+        /// </remarks>
         public static WasFound<T> From<T>(T resultOrDefault)
         {
             var defaultEqualityComparer = EqualityComparer<T>.Default;
