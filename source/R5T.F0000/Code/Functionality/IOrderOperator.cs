@@ -13,6 +13,10 @@ namespace R5T.F0000
         private static Internal.IOrderOperator Internal => F0000.Internal.OrderOperator.Instance;
 
 
+        /// <summary>
+        /// Orders elements by name, given names in order.
+        /// Any elements whose name is not in the list are appended to the ordered list, in encountered order.
+        /// </summary>
         public IEnumerable<TElement> OrderByNames<TElement>(
             IEnumerable<TElement> elements,
             Func<TElement, string> nameSelector,
@@ -50,6 +54,7 @@ namespace R5T.F0000
             return orderedNodes;
         }
 
+        /// <inheritdoc cref="OrderByNames{TElement}(IEnumerable{TElement}, Func{TElement, string}, IEnumerable{string})"/>
         public IEnumerable<TElement> OrderByNames<TElement>(
             IEnumerable<TElement> elements,
             Func<TElement, string> nameSelector,

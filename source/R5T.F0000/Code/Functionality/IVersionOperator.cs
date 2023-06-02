@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-
+using System.Reflection.Emit;
 using R5T.T0132;
 
 
@@ -178,5 +178,14 @@ namespace R5T.F0000
 			var output = this.ToString_Major_Minor_Build_FewerTokensOk(version);
 			return output;
         }
+
+		/// <summary>
+		/// Quality-of-life overload for <see cref="Parse(string)"/>.
+		/// </summary>
+		public Version ToVersion(string value)
+		{
+			var output = this.Parse(value);
+			return output;
+		}
 	}
 }

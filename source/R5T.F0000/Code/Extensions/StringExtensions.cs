@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Linq;
+using System.Runtime.CompilerServices;
 using R5T.F0000;
 
 using Instances = R5T.F0000.Instances;
@@ -55,12 +56,29 @@ namespace R5T.F0000.Extensions
 {
     public static class StringExtensions
     {
+        public static string Join(this IEnumerable<string> strings)
+        {
+            var output = strings.Join(
+                IStrings.Empty_Constant);
+
+            return output;
+        }
+
         public static string Join(this IEnumerable<string> strings,
             string separator)
         {
             return Instances.StringOperator.Join(
                 separator,
                 strings);
+        }
+
+        public static IEnumerable<string> MakeIntoLines(this IEnumerable<string> strings)
+        {
+            var output = strings
+                .Select(Instances.StringOperator.MakeIntoLine)
+                ;
+
+            return output;
         }
 
         public static IEnumerable<string> Tabinate(this IEnumerable<string> strings)

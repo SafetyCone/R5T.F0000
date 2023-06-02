@@ -11,6 +11,22 @@ namespace R5T.F0000
 	[FunctionalityMarker]
 	public partial interface IEnumerableOperator : IFunctionalityMarker
 	{
+		/// <summary>
+		/// Produces a sequence that alternates between elements of the provided enumerable, and the provided value.
+		/// Starts with the first element of the enumerable.
+		/// </summary>
+		public IEnumerable<T> AlternateWith<T>(
+			IEnumerable<T> enumerable,
+			T value)
+		{
+			foreach (var element in enumerable)
+			{
+				yield return element;
+
+				yield return value;
+			}
+		}
+
 		public IEnumerable<T> Append<T>(
 			IEnumerable<T> enumerable,
 			Func<T> itemConstructor)
@@ -25,6 +41,9 @@ namespace R5T.F0000
 			return enumerable.Concat(appendix);
 		}
 
+		/// <summary>
+		/// Append to an enumerable.
+		/// </summary>
 		public IEnumerable<T> Append<T>(IEnumerable<T> enumerable, params T[] appendix)
 		{
 			return enumerable.Concat(appendix);
@@ -131,6 +150,9 @@ namespace R5T.F0000
 			return output;
 		}
 
+		/// <summary>
+		/// Quality-of-life name for <see cref="Enumerable.SkipLast{TSource}(IEnumerable{TSource}, int)"/>
+		/// </summary>
 		public IEnumerable<T> ExceptLast<T>(IEnumerable<T> enumerable, int numberOfElements)
 		{
 			// Use SkipLast().
@@ -138,6 +160,29 @@ namespace R5T.F0000
 			return output;
 		}
 
+        /// <summary>
+        /// Quality-of-life name for <see cref="Enumerable.Skip{TSource}(IEnumerable{TSource}, int)"/>
+        /// </summary>
+        public IEnumerable<T> ExceptFirst<T>(IEnumerable<T> enumerable, int numberOfElement)
+        {
+			// Skip the first elements.
+			var output = enumerable.Skip(numberOfElement);
+			return output;
+        }
+
+        /// <summary>
+        /// Returns the entire sequence, except for the first element (skips the first element).
+        /// </summary>
+        public IEnumerable<T> ExceptFirst<T>(IEnumerable<T> enumerable)
+		{
+			// Skip the first element.
+			var output = this.ExceptFirst(enumerable, 1);
+			return output;
+		}
+
+		/// <summary>
+		/// Returns the entire sequence, except for the last element (skips the last element).
+		/// </summary>
 		public IEnumerable<T> ExceptLast<T>(IEnumerable<T> enumerable)
 		{
 			// Skip the last element.
@@ -279,7 +324,32 @@ namespace R5T.F0000
 			return output;
 		}
 
-		public IEnumerable<T> Repeat<T>(T instance, int count)
+		public IEnumerable<T> Prepend<T>(
+			IEnumerable<T> items,
+			IEnumerable<T> prependix)
+		{
+			foreach (var item in prependix)
+			{
+				yield return item;
+			}
+
+			foreach (var item in items)
+			{
+				yield return item;
+			}
+		}
+
+        public IEnumerable<T> Prepend<T>(
+			IEnumerable<T> items,
+			params T[] prependix)
+		{
+			return this.Prepend(
+				items,
+				prependix.AsEnumerable());
+		}
+
+
+        public IEnumerable<T> Repeat<T>(T instance, int count)
 		{
 			return Enumerable.Repeat(instance, count);
 		}

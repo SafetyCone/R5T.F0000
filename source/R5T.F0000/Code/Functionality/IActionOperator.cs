@@ -11,6 +11,17 @@ namespace R5T.F0000
 	[FunctionalityMarker]
 	public partial interface IActionOperator : IFunctionalityMarker
 	{
+        public Action<T> Combine<T>(IEnumerable<Action<T>> actions)
+            => @object => actions.ForEach(action => action(@object));
+
+        public Action<T> Combine<T>(params Action<T>[] actions)
+            => this.Combine(actions.AsEnumerable());
+
+        public Func<T, Task> Get_RunMultiple<T>(params Func<T, Task>[] actions)
+        {
+            return value => this.Run_OkIfDefaults(value, actions);
+        }
+
         public async Task<TOutput> Run<T, TOutput>(Func<T, Task<TOutput>> action,
             T value)
         {
@@ -34,11 +45,6 @@ namespace R5T.F0000
             var output = action(value);
             return output;
         }
-
-        public Func<T, Task> Get_RunMultiple<T>(params Func<T, Task>[] actions)
-		{
-			return value => this.Run_OkIfDefaults(value, actions);
-		}
 
         public void Run<TValue>(TValue value, params Action<TValue>[] actions)
         {

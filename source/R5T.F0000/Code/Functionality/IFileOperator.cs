@@ -166,6 +166,57 @@ namespace R5T.F0000
         }
 
         /// <summary>
+        /// Writes the provided texts (and only the provided text, with no trailing blank line) to a file.
+        /// Texts are written sequentially, with no separating lines.
+        /// </summary>
+        public Task Write_Texts(
+            string textFilePath,
+            IEnumerable<string> texts)
+        {
+            FileSystemOperator.Instance.EnsureDirectoryForFilePathExists(textFilePath);
+
+            var text = StringOperator.Instance.Join(texts);
+
+            return File.WriteAllTextAsync(
+                textFilePath,
+                text);
+        }
+
+        /// <inheritdoc cref="Write_Texts(string, IEnumerable{string})"/>
+        public Task Write_Texts(
+            string textFilePath,
+            params string[] texts)
+        {
+            return this.Write_Texts(
+                textFilePath,
+                texts.AsEnumerable());
+        }
+
+        /// <inheritdoc cref="Write_Texts(string, IEnumerable{string})"/>
+        public void Write_Texts_Synchronous(
+            string textFilePath,
+            IEnumerable<string> texts)
+        {
+            FileSystemOperator.Instance.EnsureDirectoryForFilePathExists(textFilePath);
+
+            var text = StringOperator.Instance.Join(texts);
+
+            File.WriteAllText(
+                textFilePath,
+                text);
+        }
+
+        /// <inheritdoc cref="Write_Texts(string, IEnumerable{string})"/>
+        public void Write_Texts_Synchronous(
+            string textFilePath,
+            params string[] lines)
+        {
+            this.Write_Texts_Synchronous(
+                textFilePath,
+                lines.AsEnumerable());
+        }
+
+        /// <summary>
         /// Writes the provided lines (and only the provided lines, with no trailing blank line) to a file.
         /// </summary>
         public Task WriteLines(

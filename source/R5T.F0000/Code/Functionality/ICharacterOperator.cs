@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-
+using R5T.F0000.Extensions;
 using R5T.T0132;
 
 using Glossary = R5T.Y0000.Glossary;
@@ -98,6 +98,27 @@ namespace R5T.F0000
             await this.DescribeTo(
                 fileWriter,
                 characters);
+        }
+
+        public string Display(char character)
+        {
+            return character switch
+            {
+                ' ' => @"\space",
+                '\t' => @"\t",
+                '\n' => @"\n",
+                '\r' => @"\r",
+                _ => character.ToString()
+            };
+        }
+
+        public string DisplayCharacters(string @string)
+        {
+            var output = @string
+                .Select(character => this.Display(character))
+                .Join();
+
+            return output;
         }
 
         public char[] GetAsciiCharactersWhere(

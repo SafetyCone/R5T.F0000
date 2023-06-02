@@ -42,6 +42,7 @@ namespace R5T.F0000
         public static IFileStreamOperator FileStreamOperator => F0000.FileStreamOperator.Instance;
         public static IFileSystemOperator FileSystemOperator => F0000.FileSystemOperator.Instance;
         public static IFormatProviders FormatProviders => F0000.FormatProviders.Instance;
+        public static IGuidOperator GuidOperator => F0000.GuidOperator.Instance;
         public static IIndex Index => F0000.Index.Instance;
         public static IIndexOperator IndexOperator => F0000.IndexOperator.Instance;
         public static IIntegers Integers => F0000.Integers.Instance;

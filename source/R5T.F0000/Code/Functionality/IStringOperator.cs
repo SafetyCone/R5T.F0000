@@ -79,6 +79,17 @@ namespace R5T.F0000
             return formatString;
         }
 
+        public int CountOf(
+            char character,
+            string @string)
+        {
+            var output = @string
+                .Where(c => c == character)
+                .Count();
+
+            return output;
+        }
+
         public bool EndsWith(
             string @string,
             string ending)
@@ -126,7 +137,43 @@ namespace R5T.F0000
         }
 
         /// <summary>
+        /// Returns the string, without the beginning.
+        /// Strict in terms of the function throws an exception if the string does <strong>not</strong> start with the specified beginning.
+        /// </summary>
+        public string ExceptBeginning_Strict(
+            string @string,
+            string beginning)
+        {
+            var startsWithBeginning = this.BeginsWith(
+                @string,
+                beginning);
+
+            if (!startsWithBeginning)
+            {
+                throw new ArgumentException($"String '{@string}' did not start with beginning '{beginning}'.", nameof(@string));
+            }
+
+            var output = @string[..beginning.Length];
+            return output;
+        }
+
+        /// <summary>
+        /// Quality-of-life overload for <see cref="ExceptBeginning_Strict(string, string)"/>.
+        /// </summary>
+        public string ExceptBeginning(
+            string @string,
+            string beginning)
+        {
+            var output = this.ExceptBeginning_Strict(
+                @string,
+                beginning);
+
+            return output;
+        }
+
+        /// <summary>
         /// Returns the string, without the ending.
+        /// Strict in terms of the function throws an exception if the string does <strong>not</strong> end with the specified ending.
         /// </summary>
         public string ExceptEnding_Strict(
             string @string,
@@ -138,7 +185,7 @@ namespace R5T.F0000
 
             if (!endsWithEnding)
             {
-                throw new ArgumentException($"String '{@string}' did not end with ending '{endsWithEnding}'.", nameof(@string));
+                throw new ArgumentException($"String '{@string}' did not end with ending '{ending}'.", nameof(@string));
             }
 
             var output = @string[..^ending.Length];
@@ -599,6 +646,15 @@ namespace R5T.F0000
             return output;
         }
 
+        public string Join(IEnumerable<string> strings)
+        {
+            var output = this.Join(
+                Instances.Strings.Empty,
+                strings);
+
+            return output;
+        }
+
         public string Join(char separator, IEnumerable<string> strings)
         {
             var output = System.String.Join(separator, strings);
@@ -647,6 +703,26 @@ namespace R5T.F0000
         {
             var output = @string.ToLowerInvariant();
             return output;
+        }
+
+        /// <summary>
+        /// Appends the new-line separator to the string to make the string be a line.
+        /// (Lines end with a new-line separator.)
+        /// </summary>
+        public string MakeIntoLine(
+            string @string,
+            string newLineSeparator)
+        {
+            var output = @string + newLineSeparator;
+            return output;
+        }
+
+        /// <inheritdoc cref="MakeIntoLine(string)"/>
+        public string MakeIntoLine(string @string)
+        {
+            return this.MakeIntoLine(
+                @string,
+                Instances.Strings.NewLine_ForEnvironment);
         }
 
         public StringBuilder New()

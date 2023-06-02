@@ -11,10 +11,34 @@ namespace R5T.F0000.Extensions
 {
     public static class EnumerableExtensions
     {
+        public static IEnumerable<T> AlternateWith<T>(this IEnumerable<T> enumerable,
+            T value)
+        {
+            return Instances.EnumerableOperator.AlternateWith(
+                enumerable,
+                value);
+        }
+
         public static IEnumerable<T> Append<T>(this IEnumerable<T> enumerable,
             Func<T> itemConstructor)
         {
             return Instances.EnumerableOperator.Append(enumerable, itemConstructor);
+        }
+
+        public static IEnumerable<T> Prepend<T>(this IEnumerable<T> items,
+            IEnumerable<T> prependix)
+        {
+            return Instances.EnumerableOperator.Prepend(
+                items,
+                prependix);
+        }
+
+        public static IEnumerable<T> Prepend<T>(this IEnumerable<T> items,
+            params T[] prependix)
+        {
+            return Instances.EnumerableOperator.Prepend(
+                items,
+                prependix);
         }
     }
 }
@@ -126,12 +150,28 @@ namespace System.Linq
             return output;
         }
 
+        /// <inheritdoc cref="IEnumerableOperator.ExceptFirst{T}(IEnumerable{T}, int)"/>
+        public static IEnumerable<T> ExceptFirst<T>(this IEnumerable<T> enumerable, int numberOfElements)
+        {
+            var output = Instances.EnumerableOperator.ExceptFirst(enumerable, numberOfElements);
+            return output;
+        }
+
+        /// <inheritdoc cref="IEnumerableOperator.ExceptFirst{T}(IEnumerable{T})"/>
+        public static IEnumerable<T> ExceptFirst<T>(this IEnumerable<T> enumerable)
+        {
+            var output = Instances.EnumerableOperator.ExceptFirst(enumerable);
+            return output;
+        }
+
+        /// <inheritdoc cref="IEnumerableOperator.ExceptLast{T}(IEnumerable{T}, int)"/>
         public static IEnumerable<T> ExceptLast<T>(this IEnumerable<T> enumerable, int numberOfElements)
         {
             var output = Instances.EnumerableOperator.ExceptLast(enumerable, numberOfElements);
             return output;
         }
 
+        /// <inheritdoc cref="IEnumerableOperator.ExceptLast{T}(IEnumerable{T})"/>
         public static IEnumerable<T> ExceptLast<T>(this IEnumerable<T> enumerable)
         {
             var output = Instances.EnumerableOperator.ExceptLast(enumerable);
