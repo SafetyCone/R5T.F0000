@@ -50,6 +50,12 @@ namespace R5T.F0000
             return lines;
         }
 
+        public TextWriter Get_Writer(string filePath)
+        {
+            var output = Instances.StreamWriterOperator.NewWrite(filePath);
+            return output;
+        }
+
         public async Task CopyToFile(
 			string filePath,
 			Stream stream)

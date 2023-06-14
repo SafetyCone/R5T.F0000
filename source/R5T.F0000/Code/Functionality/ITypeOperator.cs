@@ -204,6 +204,12 @@ namespace R5T.F0000
 			return isGeneric;
 		}
 
+		public bool Is_Int32(Type type)
+		{
+			var output = type == Instances.Types.Int32;
+			return output;
+		}
+
 		/// <summary>
 		/// <inheritdoc cref = "Y0000.Glossary.ForType.OpenGeneric" path="/definition"/>
 		/// </summary>

@@ -22,6 +22,19 @@ namespace R5T.F0000
             return value => this.Run_OkIfDefaults(value, actions);
         }
 
+        public void Run<T1, T2>(
+            Action<T1, T2> action,
+            T1 arg1,
+            T2 arg2)
+        {
+            if (action == default)
+            {
+                return;
+            }
+
+            action(arg1, arg2);
+        }
+
         public async Task<TOutput> Run<T, TOutput>(Func<T, Task<TOutput>> action,
             T value)
         {

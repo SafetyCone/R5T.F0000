@@ -29,6 +29,7 @@ namespace R5T.F0000
         public static IDoubleOperator DoubleOperator => F0000.DoubleOperator.Instance;
         public static IEnumerableOperator EnumerableOperator => F0000.EnumerableOperator.Instance;
         public static IEnumerationOperator EnumerationOperator => F0000.EnumerationOperator.Instance;
+        public static Unchecked.IEnumerationOperator EnumerationOperator_Unchecked => Unchecked.EnumerationOperator.Instance;
         public static IEnvironmentOperator EnvironmentOperator => F0000.EnvironmentOperator.Instance;
         public static IExceptionMessageOperator ExceptionMessageOperator => F0000.ExceptionMessageOperator.Instance;
         public static IExceptionOperator ExceptionOperator => F0000.ExceptionOperator.Instance;
@@ -58,6 +59,7 @@ namespace R5T.F0000
         public static ISeeds Seeds => F0000.Seeds.Instance;
         public static ISourceCodeOperator SourceCodeOperator => F0000.SourceCodeOperator.Instance;
         public static IStackOperator StackOperator => F0000.StackOperator.Instance;
+        public static IStreamWriterOperator StreamWriterOperator => F0000.StreamWriterOperator.Instance;
         public static IString String => F0000.String.Instance;
         public static IStringBuilderOperator StringBuilderOperator => F0000.StringBuilderOperator.Instance;
         public static IStringOperator StringOperator => F0000.StringOperator.Instance;
@@ -68,6 +70,7 @@ namespace R5T.F0000
         public static ITypeNameAffixes TypeNameAffixes => F0000.TypeNameAffixes.Instance;
         public static ITypeNameOperator TypeNameOperator => F0000.TypeNameOperator.Instance;
         public static ITypeOperator TypeOperator => F0000.TypeOperator.Instance;
+        public static ITypes Types => F0000.Types.Instance;
         public static IUrlOperator UrlOperator => F0000.UrlOperator.Instance;
         public static IValues Values => F0000.Values.Instance;
         public static IVersionOperator VersionOperator => F0000.VersionOperator.Instance;
