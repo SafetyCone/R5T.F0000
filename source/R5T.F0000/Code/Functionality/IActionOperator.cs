@@ -64,6 +64,32 @@ namespace R5T.F0000
             this.Run(value, actions.AsEnumerable());
         }
 
+        public void Run(IEnumerable<Action> actions)
+        {
+            if (actions == default)
+            {
+                return;
+            }
+
+            foreach (var action in actions)
+            {
+                this.Run(action);
+            }
+        }
+
+        public async Task Run(IEnumerable<Func<Task>> actions)
+        {
+            if (actions == default)
+            {
+                return;
+            }
+
+            foreach (var action in actions)
+            {
+                await this.Run(action);
+            }
+        }
+
         public void Run<TValue>(TValue value, IEnumerable<Action<TValue>> actions)
         {
             if(actions == default)

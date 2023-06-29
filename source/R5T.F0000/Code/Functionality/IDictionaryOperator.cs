@@ -43,6 +43,21 @@ namespace R5T.F0000
             list.Add(value);
         }
 
+        /// <summary>
+        /// Add the value only if the key does already exist.
+        /// </summary>
+        public void Add_IfKeyNotFound<TKey, TValue>(IDictionary<TKey, TValue> dictionary,
+            TKey key,
+            TValue value)
+        {
+            var hasKey = dictionary.ContainsKey(key);
+            if(!hasKey)
+            {
+                dictionary.Add(key, value);
+            }
+            // Else, do nothing.
+        }
+
         public TValue AddAndReturnValue<TKey, TValue>(IDictionary<TKey, TValue> dictionary,
             TKey key,
             TValue value)
@@ -52,7 +67,10 @@ namespace R5T.F0000
             return value;
         }
 
-        public void AddOrReplaceValue<TKey, TValue>(IDictionary<TKey, TValue> dictionary,
+        /// <summary>
+        /// Adds the key-value pair if the key does not exist, else replaces the value for the given key if the key already exists.
+        /// </summary>
+        public void Add_OrReplace<TKey, TValue>(IDictionary<TKey, TValue> dictionary,
             TKey key,
             TValue value)
         {

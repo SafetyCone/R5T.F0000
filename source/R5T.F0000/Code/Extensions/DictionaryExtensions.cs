@@ -12,7 +12,7 @@ namespace System.Extensions
             TKey key,
             TValue value)
         {
-            Instances.DictionaryOperator.AddOrReplaceValue(dictionary, key, value);
+            Instances.DictionaryOperator.Add_OrReplace(dictionary, key, value);
         }
 
         public static void AddValue<TKey, TValue>(this IDictionary<TKey, List<TValue>> dictionary,

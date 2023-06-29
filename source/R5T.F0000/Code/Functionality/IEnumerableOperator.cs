@@ -137,6 +137,23 @@ namespace R5T.F0000
 			return output;
 		}
 
+		/// <summary>
+		/// If the input enumerable is null (the default for <see cref="IEnumerable{T}"/>), then return an empty enumerable.
+		/// Else, return the enumerable.
+		/// <para>Useful for handling default enumerable argument values.</para>
+		/// </summary>
+		public IEnumerable<T> EmptyIfNull<T>(IEnumerable<T> enumerable)
+		{
+			var isDefault = enumerable == default;
+
+			var output = isDefault
+				? this.Empty<T>()
+				: enumerable
+				;
+
+			return output;
+		}
+
 		public IEnumerable<T> Except<T>(IEnumerable<T> items, T item)
 			where T : IEquatable<T>
 		{
@@ -246,6 +263,12 @@ namespace R5T.F0000
 				yield return instance;
 			}
         }
+
+		public IEnumerable<T> From<T>(params IEnumerable<T>[] enumerables)
+		{
+			var output = enumerables.SelectMany(enumerable => enumerable);
+			return output;
+		}
 
         public bool HasAny<T>(IEnumerable<T> items)
 		{

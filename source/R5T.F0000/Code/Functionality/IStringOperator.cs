@@ -173,6 +173,18 @@ namespace R5T.F0000
 
         /// <summary>
         /// Returns the string, without the ending.
+        /// Robust in terms of the function does not care if the input actually ends with the ending.
+        /// </summary>
+        public string ExceptEnding_Robust(
+            string @string,
+            string ending)
+        {
+            var output = @string[..^ending.Length];
+            return output;
+        }
+
+        /// <summary>
+        /// Returns the string, without the ending.
         /// Strict in terms of the function throws an exception if the string does <strong>not</strong> end with the specified ending.
         /// </summary>
         public string ExceptEnding_Strict(
@@ -188,7 +200,10 @@ namespace R5T.F0000
                 throw new ArgumentException($"String '{@string}' did not end with ending '{ending}'.", nameof(@string));
             }
 
-            var output = @string[..^ending.Length];
+            var output = this.ExceptEnding_Robust(
+                @string,
+                ending);
+
             return output;
         }
 

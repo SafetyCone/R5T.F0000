@@ -30,3 +30,32 @@ namespace System
         }
     }
 }
+
+
+namespace R5T.F0000.Extensions
+{
+    public static class IDictionaryExtensions
+    {
+        /// <inheritdoc cref="IDictionaryOperator.Add_IfKeyNotFound{TKey, TValue}(IDictionary{TKey, TValue}, TKey, TValue)"/>
+        public static void Add_IfKeyNotFound<TKey, TValue>(this IDictionary<TKey, TValue> dictionary,
+            TKey key,
+            TValue value)
+        {
+            Instances.DictionaryOperator.Add_IfKeyNotFound(
+                dictionary,
+                key,
+                value);
+        }
+
+        /// <inheritdoc cref="IDictionaryOperator.Add_OrReplace{TKey, TValue}(IDictionary{TKey, TValue}, TKey, TValue)"/>
+        public static void Add_OrReplace<TKey, TValue>(this IDictionary<TKey, TValue> dictionary,
+            TKey key,
+            TValue value)
+        {
+            Instances.DictionaryOperator.Add_OrReplace(
+                dictionary,
+                key,
+                value);
+        }
+    }
+}

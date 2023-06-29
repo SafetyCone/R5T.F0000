@@ -45,6 +45,22 @@ namespace R5T.F0000
             }
         }
 
+        public WasFound<TDestination> Convert<TSource, TDestination>(WasFound<TSource> wasFound, Func<TSource, WasFound<TDestination>> converterIfFound)
+        {
+            if (wasFound)
+            {
+                var convertedResult = converterIfFound(wasFound.Result);
+
+                var output = convertedResult;
+                return output;
+            }
+            else
+            {
+                var output = WasFound.From(wasFound, default(TDestination));
+                return output;
+            }
+        }
+
         public bool IsFound<T>(WasFound<T> wasFound)
         {
             return wasFound.Exists;

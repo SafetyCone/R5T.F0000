@@ -38,6 +38,12 @@ namespace System
             return output;
         }
 
+        public static WasFound<TDestination> Convert<TSource, TDestination>(this WasFound<TSource> wasFound, Func<TSource, WasFound<TDestination>> converterIfFound)
+        {
+            var output = Instances.WasFoundOperator.Convert(wasFound, converterIfFound);
+            return output;
+        }
+
         public static void ExceptionIfNotFound<T>(this WasFound<T> wasFound, string message)
         {
             wasFound.InvalidOperationIfNotFound(message);
