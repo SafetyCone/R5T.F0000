@@ -60,6 +60,7 @@ namespace R5T.F0000
         public static ISeeds Seeds => F0000.Seeds.Instance;
         public static ISourceCodeOperator SourceCodeOperator => F0000.SourceCodeOperator.Instance;
         public static IStackOperator StackOperator => F0000.StackOperator.Instance;
+        
         public static IStreamWriterOperator StreamWriterOperator => F0000.StreamWriterOperator.Instance;
         public static IString String => F0000.String.Instance;
         public static IStringBuilderOperator StringBuilderOperator => F0000.StringBuilderOperator.Instance;

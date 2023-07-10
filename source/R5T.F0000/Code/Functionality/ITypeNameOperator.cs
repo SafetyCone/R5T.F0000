@@ -27,6 +27,16 @@ namespace R5T.F0000
             return output;
         }
 
+        /// <summary>
+        /// Ensures the first letter of the type name is capitalized.
+        /// </summary>
+        public string Ensure_IsCapitalized(
+            string typeName)
+        {
+            var output = Instances.TextOperator.Ensure_IsCapitalized(typeName);
+            return output;
+        }
+
         public string GetAttributeNameFromAttributeTypeName(
             string attributeTypeName)
         {

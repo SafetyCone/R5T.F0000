@@ -1,5 +1,7 @@
 using System;
-using System.Collections.Generic;using System.Linq;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 
 using R5T.T0132;
 
@@ -15,6 +17,80 @@ namespace R5T.F0000
 		{
 			var line = text + newLine;
 			return line;
+		}
+
+		/// <summary>
+		/// <para>Ensures the first letter of the word is capitalized.</para>
+		/// Robust (not strict) in the sense that empty values do not result in an exception.
+		/// </summary>
+		public string Ensure_IsCapitalized(string word)
+		{
+			var hasFirstLetter = this.Has_FirstLetter(word);
+			if(hasFirstLetter)
+			{
+				var firstLetter = hasFirstLetter.Result;
+
+				var isUppercase = Instances.CharacterOperator.IsUppercase(firstLetter);
+				if(!isUppercase)
+				{
+					var uppercaseLetter = Instances.CharacterOperator.ToUpper(firstLetter);
+
+					var output = this.Replace_FirstLetter_Unchecked(
+						word,
+						uppercaseLetter);
+
+					return output;
+				}
+				else
+				{
+					return word;
+				}
+			}
+			else
+			{
+				return word;
+			}
+		}
+
+		public string Replace_FirstLetter_Unchecked(string word, char replacementLetter)
+		{
+			var output = replacementLetter + word[1..];
+			return output;
+		}
+
+		public WasFound<char> Has_FirstLetter(string word)
+		{
+			var hasFirstLetter = word.Length > 0;
+
+			var output = hasFirstLetter
+				? WasFound.Found(
+					this.Get_FirstLetter_Unchecked(word))
+				: WasFound.NotFound<char>()
+				;
+
+			return output;
+		}
+
+		public char Get_FirstLetter_Unchecked(string word)
+		{
+			var output = word[0];
+			return output;
+		}
+
+		public char Get_FirstLetter_Checked(string word)
+		{
+			var output = this.Has_FirstLetter(word)
+				.ResultOrExceptionIfNotFound("Word had no first letter.");
+
+			return output;
+		}
+
+		/// <summary>
+		/// Chooses <see cref="Get_FirstLetter_Checked(string)"/> as the default.
+		/// </summary>
+		public char Get_FirstLetter(string word)
+		{
+			return this.Get_FirstLetter_Checked(word);
 		}
 
 		public bool EndsWithPeriod(string text)

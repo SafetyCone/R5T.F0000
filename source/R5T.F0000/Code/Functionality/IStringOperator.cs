@@ -153,7 +153,7 @@ namespace R5T.F0000
                 throw new ArgumentException($"String '{@string}' did not start with beginning '{beginning}'.", nameof(@string));
             }
 
-            var output = @string[..beginning.Length];
+            var output = @string[beginning.Length..];
             return output;
         }
 
@@ -732,7 +732,7 @@ namespace R5T.F0000
             return output;
         }
 
-        /// <inheritdoc cref="MakeIntoLine(string)"/>
+        /// <inheritdoc cref="MakeIntoLine(string, string)"/>
         public string MakeIntoLine(string @string)
         {
             return this.MakeIntoLine(

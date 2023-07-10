@@ -125,6 +125,14 @@ namespace R5T.F0000
 		public Version NormalizeTo_Major_Minor_Build(Version version)
         {
 			var definedTokenCount = this.GetDefinedTokenCount(version);
+			if(definedTokenCount > 3)
+			{
+				// Normalize to three.
+                var outputVersion = new Version(version.Major, version.Minor, version.Build);
+                return outputVersion;
+            }
+
+			// If not 4 tokens, but greater than 2, then it is 3.
 			if (definedTokenCount > 2)
 			{
 				return version;

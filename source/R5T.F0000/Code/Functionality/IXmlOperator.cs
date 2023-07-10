@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -262,6 +264,82 @@ namespace R5T.F0000
 				xmlFilePath);
         }
 
+        /// <inheritdoc cref="WriteToFile_EmptyIsOk(XDocument, string)"/>
+        public async Task WriteToWriter_EmptyIsOk(
+            XDocument xDocument,
+            TextWriter writer)
+        {
+            if (xDocument.Root is null)
+            {
+                if (xDocument.Declaration is null)
+                {
+					//await Instances.FileOperator.WriteAnEmptyFile(xmlFilePath);
+					await writer.WriteAsync(Instances.Strings.Empty);
+                }
+                else
+                {
+                    var text = xDocument.Declaration.ToString();
+
+					//await Instances.FileOperator.WriteText(
+					//    xmlFilePath,
+					//    text);
+
+					await writer.WriteAsync(text);
+                }
+            }
+            else
+            {
+                await xDocument.SaveAsync(
+                    writer,
+                    SaveOptions.None,
+                    CancellationToken.None);
+            }
+        }
+
+        /// <inheritdoc cref="WriteToFile_EmptyIsOk(XDocument, string)"/>
+        public void WriteToWriter_EmptyIsOk_Synchronous(
+            XDocument xDocument,
+            TextWriter writer)
+        {
+            if (xDocument.Root is null)
+            {
+                if (xDocument.Declaration is null)
+                {
+                    //await Instances.FileOperator.WriteAnEmptyFile(xmlFilePath);
+                    writer.Write(Instances.Strings.Empty);
+                }
+                else
+                {
+                    var text = xDocument.Declaration.ToString();
+
+                    //await Instances.FileOperator.WriteText(
+                    //    xmlFilePath,
+                    //    text);
+
+                    writer.Write(text);
+                }
+            }
+            else
+            {
+                xDocument.Save(
+                    writer,
+                    SaveOptions.None);
+            }
+        }
+
+		public string WriteToString_Synchronous(XDocument xDocument)
+		{
+			var stringBuilder = new StringBuilder();
+			var writer = new StringWriter(stringBuilder);
+
+			this.WriteToWriter_EmptyIsOk_Synchronous(
+				xDocument,
+                writer);
+
+			var output = stringBuilder.ToString();
+			return output;
+		}
+
         /// <summary>
         /// XML files *must* have a root: https://www.w3schools.com/xml/xml_syntax.asp
         /// So if the document has no root, saving the document results in an <see cref="InvalidOperationException"/>: Token EndDocument in state Document would result in an invalid XML document.
@@ -273,30 +351,37 @@ namespace R5T.F0000
             XDocument xDocument,
 			string xmlFilePath)
         {
-            if (xDocument.Root is null)
-            {
-                if (xDocument.Declaration is null)
-                {
-                    await Instances.FileOperator.WriteAnEmptyFile(xmlFilePath);
-                }
-                else
-                {
-                    var text = xDocument.Declaration.ToString();
+            using var fileStream = Instances.FileStreamOperator.NewWrite(xmlFilePath);
+			using var writer = new StreamWriter(fileStream);
 
-                    await Instances.FileOperator.WriteText(
-                        xmlFilePath,
-                        text);
-                }
-            }
-            else
-            {
-                using var fileStream = Instances.FileStreamOperator.NewWrite(xmlFilePath);
+			await this.WriteToWriter_EmptyIsOk(
+				xDocument,
+				writer);
 
-                await xDocument.SaveAsync(
-                    fileStream,
-                    SaveOptions.None,
-                    CancellationToken.None);
-            }
+            //if (xDocument.Root is null)
+            //{
+            //    if (xDocument.Declaration is null)
+            //    {
+            //        await Instances.FileOperator.WriteAnEmptyFile(xmlFilePath);
+            //    }
+            //    else
+            //    {
+            //        var text = xDocument.Declaration.ToString();
+
+            //        await Instances.FileOperator.WriteText(
+            //            xmlFilePath,
+            //            text);
+            //    }
+            //}
+            //else
+            //{
+            //    using var fileStream = Instances.FileStreamOperator.NewWrite(xmlFilePath);
+
+            //    await xDocument.SaveAsync(
+            //        fileStream,
+            //        SaveOptions.None,
+            //        CancellationToken.None);
+            //}
         }
 
 		/// <inheritdoc cref="WriteToFile_EmptyIsOk(XDocument, string)"/>

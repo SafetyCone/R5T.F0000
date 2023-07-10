@@ -117,6 +117,12 @@ namespace System
         }
 
         public static T ResultOrExceptionIfNotFound<T>(this WasFound<T> wasFound,
+            Func<string> exceptionMessageConstructor)
+        {
+            return Instances.WasFoundOperator.ResultOrExceptionIfNotFound(wasFound, exceptionMessageConstructor);
+        }
+
+        public static T ResultOrExceptionIfNotFound<T>(this WasFound<T> wasFound,
             Func<Exception> exceptionConstructor)
         {
             return Instances.WasFoundOperator.ResultOrExceptionIfNotFound(wasFound, exceptionConstructor);
