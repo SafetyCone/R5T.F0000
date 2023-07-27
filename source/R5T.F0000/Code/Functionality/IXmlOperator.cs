@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
 
 using R5T.T0132;
@@ -253,7 +254,7 @@ namespace R5T.F0000
         }
 
 		/// <summary>
-		/// Chooses <see cref="WriteToFile_EmptyIsOk(XDocument, string)"/> as the default.
+		/// Chooses <see cref="WriteToFile_EmptyIsOk(XDocument, string, SaveOptions)"/> as the default.
 		/// </summary>
 		public void Write(
 			XDocument xDocument,
@@ -264,25 +265,21 @@ namespace R5T.F0000
 				xmlFilePath);
         }
 
-        /// <inheritdoc cref="WriteToFile_EmptyIsOk(XDocument, string)"/>
+        /// <inheritdoc cref="WriteToFile_EmptyIsOk(XDocument, string, SaveOptions)"/>
         public async Task WriteToWriter_EmptyIsOk(
             XDocument xDocument,
-            TextWriter writer)
+            TextWriter writer,
+			SaveOptions saveOptions = SaveOptions.None)
         {
             if (xDocument.Root is null)
             {
                 if (xDocument.Declaration is null)
                 {
-					//await Instances.FileOperator.WriteAnEmptyFile(xmlFilePath);
 					await writer.WriteAsync(Instances.Strings.Empty);
                 }
                 else
                 {
                     var text = xDocument.Declaration.ToString();
-
-					//await Instances.FileOperator.WriteText(
-					//    xmlFilePath,
-					//    text);
 
 					await writer.WriteAsync(text);
                 }
@@ -291,30 +288,26 @@ namespace R5T.F0000
             {
                 await xDocument.SaveAsync(
                     writer,
-                    SaveOptions.None,
+                    saveOptions,
                     CancellationToken.None);
             }
         }
 
-        /// <inheritdoc cref="WriteToFile_EmptyIsOk(XDocument, string)"/>
+        /// <inheritdoc cref="WriteToFile_EmptyIsOk(XDocument, string, SaveOptions)"/>
         public void WriteToWriter_EmptyIsOk_Synchronous(
             XDocument xDocument,
-            TextWriter writer)
+            TextWriter writer,
+			SaveOptions saveOptions = SaveOptions.None)
         {
             if (xDocument.Root is null)
             {
                 if (xDocument.Declaration is null)
                 {
-                    //await Instances.FileOperator.WriteAnEmptyFile(xmlFilePath);
                     writer.Write(Instances.Strings.Empty);
                 }
                 else
                 {
                     var text = xDocument.Declaration.ToString();
-
-                    //await Instances.FileOperator.WriteText(
-                    //    xmlFilePath,
-                    //    text);
 
                     writer.Write(text);
                 }
@@ -323,18 +316,21 @@ namespace R5T.F0000
             {
                 xDocument.Save(
                     writer,
-                    SaveOptions.None);
+                    saveOptions);
             }
         }
 
-		public string WriteToString_Synchronous(XDocument xDocument)
+		public string WriteToString_Synchronous(
+			XDocument xDocument,
+			SaveOptions saveOptions = SaveOptions.None)
 		{
 			var stringBuilder = new StringBuilder();
 			var writer = new StringWriter(stringBuilder);
 
 			this.WriteToWriter_EmptyIsOk_Synchronous(
 				xDocument,
-                writer);
+                writer,
+				saveOptions);
 
 			var output = stringBuilder.ToString();
 			return output;
@@ -349,45 +345,23 @@ namespace R5T.F0000
         /// </summary>
         public async Task WriteToFile_EmptyIsOk(
             XDocument xDocument,
-			string xmlFilePath)
+			string xmlFilePath,
+            SaveOptions saveOptions = SaveOptions.None)
         {
             using var fileStream = Instances.FileStreamOperator.NewWrite(xmlFilePath);
 			using var writer = new StreamWriter(fileStream);
 
 			await this.WriteToWriter_EmptyIsOk(
 				xDocument,
-				writer);
-
-            //if (xDocument.Root is null)
-            //{
-            //    if (xDocument.Declaration is null)
-            //    {
-            //        await Instances.FileOperator.WriteAnEmptyFile(xmlFilePath);
-            //    }
-            //    else
-            //    {
-            //        var text = xDocument.Declaration.ToString();
-
-            //        await Instances.FileOperator.WriteText(
-            //            xmlFilePath,
-            //            text);
-            //    }
-            //}
-            //else
-            //{
-            //    using var fileStream = Instances.FileStreamOperator.NewWrite(xmlFilePath);
-
-            //    await xDocument.SaveAsync(
-            //        fileStream,
-            //        SaveOptions.None,
-            //        CancellationToken.None);
-            //}
+				writer,
+				saveOptions);
         }
 
-		/// <inheritdoc cref="WriteToFile_EmptyIsOk(XDocument, string)"/>
+		/// <inheritdoc cref="WriteToFile_EmptyIsOk(XDocument, string, SaveOptions)"/>
         public void WriteToFile_EmptyIsOk_Synchronous(
 			XDocument xDocument,
-			string xmlFilePath)
+			string xmlFilePath,
+			SaveOptions saveOptions = SaveOptions.None)
         {
 			if (xDocument.Root is null)
             {
@@ -406,7 +380,9 @@ namespace R5T.F0000
             }
 			else
             {
-				xDocument.Save(xmlFilePath);
+				xDocument.Save(
+					xmlFilePath,
+					saveOptions);
             }
         }
 	}

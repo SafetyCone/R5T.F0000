@@ -85,5 +85,29 @@ namespace R5T.F0000.Extensions
         {
             return Instances.TextOperator.Tabinate(strings);
         }
+
+        /// <inheritdoc cref="IStringOperator.Trim_End(string, string)"/>
+        public static string Trim_End(this string value,
+            string ending)
+        {
+            return Instances.StringOperator.Trim_End(
+                value,
+                ending);
+        }
+
+        /// <inheritdoc cref="IStringOperator.Trim_NewLines(string)"/>
+        public static string Trim_NewLines(this string value)
+        {
+            return Instances.StringOperator.Trim_NewLines(value);
+        }
+
+        /// <inheritdoc cref="IStringOperator.Trim_Start(string, string)"/>
+        public static string Trim_Start(this string value,
+            string beginning)
+        {
+            return Instances.StringOperator.Trim_Start(
+                value,
+                beginning);
+        }
     }
 }

@@ -137,6 +137,7 @@ namespace R5T.F0000
 			return File.ReadAllTextAsync(filePath);
 		}
 
+        /// <inheritdoc cref="IStreamWriterOperator.WriteAllLines_Synchronous(string, IEnumerable{string}, bool)"/>
 		public void WriteAllLines_Synchronous(
 			string filePath,
 			IEnumerable<string> lines,

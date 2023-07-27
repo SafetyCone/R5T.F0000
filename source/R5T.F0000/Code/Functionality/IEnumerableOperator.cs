@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -341,13 +342,28 @@ namespace R5T.F0000
 			return output;
 		}
 
-		public IEnumerable<T> OrderAlphabetically<T>(IEnumerable<T> items, Func<T, string> keySelector)
+		public IEnumerable<T> OrderAlphabetically<T>(
+			IEnumerable<T> items,
+			Func<T, string> keySelector)
 		{
 			var output = items.OrderBy(keySelector);
 			return output;
 		}
 
-		public IEnumerable<T> Prepend<T>(
+        public IEnumerable<T> OrderAlphabetically_If<T>(
+			IEnumerable<T> items,
+			Func<T, string> keySelector,
+			bool orderAlphabetically)
+        {
+			var output = orderAlphabetically
+				? items.OrderBy(keySelector)
+				: items
+				;
+
+            return output;
+        }
+
+        public IEnumerable<T> Prepend<T>(
 			IEnumerable<T> items,
 			IEnumerable<T> prependix)
 		{

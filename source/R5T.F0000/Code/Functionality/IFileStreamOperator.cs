@@ -33,7 +33,7 @@ namespace R5T.F0000
         /// </summary>
         public FileStream NewRead(string filePath)
         {
-            var fileStream = new FileStream(filePath, FileMode.Open);
+            var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
             return fileStream;
         }
 

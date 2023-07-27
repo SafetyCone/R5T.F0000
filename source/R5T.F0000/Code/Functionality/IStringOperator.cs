@@ -908,7 +908,83 @@ namespace R5T.F0000
             return output;
         }
 
-		public bool WasFound(int index)
+        /// <summary>
+        /// Trims the ending (if it exists) from the end of the provided value.
+        /// </summary>
+        public string Trim_End(
+            string value,
+            string ending)
+        {
+            var output = value;
+
+            while (true)
+            {
+                bool valueEndsWithEnding = this.EndsWith(
+                    output,
+                    ending);
+
+                if (valueEndsWithEnding)
+                {
+                    output = this.ExceptEnding(
+                        output,
+                        ending);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return output;
+        }
+
+        /// <summary>
+        /// Trims new-lines (both Windows and Non-Windows) from the start and end of a string.
+        /// Does not trim tabs.
+        /// </summary>
+        /// <remarks>
+        /// Useful for creating string-literal code fragments on their own lines (meaning the new-lines between the start-line and end-line must be removed.
+        /// </remarks>
+        public string Trim_NewLines(string value)
+        {
+            var output = value.Trim(
+                Instances.Characters.NewLine,
+                Instances.Characters.CarriageReturn);
+
+            return output;
+        }
+
+        /// <summary>
+        /// Trims the beginning (if it exists) from the start of the provided value.
+        /// </summary>
+        public string Trim_Start(
+            string value,
+            string beginning)
+        {
+            var output = value;
+
+            while (true)
+            {
+                bool valueStartsWithBeginning = this.StartsWith(
+                    value,
+                    beginning);
+
+                if (valueStartsWithBeginning)
+                {
+                    output = this.ExceptBeginning(
+                        output,
+                        beginning);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return output;
+        }
+
+        public bool WasFound(int index)
         {
 			var output = index != Instances.String.IndexOfNotFound;
 			return output;

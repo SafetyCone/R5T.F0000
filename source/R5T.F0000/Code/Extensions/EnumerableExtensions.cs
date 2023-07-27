@@ -248,9 +248,18 @@ namespace System.Linq
             return output;
         }
 
-        public static IEnumerable<T> OrderAlphabetically<T>(this IEnumerable<T> items, Func<T, string> keySelector)
+        public static IEnumerable<T> OrderAlphabetically<T>(this IEnumerable<T> items,
+            Func<T, string> keySelector)
         {
             var output = Instances.EnumerableOperator.OrderAlphabetically(items, keySelector);
+            return output;
+        }
+
+        public static IEnumerable<T> OrderAlphabetically_If<T>(this IEnumerable<T> items,
+            Func<T, string> keySelector,
+            bool orderAlphabetically)
+        {
+            var output = Instances.EnumerableOperator.OrderAlphabetically_If(items, keySelector, orderAlphabetically);
             return output;
         }
 

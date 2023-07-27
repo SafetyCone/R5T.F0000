@@ -9,8 +9,8 @@ namespace R5T.F0000
     public partial interface INullOperator : IFunctionalityMarker
     {
         /// <summary>
-        /// Returns whether a null check can decide whether two instances are equal, and if so,
-        /// what equality the null check provides.
+        /// Returns whether a null check can decide whether two instances are equal,
+        /// and if so, what equality the null check provides.
         /// </summary>
         public bool NullCheckDeterminesEquality<T>(T a, T b, out bool areEqual)
             // Restrict to reference types so that we don't accidentally use this on value types (since the "is null" syntax works for value types, this operation is unneccesary).

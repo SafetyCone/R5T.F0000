@@ -86,6 +86,9 @@ namespace R5T.F0000
             return writer.WriteAsync(text);
         }
 
+        /// <summary>
+        /// Joins lines into a single text string, then writes the text to a file.
+        /// </summary>
         public void WriteAllLines_Synchronous(StreamWriter writer, IEnumerable<string> lines, string lineSeparator)
         {
             var text = Instances.StringOperator.Join(lineSeparator, lines);
@@ -110,6 +113,7 @@ namespace R5T.F0000
             await this.WriteAllLines(writer, lines, lineSeparator);
         }
 
+        /// <inheritdoc cref="WriteAllLines_Synchronous(StreamWriter, IEnumerable{string}, string)"/>
         public void WriteAllLines_Synchronous(string filePath, IEnumerable<string> lines, string lineSeparator, bool overwrite = IValues.DefaultOverwriteValue_Const)
         {
             using var writer = this.NewWrite(filePath, overwrite);
@@ -122,6 +126,7 @@ namespace R5T.F0000
             return this.WriteAllLines(filePath, lines, Instances.Strings.NewLine_ForEnvironment, overwrite);
         }
 
+        /// <inheritdoc cref="WriteAllLines_Synchronous(string, IEnumerable{string}, string, bool)"/>
         public void WriteAllLines_Synchronous(string filePath, IEnumerable<string> lines, bool overwrite = IValues.DefaultOverwriteValue_Const)
         {
             this.WriteAllLines_Synchronous(filePath, lines, Instances.Strings.NewLine_ForEnvironment, overwrite);

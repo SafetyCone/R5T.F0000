@@ -35,8 +35,11 @@ namespace R5T.F0000
         }
 
         /// <summary>
-        /// Returns the result of <see cref="Path.GetInvalidFileNameChars"/>.
+        /// Gets the characters that cannot occur in file names on the system executing the function.
         /// </summary>
+        /// <remarks>
+        /// Returns the result of <see cref="Path.GetInvalidFileNameChars"/>.
+        /// </remarks>
         public char[] GetInvalidFileNameCharacters()
         {
             var output = Path.GetInvalidFileNameChars();
