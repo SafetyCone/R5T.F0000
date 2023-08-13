@@ -8,7 +8,7 @@ namespace R5T.F0000
 	[FunctionalityMarker]
 	public partial interface IArrayOperator : IFunctionalityMarker
 	{
-		public T[] Get_NewEmpty<T>()
+		public T[] New_Empty<T>()
 		{
 			return new T[0];
 		}

@@ -59,3 +59,22 @@ namespace System
         }
     }
 }
+
+
+namespace R5T.F0000.Extensions
+{
+    public static class ListExtensions
+    {
+        /// <inheritdoc cref="IListOperator.Get_First{T}(IList{T})"/>
+        public static T Get_First<T>(this IList<T> list)
+        {
+            return Instances.ListOperator.Get_First(list);
+        }
+
+        /// <inheritdoc cref="IListOperator.Get_Second{T}(IList{T})"/>
+        public static T Get_Second<T>(this IList<T> list)
+        {
+            return Instances.ListOperator.Get_Second(list);
+        }
+    }
+}

@@ -27,6 +27,9 @@ namespace R5T.F0000
             }
         }
 
+        /// <summary>
+        /// If there is an expandable list of values for each key, add the value to either a new list (if the key does not already exist), or the existing list.
+        /// </summary>
         public void AddValue<TKey, TValue>(
             IDictionary<TKey, List<TValue>> dictionary,
             TKey key,

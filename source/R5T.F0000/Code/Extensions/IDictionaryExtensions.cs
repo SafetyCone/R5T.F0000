@@ -36,6 +36,15 @@ namespace R5T.F0000.Extensions
 {
     public static class IDictionaryExtensions
     {
+        /// <inheritdoc cref="IDictionaryOperator.AddValue{TKey, TValue}(IDictionary{TKey, List{TValue}}, TKey, TValue)"/>
+        public static void Add_Value<TKey, TValue>(this IDictionary<TKey, List<TValue>> dictionary, TKey key, TValue value)
+        {
+            Instances.DictionaryOperator.AddValue(
+                dictionary,
+                key,
+                value);
+        }
+
         /// <inheritdoc cref="IDictionaryOperator.Add_IfKeyNotFound{TKey, TValue}(IDictionary{TKey, TValue}, TKey, TValue)"/>
         public static void Add_IfKeyNotFound<TKey, TValue>(this IDictionary<TKey, TValue> dictionary,
             TKey key,

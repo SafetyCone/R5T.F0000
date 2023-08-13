@@ -1,7 +1,9 @@
 using System;
 using System.Linq;
-using System.Reflection.Emit;
+
 using R5T.T0132;
+
+using R5T.F0000.Extensions;
 
 
 namespace R5T.F0000
@@ -9,6 +11,18 @@ namespace R5T.F0000
 	[FunctionalityMarker]
 	public partial interface IVersionOperator : IFunctionalityMarker
 	{
+		public string Ensure_NotVersionIndicated(string versionString)
+		{
+			var hasVersionIndicator = this.Has_LeadingVersionIndicator(versionString);
+
+			var output = hasVersionIndicator
+				? this.Remove_LeadingVersionIndicator_Unchecked(versionString)
+				: versionString
+				;
+
+			return output;
+		}
+
 		public Version From(int major, int minor, int build)
         {
 			var version = new Version(major, minor, build);
@@ -79,6 +93,23 @@ namespace R5T.F0000
 			var output = Z0000.Instances.Characters.Period;
 			return output;
         }
+
+		/// <summary>
+		/// Robust, in the sense that if the version string is null or empty, no exception will be thrown.
+		/// Instead, false will be return.
+		/// </summary>
+		public bool Has_LeadingVersionIndicator(string versionString)
+		{
+			if(Instances.StringOperator.IsNullOrEmpty(versionString))
+			{
+				return false;
+			}
+
+			var firstCharacter = versionString.First();
+
+			var output = firstCharacter == Instances.Values.LeadingVersionIndicator;
+			return output;
+		}
 
 		/// <summary>
 		/// Determines if the version is the <see cref="IVersions.None"/> value.
@@ -158,10 +189,50 @@ namespace R5T.F0000
 			}
 		}
 
-		public Version Parse(string versionString)
+        public Version Parse_WithoutHandlingVersionIndicator(string versionString)
+        {
+            var output = Version.Parse(versionString);
+            return output;
+        }
+
+        /// <summary>
+        /// Can handle version indicated strings (ex: v4.0.30319).
+        /// </summary>
+        public Version Parse(string versionString)
 		{
-			var output = Version.Parse(versionString);
+			var ensuredVersionString = this.Ensure_NotVersionIndicated(versionString);
+
+			var output = Version.Parse(ensuredVersionString);
 			return output;
+		}
+
+		/// <summary>
+		/// Unchecked in the sense that no check is performed that the input is not null or empty, or that the input actually begins with the leading version indicator.
+		/// </summary>
+        public string Remove_LeadingVersionIndicator_Unchecked(string versionIndicatedString)
+        {
+            var output = versionIndicatedString.Except_First();
+			return output;
+        }
+
+        /// <summary>
+        /// Version indicated strings begin with a 'v'.
+        /// This method removes that V.
+        /// </summary>
+        public string Remove_LeadingVersionIndicator_Strict(string versionIndicatedString)
+		{
+			this.Verify_HasLeadingVersionIndicator(versionIndicatedString);
+
+			var output = this.Remove_LeadingVersionIndicator_Unchecked(versionIndicatedString);
+			return output;
+		}
+
+		/// <summary>
+		/// Chooses <see cref="Remove_LeadingVersionIndicator_Strict(string)"/> as the default.
+		/// </summary>
+		public string Remove_LeadingVersionIndicator(string versionIndicatedString)
+		{
+			return this.Remove_LeadingVersionIndicator_Strict(versionIndicatedString);
 		}
 
 		/// <summary>
@@ -195,5 +266,14 @@ namespace R5T.F0000
 			var output = this.Parse(value);
 			return output;
 		}
+
+		public void Verify_HasLeadingVersionIndicator(string versionString)
+		{
+            var hasLeadingVersionIndicator = this.Has_LeadingVersionIndicator(versionString);
+            if (!hasLeadingVersionIndicator)
+            {
+                throw new Exception($"Version string did not have a leading version indicator ('{Instances.Values.LeadingVersionIndicator}').");
+            }
+        }
 	}
 }

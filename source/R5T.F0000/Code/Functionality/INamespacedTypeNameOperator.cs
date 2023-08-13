@@ -11,6 +11,16 @@ namespace R5T.F0000
 	{
 		public string Combine(params string[] tokens)
         {
+			if(tokens.Length < 1)
+			{
+				return Instances.Strings.Empty;
+			}
+
+			if(tokens.Length < 2)
+			{
+				return tokens.First();
+			}
+
 			var tokenSeparator = this.GetTokenSeparator();
 
 			var output = Instances.StringOperator.Join(
@@ -53,6 +63,11 @@ namespace R5T.F0000
 			string namespaceName,
 			string typeName)
         {
+			if(Instances.StringOperator.IsNullOrEmpty(namespaceName))
+			{
+				return typeName;
+			}
+
 			var namespacedTypeName = this.Combine(namespaceName, typeName);
 			return namespacedTypeName;
 		}
@@ -63,23 +78,36 @@ namespace R5T.F0000
 		public string GetNamespacedTypeName_FromFullName(string fullTypeName)
 		{
 			var parts = fullTypeName.Split(
-				Instances.Characters.OpenBrace);
+				Instances.Characters.OpenBracket_Correct);
 
 			var namespacedTypeName = parts.First();
 			return namespacedTypeName;
 		}
 
+		/// <summary>
+		/// Note: Can handle types in the global namespace (those where the namespaced type name is just the type name).
+		/// </summary>
 		public string GetNamespaceName(string namespacedTypeName)
         {
 			var tokenSeparatorChar = this.GetTokenSeparator_Character();
 
 			var lastTokenSeparatorIndex = namespacedTypeName.LastIndexOf(tokenSeparatorChar);
-
-			var namespaceName = namespacedTypeName[..(lastTokenSeparatorIndex)];
-			return namespaceName;
+			if(Instances.IndexOperator.IsFound(lastTokenSeparatorIndex))
+			{
+                var namespaceName = namespacedTypeName[..(lastTokenSeparatorIndex)];
+                return namespaceName;
+            }
+			else
+			{
+				// There is no namespace name, just a type name, indicating the type is in the global namespace.
+				return Instances.Strings.Empty;
+			}
         }
 
-		public string GetTypeName(string namespacedTypeName)
+        /// <summary>
+        /// Note: Can handle types in the global namespace (those where the namespaced type name is just the type name).
+        /// </summary>
+        public string GetTypeName(string namespacedTypeName)
         {
 			var nameparts = this.GetNameParts(namespacedTypeName);
 

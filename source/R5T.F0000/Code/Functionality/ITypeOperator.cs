@@ -38,16 +38,47 @@ namespace R5T.F0000
 			return this.GetNamespacedTypeName(type);
         }
 
-		public string GetNamespacedTypeName(Type type)
+		public bool Is_TypeNestedType(Type type)
 		{
-			var namespaceName = this.GetNamespaceName(type);
-			var typeName = this.GetTypeName(type);
+			var output = type.DeclaringType is object;
+			return output;
+		}
 
-			var namespacedTypeName = Instances.NamespacedTypeNameOperator.GetNamespacedTypeName(
-				namespaceName,
-				typeName);
+        public bool Is_MethodNestedType(Type type)
+        {
+            var output = type.DeclaringMethod is object;
+            return output;
+        }
 
-			return namespacedTypeName;
+		public bool Is_Public(Type type)
+		{
+			var output = type.IsPublic;
+			return output;
+		}
+
+        public string GetNamespacedTypeName(Type type)
+		{
+			var isNestedType = this.Is_TypeNestedType(type);
+			if (isNestedType)
+			{
+				var parentNamespacedTypeName = this.GetNamespacedTypeName(type.DeclaringType);
+
+                var typeName = this.GetTypeName(type);
+
+                var output = $"{parentNamespacedTypeName}+{typeName}";
+				return output;
+			}
+			else
+			{
+                var namespaceName = this.GetNamespaceName(type);
+                var typeName = this.GetTypeName(type);
+
+                var namespacedTypeName = Instances.NamespacedTypeNameOperator.GetNamespacedTypeName(
+                    namespaceName,
+                    typeName);
+
+                return namespacedTypeName;
+            }
 		}
 
 		public string GetNamespacedTypeName(TypeInfo typeInfo)
@@ -229,7 +260,50 @@ namespace R5T.F0000
 			return output;
 		}
 
-		public Func<TypeInfo, bool> WhereNamespacedTypeNameIs(string namespacedTypeName)
+		public void As_Type_Verify<T, TInstance>(
+			TInstance instance,
+			Action<T> action)
+		{
+			if(instance is T instanceAsT)
+			{
+				Instances.ActionOperator.Run(
+                    instanceAsT,
+					action);
+			}
+			else
+			{
+                throw this.Get_InstanceTypeWasTypeException<T, TInstance>();
+            }
+		}
+
+        public TOut As_Type_Verify<T, TInstance, TOut>(
+            TInstance instance,
+            Func<T, TOut> function)
+        {
+            if (instance is T instanceAsT)
+            {
+                var output = Instances.ActionOperator.Run(
+                    function,
+                    instanceAsT);
+
+				return output;
+            }
+            else
+            {
+				throw this.Get_InstanceTypeWasTypeException<T, TInstance>();
+            }
+        }
+
+		public Exception Get_InstanceTypeWasTypeException<T, TInstance>()
+		{
+            var instanceTypeName = this.GetNamespacedTypeName<TInstance>();
+            var typeName = this.GetNamespacedTypeName<T>();
+
+            var output = new Exception($"'{instanceTypeName}' instance was not a '{typeName}'.");
+			return output;
+        }
+
+        public Func<TypeInfo, bool> WhereNamespacedTypeNameIs(string namespacedTypeName)
 		{
 			return typeInfo =>
 			{

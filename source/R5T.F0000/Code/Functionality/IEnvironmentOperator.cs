@@ -63,7 +63,11 @@ namespace R5T.F0000
             writer.WriteLine($"{Environment.CurrentManagedThreadId}: current managed thread ID");
         }
 
-        public Version GetDotnetRuntimeVersion()
+        /// <summary>
+        /// Gets the dotnet runtime version.
+        /// <para>Example: 6.0.21</para>
+        /// </summary>
+        public Version Get_DotnetRuntimeVersion()
         {
             var output = Environment.Version;
             return output;

@@ -84,6 +84,17 @@ namespace R5T.F0000.Extensions.ForObject
             return @object;
         }
 
+        /// <summary>
+        /// Allows fluently changing an object to another instance of the same type.
+        /// </summary>
+        public static T Change<T>(this T @object,
+            Func<T, T> changer)
+        {
+            var output = changer(@object);
+
+            return output;
+        }
+
         public static T ModifyIf<T>(this T @object,
             bool condition,
             Action<T> modifyAction)

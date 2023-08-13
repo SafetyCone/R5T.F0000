@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -334,6 +335,32 @@ namespace R5T.F0000
             return count;
         }
 
+        /// <summary>
+        /// Gets the first character of the string.
+        /// </summary>
+        /// <remarks>
+        /// This must duplicate <see cref="IListOperator.Get_First{T}(IList{T})"/> because string does not actually implement <see cref="IList{T}"/> of <see cref="char"/>
+        /// (because it does not implement <see cref="Array"/> of <see cref="char"/>).
+        /// </remarks>
+        public char Get_First(string @string)
+        {
+            var output = @string[0];
+            return output;
+        }
+
+        /// <summary>
+        /// Gets the first character of the string.
+        /// </summary>
+        /// <remarks>
+        /// This must duplicate <see cref="IListOperator.Get_Second{T}(IList{T})"/> because string does not actually implement <see cref="IList{T}"/> of <see cref="char"/>
+        /// (because it does not implement <see cref="Array"/> of <see cref="char"/>).
+        /// </remarks>
+        public char Get_Second(string @string)
+        {
+            var output = @string[1];
+            return output;
+        }
+
         public string Get_FirstNCharacters(string @string, int numberOfCharacters)
         {
             var output = @string[..numberOfCharacters];
@@ -441,11 +468,75 @@ namespace R5T.F0000
             return output;
         }
 
+        /// <summary>
+        /// Gets the beginning substring up to, but excluding, the first occurrence of the specified character.
+        /// </summary>
+        public string Get_Substring_Upto_First(
+            string @string,
+            char character)
+        {
+            var firstIndexOfCharacterFound = this.IndexOf(character, @string);
+            if(!firstIndexOfCharacterFound)
+            {
+                throw new Exception($"Character '{character}' not found in string \"{@string}\".");
+            }
+
+            var substring = this.Get_Substring_Upto_Exclusive(
+                firstIndexOfCharacterFound.Result,
+                @string);
+
+            return substring;
+        }
+
         public string Get_Substring_Upto_Exclusive(
             int endIndex_Exclusive,
             string @string)
         {
             var output = @string[..(endIndex_Exclusive)];
+            return output;
+        }
+
+        public string Get_Substring_From_First(
+            string @string,
+            char character)
+        {
+            var firstIndexOfCharacterFound = this.IndexOf(character, @string);
+            if (!firstIndexOfCharacterFound)
+            {
+                throw new Exception($"Character '{character}' not found in string \"{@string}\".");
+            }
+
+            var output = this.Get_Substring_From_Exclusive(
+                firstIndexOfCharacterFound.Result,
+                @string);
+
+            return output;
+        }
+
+        public string Get_Substring_From_Start_To_NextOrEnd(
+            string @string,
+            char startCharacter,
+            char nextCharacter)
+        {
+            var firstIndexOfStartCharacterFound = this.IndexOf(startCharacter, @string);
+            if (!firstIndexOfStartCharacterFound)
+            {
+                throw new Exception($"Character '{startCharacter}' not found in string \"{@string}\".");
+            }
+
+            var substring = this.Get_Substring_From_Exclusive(
+                firstIndexOfStartCharacterFound.Result,
+                @string);
+
+            var firstIndexOfNextCharacterFound = this.IndexOf(nextCharacter, substring);
+
+            var output = firstIndexOfNextCharacterFound
+                ? this.Get_Substring_Upto_Exclusive(
+                    firstIndexOfNextCharacterFound.Result,
+                    substring)
+                : substring
+                ;
+
             return output;
         }
 
@@ -457,6 +548,25 @@ namespace R5T.F0000
             string @string)
         {
             var output = @string[(startIndex_Exclusive + 1)..];
+            return output;
+        }
+
+        public string Get_Substring_From_Exclusive(
+            string token,
+            string @string)
+        {
+            var indexOfTokenFound = this.IndexOf(token, @string);
+            if(!indexOfTokenFound)
+            {
+                throw new Exception($"Token \"{token}\" not found in string \"{@string}\".");
+            }
+
+            var startIndex = indexOfTokenFound + (token.Length - 1);
+
+            var output = this.Get_Substring_From_Exclusive(
+                startIndex,
+                @string);
+
             return output;
         }
 
@@ -524,6 +634,18 @@ namespace R5T.F0000
         }
 
         public WasFound<int> IndexOf(
+            string token,
+            string @string)
+        {
+            var indexOrNotFound = this.IndexOf_OrNotFound(
+                token,
+                @string);
+
+            var output = Internal.WasFound(indexOrNotFound);
+            return output;
+        }
+
+        public WasFound<int> IndexOf(
             char character,
             string @string)
         {
@@ -555,6 +677,15 @@ namespace R5T.F0000
             string @string)
         {
             var output = @string.IndexOf(character);
+            return output;
+        }
+
+        /// <inheritdoc cref="System.String.IndexOf(char)"/>
+        public int IndexOf_OrNotFound(
+            string token,
+            string @string)
+        {
+            var output = @string.IndexOf(token);
             return output;
         }
 

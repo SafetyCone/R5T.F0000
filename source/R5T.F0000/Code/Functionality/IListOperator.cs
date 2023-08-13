@@ -44,7 +44,19 @@ namespace R5T.F0000
 			return output;
 		}
 
-		public WasFound<T> HasNth<T>(IList<T> list, int n)
+		public T Get_First<T>(IList<T> list)
+		{
+			var output = list[0];
+			return output;
+		}
+
+        public T Get_Second<T>(IList<T> list)
+        {
+            var output = list[1];
+            return output;
+        }
+
+        public WasFound<T> HasNth<T>(IList<T> list, int n)
 		{
 			var count = list.Count;
 

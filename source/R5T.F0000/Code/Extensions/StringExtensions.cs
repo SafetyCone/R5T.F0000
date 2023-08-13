@@ -56,6 +56,21 @@ namespace R5T.F0000.Extensions
 {
     public static class StringExtensions
     {
+        public static string Except_First(this string @string)
+        {
+            return Instances.StringOperator.ExceptFirst(@string);
+        }
+
+        public static char Get_First(this string @string)
+        {
+            return Instances.StringOperator.Get_First(@string);
+        }
+
+        public static char Get_Second(this string @string)
+        {
+            return Instances.StringOperator.Get_Second(@string);
+        }
+
         public static string Join(this IEnumerable<string> strings)
         {
             var output = strings.Join(

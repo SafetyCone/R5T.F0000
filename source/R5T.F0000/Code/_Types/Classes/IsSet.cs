@@ -34,4 +34,12 @@ namespace R5T.F0000
             this.WasSet = true;
         }
     }
+
+    public static class IsSet
+    {
+        public static IsSet<T> Set<T>(T value)
+        {
+            return new IsSet<T>(value);
+        }
+    }
 }
