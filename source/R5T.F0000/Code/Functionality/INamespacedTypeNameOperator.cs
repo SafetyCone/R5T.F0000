@@ -92,7 +92,7 @@ namespace R5T.F0000
 			var tokenSeparatorChar = this.GetTokenSeparator_Character();
 
 			var lastTokenSeparatorIndex = namespacedTypeName.LastIndexOf(tokenSeparatorChar);
-			if(Instances.IndexOperator.IsFound(lastTokenSeparatorIndex))
+			if(Instances.IndexOperator.Is_Found(lastTokenSeparatorIndex))
 			{
                 var namespaceName = namespacedTypeName[..(lastTokenSeparatorIndex)];
                 return namespaceName;

@@ -9,21 +9,9 @@ namespace R5T.F0000.Implementations
     /// Operations related to flags enumerations.
     /// </summary>
     [FunctionalityMarker]
-    public partial interface IFlagsOperator : IFunctionalityMarker
+    public partial interface IFlagsOperator : IFunctionalityMarker,
+        L0053.Implementations.IFlagsOperator
     {
-        /// <summary>
-        /// Uses the standard library's <see cref="Enum.HasFlag(Enum)"/> method.
-        /// </summary>
-        /// <remarks>
-        /// For source, see: <see href="https://source.dot.net/#System.Private.CoreLib/src/libraries/System.Private.CoreLib/src/System/Enum.cs,9cd73f33d2df3074"/>.
-        /// </remarks>
-        public bool Has_Flag_StandardLibrary<TEnum>(TEnum value, TEnum flags)
-            where TEnum: Enum
-        {
-            var output = value.HasFlag(flags);
-            return output;
-        }
-
         /// <summary>
         /// Implementation showing how to implement your own flags enumeration value testing.
         /// Note that this implementation does not handle all the possible underlying types, just <see cref="Int32"/>.

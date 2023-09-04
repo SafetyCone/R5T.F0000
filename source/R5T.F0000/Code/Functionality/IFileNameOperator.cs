@@ -7,7 +7,8 @@ using R5T.T0132;
 namespace R5T.F0000
 {
 	[FunctionalityMarker]
-	public partial interface IFileNameOperator : IFunctionalityMarker
+	public partial interface IFileNameOperator : IFunctionalityMarker,
+		L0053.IFileNameOperator
 	{
 		public string AppendToFileNameStem(
 			string fileName,
@@ -18,7 +19,7 @@ namespace R5T.F0000
 
 			var newFileNameStem = fileNameStem + appendix;
 
-			var newFileName = Instances.FileNameOperator.GetFileName(
+			var newFileName = Instances.FileNameOperator.Get_FileName(
 				newFileNameStem,
 				fileExtension);
 
@@ -33,21 +34,17 @@ namespace R5T.F0000
             // Just append the "dll" file extension to the assembly name.
             var assemblyFileNameStem = this.Get_AssemblyFileNameStem(assemblyName);
 
-            var assemblyDocumentationFileName = Instances.FileNameOperator.GetFileName(
+            var assemblyDocumentationFileName = Instances.FileNameOperator.Get_FileName(
                 assemblyFileNameStem,
                 Instances.FileExtensions.Xml);
 
             return assemblyDocumentationFileName;
         }
 
-        /// <summary>
-        /// Get the assemby file name stem given an assembly name.
-        /// </summary>
+        /// <inheritdoc cref="L0053.IAssemblyFileNameOperator.Get_AssemblyFileNameStem(string)"/>
         public string Get_AssemblyFileNameStem(string assemblyName)
 		{
-			// The file name stem is just the assembly name.
-			var assemblyFileNameStem = assemblyName;
-			return assemblyFileNameStem;
+			return Instances.AssemblyFileNameOperator.Get_AssemblyFileNameStem(assemblyName);
 		}
 
         /// <summary>
@@ -58,7 +55,7 @@ namespace R5T.F0000
 			// Just append the "dll" file extension to the assembly name.
 			var assemblyFileNameStem = this.Get_AssemblyFileNameStem(assemblyName);
 
-			var assemblyFileName = Instances.FileNameOperator.GetFileName(
+			var assemblyFileName = Instances.FileNameOperator.Get_FileName(
 				assemblyFileNameStem,
 				Instances.FileExtensions.Dll);
 
@@ -78,7 +75,7 @@ namespace R5T.F0000
 
 			var backupCopyFileNameStem = this.GetBackupCopyFileNameStem(fileNameStem);
 
-			var backupCopyFileName = this.GetFileName(backupCopyFileNameStem, fileExtension);
+			var backupCopyFileName = this.Get_FileName(backupCopyFileNameStem, fileExtension);
 			return backupCopyFileName;
 		}
 
@@ -88,13 +85,7 @@ namespace R5T.F0000
 			return output;
 		}
 
-		public string GetFileName(string fileNameStem, string fileExtension)
-        {
-			var fileExtensionSeparator = Instances.FileExtensionOperator.GetFileExtensionSeparator();
-
-			var output = $"{fileNameStem}{fileExtensionSeparator}{fileExtension}";
-			return output;
-		}
+		
 
 		[Obsolete("Warning: uses System.IO.FileInfo, which has issues with paths of a different OS type. Use R5T.F0002.IPathOperator.GetFileName() instead.")]
 		public string GetFileName_FromFilePath(string filePath)
@@ -107,7 +98,7 @@ namespace R5T.F0000
 
 		public string GetFileNameStem(string fileName)
         {
-			var fileExtensionSeparator = Instances.FileExtensionOperator.GetFileExtensionSeparator();
+			var fileExtensionSeparator = Instances.FileExtensionOperator.Get_FileExtensionSeparator();
 
 			var tokens = Instances.StringOperator.Split(
 				fileExtensionSeparator,

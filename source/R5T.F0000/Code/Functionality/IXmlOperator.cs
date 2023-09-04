@@ -348,7 +348,7 @@ namespace R5T.F0000
 			string xmlFilePath,
             SaveOptions saveOptions = SaveOptions.None)
         {
-            using var fileStream = Instances.FileStreamOperator.NewWrite(xmlFilePath);
+            using var fileStream = Instances.FileStreamOperator.Open_Write(xmlFilePath);
 			using var writer = new StreamWriter(fileStream);
 
 			await this.WriteToWriter_EmptyIsOk(
@@ -373,7 +373,7 @@ namespace R5T.F0000
                 {
 					var text = xDocument.Declaration.ToString();
 
-					Instances.FileOperator.WriteText_Synchronous(
+					Instances.FileOperator.Write_Text_Synchronous(
 						xmlFilePath,
 						text); 
                 }

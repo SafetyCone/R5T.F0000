@@ -1,6 +1,4 @@
 using System;
-using System.Linq;
-using System.Reflection;
 
 using R5T.T0132;
 
@@ -17,61 +15,24 @@ namespace R5T.F0000
 	/// * R5T.Magyar.ExecutableFilePathHelper
 	/// </remarks>
 	[FunctionalityMarker]
-	public partial interface IExecutablePathOperator : IFunctionalityMarker
+	public partial interface IExecutablePathOperator : IFunctionalityMarker,
+		L0053.IExecutablePathOperator
 	{
-		/// <summary>
-		/// Get the current executable's path location from the first argument of the command-line incantation used to start the current process.
-		/// </summary>
-		public string GetExecutableFilePath_ViaCommandLineArgumentValue()
+        private static L0053.Implementations.IExecutablePathOperator Platform_Implementations => L0053.Implementations.ExecutablePathOperator.Instance;
+
+
+        /// <inheritdoc cref="L0053.Implementations.IExecutablePathOperator.Get_ExecutableFilePath_ViaCommandLineArgument"/>
+        public string GetExecutableFilePath_ViaCommandLineArgumentValue()
         {
-			var commandLineArguments = Instances.CommandLineArgumentsOperator.GetCommandLineArguments();
-
-			// First argument of any command-line incantation is the path of the executable.
-			var executableFilePath = commandLineArguments.First();
-			return executableFilePath;
-        }
-
-        /// <summary>
-        /// Get the current executable's path location from the entry assembly provided by <see cref="Assembly.GetEntryAssembly"/>.
-        /// </summary>
-        public string GetExecutableFilePath_ViaEntryAssemblyLocation()
-        {
-			var entryAssembly = Assembly.GetEntryAssembly();
-
-			// The entry assembly will be the executable path.
-			var executableFilePath = entryAssembly.Location;
-			return executableFilePath;
-		}
-
-		/// <summary>
-		/// Gets the path location of the executable via the default method, <see cref="IExecutablePathOperator.GetExecutableFilePath_ViaCommandLineArgumentValue()"/>.
-		/// </summary>
-		/// <remarks>
-		/// There are multiple ways to get the location of the executable, and depending on context (unit test, debugging in Visual Studio, or production) different locations are returned.
-		/// The command line argument is chosen as the default since this is the way the program is actually run by the operating system.
-		/// </remarks>
-		public string Get_ExecutableFilePath()
-        {
-			var output = this.GetExecutableFilePath_ViaCommandLineArgumentValue();
+			var output = Platform_Implementations.Get_ExecutableFilePath_ViaCommandLineArgument();
 			return output;
         }
 
-		/// <summary>
-		/// Gets the directory path of the directory containing the executable file.
-		/// </summary>
-		/// <returns>The non-directory indicated directory path of the directory containing the executable file.</returns>
-		public string GetExecutableDirectoryPath()
+        /// <inheritdoc cref="L0053.Implementations.IExecutablePathOperator.Get_ExecutableFilePath_ViaEntryAssemblyLocation"/>
+        public string GetExecutableFilePath_ViaEntryAssemblyLocation()
         {
-			var executableFilePath = this.Get_ExecutableFilePath();
-
-			var executableDirectoryPath = this.GetExecutableDirectoryPath(executableFilePath);
-			return executableDirectoryPath;
-        }
-
-        public string GetExecutableDirectoryPath(string executableFilePath)
-		{
-            var executableDirectoryPath = PathOperator.Instance.GetFileParentDirectoryPath(executableFilePath);
-            return executableDirectoryPath;
-        }
+			var output = Platform_Implementations.Get_ExecutableFilePath_ViaEntryAssemblyLocation();
+			return output;
+		}
     }
 }

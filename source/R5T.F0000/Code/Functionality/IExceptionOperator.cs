@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 using R5T.T0132;
 
@@ -8,7 +7,8 @@ using R5T.T0132;
 namespace R5T.F0000
 {
 	[FunctionalityMarker]
-	public partial interface IExceptionOperator : IFunctionalityMarker
+	public partial interface IExceptionOperator : IFunctionalityMarker,
+		L0053.IExceptionOperator
 	{
 		private static Internal.IExceptionOperator Internal => F0000.Internal.ExceptionOperator.Instance;
 
@@ -24,15 +24,6 @@ namespace R5T.F0000
 			var output = new Exception(message);
 			return output;
         }
-
-		public Exception GetErrorDataReceivedException(DataReceivedEventArgs eventArgs)
-        {
-			var exception = new Exception(Instances.ExceptionMessageOperator.MessageIfMessageIsNull(
-				eventArgs.Data,
-				Instances.Messages.EventDataReceivedWasNull));
-
-			return exception;
-		}
 
 		/// <summary>
 		/// <inheritdoc cref="Documentation.CollectionCountsNotActuallyChecked" path="/summary"/>

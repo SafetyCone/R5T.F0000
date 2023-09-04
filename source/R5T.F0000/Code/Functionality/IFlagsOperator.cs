@@ -12,7 +12,8 @@ namespace R5T.F0000
     //  * https://devblogs.microsoft.com/premier-developer/dissecting-new-generics-constraints-in-c-7-3/#the-enum-constraint
     //  * https://journal.stuffwithstuff.com/2008/03/05/checking-flags-in-c-enums/
     [FunctionalityMarker]
-    public partial interface IFlagsOperator : IFunctionalityMarker
+    public partial interface IFlagsOperator : IFunctionalityMarker,
+        L0053.IFileOperator
     {
         private static Implementations.IFlagsOperator Implementations => F0000.Implementations.FlagsOperator.Instance;
         private static Unchecked.IFlagsOperator Unchecked => F0000.Unchecked.FlagsOperator.Instance;
@@ -38,34 +39,6 @@ namespace R5T.F0000
             Instances.EnumerationOperator.Verify_IsInt32Based<TEnum>();
 
             var output = Unchecked.From_Int32<TEnum>(value);
-            return output;
-        }
-
-        /// <summary>
-        /// Works for an enumeration value of a single flag.
-        /// </summary>
-        public bool Has_Flag<TEnum>(TEnum value, TEnum flag)
-            where TEnum : Enum
-        {
-            // Use the standard library's implementation, it works for both flag and flags (since both are actually just an integer value).
-            var output = Implementations.Has_Flag_StandardLibrary(
-                value,
-                flag);
-
-            return output;
-        }
-
-        /// <summary>
-        /// Works for an enumeration value of combined flags.
-        /// </summary>
-        public bool Has_Flags<TEnum>(TEnum value, TEnum flags)
-            where TEnum : Enum
-        {
-            // Use the standard library's implementation, it works for both flag and flags (since both are actually just an integer value).
-            var output = Implementations.Has_Flag_StandardLibrary(
-                value,
-                flags);
-
             return output;
         }
 

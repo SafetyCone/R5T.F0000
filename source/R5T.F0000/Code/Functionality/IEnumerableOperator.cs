@@ -10,7 +10,8 @@ using R5T.T0132;
 namespace R5T.F0000
 {
 	[FunctionalityMarker]
-	public partial interface IEnumerableOperator : IFunctionalityMarker
+	public partial interface IEnumerableOperator : IFunctionalityMarker,
+		L0053.IEnumerableOperator
 	{
 		/// <summary>
 		/// Produces a sequence that alternates between elements of the provided enumerable, and the provided value.
@@ -305,24 +306,6 @@ namespace R5T.F0000
 			return Enumerable.Empty<T>();
 		}
 
-        public bool None<T>(IEnumerable<T> items)
-		{
-			var any = items.Any();
-
-			// None is not-any.
-			var output = !any;
-			return output;
-		}
-
-		/// <summary>
-		/// Enumerates the enumerable.
-		/// </summary>
-		public T[] Now<T>(IEnumerable<T> items)
-		{
-			var output = items.ToArray();
-			return output;
-		}
-
         public T Nth<T>(IEnumerable<T> items, int n)
 		{
 			var wasFound = this.HasNth(items, n);
@@ -339,14 +322,6 @@ namespace R5T.F0000
 			var wasFound = this.HasNth(items, n);
 
 			var output = wasFound.ResultOrDefaultIfNotFound();
-			return output;
-		}
-
-		public IEnumerable<T> OrderAlphabetically<T>(
-			IEnumerable<T> items,
-			Func<T, string> keySelector)
-		{
-			var output = items.OrderBy(keySelector);
 			return output;
 		}
 

@@ -5,12 +5,13 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using R5T.T0132;
-using R5T.Z0000;
+
 
 namespace R5T.F0000
 {
 	[FunctionalityMarker]
-	public partial interface IFileOperator : IFunctionalityMarker
+	public partial interface IFileOperator : IFunctionalityMarker,
+        L0053.IFileOperator
 	{
 		/// <summary>
 		/// Actually reads all lines. The <see cref="File.ReadLines(string)"/> method omits blank lines, instead adding the new line character to the previous line!
@@ -60,7 +61,7 @@ namespace R5T.F0000
 			string filePath,
 			Stream stream)
         {
-			using var fileStream = FileStreamOperator.Instance.NewWrite(
+			using var fileStream = FileStreamOperator.Instance.Open_Write(
 				filePath);
 
 			await stream.CopyToAsync(fileStream);
@@ -69,7 +70,7 @@ namespace R5T.F0000
 		public bool HasByteOrderMark(
 			string filePath)
         {
-			var bytes = this.ReadBytes_Synchronous(filePath);
+			var bytes = this.Read_Bytes_Synchronous(filePath);
 
 			var byteOrderMark = Instances.Values.ByteOrderMark;
 
@@ -112,12 +113,6 @@ namespace R5T.F0000
 			return fileBytes;
 		}
 
-		public byte[] ReadBytes_Synchronous(string filePath)
-        {
-			var fileBytes = File.ReadAllBytes(filePath);
-			return fileBytes;
-        }
-
 		public async Task<MemoryStream> ReadBytesInMemory(string filePath)
 		{
 			var fileBytes = await this.ReadBytes(filePath);
@@ -143,7 +138,7 @@ namespace R5T.F0000
 			IEnumerable<string> lines,
 			bool overwrite = IValues.DefaultOverwriteValue_Const)
 		{
-            FileSystemOperator.Instance.EnsureDirectoryForFilePathExists(filePath);
+            FileSystemOperator.Instance.Ensure_DirectoryExists_ForFilePath(filePath);
 
             StreamWriterOperator.Instance.WriteAllLines_Synchronous(filePath, lines, overwrite);
 		}
@@ -153,7 +148,7 @@ namespace R5T.F0000
 		/// </summary>
 		public async Task WriteAnEmptyFile(string textFilePath)
         {
-            FileSystemOperator.Instance.EnsureDirectoryForFilePathExists(textFilePath);
+            FileSystemOperator.Instance.Ensure_DirectoryExists_ForFilePath(textFilePath);
 
             await this.WriteText(
 				textFilePath,
@@ -165,9 +160,9 @@ namespace R5T.F0000
         /// </summary>
         public void WriteAnEmptyFile_Synchronous(string textFilePath)
         {
-            FileSystemOperator.Instance.EnsureDirectoryForFilePathExists(textFilePath);
+            FileSystemOperator.Instance.Ensure_DirectoryExists_ForFilePath(textFilePath);
 
-            this.WriteText_Synchronous(
+            this.Write_Text_Synchronous(
                 textFilePath,
                 Instances.Strings.Empty);
         }
@@ -180,7 +175,7 @@ namespace R5T.F0000
             string textFilePath,
             IEnumerable<string> texts)
         {
-            FileSystemOperator.Instance.EnsureDirectoryForFilePathExists(textFilePath);
+            FileSystemOperator.Instance.Ensure_DirectoryExists_ForFilePath(textFilePath);
 
             var text = StringOperator.Instance.Join(texts);
 
@@ -204,7 +199,7 @@ namespace R5T.F0000
             string textFilePath,
             IEnumerable<string> texts)
         {
-            FileSystemOperator.Instance.EnsureDirectoryForFilePathExists(textFilePath);
+            FileSystemOperator.Instance.Ensure_DirectoryExists_ForFilePath(textFilePath);
 
             var text = StringOperator.Instance.Join(texts);
 
@@ -223,66 +218,11 @@ namespace R5T.F0000
                 lines.AsEnumerable());
         }
 
-        /// <summary>
-        /// Writes the provided lines (and only the provided lines, with no trailing blank line) to a file.
-        /// </summary>
-        public Task WriteLines(
-			string textFilePath,
-			IEnumerable<string> lines)
-		{
-            FileSystemOperator.Instance.EnsureDirectoryForFilePathExists(textFilePath);
-
-            var text = StringOperator.Instance.Join(
-                Instances.Characters.NewLine,
-                lines);
-
-            return File.WriteAllTextAsync(
-				textFilePath,
-				text);
-		}
-
-        /// <inheritdoc cref="WriteLines(string, IEnumerable{string})"/>
-        public void WriteLines_Synchronous(
-            string textFilePath,
-            params string[] lines)
-		{
-			this.WriteLines_Synchronous(
-				textFilePath,
-				lines.AsEnumerable());
-		}
-
-        /// <inheritdoc cref="WriteLines(string, IEnumerable{string})"/>
-        public void WriteLines_Synchronous(
-			string textFilePath,
-			IEnumerable<string> lines)
-		{
-            FileSystemOperator.Instance.EnsureDirectoryForFilePathExists(textFilePath);
-
-			var text = StringOperator.Instance.Join(
-				Instances.Characters.NewLine,
-				lines);
-
-            File.WriteAllText(
-				textFilePath,
-				text);
-		}
-
-		public void WriteText_Synchronous(
-			string textFilePath,
-			string text)
-        {
-			FileSystemOperator.Instance.EnsureDirectoryForFilePathExists(textFilePath);
-
-			File.WriteAllText(
-				textFilePath,
-				text);
-        }
-
         public async Task WriteText(
             string textFilePath,
             string text)
         {
-            FileSystemOperator.Instance.EnsureDirectoryForFilePathExists(textFilePath);
+            FileSystemOperator.Instance.Ensure_DirectoryExists_ForFilePath(textFilePath);
 
             await File.WriteAllTextAsync(
                 textFilePath,

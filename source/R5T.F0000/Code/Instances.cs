@@ -9,6 +9,7 @@ namespace R5T.F0000
     {
         public static IActionOperator ActionOperator => F0000.ActionOperator.Instance;
         public static IArrayOperator ArrayOperator => F0000.ArrayOperator.Instance;
+        public static IAssemblyFileNameOperator AssemblyFileNameOperator => F0000.AssemblyFileNameOperator.Instance;
         public static IBooleanOperator BooleanOperator => F0000.BooleanOperator.Instance;
         public static ICharacterIndexes CharacterIndexes => Z0000.CharacterIndexes.Instance;
         public static ICharacterNames CharacterNames => Z0000.CharacterNames.Instance;

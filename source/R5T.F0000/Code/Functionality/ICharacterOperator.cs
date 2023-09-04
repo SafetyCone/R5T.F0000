@@ -136,7 +136,7 @@ namespace R5T.F0000
             int firstIndex_Inclusive,
             int lastIndex_Inclusive)
         {
-            var lastIndex_Exclusive = Instances.IndexOperator.GetLastExclusiveIndex(lastIndex_Inclusive);
+            var lastIndex_Exclusive = Instances.IndexOperator.Get_ExclusiveIndex(lastIndex_Inclusive);
 
             for (int i = 0; i < lastIndex_Exclusive; i++)
             {

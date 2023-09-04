@@ -18,7 +18,8 @@ namespace R5T.F0000
     /// Prior work: R5T.Magyar.
     /// </remarks>
 	[FunctionalityMarker]
-	public partial interface IFileSystemOperator : IFunctionalityMarker
+	public partial interface IFileSystemOperator : IFunctionalityMarker,
+        L0053.IFileSystemOperator
 	{
         public async Task ClearFile(string filePath)
         {
@@ -129,7 +130,7 @@ namespace R5T.F0000
         }
 
         /// <summary>
-        /// Chooses <see cref="CreateDirectory_OkIfAlreadyExists(string)"/> as the default.
+        /// Chooses <see cref="L0053.N000.IFileSystemOperator.CreateDirectory_OkIfAlreadyExists(string)"/> as the default.
         /// </summary>
         public void CreateDirectory(string directoryPath)
         {
@@ -148,17 +149,6 @@ namespace R5T.F0000
             }
 
             this.CreateDirectory_OkIfAlreadyExists(directoryPath);
-        }
-
-        /// <summary>
-        /// Creates a directory idempotently (meaning there is no problem with issuing the command multiple times). 
-        /// Note: The system method <see cref="Directory.CreateDirectory(string)"/> does not throw an exception if you create a directory that already exists. However, it's hard to remember this fact. Thus, this method name makes that fact explicit.
-        /// </summary>
-        public void CreateDirectory_OkIfAlreadyExists(string directoryPath)
-        {
-            // Does not throw an exception if a directory already exists.
-            // See proof at: https://github.com/MinexAutomation/Public/blob/a8c302415b56fb8903c751436cbeef3eae8e1692/Source/Experiments/CSharp/ExaminingCSharp/ExaminingCSharp/Code/Experiments/IOExperiments.cs#L24
-            Directory.CreateDirectory(directoryPath);
         }
 
         public bool DirectoryExists(string directoryPath)
@@ -257,13 +247,6 @@ namespace R5T.F0000
             {
                 this.DisableReadOnly(subdirectory);
             }
-        }
-
-        public void EnsureDirectoryForFilePathExists(string filePath)
-        {
-            var directoryPath = PathOperator.Instance.GetFileParentDirectoryPath(filePath);
-
-            Instances.FileSystemOperator.CreateDirectory_OkIfAlreadyExists(directoryPath);
         }
 
         public void EnsureDirectoryExists(string directoryPath)
@@ -368,7 +351,7 @@ namespace R5T.F0000
             string directoryPath,
             string fileExtension)
         {
-            var searchPattern = Instances.SearchPatternGenerator.AllFilesWithExtension(fileExtension);
+            var searchPattern = Instances.SearchPatternGenerator.Files_WithExtension(fileExtension);
 
             var output = this.FindChildFilesInDirectory(directoryPath, searchPattern)
                 .ToArray();

@@ -34,7 +34,7 @@ namespace R5T.F0000
                     orderIndicesByName,
                     nameSelector);
 
-                var indexIsFound = IndexOperator.Instance.IsFound(index);
+                var indexIsFound = IndexOperator.Instance.Is_Found(index);
                 if (indexIsFound)
                 {
                     orderableNodes.Add((index, element));

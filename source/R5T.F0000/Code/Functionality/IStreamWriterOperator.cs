@@ -58,7 +58,7 @@ namespace R5T.F0000
             string filePath,
             bool overwrite = IValues.DefaultOverwriteValue_Const)
         {
-            var stream = Instances.FileStreamOperator.NewWrite(filePath, overwrite);
+            var stream = Instances.FileStreamOperator.Open_Write(filePath, overwrite);
 
             var output = this.NewCloseAfter(stream);
             return output;

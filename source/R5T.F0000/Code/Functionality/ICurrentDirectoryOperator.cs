@@ -13,7 +13,7 @@ namespace R5T.F0000
         /// </summary>
         public void SetCurrentDirectory_Default()
         {
-            var executableDirectoryPath = ExecutablePathOperator.Instance.GetExecutableDirectoryPath();
+            var executableDirectoryPath = ExecutablePathOperator.Instance.Get_ExecutableDirectoryPath();
 
             this.SetCurrentDirectory(executableDirectoryPath);
         }

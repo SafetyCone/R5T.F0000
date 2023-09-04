@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -11,7 +10,8 @@ using R5T.T0132;
 namespace R5T.F0000
 {
 	[FunctionalityMarker]
-	public interface IStringOperator : IFunctionalityMarker
+	public interface IStringOperator : IFunctionalityMarker,
+        L0053.IStringOperator
 	{
         private static Internal.IStringOperator Internal => F0000.Internal.StringOperator.Instance;
 
@@ -49,7 +49,7 @@ namespace R5T.F0000
             string @string,
             string[] searchStrings)
         {
-            var index = this.IndexOfAny_OrNotFound(@string, searchStrings);
+            var index = this.Get_IndexOfAny_OrNotFound(@string, searchStrings);
 
             var wasFound = this.WasFound(index);
             return wasFound;
@@ -59,7 +59,7 @@ namespace R5T.F0000
             string @string,
             char[] searchCharacters)
         {
-            var index = this.IndexOfAny_OrNotFound(@string, searchCharacters);
+            var index = this.Get_IndexOfAny_OrNotFound(@string, searchCharacters);
 
             var wasFound = this.WasFound(index);
             return wasFound;
@@ -115,25 +115,6 @@ namespace R5T.F0000
         public string Enquote(string @string)
         {
             var output = $"\"{@string}\"";
-            return output;
-        }
-
-        public string EnsureEnquoted(string @string)
-        {
-            var firstChar = @string.First();
-            var lastChar = @string.Last();
-
-            var firstQuoteToken = firstChar == Instances.Characters.Quote
-                ? Instances.Strings.Empty
-                : Instances.Strings.Quote
-                ;
-
-            var lastQuoteToken = lastChar == Instances.Characters.Quote
-                ? Instances.Strings.Empty
-                : Instances.Strings.Quote
-                ;
-
-            var output = $"{firstQuoteToken}{@string}{lastQuoteToken}";
             return output;
         }
 
@@ -428,7 +409,7 @@ namespace R5T.F0000
 			return output;
         }
 
-        public int Get_LastIndexOf(
+        public new int Get_LastIndexOf(
             char character,
             string @string)
         {
@@ -486,14 +467,6 @@ namespace R5T.F0000
                 @string);
 
             return substring;
-        }
-
-        public string Get_Substring_Upto_Exclusive(
-            int endIndex_Exclusive,
-            string @string)
-        {
-            var output = @string[..(endIndex_Exclusive)];
-            return output;
         }
 
         public string Get_Substring_From_First(
@@ -699,49 +672,16 @@ namespace R5T.F0000
             return output;
         }
 
-        public int IndexOfAny_OrNotFound(
-            string @string,
-            string[] searchStrings)
-        {
-            foreach (var searchString in searchStrings)
-            {
-                var index = @string.IndexOf(searchString);
-
-                var wasFound = this.WasFound(index);
-                if (wasFound)
-                {
-                    return index;
-                }
-            }
-
-            return Instances.String.IndexOfNotFound;
-        }
-
         public WasFound<int> IndexOfAny(
             string @string,
             params char[] searchCharacters)
         {
-            var indexOrNotFound = this.IndexOfAny_OrNotFound(
+            var indexOrNotFound = this.Get_IndexOfAny_OrNotFound(
                 @string,
                 searchCharacters);
 
             var output = Internal.WasFound(indexOrNotFound);
             return output;
-        }
-
-        public int IndexOfAny_OrNotFound(
-            string @string,
-            params char[] searchCharacters)
-        {
-            var index = @string.IndexOfAny(searchCharacters);
-
-            var wasFound = this.WasFound(index);
-            if (wasFound)
-            {
-                return index;
-            }
-
-            return Instances.String.IndexOfNotFound;
         }
 
         /// <summary>
@@ -798,30 +738,6 @@ namespace R5T.F0000
                 Instances.Strings.Empty,
                 strings);
 
-            return output;
-        }
-
-        public string Join(char separator, IEnumerable<string> strings)
-        {
-            var output = System.String.Join(separator, strings);
-            return output;
-        }
-
-        public string Join(char separator, params string[] strings)
-        {
-            var output = this.Join(separator, strings.AsEnumerable());
-            return output;
-        }
-
-        public string Join(string separator, IEnumerable<string> strings)
-        {
-            var output = System.String.Join(separator, strings);
-            return output;
-        }
-
-        public string Join(string separator, params string[] strings)
-        {
-            var output = this.Join(separator, strings.AsEnumerable());
             return output;
         }
 

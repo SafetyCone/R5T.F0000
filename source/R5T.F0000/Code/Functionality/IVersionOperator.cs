@@ -9,7 +9,8 @@ using R5T.F0000.Extensions;
 namespace R5T.F0000
 {
 	[FunctionalityMarker]
-	public partial interface IVersionOperator : IFunctionalityMarker
+	public partial interface IVersionOperator : IFunctionalityMarker,
+		L0053.IVersionOperator
 	{
 		public string Ensure_NotVersionIndicated(string versionString)
 		{

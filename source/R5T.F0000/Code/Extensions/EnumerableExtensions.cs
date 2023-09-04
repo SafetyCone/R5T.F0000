@@ -206,12 +206,6 @@ namespace System.Linq
             return output;
         }
 
-        public static T[] Now<T>(this IEnumerable<T> items)
-        {
-            var output = Instances.EnumerableOperator.Now(items);
-            return output;
-        }
-
         public static WasFound<T> HasNth<T>(this IEnumerable<T> items, int n)
         {
             var output = Instances.EnumerableOperator.HasNth(items, n);
@@ -245,13 +239,6 @@ namespace System.Linq
         public static T SecondOrDefault<T>(this IEnumerable<T> enumerable)
         {
             var output = Instances.EnumerableOperator.SecondOrDefault(enumerable);
-            return output;
-        }
-
-        public static IEnumerable<T> OrderAlphabetically<T>(this IEnumerable<T> items,
-            Func<T, string> keySelector)
-        {
-            var output = Instances.EnumerableOperator.OrderAlphabetically(items, keySelector);
             return output;
         }
 

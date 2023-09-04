@@ -6,8 +6,9 @@ using R5T.T0131;
 namespace R5T.F0000
 {
 	[ValuesMarker]
-	public partial interface IMessages : IValuesMarker
+	public partial interface IMessages : IValuesMarker,
+		L0053.IMessages
 	{
-		public string EventDataReceivedWasNull => "<Event data received was null>";
+		
 	}
 }

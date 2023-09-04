@@ -7,7 +7,8 @@ using R5T.T0132;
 namespace R5T.F0000
 {
 	[FunctionalityMarker]
-	public partial interface IPathOperator : IFunctionalityMarker
+	public partial interface IPathOperator : IFunctionalityMarker,
+        L0053.IPathOperator
 	{
         public string GetDirectoryName_FromDirectoryPath(string directoryPath)
         {

@@ -6,7 +6,8 @@ using R5T.T0132;
 namespace R5T.F0000
 {
 	[FunctionalityMarker]
-	public partial interface IEnumerationOperator : IFunctionalityMarker
+	public partial interface IEnumerationOperator : IFunctionalityMarker,
+        L0053.IEnumerationOperator
 	{
         private static Unchecked.IEnumerationOperator Unchecked => F0000.Unchecked.EnumerationOperator.Instance;
 
@@ -25,29 +26,6 @@ namespace R5T.F0000
         {
 			var output = @enum.ToString();
 			return output;
-        }
-
-        public Type Get_UnderlyingType(Enum value)
-        {
-            var enumerationType = value.GetType();
-
-            var output = this.Get_UnderlyingType(enumerationType);
-            return output;
-        }
-
-        public Type Get_UnderlyingType<TEnum>()
-            where TEnum : Enum
-        {
-            var enumerationType = typeof(TEnum);
-
-            var output = this.Get_UnderlyingType(enumerationType);
-            return output;
-        }
-
-        public Type Get_UnderlyingType(Type enumerationType)
-        {
-            var underlyingType = Enum.GetUnderlyingType(enumerationType);
-            return underlyingType;
         }
 
         public TEnum GetValue<TEnum>(string valueString)

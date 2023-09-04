@@ -7,17 +7,18 @@ using R5T.T0132;
 namespace R5T.F0000
 {
 	[FunctionalityMarker]
-	public partial interface IFileExtensionOperator : IFunctionalityMarker
+	public partial interface IFileExtensionOperator : IFunctionalityMarker,
+		L0053.IFileExtensionOperator
 	{
 		public string AddFileExtension(string fileNameStem, string fileExtension)
 		{
-			var output = Instances.FileNameOperator.GetFileName(fileNameStem, fileExtension);
+			var output = Instances.FileNameOperator.Get_FileName(fileNameStem, fileExtension);
 			return output;
 		}
 
 		public string GetFileExtension(string fileName)
 		{
-			var fileExtensionSeparator = Instances.FileExtensionOperator.GetFileExtensionSeparator();
+			var fileExtensionSeparator = Instances.FileExtensionOperator.Get_FileExtensionSeparator();
 
 			var tokens = Instances.StringOperator.Split(
 				fileExtensionSeparator,
@@ -31,24 +32,9 @@ namespace R5T.F0000
 			return fileExtension;
 		}
 
-		public char GetFileExtensionSeparator_Char()
-        {
-			var output = Instances.Characters.Period;
-			return output;
-        }
-
-		/// <summary>
-		/// Chooses <see cref="GetFileExtensionSeparator_Char"/> as the default.
-		/// </summary>
-		public char GetFileExtensionSeparator()
-        {
-			var output = this.GetFileExtensionSeparator_Char();
-			return output;
-        }
-
 		public string GetFileName(string fileNameStem, string fileExtension)
         {
-			var output = Instances.FileNameOperator.GetFileName(fileNameStem, fileExtension);
+			var output = Instances.FileNameOperator.Get_FileName(fileNameStem, fileExtension);
 			return output;
         }
 
