@@ -30,13 +30,5 @@ namespace R5T.F0000
 
 		public const string ExplicitNone_Constant = "<None>";
 		public string ExplicitNone => IValues.ExplicitNone_Constant;
-
-        /// <summary>
-        /// Version strings can have a 'v' as a leading version indicator (ex: v4.0.30319).
-        /// </summary>
-        public const char LeadingVersionIndicator_Constant = ICharacters.v_Lowercase_Constant;
-
-		/// <inheritdoc cref="LeadingVersionIndicator_Constant"/>
-		public char LeadingVersionIndicator => LeadingVersionIndicator_Constant;
     }
 }

@@ -12,7 +12,8 @@ using Glossary = R5T.Y0000.Glossary;
 namespace R5T.F0000
 {
     [FunctionalityMarker]
-    public interface ICharacterOperator
+    public interface ICharacterOperator : IFunctionalityMarker,
+        L0053.ICharacterOperator
     {
         /// <summary>
         /// Describes a character with its string representation, three-digit numeric value, and name. Example: 'b': 062, "lower-case b".
@@ -281,139 +282,6 @@ namespace R5T.F0000
                 Instances.CharacterIndexes.ASCII_Unextended_LastIndex,
                 predicate);
 
-            return output;
-        }
-
-        /// <summary>
-        /// <inheritdoc cref="Glossary.ForCharacterClasses.Alphanumeric" path="/definition"/>
-        /// </summary>
-        public bool IsAlphanumeric(char character)
-        {
-            var output = Char.IsLetterOrDigit(character);
-            return output;
-        }
-
-        /// <summary>
-        /// Quality-of-life overload for <see cref="IsUppercase(char)"/>.
-        /// </summary>
-        public bool IsCapitalized(char character)
-        {
-            var output = this.IsUppercase(character);
-            return output;
-        }
-
-        /// <summary>
-        /// <inheritdoc cref="Glossary.ForCharacterClasses.Character" path="/definition"/>
-        /// </summary>
-        public bool IsCharacter(char character)
-        {
-            return true;
-        }
-
-        /// <summary>
-        /// <inheritdoc cref="Glossary.ForCharacterClasses.Control" path="/definition"/>
-        /// </summary>
-        public bool IsControl(char character)
-        {
-            var output = Char.IsControl(character);
-            return output;
-        }
-
-        /// <summary>
-        /// <inheritdoc cref="Glossary.ForCharacterClasses.Digit" path="/definition"/>
-        /// </summary>
-        public bool IsDigit(char character)
-        {
-            var output = Char.IsDigit(character);
-            return output;
-        }
-
-        /// <summary>
-        /// <inheritdoc cref="Glossary.ForCharacterClasses.Letter" path="/definition"/>
-        /// </summary>
-        public bool IsLetter(char character)
-        {
-            var output = Char.IsLetter(character);
-            return output;
-        }
-
-        /// <summary>
-        /// <inheritdoc cref="Glossary.ForCharacterClasses.Alphanumeric" path="/definition"/>
-        /// </summary>
-        public bool IsLetterOrDigit(char character)
-        {
-            var output = Char.IsLetterOrDigit(character);
-            return output;
-        }
-
-        /// <summary>
-        /// <inheritdoc cref="Glossary.ForCharacterClasses.Lowercase" path="/definition"/>
-        /// </summary>
-        public bool IsLowercase(char character)
-        {
-            var output = Char.IsLower(character);
-            return output;
-        }
-
-        /// <summary>
-        /// <inheritdoc cref="Glossary.ForCharacterClasses.None" path="/definition"/>
-        /// </summary>
-        public bool IsNone(char character)
-        {
-            return false;
-        }
-
-        /// <summary>
-        /// <inheritdoc cref="Glossary.ForCharacterClasses.Number" path="/definition"/>
-        /// </summary>
-        public bool IsNumber(char character)
-        {
-            var output = Char.IsNumber(character);
-            return output;
-        }
-
-        /// <summary>
-        /// <inheritdoc cref="Glossary.ForCharacterClasses.Punctuation" path="/definition"/>
-        /// </summary>
-        public bool IsPunctuation(char character)
-        {
-            var output = Char.IsPunctuation(character);
-            return output;
-        }
-
-        /// <summary>
-        /// <inheritdoc cref="Glossary.ForCharacterClasses.Separator" path="/definition"/>
-        /// </summary>
-        public bool IsSeparator(char character)
-        {
-            var output = Char.IsSeparator(character);
-            return output;
-        }
-
-        /// <summary>
-        /// <inheritdoc cref="Glossary.ForCharacterClasses.Symbol" path="/definition"/>
-        /// </summary>
-        public bool IsSymbol(char character)
-        {
-            var output = Char.IsSymbol(character);
-            return output;
-        }
-
-        /// <summary>
-        /// <inheritdoc cref="Glossary.ForCharacterClasses.Uppercase" path="/definition"/>
-        /// </summary>
-        public bool IsUppercase(char character)
-        {
-            var output = Char.IsUpper(character);
-            return output;
-        }
-
-        /// <summary>
-        /// <inheritdoc cref="Glossary.ForCharacterClasses.Whitespace" path="/definition"/>
-        /// </summary>
-        public bool IsWhitespace(char character)
-        {
-            var output = Char.IsWhiteSpace(character);
             return output;
         }
 

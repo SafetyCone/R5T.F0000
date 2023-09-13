@@ -38,86 +38,6 @@ namespace R5T.F0000
 			return enumerable.Append(item);
 		}
 
-		public IEnumerable<T> Append<T>(IEnumerable<T> enumerable, IEnumerable<T> appendix)
-		{
-			return enumerable.Concat(appendix);
-		}
-
-		/// <summary>
-		/// Append to an enumerable.
-		/// </summary>
-		public IEnumerable<T> Append<T>(IEnumerable<T> enumerable, params T[] appendix)
-		{
-			return enumerable.Concat(appendix);
-		}
-
-        public IEnumerable<T> AppendIf<T>(IEnumerable<T> enumerable,
-            bool value,
-            IEnumerable<T> appendix)
-        {
-			var output = value
-				? Instances.EnumerableOperator.Append(enumerable, appendix)
-				: enumerable
-				;
-
-			return output;
-        }
-
-        public IEnumerable<T> AppendIf<T>(IEnumerable<T> enumerable,
-			bool value,
-			params T[] appendices)
-		{
-			var output = this.AppendIf(
-				enumerable,
-				value,
-				appendices.AsEnumerable());
-
-			return output;
-		}
-
-        public IEnumerable<T> AppendIf<T>(IEnumerable<T> enumerable,
-            bool value,
-            params Func<T>[] appendixConstructors)
-        {
-            var appendices = value
-                ? appendixConstructors.Select(x => x())
-                : Instances.EnumerableOperator.Empty<T>()
-                ;
-
-			var output = this.AppendIf(
-				enumerable,
-				value,
-				appendices);
-
-            return output;
-        }
-
-        public IEnumerable<T> AppendIf<T>(IEnumerable<T> enumerable,
-			bool value,
-			IEnumerable<T> appendixIfTrue,
-			IEnumerable<T> appendixIfFalse)
-		{
-			var output = value
-				? Instances.EnumerableOperator.Append(enumerable, appendixIfTrue)
-				: Instances.EnumerableOperator.Append(enumerable, appendixIfFalse)
-			;
-
-			return output;
-		}
-
-		public IEnumerable<T> AppendRange<T>(IEnumerable<T> enumerable, IEnumerable<T> appendix)
-		{
-			return enumerable.Concat(appendix);
-		}
-
-		public IEnumerable<T> AppendRange<T>(IEnumerable<T> enumerable, Func<IEnumerable<T>> appendixGenerator)
-		{
-			var appendix = appendixGenerator();
-
-			var output = this.AppendRange(enumerable, appendix);
-			return output;
-		}
-
 		/// <summary>
 		/// Returns a new enumerable (does not clear the input enumerable, but provides a clean slate for future operations).
 		/// </summary>
@@ -130,12 +50,6 @@ namespace R5T.F0000
 		public bool ContainsAll<T>(IEnumerable<T> superset, IEnumerable<T> subset)
 		{
 			var output = subset.Except(superset).None();
-			return output;
-		}
-
-		public IEnumerable<T> Empty<T>()
-		{
-			var output = Enumerable.Empty<T>();
 			return output;
 		}
 
@@ -251,25 +165,6 @@ namespace R5T.F0000
 			{
 				return this.From(Values.Instance.ExplicitNone);
 			}
-		}
-
-		public IEnumerable<T> From<T>(T instance)
-		{
-			yield return instance;
-		}
-
-        public IEnumerable<T> From<T>(params T[] instances)
-        {
-			foreach (var instance in instances)
-			{
-				yield return instance;
-			}
-        }
-
-		public IEnumerable<T> From<T>(params IEnumerable<T>[] enumerables)
-		{
-			var output = enumerables.SelectMany(enumerable => enumerable);
-			return output;
 		}
 
         public bool HasAny<T>(IEnumerable<T> items)

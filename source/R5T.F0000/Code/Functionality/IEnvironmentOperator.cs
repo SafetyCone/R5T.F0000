@@ -67,6 +67,9 @@ namespace R5T.F0000
         /// Gets the dotnet runtime version.
         /// <para>Example: 6.0.21</para>
         /// </summary>
+        /// <returns>
+        /// Returns <see cref="Environment.Version"/>.
+        /// </returns>
         public Version Get_DotnetRuntimeVersion()
         {
             var output = Environment.Version;

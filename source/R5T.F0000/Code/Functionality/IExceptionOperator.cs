@@ -97,7 +97,7 @@ namespace R5T.F0000.Internal
 	{
         public string Get_UnhandledValueExceptionMessage<TValue>(TValue value)
         {
-            var typeName = Instances.TypeOperator.GetTypeNameOf(value);
+            var typeName = Instances.TypeOperator.Get_TypeNameOf(value);
 
 			var output = this.Get_UnhandledValueExceptionMessage(
 				value,

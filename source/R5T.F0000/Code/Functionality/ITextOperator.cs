@@ -30,7 +30,7 @@ namespace R5T.F0000
 			{
 				var firstLetter = hasFirstLetter.Result;
 
-				var isUppercase = Instances.CharacterOperator.IsUppercase(firstLetter);
+				var isUppercase = Instances.CharacterOperator.Is_Uppercase(firstLetter);
 				if(!isUppercase)
 				{
 					var uppercaseLetter = Instances.CharacterOperator.ToUpper(firstLetter);

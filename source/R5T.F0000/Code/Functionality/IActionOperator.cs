@@ -9,7 +9,8 @@ using R5T.T0132;
 namespace R5T.F0000
 {
 	[FunctionalityMarker]
-	public partial interface IActionOperator : IFunctionalityMarker
+	public partial interface IActionOperator : IFunctionalityMarker,
+        L0053.IActionOperator
 	{
         public Action<T> Combine<T>(IEnumerable<Action<T>> actions)
             => @object => actions.ForEach(action => action(@object));
@@ -44,18 +45,6 @@ namespace R5T.F0000
             }
 
             var output = await action(value);
-            return output;
-        }
-
-        public TOutput Run<T, TOutput>(Func<T, TOutput> action,
-            T value)
-        {
-            if (action == default)
-            {
-                return default;
-            }
-
-            var output = action(value);
             return output;
         }
 
@@ -103,23 +92,13 @@ namespace R5T.F0000
             }
         }
 
-        public void Run<TValue>(TValue value, Action<TValue> action)
-        {
-            if (action == default)
-            {
-                return;
-            }
-
-            action(value);
-        }
-
         public async Task Run_OkIfDefaults<T>(T value, params Func<T, Task>[] actions)
 		{
 			foreach (var action in actions)
 			{
 				await this.Run_OkIfDefault(
-					action,
-					value);
+                    value,
+                    action);
 			}
 		}
 
@@ -133,19 +112,9 @@ namespace R5T.F0000
             foreach (var action in actions)
             {
                 await this.Run_OkIfDefault(
-                    action,
-                    value);
+                    value,
+                    action);
             }
-        }
-
-        public async Task Run_OkIfDefault<T>(Func<T, Task> action, T value)
-        {
-            if (action == default)
-            {
-                return;
-            }
-
-            await action(value);
         }
 
         /// <summary>
@@ -153,7 +122,9 @@ namespace R5T.F0000
         /// </summary>
         public async Task Run<T>(Func<T, Task> action, T value)
         {
-            await this.Run_OkIfDefault(action, value);
+            await this.Run_OkIfDefault(
+                value,
+                action);
         }
 
         public void Run_OkIfDefault<T>(Action<T> action, T value)

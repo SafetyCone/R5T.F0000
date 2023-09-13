@@ -35,7 +35,7 @@ namespace R5T.F0000
 
 		public string[] GetLinesFromText(string text)
 		{
-            if (Instances.StringOperator.IsEmpty(text))
+            if (Instances.StringOperator.Is_Empty(text))
             {
                 return Array.Empty<string>();
             }

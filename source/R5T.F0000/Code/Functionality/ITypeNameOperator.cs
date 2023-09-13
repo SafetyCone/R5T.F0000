@@ -160,7 +160,7 @@ namespace R5T.F0000
 
 		public string GetTypeNameOf<T>(T instance)
         {
-			var output = Instances.TypeOperator.GetTypeNameOf(instance);
+			var output = Instances.TypeOperator.Get_TypeNameOf(instance);
 			return output;
         }
 
@@ -197,7 +197,7 @@ namespace R5T.F0000
         public bool Is_InterfaceIndicatedTypeName(string typeName)
         {
             // Must not be empty.
-            var isEmpty = StringOperator.Instance.IsEmpty(typeName);
+            var isEmpty = StringOperator.Instance.Is_Empty(typeName);
             if(isEmpty)
             {
                 return false;
@@ -225,7 +225,7 @@ namespace R5T.F0000
         public bool Is_TypeName(string typeName)
         {
             // Must not be empty.
-            var isEmpty = StringOperator.Instance.IsEmpty(typeName);
+            var isEmpty = StringOperator.Instance.Is_Empty(typeName);
             if (isEmpty)
             {
                 return false;
@@ -233,7 +233,7 @@ namespace R5T.F0000
 
             // 1) Is the first character of the type name capitalized?
             var firstCharacter = typeName.Second();
-            var firstCharacterIsCapitalized = CharacterOperator.Instance.IsCapitalized(firstCharacter);
+            var firstCharacterIsCapitalized = CharacterOperator.Instance.Is_Capitalized(firstCharacter);
 
             var output = true
                 && firstCharacterIsCapitalized
@@ -252,7 +252,7 @@ namespace R5T.F0000
 
         public void Verify_IsNotEmpty(string typeNameValue)
         {
-            var isEmpty = StringOperator.Instance.IsEmpty(typeNameValue);
+            var isEmpty = StringOperator.Instance.Is_Empty(typeNameValue);
             if (isEmpty)
             {
                 throw new ArgumentException(
@@ -293,7 +293,7 @@ namespace R5T.F0000.Internal
         /// </summary>
         public string GetTypeNameStemForInterfaceName_Unchecked(string interfaceTypeName)
         {
-            var output = StringOperator.Instance.ExceptFirst_Unchecked(interfaceTypeName);
+            var output = Instances.StringOperator_Internal.ExceptFirst_Unchecked(interfaceTypeName);
             return output;
         }
     }

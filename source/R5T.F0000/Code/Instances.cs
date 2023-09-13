@@ -66,6 +66,7 @@ namespace R5T.F0000
         public static IString String => F0000.String.Instance;
         public static IStringBuilderOperator StringBuilderOperator => F0000.StringBuilderOperator.Instance;
         public static IStringOperator StringOperator => F0000.StringOperator.Instance;
+        public static L0053.Internal.IStringOperator StringOperator_Internal => L0053.Internal.StringOperator.Instance;
         public static IStrings Strings => F0000.Strings.Instance;
         public static ISyncOverAsyncOperator SyncOverAsyncOperator => F0000.SyncOverAsyncOperator.Instance;
         public static ITextOperator TextOperator => F0000.TextOperator.Instance;

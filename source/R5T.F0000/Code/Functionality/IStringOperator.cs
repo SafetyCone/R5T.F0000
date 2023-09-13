@@ -203,52 +203,6 @@ namespace R5T.F0000
             return output;
         }
 
-        /// <summary>
-        /// Robustly returns null or empty for null or empty (respectively).
-        /// </summary>
-        public string ExceptFirst_Robust(string @string)
-        {
-            var isNullOrEmpty = this.IsNullOrEmpty(@string);
-            if(isNullOrEmpty)
-            {
-                return @string;
-            }
-
-            var output = Internal.ExceptFirst_Unchecked(@string);
-            return output;
-        }
-
-        /// <summary>
-        /// Similar to the String.Length property and the LINQ Count() extension, throws an exception if the string is null or empty.
-        /// </summary>
-        public string ExceptFirst_Strict(string @string)
-        {
-            var isNull = this.IsNull(@string);
-            if(isNull)
-            {
-                throw new ArgumentNullException(nameof(@string));
-            }
-
-            var isEmpty = this.IsEmpty(@string);
-            if(isEmpty)
-            {
-                throw new ArgumentOutOfRangeException(nameof(@string), "Input string was empty.");
-            }
-
-            var output = Internal.ExceptFirst_Unchecked(@string);
-            return output;
-        }
-
-        /// <summary>
-        /// Chooses <see cref="ExceptFirst_Strict(string)"/> as the default.
-        /// Check your string lengths!
-        /// </summary>
-        public string ExceptFirst(string @string)
-        {
-            var output = this.ExceptFirst_Strict(@string);
-            return output;
-        }
-
         public string Format(
             string template,
             params object[] objects)
@@ -513,17 +467,6 @@ namespace R5T.F0000
             return output;
         }
 
-        /// <summary>
-        /// Gets a substring, starting at an index and going to the end.
-        /// </summary>
-        public string Get_Substring_From_Exclusive(
-            int startIndex_Exclusive,
-            string @string)
-        {
-            var output = @string[(startIndex_Exclusive + 1)..];
-            return output;
-        }
-
         public string Get_Substring_From_Exclusive(
             string token,
             string @string)
@@ -544,7 +487,7 @@ namespace R5T.F0000
         }
 
         /// <summary>
-        /// Chooses <see cref="Get_Substring_From_Exclusive(int, string)"/> as the default.
+        /// Chooses <see cref="L0053.IStringOperator.Get_Substring_From_Exclusive(int, string)"/> as the default.
         /// </summary>
         public string Get_Substring_Exclusive(
             int startIndex_Exclusive,
@@ -684,15 +627,6 @@ namespace R5T.F0000
             return output;
         }
 
-        /// <summary>
-        /// Determines if the input is specifically the <see cref="Z0000.IStrings.Empty"/> string.
-        /// </summary>
-        public bool IsEmpty(string value)
-        {
-            var isEmpty = value == Instances.Strings.Empty;
-            return isEmpty;
-        }
-
         public bool IsNotEmpty(string value)
         {
             var isEmpty = value != Instances.Strings.Empty;
@@ -710,26 +644,10 @@ namespace R5T.F0000
 
         public bool IsNotNullAndNotEmpty(string @string)
         {
-            var isNullOrEmpty = this.IsNullOrEmpty(@string);
+            var isNullOrEmpty = this.Is_NullOrEmpty(@string);
 
             var isNotNullAndNotEmpty = !isNullOrEmpty;
             return isNotNullAndNotEmpty;
-        }
-
-        public bool IsNull(string @string)
-        {
-            // Use  instead of:
-            // * == null - Equality operator eventually just uses Object.ReferenceEquals().
-            // * Object.Equals() - Should be Object.ReferenceEquals() instead.
-            // * Object.ReferenceEquals() - IDE0041 message is produced, indicating preference for "is null".
-            var output = @string is null;
-            return output;
-        }
-
-        public bool IsNullOrEmpty(string @string)
-        {
-            var output = System.String.IsNullOrEmpty(@string);
-            return output;
         }
 
         public string Join(IEnumerable<string> strings)
@@ -1044,12 +962,6 @@ namespace R5T.F0000.Internal
 {
     public partial interface IStringOperator
     {
-        public string ExceptFirst_Unchecked(string @string)
-        {
-            var output = @string[1..];
-            return output;
-        }
-
         public WasFound<int> WasFound(int indexOrNotFound)
         {
             var wasFound = F0000.StringOperator.Instance.WasFound(indexOrNotFound);
