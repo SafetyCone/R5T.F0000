@@ -28,7 +28,7 @@ namespace R5T.F0000
         {
             var value = constructor();
 
-            ActionOperator.Instance.Run(
+            ActionOperator.Instance.Run_Actions(
                 value,
                 modifiers);
 

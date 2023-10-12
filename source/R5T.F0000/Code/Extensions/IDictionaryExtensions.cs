@@ -12,7 +12,7 @@ namespace System
             TKey key,
             Func<TValue> valueConstructor)
         {
-            var output = Instances.DictionaryOperator.AcquireValue(dictionary, key, valueConstructor);
+            var output = Instances.DictionaryOperator.Acquire_Value(dictionary, key, valueConstructor);
             return output;
         }
 
@@ -20,7 +20,7 @@ namespace System
             TKey key,
             TValue value)
         {
-            var output = Instances.DictionaryOperator.AddAndReturnValue(dictionary, key, value);
+            var output = Instances.DictionaryOperator.AddAndReturn_Value(dictionary, key, value);
             return output;
         }
 

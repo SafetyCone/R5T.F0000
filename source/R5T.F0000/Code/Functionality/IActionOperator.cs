@@ -23,20 +23,8 @@ namespace R5T.F0000
             return value => this.Run_OkIfDefaults(value, actions);
         }
 
-        public void Run<T1, T2>(
-            Action<T1, T2> action,
-            T1 arg1,
-            T2 arg2)
-        {
-            if (action == default)
-            {
-                return;
-            }
-
-            action(arg1, arg2);
-        }
-
-        public async Task<TOutput> Run<T, TOutput>(Func<T, Task<TOutput>> action,
+        public async Task<TOutput> Run<T, TOutput>(
+            Func<T, Task<TOutput>> action,
             T value)
         {
             if (action == default)
@@ -48,11 +36,6 @@ namespace R5T.F0000
             return output;
         }
 
-        public void Run<TValue>(TValue value, params Action<TValue>[] actions)
-        {
-            this.Run(value, actions.AsEnumerable());
-        }
-
         public void Run(IEnumerable<Action> actions)
         {
             if (actions == default)
@@ -62,7 +45,7 @@ namespace R5T.F0000
 
             foreach (var action in actions)
             {
-                this.Run(action);
+                this.Run_Action(action);
             }
         }
 
@@ -79,20 +62,9 @@ namespace R5T.F0000
             }
         }
 
-        public void Run<TValue>(TValue value, IEnumerable<Action<TValue>> actions)
-        {
-            if(actions == default)
-            {
-                return;
-            }
-
-            foreach (var action in actions)
-            {
-                this.Run(value, action);
-            }
-        }
-
-        public async Task Run_OkIfDefaults<T>(T value, params Func<T, Task>[] actions)
+        public async Task Run_OkIfDefaults<T>(
+            T value,
+            params Func<T, Task>[] actions)
 		{
 			foreach (var action in actions)
 			{
@@ -102,12 +74,16 @@ namespace R5T.F0000
 			}
 		}
 
-        public async Task Run<T>(T value, params Func<T, Task>[] actions)
+        public async Task Run<T>(
+            T value,
+            params Func<T, Task>[] actions)
 		{
 			await this.Run_OkIfDefaults(value, actions);
 		}
 
-        public async Task Run<T>(T value, IEnumerable<Func<T, Task>> actions)
+        public async Task Run<T>(
+            T value,
+            IEnumerable<Func<T, Task>> actions)
         {
             foreach (var action in actions)
             {
@@ -117,62 +93,13 @@ namespace R5T.F0000
             }
         }
 
-        /// <summary>
-        /// Chooses <see cref="Run_OkIfDefault{T}(Action{T}, T)"/> as the default.
-        /// </summary>
-        public async Task Run<T>(Func<T, Task> action, T value)
+        public async Task Run<T>(
+            Func<T, Task> action,
+            T value)
         {
             await this.Run_OkIfDefault(
                 value,
                 action);
-        }
-
-        public void Run_OkIfDefault<T>(Action<T> action, T value)
-		{
-			if(action == default)
-			{
-				return;
-			}
-
-			action(value);
-		}
-
-		/// <summary>
-		/// Chooses <see cref="Run_OkIfDefault{T}(Action{T}, T)"/> as the default.
-		/// </summary>
-		public void Run<T>(Action<T> action, T value)
-		{
-			this.Run_OkIfDefault(action, value);
-		}
-
-        public async Task Run(Func<Task> action)
-        {
-            await this.Run_OkIfDefault(action);
-        }
-
-        public async Task Run_OkIfDefault(Func<Task> action)
-        {
-            if (action == default)
-            {
-                return;
-            }
-
-            await action();
-        }
-
-        public void Run(Action action)
-        {
-            this.Run_OkIfDefault(action);
-        }
-
-        public void Run_OkIfDefault(Action action)
-        {
-            if (action == default)
-            {
-                return;
-            }
-
-            action();
         }
 
         public async Task Run<T1, T2>(

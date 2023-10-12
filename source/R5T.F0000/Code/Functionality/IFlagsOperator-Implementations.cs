@@ -10,7 +10,7 @@ namespace R5T.F0000.Implementations
     /// </summary>
     [FunctionalityMarker]
     public partial interface IFlagsOperator : IFunctionalityMarker,
-        L0053.Implementations.IFlagsOperator
+        L0066.Implementations.IFlagsOperator
     {
         /// <summary>
         /// Implementation showing how to implement your own flags enumeration value testing.

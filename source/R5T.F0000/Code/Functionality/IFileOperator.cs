@@ -83,7 +83,7 @@ namespace R5T.F0000
 
 		public StreamWriter NewWrite_Text(
 			string filePath,
-            bool overwrite = IValues.DefaultOverwriteValue_Const)
+            bool overwrite = IValues.Default_OverwriteValue_Const)
 		{
 			var output = StreamWriterOperator.Instance.NewWrite(
 				filePath);
@@ -136,7 +136,7 @@ namespace R5T.F0000
 		public void WriteAllLines_Synchronous(
 			string filePath,
 			IEnumerable<string> lines,
-			bool overwrite = IValues.DefaultOverwriteValue_Const)
+			bool overwrite = IValues.Default_OverwriteValue_Const)
 		{
             FileSystemOperator.Instance.Ensure_DirectoryExists_ForFilePath(filePath);
 

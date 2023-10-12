@@ -7,9 +7,9 @@ namespace System
 {
     public static class ArrayExtensions
     {
-        public static bool IsEmpty(this Array array)
+        public static bool Is_Empty(this Array array)
         {
-            var output = Instances.ArrayOperator.IsEmpty(array);
+            var output = Instances.ArrayOperator.Is_Empty(array);
             return output;
         }
     }

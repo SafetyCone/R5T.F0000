@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using System.Threading.Tasks.Sources;
+
 using R5T.T0132;
 
 
@@ -11,7 +11,8 @@ namespace R5T.F0000
     ///     * Process R5T.B0001.X001
     /// </summary>
 	[FunctionalityMarker]
-	public partial interface ITypeNameOperator : IFunctionalityMarker
+	public partial interface ITypeNameOperator : IFunctionalityMarker,
+        L0053.ITypeNameOperator
 	{
         private static Internal.ITypeNameOperator Internal => F0000.Internal.TypeNameOperator.Instance;
 
@@ -112,7 +113,7 @@ namespace R5T.F0000
 
         public string GetNonAttributeSuffixedTypeName(string attributeSuffixedTypeName)
         {
-            var output = Instances.StringOperator.ExceptEnding(
+            var output = Instances.StringOperator.Except_Ending(
                 attributeSuffixedTypeName,
                 TypeNameAffixes.Instance.AttributeSuffix);
 
@@ -157,12 +158,6 @@ namespace R5T.F0000
 
 			return interfaceTypeName;
 		}
-
-		public string GetTypeNameOf<T>(T instance)
-        {
-			var output = Instances.TypeOperator.Get_TypeNameOf(instance);
-			return output;
-        }
 
         /// <summary>
         /// Quality-of-life overload for <see cref="Is_AttributeSuffixedTypeName(string)"/>.

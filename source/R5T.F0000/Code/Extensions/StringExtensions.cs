@@ -42,7 +42,7 @@ namespace System.Linq
             return output;
         }
 
-        /// <inheritdoc cref="IStringOperator.Trim(string)"/>
+        /// <inheritdoc cref="R5T.L0053.IStringOperator.Trim(string)"/>
         public static IEnumerable<string> Trim(this IEnumerable<string> strings)
         {
             var output = Instances.StringOperator.Trim(strings);
@@ -96,7 +96,7 @@ namespace R5T.F0000.Extensions
             return Instances.TextOperator.Tabinate(strings);
         }
 
-        /// <inheritdoc cref="IStringOperator.Trim_End(string, string)"/>
+        /// <inheritdoc cref="L0053.IStringOperator.Trim_End(string, string)"/>
         public static string Trim_End(this string value,
             string ending)
         {
@@ -105,13 +105,13 @@ namespace R5T.F0000.Extensions
                 ending);
         }
 
-        /// <inheritdoc cref="IStringOperator.Trim_NewLines(string)"/>
+        /// <inheritdoc cref="L0053.IStringOperator.Trim_NewLines(string)"/>
         public static string Trim_NewLines(this string value)
         {
             return Instances.StringOperator.Trim_NewLines(value);
         }
 
-        /// <inheritdoc cref="IStringOperator.Trim_Start(string, string)"/>
+        /// <inheritdoc cref="L0053.IStringOperator.Trim_Start(string, string)"/>
         public static string Trim_Start(this string value,
             string beginning)
         {

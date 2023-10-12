@@ -8,25 +8,9 @@ using R5T.T0132;
 namespace R5T.F0000
 {
 	[FunctionalityMarker]
-	public partial interface IDictionaryOperator : IFunctionalityMarker
+	public partial interface IDictionaryOperator : IFunctionalityMarker,
+        L0053.IDictionaryOperator
 	{
-        public TValue AcquireValue<TKey, TValue>(IDictionary<TKey, TValue> dictionary,
-            TKey key,
-            Func<TValue> valueConstructor)
-        {
-            if (dictionary.ContainsKey(key))
-            {
-                var value = dictionary[key];
-                return value;
-            }
-            else
-            {
-                var value = valueConstructor();
-
-                return dictionary.AddAndReturnValue(key, value);
-            }
-        }
-
         /// <summary>
         /// If there is an expandable list of values for each key, add the value to either a new list (if the key does not already exist), or the existing list.
         /// </summary>
@@ -59,15 +43,6 @@ namespace R5T.F0000
                 dictionary.Add(key, value);
             }
             // Else, do nothing.
-        }
-
-        public TValue AddAndReturnValue<TKey, TValue>(IDictionary<TKey, TValue> dictionary,
-            TKey key,
-            TValue value)
-        {
-            dictionary.Add(key, value);
-
-            return value;
         }
 
         /// <summary>

@@ -14,7 +14,7 @@ namespace R5T.F0000
         {
             Task Internal(T value)
             {
-                Instances.ActionOperator.Run(
+                Instances.ActionOperator.Run_Actions(
                     value,
                     actions);
 

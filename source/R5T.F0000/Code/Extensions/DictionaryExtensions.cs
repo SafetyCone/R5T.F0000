@@ -25,6 +25,16 @@ namespace System.Extensions
                 value);
         }
 
+        public static TValue AddAndReturnValue<TKey, TValue>(this IDictionary<TKey, TValue> dictionary,
+            TKey key,
+            TValue value)
+        {
+            return Instances.DictionaryOperator.AddAndReturn_Value(
+                dictionary,
+                key,
+                value);
+        }
+
         public static WasFound<TValue> HasValue<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key)
         {
             return Instances.DictionaryOperator.HasValue(

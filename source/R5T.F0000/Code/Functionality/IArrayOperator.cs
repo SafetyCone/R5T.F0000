@@ -6,13 +6,9 @@ using R5T.T0132;
 namespace R5T.F0000
 {
 	[FunctionalityMarker]
-	public partial interface IArrayOperator : IFunctionalityMarker
+	public partial interface IArrayOperator : IFunctionalityMarker,
+		L0053.IArrayOperator
 	{
-		public T[] New_Empty<T>()
-		{
-			return new T[0];
-		}
-
 		public T[] From<T>(T value)
 		{
 			var output = new[]
@@ -28,12 +24,6 @@ namespace R5T.F0000
 			var lengthsAreEqual = a.Length == b.Length;
 			return lengthsAreEqual;
 		}
-
-		public bool IsEmpty(Array array)
-        {
-			var output = array.Length == 0;
-			return output;
-        }
 
 		public void VerifyEqualLengths(Array a, Array b)
         {

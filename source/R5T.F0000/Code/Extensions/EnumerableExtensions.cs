@@ -47,65 +47,6 @@ namespace System.Linq
 {
     public static class EnumerableExtensions
     {
-        public static IEnumerable<T> Append<T>(this IEnumerable<T> enumerable, IEnumerable<T> appendix)
-        {
-            return Instances.EnumerableOperator.Append(enumerable, appendix);
-        }
-
-        public static IEnumerable<T> Append<T>(this IEnumerable<T> enumerable, params T[] appendix)
-        {
-            return Instances.EnumerableOperator.Append(enumerable, appendix);
-        }
-
-        public static IEnumerable<T> AppendIf<T>(this IEnumerable<T> enumerable,
-            bool value,
-            IEnumerable<T> appendix)
-        {
-            return Instances.EnumerableOperator.AppendIf(
-                enumerable,
-                value,
-                appendix);
-        }
-
-        public static IEnumerable<T> AppendIf<T>(this IEnumerable<T> enumerable,
-            bool value,
-            params T[] appendices)
-        {
-            return Instances.EnumerableOperator.AppendIf(
-                enumerable,
-                value,
-                appendices);
-        }
-
-        /// <summary>
-        /// Delays execution of the appendix constructor until after the value is true.
-        /// </summary>
-        public static IEnumerable<T> AppendIf<T>(this IEnumerable<T> enumerable,
-            bool value,
-            params Func<T>[] appendixConstructors)
-        {
-            return Instances.EnumerableOperator.AppendIf(
-                enumerable,
-                value,
-                appendixConstructors);
-        }
-
-        public static IEnumerable<T> AppendIf<T>(this IEnumerable<T> enumerable,
-            bool value,
-            IEnumerable<T> appendixIfTrue,
-            IEnumerable<T> appendixIfFalse)
-        {
-            return Instances.EnumerableOperator.AppendIf(enumerable,
-                value,
-                appendixIfTrue,
-                appendixIfFalse);
-        }
-
-        public static IEnumerable<T> AppendRange<T>(this IEnumerable<T> enumerable, IEnumerable<T> appendix)
-        {
-            return Instances.EnumerableOperator.AppendRange(enumerable, appendix);
-        }
-
         public static IEnumerable<T> AppendRange2<T>(this IEnumerable<T> enumerable, IEnumerable<T> appendix)
         {
             return Instances.EnumerableOperator.AppendRange(enumerable, appendix);
@@ -227,12 +168,6 @@ namespace System.Linq
         public static WasFound<T> HasSecond<T>(this IEnumerable<T> enumerable)
         {
             var output = Instances.EnumerableOperator.HasSecond(enumerable);
-            return output;
-        }
-
-        public static T Second<T>(this IEnumerable<T> enumerable)
-        {
-            var output = Instances.EnumerableOperator.Second(enumerable);
             return output;
         }
 
