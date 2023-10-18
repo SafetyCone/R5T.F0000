@@ -341,12 +341,6 @@ namespace R5T.F0000
             }
         }
 
-        public bool FileExists(string filePath)
-        {
-            var output = File.Exists(filePath);
-            return output;
-        }
-
         public string[] FindChildFilesInDirectoryByFileExtension(
             string directoryPath,
             string fileExtension)
@@ -483,7 +477,7 @@ namespace R5T.F0000
         /// </summary>
         public void VerifyFileExists(string filePath)
         {
-            var fileExists = this.FileExists(filePath);
+            var fileExists = this.Exists_File(filePath);
             if(!fileExists)
             {
                 throw new FileNotFoundException("File did not exists.", filePath);
@@ -495,7 +489,7 @@ namespace R5T.F0000
         /// </summary>
         public void VerifyFileDoesNotExists(string filePath)
         {
-            var fileExists = this.FileExists(filePath);
+            var fileExists = this.Exists_File(filePath);
             if (fileExists)
             {
                 throw new Exception($"File exists:\n{filePath}");

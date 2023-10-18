@@ -9,16 +9,6 @@ namespace R5T.F0000
 	public partial interface IArrayOperator : IFunctionalityMarker,
 		L0053.IArrayOperator
 	{
-		public T[] From<T>(T value)
-		{
-			var output = new[]
-			{
-				value,
-			};
-
-			return output;
-		}
-
 		public bool EqualLengths(Array a, Array b)
         {
 			var lengthsAreEqual = a.Length == b.Length;
