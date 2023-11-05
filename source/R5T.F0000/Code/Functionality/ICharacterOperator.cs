@@ -53,7 +53,7 @@ namespace R5T.F0000
                 .Select(character => this.Describe(character))
                 ;
 
-            var text = TextOperator.Instance.JoinLines(lines);
+            var text = TextOperator.Instance.Join_Lines(lines);
             return text;
         }
 
@@ -99,27 +99,6 @@ namespace R5T.F0000
             await this.DescribeTo(
                 fileWriter,
                 characters);
-        }
-
-        public string Display(char character)
-        {
-            return character switch
-            {
-                ' ' => @"\space",
-                '\t' => @"\t",
-                '\n' => @"\n",
-                '\r' => @"\r",
-                _ => character.ToString()
-            };
-        }
-
-        public string DisplayCharacters(string @string)
-        {
-            var output = @string
-                .Select(character => this.Display(character))
-                .Join();
-
-            return output;
         }
 
         public char[] GetAsciiCharactersWhere(
@@ -282,27 +261,6 @@ namespace R5T.F0000
                 Instances.CharacterIndexes.ASCII_Unextended_LastIndex,
                 predicate);
 
-            return output;
-        }
-
-        public string Join(IEnumerable<char> characters, string separator)
-        {
-            var characterStrings = characters
-                .Select(character => character.ToString())
-                ;
-
-            var output = Instances.StringOperator.Join(
-                separator,
-                characterStrings);
-
-            return output;
-        }
-
-        public string Join(IEnumerable<char> characters)
-        {
-            var separator = Instances.Strings.CommaSeparatedListSpacedSeparator;
-
-            var output = this.Join(characters, separator);
             return output;
         }
 

@@ -1,15 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 
+using R5T.N0000;
 using R5T.T0132;
 
 
 namespace R5T.F0000
 {
 	[FunctionalityMarker]
-	public partial interface ITextOperator : IFunctionalityMarker
+	public partial interface ITextOperator : IFunctionalityMarker,
+		L0053.ITextOperator
 	{
 		public string MakeLine(
 			string text,
@@ -145,32 +146,6 @@ namespace R5T.F0000
 
 			return output;
         }
-
-        /// <summary>
-        /// Joins lines using the specified line separator into a single string of text.
-        /// </summary>
-        public string JoinLines(
-			IEnumerable<string> lines,
-			string lineSeparator)
-        {
-            var output = StringOperator.Instance.Join(
-                lineSeparator,
-                lines);
-
-            return output;
-        }
-
-        /// <summary>
-        /// Joins lines using the <see cref="Z0000.IStrings.NewLine"/> separator into a single string of text.
-        /// </summary>
-        public string JoinLines(IEnumerable<string> lines)
-		{
-			var output = this.JoinLines(
-				lines,
-				Instances.Strings.NewLine);
-
-			return output;
-		}
 
 		/// <summary>
 		/// Assumes that the inputs are, in fact, sentences.

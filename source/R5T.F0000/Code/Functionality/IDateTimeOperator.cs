@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
+using R5T.N0000;
 using R5T.T0132;
 
 
 namespace R5T.F0000
 {
 	[FunctionalityMarker]
-	public partial interface IDateTimeOperator : IFunctionalityMarker
+	public partial interface IDateTimeOperator : IFunctionalityMarker,
+        L0053.IDateTimeOperator
 	{
         public string Format(
             DateTime dateTime,
@@ -132,22 +134,6 @@ namespace R5T.F0000
         {
 			var utc = local.ToUniversalTime();
 			return utc;
-        }
-
-        public bool TryParseExact(
-            string @string,
-            string format,
-            out DateTime dateTime)
-        {
-            var isDateTimeWithFormat = DateTime.TryParseExact(
-                @string,
-                format,
-                Instances.FormatProviders.Default,
-                // Use none to match the old behavior.
-                DateTimeStyles.None,
-                out dateTime);
-
-            return isDateTimeWithFormat;
         }
     }
 }

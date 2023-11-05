@@ -36,10 +36,10 @@ namespace R5T.F0000.Extensions
 {
     public static class IDictionaryExtensions
     {
-        /// <inheritdoc cref="IDictionaryOperator.AddValue{TKey, TValue}(IDictionary{TKey, List{TValue}}, TKey, TValue)"/>
+        /// <inheritdoc cref="L0053.IDictionaryOperator.Add_Value{TKey, TValue}(IDictionary{TKey, List{TValue}}, TKey, TValue)"/>
         public static void Add_Value<TKey, TValue>(this IDictionary<TKey, List<TValue>> dictionary, TKey key, TValue value)
         {
-            Instances.DictionaryOperator.AddValue(
+            Instances.DictionaryOperator.Add_Value(
                 dictionary,
                 key,
                 value);

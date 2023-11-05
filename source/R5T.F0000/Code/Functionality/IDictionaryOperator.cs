@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using R5T.N0000;
 using R5T.T0132;
 
 
@@ -11,25 +12,6 @@ namespace R5T.F0000
 	public partial interface IDictionaryOperator : IFunctionalityMarker,
         L0053.IDictionaryOperator
 	{
-        /// <summary>
-        /// If there is an expandable list of values for each key, add the value to either a new list (if the key does not already exist), or the existing list.
-        /// </summary>
-        public void AddValue<TKey, TValue>(
-            IDictionary<TKey, List<TValue>> dictionary,
-            TKey key,
-            TValue value)
-        {
-            var hasValue = dictionary.TryGetValue(key, out List<TValue> list);
-            if(!hasValue)
-            {
-                list = new List<TValue>();
-
-                dictionary.Add(key, list);
-            }
-
-            list.Add(value);
-        }
-
         /// <summary>
         /// Add the value only if the key does already exist.
         /// </summary>
@@ -131,7 +113,7 @@ namespace R5T.F0000
         {
             var lines = this.OutputToLines(stringsByString);
 
-            var text = TextOperator.Instance.JoinLines(lines);
+            var text = TextOperator.Instance.Join_Lines(lines);
             return text;
         }
 

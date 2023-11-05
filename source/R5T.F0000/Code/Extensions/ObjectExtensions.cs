@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using R5T.F0000;
+using R5T.N0000;
 
 
 namespace System.Extensions
@@ -40,7 +41,7 @@ namespace System.Extensions
 
         public static WasFound<T> WasFound<T>(this T value)
         {
-            var output = R5T.F0000.WasFound.From(value);
+            var output = R5T.N0000.WasFound.From(value);
             return output;
         }
     }
@@ -109,7 +110,7 @@ namespace R5T.F0000.Extensions.ForObject
 
         public static WasFound<T> WasFound<T>(this T value)
         {
-            var output = R5T.F0000.WasFound.From(value);
+            var output = R5T.N0000.WasFound.From(value);
             return output;
         }
     }

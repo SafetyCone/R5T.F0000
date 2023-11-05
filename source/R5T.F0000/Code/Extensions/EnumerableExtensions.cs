@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using R5T.F0000;
+using R5T.N0000;
 
 using Instances = R5T.F0000.Instances;
 
@@ -135,12 +136,13 @@ namespace System.Linq
             return Instances.EnumerableOperator.ForEach(enumerable, action);
         }
 
-        /// <inheritdoc cref="R5T.F0000.IEnumerableOperator.ForEach_WithCounter{T}(IEnumerable{T}, Action{T, int})"/>
+        /// <inheritdoc cref="IEnumerableOperator.ForEach_WithCounter{T}(IEnumerable{T}, Action{T, int})"/>
         public static void ForEach_WithCounter<T>(this IEnumerable<T> enumerable, Action<T, int> action_WithCounter)
         {
             Instances.EnumerableOperator.ForEach_WithCounter(enumerable, action_WithCounter);
         }
 
+        /// <inheritdoc cref="R5T.L0053.IEnumerableOperator.None{T}(IEnumerable{T})"/>
         public static bool None<T>(this IEnumerable<T> items)
         {
             var output = Instances.EnumerableOperator.None(items);

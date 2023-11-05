@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-using R5T.F0000;
+using R5T.N0000;
 using R5T.T0132;
 
 
 namespace R5T.F0000
 {
     [FunctionalityMarker]
-	public partial interface IXElementOperator : IFunctionalityMarker
+	public partial interface IXElementOperator : IFunctionalityMarker,
+		L0053.IXElementOperator
 	{
 		/// <summary>
 		/// Creates an <see cref="XElement"/> with the child name, adds it to the parent, and returns the child.

@@ -66,14 +66,6 @@ namespace R5T.F0000.Extensions
             return Instances.StringOperator.Get_Second(@string);
         }
 
-        public static string Join(this IEnumerable<string> strings)
-        {
-            var output = strings.Join(
-                IStrings.Empty_Constant);
-
-            return output;
-        }
-
         public static string Join(this IEnumerable<string> strings,
             string separator)
         {

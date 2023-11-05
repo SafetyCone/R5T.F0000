@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
 
-using R5T.F0000;
+using R5T.N0000;
 
 using Instances = R5T.F0000.Instances;
 
@@ -94,7 +94,7 @@ namespace System.Linq
 {
     public static class XElementExtensions
     {
-        /// <inheritdoc cref="IXElementOperator.WhereNameIs(IEnumerable{XElement}, string)"/>
+        /// <inheritdoc cref="R5T.F0000.IXElementOperator.WhereNameIs(IEnumerable{XElement}, string)"/>
         public static IEnumerable<XElement> WhereNameIs(this IEnumerable<XElement> xElements,
             string name)
         {

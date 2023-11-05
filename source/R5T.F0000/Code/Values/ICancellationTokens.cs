@@ -1,5 +1,4 @@
 using System;
-using System.Threading;
 
 using R5T.T0131;
 
@@ -7,8 +6,9 @@ using R5T.T0131;
 namespace R5T.F0000
 {
     [ValuesMarker]
-    public partial interface ICancellationTokens : IValuesMarker
+    public partial interface ICancellationTokens : IValuesMarker,
+        L0053.ICancellationTokens
     {
-        public CancellationToken None => CancellationToken.None;
+
     }
 }

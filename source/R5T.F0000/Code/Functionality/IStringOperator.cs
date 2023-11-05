@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
+using R5T.N0000;
 using R5T.T0132;
 
 
@@ -470,15 +471,6 @@ namespace R5T.F0000
             return isNotNullAndNotEmpty;
         }
 
-        public string Join(IEnumerable<string> strings)
-        {
-            var output = this.Join(
-                Instances.Strings.Empty,
-                strings);
-
-            return output;
-        }
-
         public WasFound<int> LastIndexOf(
             char character,
             string @string)
@@ -606,7 +598,7 @@ namespace R5T.F0000.Internal
         {
             var wasFound = F0000.StringOperator.Instance.WasFound(indexOrNotFound);
 
-            var output = F0000.WasFound.From(
+            var output = N0000.WasFound.From(
                 wasFound,
                 indexOrNotFound);
 

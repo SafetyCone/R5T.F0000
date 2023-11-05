@@ -21,120 +21,12 @@ namespace R5T.F0000
 	public partial interface IFileSystemOperator : IFunctionalityMarker,
         L0053.IFileSystemOperator
 	{
-        public async Task ClearFile(string filePath)
-        {
-            await File.WriteAllTextAsync(
-                filePath,
-                System.String.Empty);
-        }
-
-        public void ClearFile_Synchronous(string filePath)
-        {
-            File.WriteAllText(
-                filePath,
-                System.String.Empty);
-        }
-
         /// <summary>
-        /// Copies a directory.
-        /// </summary>
-        /// <remarks>
-        /// It is BONKERS that C# does not have a built-in implementation of copying directories. Wut?!?
-        /// </remarks>
-        public void CopyDirectory(
-            string sourceDirectoryPath,
-            string destinationDirectoryPath,
-            bool recursive = true)
-        {
-            /// Adapted from: https://docs.microsoft.com/en-us/dotnet/standard/io/how-to-copy-directories
-
-            // Get information about the source directory
-            var directory = new DirectoryInfo(sourceDirectoryPath);
-
-            // Check if the source directory exists
-            if (!directory.Exists)
-            {
-                throw new DirectoryNotFoundException($"Source directory not found: {directory.FullName}");
-            }
-
-            // Cache directories before we start copying.
-            DirectoryInfo[] subDirectories = directory.GetDirectories();
-
-            // Create the destination directory
-            Directory.CreateDirectory(destinationDirectoryPath);
-
-            // Get the files in the source directory and copy to the destination directory
-            foreach (FileInfo file in directory.GetFiles())
-            {
-                string targetFilePath = Path.Combine(destinationDirectoryPath, file.Name);
-                file.CopyTo(targetFilePath);
-            }
-
-            // If recursive and copying subdirectories, recursively call this method
-            if (recursive)
-            {
-                foreach (DirectoryInfo subDirectory in subDirectories)
-                {
-                    string newDestinationDirectoryPath = Path.Combine(destinationDirectoryPath, subDirectory.Name);
-
-                    this.CopyDirectory(subDirectory.FullName, newDestinationDirectoryPath, true);
-                }
-            }
-        }
-
-        public void CopyFiles(IEnumerable<FileCopyPair> fileCopyPairs)
-        {
-            foreach (var fileCopyPair in fileCopyPairs)
-            {
-                this.CopyFile(fileCopyPair);
-            }
-        }
-
-        public void CopyFile(FileCopyPair fileCopyPair)
-        {
-            this.CopyFile(
-                fileCopyPair.SourceFilePath,
-                fileCopyPair.DestinationFilePath);
-        }
-
-        /// <summary>
-        /// Chooses <see cref="CopyFile_OverwriteAllowed(string, string)"/> as the default.
-        /// </summary>
-        public void CopyFile(
-			string sourceFilePath,
-			string destinationFilePath)
-        {
-            this.CopyFile_OverwriteAllowed(
-                sourceFilePath,
-                destinationFilePath);
-        }
-
-        public void CopyFile_OverwriteAllowed(
-            string sourceFilePath,
-            string destinationFilePath)
-        {
-            File.Copy(
-                sourceFilePath,
-                destinationFilePath,
-                true);
-        }
-
-        public void CopyFile_OverwriteForbidden(
-            string sourceFilePath,
-            string destinationFilePath)
-        {
-            File.Copy(
-                sourceFilePath,
-                destinationFilePath,
-                false);
-        }
-
-        /// <summary>
-        /// Chooses <see cref="L0053.N000.IFileSystemOperator.CreateDirectory_OkIfAlreadyExists(string)"/> as the default.
+        /// Chooses <see cref="L0053.N000.IFileSystemOperator.Create_Directory_OkIfAlreadyExists(string)"/> as the default.
         /// </summary>
         public void CreateDirectory(string directoryPath)
         {
-            this.CreateDirectory_OkIfAlreadyExists(directoryPath);
+            this.Create_Directory_OkIfAlreadyExists(directoryPath);
         }
 
         /// <summary>
@@ -148,7 +40,7 @@ namespace R5T.F0000
                 throw new Exception("Directory already existed.");
             }
 
-            this.CreateDirectory_OkIfAlreadyExists(directoryPath);
+            this.Create_Directory_OkIfAlreadyExists(directoryPath);
         }
 
         public bool DirectoryExists(string directoryPath)
@@ -251,7 +143,7 @@ namespace R5T.F0000
 
         public void EnsureDirectoryExists(string directoryPath)
         {
-            this.CreateDirectory_OkIfAlreadyExists(directoryPath);
+            this.Create_Directory_OkIfAlreadyExists(directoryPath);
         }
 
         public IEnumerable<string> EnumerateAllChildDirectoryPaths(string directoryPath)
