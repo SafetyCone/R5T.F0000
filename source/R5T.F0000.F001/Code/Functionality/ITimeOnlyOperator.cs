@@ -6,14 +6,9 @@ using R5T.T0132;
 namespace R5T.F0000.F001
 {
 	[FunctionalityMarker]
-	public partial interface ITimeOnlyOperator : IFunctionalityMarker
+	public partial interface ITimeOnlyOperator : IFunctionalityMarker,
+        L0072.ITimeOnlyOperator
 	{
-        public TimeOnly FromDateTime(DateTime dateTime)
-        {
-            var timeOnly = TimeOnly.FromDateTime(dateTime);
-            return timeOnly;
-        }
-
         public DateOnly GetDateForNextTime_Local(TimeOnly localTime, TimeOnly localNow)
         {
             var timeIsAfterNow = this.TimeIsAfterNow_Local(localTime, localNow);
@@ -28,19 +23,19 @@ namespace R5T.F0000.F001
 
         /// <summary>
         /// Gets the next datetime which the local time occurs.
-        /// <inheritdoc cref="Documentation.NexDateAfterTime"/>
+        /// <inheritdoc cref="Documentation.NextDateAfterTime"/>
         /// </summary>
         public DateTime GetNextDateTime_Local(TimeOnly localTime, TimeOnly localNow)
         {
             var dateForNextTime = this.GetDateForNextTime_Local(localTime, localNow);
 
-            var nextLocalDateTime = Instances.DateTimeOperator.FromDateAndTime(dateForNextTime, localTime);
+            var nextLocalDateTime = Instances.DateTimeOperator.From_DateAndTime(dateForNextTime, localTime);
             return nextLocalDateTime;
         }
 
         /// <summary>
         /// Gets the next datetime offset at which the local time occurs.
-        /// <inheritdoc cref="Documentation.NexDateAfterTime"/>
+        /// <inheritdoc cref="Documentation.NextDateAfterTime"/>
         /// </summary>
         public DateTimeOffset GetNextDateTimeOffset_Local(TimeOnly localTime, TimeOnly localNow)
         {
@@ -63,7 +58,7 @@ namespace R5T.F0000.F001
         {
             var nowLocalDateTime = Instances.F0000_DateOperator.GetNow_Local();
 
-            var nowLocal = this.FromDateTime(nowLocalDateTime);
+            var nowLocal = this.From_DateTime(nowLocalDateTime);
             return nowLocal;
         }
 
@@ -71,7 +66,7 @@ namespace R5T.F0000.F001
         {
             var nowUtcDateTime = Instances.F0000_DateOperator.GetNow_Utc();
 
-            var nowUtc = this.FromDateTime(nowUtcDateTime);
+            var nowUtc = this.From_DateTime(nowUtcDateTime);
             return nowUtc;
         }
 

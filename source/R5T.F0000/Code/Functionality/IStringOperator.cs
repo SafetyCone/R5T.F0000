@@ -146,44 +146,6 @@ namespace R5T.F0000
             return output;
         }
 
-        /// <summary>
-        /// The default <see cref="System.String.GetHashCode()"/> is non-deterministic.
-        /// This method just calls that method.
-        /// </summary>
-        public int GetHashCode_NonDeterministic(string @string)
-        {
-            var output = @string.GetHashCode();
-            return output;
-        }
-
-        /// <summary>
-        /// The default <see cref="System.String.GetHashCode()"/> is non-deterministic.
-        /// This method provides a deterministic implementation.
-        /// </summary>
-        /// <remarks>
-        /// Source: https://andrewlock.net/why-is-string-gethashcode-different-each-time-i-run-my-program-in-net-core/#a-deterministic-gethashcode-implementation
-        /// </remarks>
-        public int GetHashCode_Deterministic(string @string)
-        {
-            unchecked
-            {
-                int hash1 = (5381 << 16) + 5381;
-                int hash2 = hash1;
-
-                for (int i = 0; i < @string.Length; i += 2)
-                {
-                    hash1 = ((hash1 << 5) + hash1) ^ @string[i];
-
-                    if (i == @string.Length - 1)
-                        break;
-
-                    hash2 = ((hash2 << 5) + hash2) ^ @string[i + 1];
-                }
-
-                return hash1 + (hash2 * 1566083941);
-            }
-        }
-
         public new int Get_LastIndexOf(
             char character,
             string @string)
@@ -308,7 +270,7 @@ namespace R5T.F0000
         }
 
         /// <summary>
-        /// Chooses <see cref="L0053.IStringOperator.Get_Substring_From_Exclusive(int, string)"/> as the default.
+        /// Chooses <see cref="L0066.IStringOperator.Get_Substring_From_Exclusive(int, string)"/> as the default.
         /// </summary>
         public string Get_Substring_Exclusive(
             int startIndex_Exclusive,
@@ -545,22 +507,8 @@ namespace R5T.F0000
             return output;
         }
 
-        public string PrefixWith(
-            string prefix,
-            string @string)
-        {
-            var output = prefix + @string;
-            return output;
-        }
-
-        public string Repeat(char character, int count)
-        {
-            var output = new string(character, count);
-            return output;
-        }
-
         /// <summary>
-        /// Quality-of-life overload for <see cref="L0053.IStringOperator.Append(string, string)"/>.
+        /// Quality-of-life overload for <see cref="L0066.IStringOperator.Append(string, string)"/>.
         /// </summary>
         public string Suffix(
             string @string,

@@ -22,7 +22,7 @@ namespace R5T.F0000
         L0053.IFileSystemOperator
 	{
         /// <summary>
-        /// Chooses <see cref="L0053.N000.IFileSystemOperator.Create_Directory_OkIfAlreadyExists(string)"/> as the default.
+        /// Chooses <see cref="L0066.IFileSystemOperator.Create_Directory_OkIfAlreadyExists(string)"/> as the default.
         /// </summary>
         public void CreateDirectory(string directoryPath)
         {

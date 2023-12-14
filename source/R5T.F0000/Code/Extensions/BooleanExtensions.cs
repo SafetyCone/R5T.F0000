@@ -18,7 +18,7 @@ public static class BooleanExtensions
         return representation;
     }
 
-    /// <inheritdoc cref="R5T.F0000.IBooleanOperator.ToString_PascalCase(bool)"/>
+    /// <inheritdoc cref="R5T.L0066.IBooleanOperator.ToString_PascalCase(bool)"/>
     public static string ToString_PascalCase(this bool value)
     {
         var representation = Instances.BooleanOperator.ToString_PascalCase(value);

@@ -258,12 +258,6 @@ namespace R5T.F0000
 				prependix.AsEnumerable());
 		}
 
-
-        public IEnumerable<T> Repeat<T>(T instance, int count)
-		{
-			return Enumerable.Repeat(instance, count);
-		}
-
 		public T Second<T>(IEnumerable<T> enumerable)
 		{
 			var output = this.Nth(enumerable, 2);

@@ -28,7 +28,7 @@ namespace R5T.F0000.Construction
         {
 			var type = Instances.ExampleTypes.NonGeneric;
 
-			var isConstructed = Instances.TypeOperator.IsConstructedGeneric(type);
+			var isConstructed = Instances.TypeOperator.Is_ConstructedGeneric(type);
 
 			Console.WriteLine($"{isConstructed}: Is constructed generic type?\n{type.FullName}");
 		}
@@ -37,7 +37,7 @@ namespace R5T.F0000.Construction
 		{
 			var partiallyConstructedType = Instances.ExampleTypes.PartiallyConstructedType;
 
-			var isConstructed = Instances.TypeOperator.IsConstructedGeneric(partiallyConstructedType);
+			var isConstructed = Instances.TypeOperator.Is_ConstructedGeneric(partiallyConstructedType);
 
 			Console.WriteLine($"{isConstructed}: Is constructed generic type?\n{partiallyConstructedType.FullName}");
 		}
@@ -46,7 +46,7 @@ namespace R5T.F0000.Construction
 		{
 			var type = Instances.ExampleTypes.ClosedGeneric;
 
-			var isConstructed = Instances.TypeOperator.IsConstructedGeneric(type);
+			var isConstructed = Instances.TypeOperator.Is_ConstructedGeneric(type);
 
 			Console.WriteLine($"{isConstructed}: Is constructed generic type?\n{type.FullName}");
 		}
@@ -55,7 +55,7 @@ namespace R5T.F0000.Construction
 		{
 			var type = Instances.ExampleTypes.ClosedGeneric;
 
-			var isConstructed = Instances.TypeOperator.IsConstructedGeneric(type);
+			var isConstructed = Instances.TypeOperator.Is_ConstructedGeneric(type);
 
 			Console.WriteLine($"{isConstructed}: Is constructed generic type?\n{type.FullName}");
 		}
@@ -71,7 +71,7 @@ namespace R5T.F0000.Construction
 		{
 			var partiallyConstructedType = Instances.ExampleTypes.PartiallyConstructedType;
 
-			var isClosed = Instances.TypeOperator.IsClosedGeneric(partiallyConstructedType);
+			var isClosed = Instances.TypeOperator.Is_ClosedGeneric(partiallyConstructedType);
 
 			Console.WriteLine($"{isClosed}: Is closed generic type?\n{partiallyConstructedType.FullName}");
 		}
@@ -80,7 +80,7 @@ namespace R5T.F0000.Construction
 		{
 			var type = Instances.ExampleTypes.ClosedGeneric;
 
-			var isClosed = Instances.TypeOperator.IsClosedGeneric(type);
+			var isClosed = Instances.TypeOperator.Is_ClosedGeneric(type);
 
 			Console.WriteLine($"{isClosed}: Is closed generic type?\n{type.FullName}");
 		}
@@ -89,7 +89,7 @@ namespace R5T.F0000.Construction
 		{
 			var type = Instances.ExampleTypes.OpenGenericClass;
 
-			var isClosed = Instances.TypeOperator.IsClosedGeneric(type);
+			var isClosed = Instances.TypeOperator.Is_ClosedGeneric(type);
 
 			Console.WriteLine($"{isClosed}: Is closed generic type?\n{type.FullName}");
 		}
@@ -106,7 +106,7 @@ namespace R5T.F0000.Construction
 			// Make a partially-closed
 			var partiallyConstructedType = Instances.ExampleTypes.PartiallyConstructedType;
 
-			var isOpen = Instances.TypeOperator.IsOpenGeneric(partiallyConstructedType);
+			var isOpen = Instances.TypeOperator.Is_OpenGeneric(partiallyConstructedType);
 
 			Console.WriteLine($"{isOpen}: Is open generic type?\n{partiallyConstructedType.FullName}");
 		}
@@ -115,7 +115,7 @@ namespace R5T.F0000.Construction
 		{
 			var type = Instances.ExampleTypes.ClosedGeneric;
 
-			var isOpen = Instances.TypeOperator.IsOpenGeneric(type);
+			var isOpen = Instances.TypeOperator.Is_OpenGeneric(type);
 
 			Console.WriteLine($"{isOpen}: Is open generic type?\n{type.FullName}");
 		}
@@ -124,7 +124,7 @@ namespace R5T.F0000.Construction
         {
 			var type = Instances.ExampleTypes.OpenGenericClass;
 
-			var isOpen = Instances.TypeOperator.IsOpenGeneric(type);
+			var isOpen = Instances.TypeOperator.Is_OpenGeneric(type);
 
 			Console.WriteLine($"{isOpen}: Is open generic type?\n{type.FullName}");
 		}
@@ -133,7 +133,7 @@ namespace R5T.F0000.Construction
 		{
 			var type = Instances.ExampleTypes.ClosedGeneric;
 
-			var isGeneric = Instances.TypeOperator.IsGeneric(type);
+			var isGeneric = Instances.TypeOperator.Is_Generic(type);
 
 			Console.WriteLine($"{isGeneric}: Is generic type?\n{type.FullName}");
 		}
@@ -142,7 +142,7 @@ namespace R5T.F0000.Construction
         {
 			var type = Instances.ExampleTypes.OpenGenericClass;
 
-			var isGeneric = Instances.TypeOperator.IsGeneric(type);
+			var isGeneric = Instances.TypeOperator.Is_Generic(type);
 
 			Console.WriteLine($"{isGeneric}: Is generic type?\n{type.FullName}");
         }

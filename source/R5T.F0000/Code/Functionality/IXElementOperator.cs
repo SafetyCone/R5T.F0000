@@ -19,17 +19,11 @@ namespace R5T.F0000
 		/// <returns>The child <see cref="XElement"/>.</returns>
 		public XElement AddChild(XElement parentElement, string childName)
 		{
-			var child = this.CreateElement(childName);
+			var child = this.Create_Element(childName);
 
 			parentElement.Add(child);
 
 			return child;
-		}
-
-		public XElement CreateElement(string name)
-		{
-			var output = new XElement(name);
-			return output;
 		}
 
 		/// <summary>

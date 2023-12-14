@@ -22,7 +22,7 @@ namespace R5T.F0000.Construction
 			byte byteOrderMark02 = 0xBB; // 187, »
 			byte byteOrderMark03 = 0xBF; // 191, ¿
 
-			var bytes = F0000.Instances.FileOperator.ReadBytes_Synchronous(filePath);
+			var bytes = F0000.Instances.FileOperator.Read_Bytes_Synchronous(filePath);
 
 			var hasByteOrderMark01 = bytes[0] == byteOrderMark01;
 			var hasByteOrderMark02 = bytes[1] == byteOrderMark02;

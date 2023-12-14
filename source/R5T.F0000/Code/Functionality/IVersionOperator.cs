@@ -32,7 +32,7 @@ namespace R5T.F0000
 		}
 
 		/// <summary>
-		/// Determines if the version is the <see cref="IVersions.None"/> value.
+		/// Determines if the version is the <see cref="L0066.IVersions.None"/> value.
 		/// </summary>
 		public bool IsNone(Version version)
 		{

@@ -126,7 +126,7 @@ namespace R5T.F0000
         {
 			var document = Instances.XmlOperator.CreateNewDocument();
 
-			var root = Instances.XElementOperator.CreateElement(rootElementName);
+			var root = Instances.XElementOperator.Create_Element(rootElementName);
 
 			document.Add(root);
 

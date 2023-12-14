@@ -13,7 +13,7 @@ namespace R5T.F0000.F001
         {
 			var todayLocalDateTime = Instances.F0000_DateOperator.GetToday_Local();
 
-			var todayLocal = Instances.DateOnlyOperator.FromDateTime(todayLocalDateTime);
+			var todayLocal = Instances.DateOnlyOperator.From_DateTime(todayLocalDateTime);
 			return todayLocal;
         }
 
@@ -21,7 +21,7 @@ namespace R5T.F0000.F001
 		{
 			var todayUtcDateTime = Instances.F0000_DateOperator.GetToday_Utc();
 
-			var todayUtc = Instances.DateOnlyOperator.FromDateTime(todayUtcDateTime);
+			var todayUtc = Instances.DateOnlyOperator.From_DateTime(todayUtcDateTime);
 			return todayUtc;
 		}
 
@@ -39,7 +39,7 @@ namespace R5T.F0000.F001
 		{
 			var todayLocalDateTime = Instances.F0000_DateOperator.GetTomorrow_Local();
 
-			var todayLocal = Instances.DateOnlyOperator.FromDateTime(todayLocalDateTime);
+			var todayLocal = Instances.DateOnlyOperator.From_DateTime(todayLocalDateTime);
 			return todayLocal;
 		}
 
@@ -47,7 +47,7 @@ namespace R5T.F0000.F001
 		{
 			var todayUtcDateTime = Instances.F0000_DateOperator.GetTomorrow_Utc();
 
-			var todayUtc = Instances.DateOnlyOperator.FromDateTime(todayUtcDateTime);
+			var todayUtc = Instances.DateOnlyOperator.From_DateTime(todayUtcDateTime);
 			return todayUtc;
 		}
 
