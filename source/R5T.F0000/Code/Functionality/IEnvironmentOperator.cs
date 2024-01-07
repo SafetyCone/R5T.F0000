@@ -16,7 +16,8 @@ namespace R5T.F0000
         }
 
 		/// <summary>
-		/// Returns true if the DEBUG preprocessor context symbol has been defined. False otherwise.
+		/// Returns true if the DEBUG preprocessor context symbol was defined during compilation of the currently executing code.
+        /// False otherwise.
 		/// </summary>
 		public bool IsDebugCompilationConfiguration()
         {

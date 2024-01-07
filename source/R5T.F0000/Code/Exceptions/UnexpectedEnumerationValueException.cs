@@ -44,7 +44,7 @@ namespace R5T.F0000
         }
 
         public UnexpectedEnumerationValueException(TEnum value)
-            : this(Instances.EnumerationOperator.UnexpectedEnumerationValueMessage<TEnum>(value))
+            : this(Instances.EnumerationOperator.Get_UnexpectedEnumerationValueExceptionMessage<TEnum>(value))
         {
             this.Value = value;
         }

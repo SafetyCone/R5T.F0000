@@ -25,22 +25,6 @@ namespace R5T.F0000.Extensions
         {
             return Instances.EnumerableOperator.Append(enumerable, itemConstructor);
         }
-
-        public static IEnumerable<T> Prepend<T>(this IEnumerable<T> items,
-            IEnumerable<T> prependix)
-        {
-            return Instances.EnumerableOperator.Prepend(
-                items,
-                prependix);
-        }
-
-        public static IEnumerable<T> Prepend<T>(this IEnumerable<T> items,
-            params T[] prependix)
-        {
-            return Instances.EnumerableOperator.Prepend(
-                items,
-                prependix);
-        }
     }
 }
 

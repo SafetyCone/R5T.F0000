@@ -13,13 +13,13 @@ namespace System
         public static void AddRange<T>(this IList<T> list,
             IEnumerable<T> items)
         {
-            Instances.ListOperator.AddRange(list, items);
+            Instances.ListOperator.Add_Range(list, items);
         }
 
         public static void AddRange<T>(this IList<T> list,
             params T[] items)
         {
-            Instances.ListOperator.AddRange(list, items);
+            Instances.ListOperator.Add_Range(list, items);
         }
 
         public static WasFound<T> HasNth<T>(this IList<T> list, int n)
@@ -30,13 +30,13 @@ namespace System
 
         public static T Nth<T>(this IList<T> list, int n)
         {
-            var output = Instances.ListOperator.Nth(list, n);
+            var output = Instances.ListOperator.Get_Nth(list, n);
             return output;
         }
 
         public static T NthOrDefault<T>(this IList<T> list, int n)
         {
-            var output = Instances.ListOperator.NthOrDefault(list, n);
+            var output = Instances.ListOperator.Get_NthOrDefault(list, n);
             return output;
         }
 
@@ -48,13 +48,13 @@ namespace System
 
         public static T Second<T>(this IList<T> list)
         {
-            var output = Instances.ListOperator.Second(list);
+            var output = Instances.ListOperator.Get_Second(list);
             return output;
         }
 
         public static T SecondOrDefault<T>(this IList<T> list)
         {
-            var output = Instances.ListOperator.SecondOrDefault(list);
+            var output = Instances.ListOperator.Get_SecondOrDefault(list);
             return output;
         }
     }
@@ -65,13 +65,13 @@ namespace R5T.F0000.Extensions
 {
     public static class ListExtensions
     {
-        /// <inheritdoc cref="IListOperator.Get_First{T}(IList{T})"/>
+        /// <inheritdoc cref="L0066.IListOperator.Get_First{T}(IList{T})"/>
         public static T Get_First<T>(this IList<T> list)
         {
             return Instances.ListOperator.Get_First(list);
         }
 
-        /// <inheritdoc cref="IListOperator.Get_Second{T}(IList{T})"/>
+        /// <inheritdoc cref="L0066.IListOperator.Get_Second{T}(IList{T})"/>
         public static T Get_Second<T>(this IList<T> list)
         {
             return Instances.ListOperator.Get_Second(list);

@@ -82,7 +82,7 @@ namespace R5T.F0000
             string filePath,
             IEnumerable<char> characters)
         {
-            using var fileWriter = StreamWriterOperator.Instance.NewWrite(filePath);
+            using var fileWriter = StreamWriterOperator.Instance.New_Write(filePath);
 
             this.DescribeTo_Synchronous(
                 fileWriter,
@@ -94,7 +94,7 @@ namespace R5T.F0000
             string filePath,
             IEnumerable<char> characters)
         {
-            using var fileWriter = StreamWriterOperator.Instance.NewWrite(filePath);
+            using var fileWriter = StreamWriterOperator.Instance.New_Write(filePath);
 
             await this.DescribeTo(
                 fileWriter,

@@ -543,7 +543,7 @@ namespace R5T.F0000
 			IList<T> a,
 			IList<T> b)
 		{
-			var countsAreEqual = ListOperator.Instance.EqualCounts(a, b);
+			var countsAreEqual = ListOperator.Instance.Equal_Counts(a, b);
 			return countsAreEqual;
 		}
 
@@ -578,7 +578,7 @@ namespace R5T.F0000
 			IList<T> b,
 			Func<T, T, int, bool> instanceEquals)
 		{
-			ListOperator.Instance.VerifyEqualCounts(a, b);
+			ListOperator.Instance.Verify_EqualCounts(a, b);
 
 			var output = this.List_Values_StopOnFirst_WithoutVerification(a, b, instanceEquals);
 			return output;

@@ -197,11 +197,6 @@ namespace R5T.F0000
             return output;
         }
 
-		public IEnumerable<T> New<T>()
-		{
-			return Enumerable.Empty<T>();
-		}
-
         public T Nth<T>(IEnumerable<T> items, int n)
 		{
 			var wasFound = this.HasNth(items, n);
@@ -233,30 +228,6 @@ namespace R5T.F0000
 
             return output;
         }
-
-        public IEnumerable<T> Prepend<T>(
-			IEnumerable<T> items,
-			IEnumerable<T> prependix)
-		{
-			foreach (var item in prependix)
-			{
-				yield return item;
-			}
-
-			foreach (var item in items)
-			{
-				yield return item;
-			}
-		}
-
-        public IEnumerable<T> Prepend<T>(
-			IEnumerable<T> items,
-			params T[] prependix)
-		{
-			return this.Prepend(
-				items,
-				prependix.AsEnumerable());
-		}
 
 		public T Second<T>(IEnumerable<T> enumerable)
 		{

@@ -88,20 +88,6 @@ namespace R5T.F0000
         }
 
         /// <summary>
-        /// Gets a message indicating the the input value of the <typeparamref name="TEnum"/> enumeration was unexpected.
-        /// This is useful in producing an error in the default case for switch statements based on enumeration values.
-        /// </summary>
-        /// <remarks>
-        /// See: https://stackoverflow.com/questions/13645149/what-is-the-correct-exception-to-throw-for-unhandled-enum-values
-        /// </remarks>
-        public string UnexpectedEnumerationValueMessage<TEnum>(TEnum unexpectedValue)
-            where TEnum : Enum
-        {
-            var output = $"Unexpected enumeration value: '{unexpectedValue}' for enumeration type {typeof(TEnum).FullName}";
-            return output;
-        }
-
-        /// <summary>
         /// Produces an exception for the situation where a value of the <typeparamref name="TEnum"/> enumeration was unexpected.
         /// This is useful in producing an error in the default case for switch statements based on enumeration values.
         /// </summary>

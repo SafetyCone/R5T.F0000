@@ -51,11 +51,7 @@ namespace R5T.F0000
             return lines;
         }
 
-        public TextWriter Get_Writer(string filePath)
-        {
-            var output = Instances.StreamWriterOperator.NewWrite(filePath);
-            return output;
-        }
+        
 
         public async Task CopyToFile(
 			string filePath,
@@ -83,9 +79,9 @@ namespace R5T.F0000
 
 		public StreamWriter NewWrite_Text(
 			string filePath,
-            bool overwrite = IValues.Default_OverwriteValue_Const)
+            bool overwrite = IValues.Default_OverwriteValue_Constant)
 		{
-			var output = StreamWriterOperator.Instance.NewWrite(
+			var output = StreamWriterOperator.Instance.New_Write(
 				filePath);
 
 			return output;
@@ -121,22 +117,11 @@ namespace R5T.F0000
 			return memoryStream;
         }
 
-        public string ReadText_Synchronous(string filePath)
-        {
-			var text = File.ReadAllText(filePath);
-			return text;
-        }
-
-		public Task<string> ReadText(string filePath)
-		{
-			return File.ReadAllTextAsync(filePath);
-		}
-
         /// <inheritdoc cref="IStreamWriterOperator.WriteAllLines_Synchronous(string, IEnumerable{string}, bool)"/>
 		public void WriteAllLines_Synchronous(
 			string filePath,
 			IEnumerable<string> lines,
-			bool overwrite = IValues.Default_OverwriteValue_Const)
+			bool overwrite = IValues.Default_OverwriteValue_Constant)
 		{
             FileSystemOperator.Instance.Ensure_DirectoryExists_ForFilePath(filePath);
 

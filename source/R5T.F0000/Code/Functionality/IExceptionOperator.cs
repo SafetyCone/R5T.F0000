@@ -10,11 +10,11 @@ namespace R5T.F0000
 	public partial interface IExceptionOperator : IFunctionalityMarker,
 		L0053.IExceptionOperator
 	{
-		private static Internal.IExceptionOperator Internal => F0000.Internal.ExceptionOperator.Instance;
+		//private static Internal.IExceptionOperator Internal => F0000.Internal.ExceptionOperator.Instance;
 
 
 		/// <summary>
-		/// <inheritdoc cref="Documentation.ArrayLengthsNotActuallyChecked" path="/summary"/>
+		/// <inheritdoc cref="L0066.Documentation.ArrayLengthsNotActuallyChecked" path="/summary"/>
 		/// Just gets the exception assuming that is the case.
 		/// </summary>
 		public Exception GetArrayLengthsUnequalException(Array a, Array b)
@@ -25,11 +25,11 @@ namespace R5T.F0000
 			return output;
         }
 
-		/// <summary>
-		/// <inheritdoc cref="Documentation.CollectionCountsNotActuallyChecked" path="/summary"/>
-		/// Just gets the exception assuming that is the case.
-		/// </summary>
-		public Exception GetCollectionCountsUnequalException<T>(
+        /// <summary>
+        /// <inheritdoc cref="L0066.Documentation.CollectionCountsNotActuallyChecked" path="/summary"/>
+        /// Just gets the exception assuming that is the case.
+        /// </summary>
+        public Exception GetCollectionCountsUnequalException<T>(
 			ICollection<T> a,
 			ICollection<T> b)
 		{
@@ -39,29 +39,15 @@ namespace R5T.F0000
 			return output;
 		}
 
-		/// <summary>
-		/// <inheritdoc cref="Documentation.DictionaryCountsNotActuallyChecked" path="/summary"/>
-		/// Just gets the exception assuming that is the case.
-		/// </summary>
-		public Exception GetDictionaryCountsUnequalException<TKey, TValue>(
+        /// <summary>
+        /// <inheritdoc cref="L0066.Documentation.DictionaryCountsNotActuallyChecked" path="/summary"/>
+        /// Just gets the exception assuming that is the case.
+        /// </summary>
+        public Exception GetDictionaryCountsUnequalException<TKey, TValue>(
 			IDictionary<TKey, TValue> a,
 			IDictionary<TKey, TValue> b)
 		{
 			var message = MessageOperator.Instance.GetUnequalDictionaryCounts(a, b);
-
-			var output = new Exception(message);
-			return output;
-		}
-
-		/// <summary>
-		/// <inheritdoc cref="Documentation.ListCountsNotActuallyChecked" path="/summary"/>
-		/// Just gets the exception assuming that is the case.
-		/// </summary>
-		public Exception GetListCountsUnequalException<T>(
-			IList<T> a,
-			IList<T> b)
-		{
-			var message = MessageOperator.Instance.GetUnequalListCounts(a, b);
 
 			var output = new Exception(message);
 			return output;

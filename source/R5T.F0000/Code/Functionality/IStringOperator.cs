@@ -32,12 +32,6 @@ namespace R5T.F0000
             return formatString;
         }
 
-        public string Enquote(string @string)
-        {
-            var output = $"\"{@string}\"";
-            return output;
-        }
-
         public string Format(
             string template,
             params object[] objects)
@@ -109,7 +103,7 @@ namespace R5T.F0000
         /// Gets the first character of the string.
         /// </summary>
         /// <remarks>
-        /// This must duplicate <see cref="IListOperator.Get_First{T}(IList{T})"/> because string does not actually implement <see cref="IList{T}"/> of <see cref="char"/>
+        /// This must duplicate <see cref="L0066.IListOperator.Get_First{T}(IList{T})"/> because string does not actually implement <see cref="IList{T}"/> of <see cref="char"/>
         /// (because it does not implement <see cref="Array"/> of <see cref="char"/>).
         /// </remarks>
         public char Get_First(string @string)
@@ -122,7 +116,7 @@ namespace R5T.F0000
         /// Gets the first character of the string.
         /// </summary>
         /// <remarks>
-        /// This must duplicate <see cref="IListOperator.Get_Second{T}(IList{T})"/> because string does not actually implement <see cref="IList{T}"/> of <see cref="char"/>
+        /// This must duplicate <see cref="L0066.IListOperator.Get_Second{T}(IList{T})"/> because string does not actually implement <see cref="IList{T}"/> of <see cref="char"/>
         /// (because it does not implement <see cref="Array"/> of <see cref="char"/>).
         /// </remarks>
         public char Get_Second(string @string)
