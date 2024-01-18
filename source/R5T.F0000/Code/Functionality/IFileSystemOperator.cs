@@ -141,11 +141,6 @@ namespace R5T.F0000
             }
         }
 
-        public void EnsureDirectoryExists(string directoryPath)
-        {
-            this.Create_Directory_OkIfAlreadyExists(directoryPath);
-        }
-
         public IEnumerable<string> EnumerateAllChildDirectoryPaths(string directoryPath)
         {
             var output = this.EnumerateChildDirectoryPaths(

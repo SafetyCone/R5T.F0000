@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-using R5T.N0000;
 using R5T.T0132;
+using R5T.T0221;
 
 
 namespace R5T.F0000
@@ -540,7 +540,7 @@ namespace R5T.F0000.Internal
         {
             var wasFound = F0000.StringOperator.Instance.WasFound(indexOrNotFound);
 
-            var output = N0000.WasFound.From(
+            var output = T0221.WasFound.From(
                 wasFound,
                 indexOrNotFound);
 

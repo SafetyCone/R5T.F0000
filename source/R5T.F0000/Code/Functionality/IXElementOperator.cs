@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-using R5T.N0000;
 using R5T.T0132;
+using R5T.T0221;
 
 
 namespace R5T.F0000
@@ -19,7 +19,7 @@ namespace R5T.F0000
 		/// <returns>The child <see cref="XElement"/>.</returns>
 		public XElement AddChild(XElement parentElement, string childName)
 		{
-			var child = this.Create_Element(childName);
+			var child = this.Create_Element_FromName(childName);
 
 			parentElement.Add(child);
 
