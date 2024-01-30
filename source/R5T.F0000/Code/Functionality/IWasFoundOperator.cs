@@ -7,7 +7,7 @@ namespace R5T.F0000
 {
     [FunctionalityMarker]
 	public partial interface IWasFoundOperator : IFunctionalityMarker,
-        T0221.IWasFoundOperator
+        L0089.IWasFoundOperator 
 	{
         
     }

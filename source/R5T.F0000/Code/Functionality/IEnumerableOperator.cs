@@ -4,8 +4,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
+using R5T.L0089.T000;
 using R5T.T0132;
-using R5T.T0221;
 
 
 namespace R5T.F0000
@@ -48,12 +48,6 @@ namespace R5T.F0000
 			return output;
 		}
 
-		public bool ContainsAll<T>(IEnumerable<T> superset, IEnumerable<T> subset)
-		{
-			var output = subset.Except(superset).None();
-			return output;
-		}
-
 		/// <summary>
 		/// If the input enumerable is null (the default for <see cref="IEnumerable{T}"/>), then return an empty enumerable.
 		/// Else, return the enumerable.
@@ -68,29 +62,6 @@ namespace R5T.F0000
 				: enumerable
 				;
 
-			return output;
-		}
-
-		public IEnumerable<T> Except<T>(IEnumerable<T> items, T item)
-			where T : IEquatable<T>
-		{
-			var output = items.Where(x => !x.Equals(item));
-			return output;
-		}
-
-		public IEnumerable<T> Except<T>(IEnumerable<T> items, T item, IEqualityComparer<T> equalityComparer)
-		{
-			var output = items.Where(x => !equalityComparer.Equals(x, item));
-			return output;
-		}
-
-		/// <summary>
-		/// Quality-of-life name for <see cref="Enumerable.SkipLast{TSource}(IEnumerable{TSource}, int)"/>
-		/// </summary>
-		public IEnumerable<T> ExceptLast<T>(IEnumerable<T> enumerable, int numberOfElements)
-		{
-			// Use SkipLast().
-			var output = enumerable.SkipLast(numberOfElements);
 			return output;
 		}
 
@@ -111,16 +82,6 @@ namespace R5T.F0000
 		{
 			// Skip the first element.
 			var output = this.ExceptFirst(enumerable, 1);
-			return output;
-		}
-
-		/// <summary>
-		/// Returns the entire sequence, except for the last element (skips the last element).
-		/// </summary>
-		public IEnumerable<T> ExceptLast<T>(IEnumerable<T> enumerable)
-		{
-			// Skip the last element.
-			var output = this.ExceptLast(enumerable, 1);
 			return output;
 		}
 
@@ -212,7 +173,7 @@ namespace R5T.F0000
 		{
 			var wasFound = this.HasNth(items, n);
 
-			var output = wasFound.ResultOrDefaultIfNotFound();
+			var output = wasFound.Get_Result_OrDefaultIfNotFound();
 			return output;
 		}
 
@@ -238,56 +199,6 @@ namespace R5T.F0000
 		public T SecondOrDefault<T>(IEnumerable<T> enumerable)
 		{
 			var output = this.NthOrDefault(enumerable, 2);
-			return output;
-		}
-
-		public IEnumerable<T> SkipFirst<T>(IEnumerable<T> enumerable)
-		{
-			var output = enumerable.Skip(1);
-			return output;
-		}
-
-		public bool StartsWith<T>(
-			IEnumerable<T> enumerable,
-			IEnumerable<T> start,
-			IEqualityComparer<T> equalityComparer)
-		{
-			var enumerableEnumeration = enumerable.GetEnumerator();
-			var startEnumerator = start.GetEnumerator();
-
-			while (startEnumerator.MoveNext())
-			{
-				var enumerableHasNext = enumerableEnumeration.MoveNext();
-				if (!enumerableHasNext)
-				{
-					// Enumerable is too short.
-					return false;
-				}
-
-				var enumerableCurrent = enumerableEnumeration.Current;
-				var startCurrent = startEnumerator.Current;
-
-				var currentIsEqual = equalityComparer.Equals(enumerableCurrent, startCurrent);
-				if (!currentIsEqual)
-				{
-					return false;
-				}
-			}
-
-			return true;
-		}
-
-		public bool StartsWith<T>(
-			IEnumerable<T> enumerable,
-			IEnumerable<T> start)
-		{
-			var equalityComparer = EqualityComparer<T>.Default;
-
-			var output = this.StartsWith(
-				enumerable,
-				start,
-				equalityComparer);
-
 			return output;
 		}
 

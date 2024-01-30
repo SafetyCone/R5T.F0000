@@ -6,6 +6,8 @@ using R5T.T0142;
 namespace R5T.F0000.T000
 {
     /// <summary>
+    /// <para>See new work in R5T.T0221.</para>
+    /// 
     /// A <see cref="System.Collections.Generic.IEqualityComparer{T}"/>-based equality comparer.
     /// </summary>
     [UtilityTypeMarker]

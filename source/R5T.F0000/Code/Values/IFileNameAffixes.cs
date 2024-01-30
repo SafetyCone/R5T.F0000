@@ -6,9 +6,9 @@ using R5T.T0131;
 namespace R5T.F0000
 {
 	[ValuesMarker]
-	public partial interface IFileNameAffixes : IValuesMarker
+	public partial interface IFileNameAffixes : IValuesMarker,
+		L0071.IFileNameAffixes
 	{
-		public string Backup => this.BAK;
-		public string BAK => "BAK";
+
 	}
 }

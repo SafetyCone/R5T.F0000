@@ -5,6 +5,9 @@ using R5T.T0142;
 
 namespace R5T.F0000.T000
 {
+    /// <summary>
+    /// See new work in R5T.T0221.
+    /// </summary>
     [UtilityTypeMarker]
     public class FunctionBasedEqualityComparer<T> : IEqualityComparer<T>
     {

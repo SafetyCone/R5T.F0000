@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
+
 using R5T.F0000;
 
 using Instances = R5T.F0000.Instances;
@@ -11,7 +11,7 @@ public static class StringExtensions
 {
     public static bool IsNotNullAndNotEmpty(this string @string)
     {
-        var isNotNullAndNotEmpty = Instances.StringOperator.IsNotNullAndNotEmpty(@string);
+        var isNotNullAndNotEmpty = Instances.StringOperator.Is_NotNullOrEmpty(@string);
         return isNotNullAndNotEmpty;
     }
 }
@@ -39,13 +39,6 @@ namespace System.Linq
         public static IEnumerable<string> OrderAlphabetically_OnlyIfDebug(this IEnumerable<string> strings)
         {
             var output = Instances.StringOperator.OrderAlphabetically_OnlyIfDebug(strings);
-            return output;
-        }
-
-        /// <inheritdoc cref="R5T.L0053.IStringOperator.Trim(string)"/>
-        public static IEnumerable<string> Trim(this IEnumerable<string> strings)
-        {
-            var output = Instances.StringOperator.Trim(strings);
             return output;
         }
     }
@@ -88,7 +81,7 @@ namespace R5T.F0000.Extensions
             return Instances.TextOperator.Tabinate(strings);
         }
 
-        /// <inheritdoc cref="L0053.IStringOperator.Trim_End(string, string)"/>
+        /// <inheritdoc cref="L0066.IStringOperator.Trim_End(string, string)"/>
         public static string Trim_End(this string value,
             string ending)
         {
@@ -97,13 +90,13 @@ namespace R5T.F0000.Extensions
                 ending);
         }
 
-        /// <inheritdoc cref="L0053.IStringOperator.Trim_NewLines(string)"/>
+        /// <inheritdoc cref="L0066.IStringOperator.Trim_NewLines(string)"/>
         public static string Trim_NewLines(this string value)
         {
             return Instances.StringOperator.Trim_NewLines(value);
         }
 
-        /// <inheritdoc cref="L0053.IStringOperator.Trim_Start(string, string)"/>
+        /// <inheritdoc cref="L0066.IStringOperator.Trim_Start(string, string)"/>
         public static string Trim_Start(this string value,
             string beginning)
         {

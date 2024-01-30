@@ -76,13 +76,6 @@ namespace R5T.F0000
 
         public async Task Run<T>(
             T value,
-            params Func<T, Task>[] actions)
-		{
-			await this.Run_OkIfDefaults(value, actions);
-		}
-
-        public async Task Run<T>(
-            T value,
             IEnumerable<Func<T, Task>> actions)
         {
             foreach (var action in actions)

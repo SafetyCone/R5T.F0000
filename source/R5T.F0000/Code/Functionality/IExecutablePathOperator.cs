@@ -21,14 +21,14 @@ namespace R5T.F0000
         private static L0053.Implementations.IExecutablePathOperator Platform_Implementations => L0053.Implementations.ExecutablePathOperator.Instance;
 
 
-        /// <inheritdoc cref="L0053.Implementations.IExecutablePathOperator.Get_ExecutableFilePath_ViaCommandLineArgument"/>
+        /// <inheritdoc cref="L0066.Implementations.IExecutablePathOperator.Get_ExecutableFilePath_ViaCommandLineArgument"/>
         public string GetExecutableFilePath_ViaCommandLineArgumentValue()
         {
 			var output = Platform_Implementations.Get_ExecutableFilePath_ViaCommandLineArgument();
 			return output;
         }
 
-        /// <inheritdoc cref="L0053.Implementations.IExecutablePathOperator.Get_ExecutableFilePath_ViaEntryAssemblyLocation"/>
+        /// <inheritdoc cref="L0066.Implementations.IExecutablePathOperator.Get_ExecutableFilePath_ViaEntryAssemblyLocation"/>
         public string GetExecutableFilePath_ViaEntryAssemblyLocation()
         {
 			var output = Platform_Implementations.Get_ExecutableFilePath_ViaEntryAssemblyLocation();

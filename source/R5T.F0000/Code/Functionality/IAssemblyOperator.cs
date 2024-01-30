@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
+using R5T.L0089.T000;
 using R5T.T0132;
-using R5T.T0221;
 
 
 namespace R5T.F0000
@@ -52,7 +52,7 @@ namespace R5T.F0000
                 assembly,
                 namespacedTypeName);
 
-            var typeInfo = WasFoundOperator.Instance.ResultOrExceptionIfNotFound(
+            var typeInfo = Instances.WasFoundOperator.Get_Result_OrExceptionIfNotFound(
                 hasType,
                 $"{namespacedTypeName}: type not found.");
 

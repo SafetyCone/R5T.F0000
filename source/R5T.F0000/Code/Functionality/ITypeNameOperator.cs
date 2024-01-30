@@ -288,7 +288,7 @@ namespace R5T.F0000.Internal
         /// </summary>
         public string GetTypeNameStemForInterfaceName_Unchecked(string interfaceTypeName)
         {
-            var output = Instances.StringOperator_Internal.ExceptFirst_Unchecked(interfaceTypeName);
+            var output = Instances.StringOperator_Internal.Except_First_Unchecked(interfaceTypeName);
             return output;
         }
     }

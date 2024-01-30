@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using R5T.F0000;
-using R5T.T0221;
+using R5T.L0089.T000;
+
+using Framework = System.Collections.Generic;
 
 using Instances = R5T.F0000.Instances;
 
@@ -47,18 +49,6 @@ namespace System.Linq
             var output = Instances.EnumerableOperator.Clear(enumerable);
             return output;
         }
-        public static bool ContainsAll<T>(this IEnumerable<T> superset, IEnumerable<T> subset)
-        {
-            var output = Instances.EnumerableOperator.ContainsAll(superset, subset);
-            return output;
-        }
-
-        public static IEnumerable<T> Except<T>(this IEnumerable<T> items, T item)
-            where T : IEquatable<T>
-        {
-            var output = Instances.EnumerableOperator.Except(items, item);
-            return output;
-        }
 
         /// <summary>
         /// A method for use when in an environment where a System.LINQ Except() method is avaiable.
@@ -70,7 +60,7 @@ namespace System.Linq
             return output;
         }
 
-        public static IEnumerable<T> Except<T>(this IEnumerable<T> items, T item, IEqualityComparer<T> equalityComparer)
+        public static IEnumerable<T> Except<T>(this IEnumerable<T> items, T item, Framework.IEqualityComparer<T> equalityComparer)
         {
             var output = Instances.EnumerableOperator.Except(items, item, equalityComparer);
             return output;
@@ -87,20 +77,6 @@ namespace System.Linq
         public static IEnumerable<T> ExceptFirst<T>(this IEnumerable<T> enumerable)
         {
             var output = Instances.EnumerableOperator.ExceptFirst(enumerable);
-            return output;
-        }
-
-        /// <inheritdoc cref="IEnumerableOperator.ExceptLast{T}(IEnumerable{T}, int)"/>
-        public static IEnumerable<T> ExceptLast<T>(this IEnumerable<T> enumerable, int numberOfElements)
-        {
-            var output = Instances.EnumerableOperator.ExceptLast(enumerable, numberOfElements);
-            return output;
-        }
-
-        /// <inheritdoc cref="IEnumerableOperator.ExceptLast{T}(IEnumerable{T})"/>
-        public static IEnumerable<T> ExceptLast<T>(this IEnumerable<T> enumerable)
-        {
-            var output = Instances.EnumerableOperator.ExceptLast(enumerable);
             return output;
         }
 
@@ -124,13 +100,6 @@ namespace System.Linq
         public static void ForEach_WithCounter<T>(this IEnumerable<T> enumerable, Action<T, int> action_WithCounter)
         {
             Instances.EnumerableOperator.ForEach_WithCounter(enumerable, action_WithCounter);
-        }
-
-        /// <inheritdoc cref="R5T.L0053.IEnumerableOperator.None{T}(IEnumerable{T})"/>
-        public static bool None<T>(this IEnumerable<T> items)
-        {
-            var output = Instances.EnumerableOperator.None(items);
-            return output;
         }
 
         public static WasFound<T> HasNth<T>(this IEnumerable<T> items, int n)
@@ -198,15 +167,9 @@ namespace System.Linq
                 orderedNames.AsEnumerable());
         }
 
-        public static IEnumerable<T> SkipFirst<T>(this IEnumerable<T> enumerable)
-        {
-            var output = Instances.EnumerableOperator.SkipFirst(enumerable);
-            return output;
-        }
-
         public static bool StartsWith<T>(this IEnumerable<T> enumerable,
             IEnumerable<T> start,
-            IEqualityComparer<T> equalityComparer)
+            Framework.IEqualityComparer<T> equalityComparer)
         {
             var output = Instances.EnumerableOperator.StartsWith(
                 enumerable,

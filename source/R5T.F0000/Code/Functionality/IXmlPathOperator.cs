@@ -16,7 +16,7 @@ namespace R5T.F0000
 		public bool IsSolutionFilePath(
 			string possibleSolutionFilePath)
 		{
-			var isSolutionFilePath = Instances.PathOperator.HasFileExtension(
+			var isSolutionFilePath = Instances.PathOperator.Has_FileExtension(
 				possibleSolutionFilePath,
 				Instances.FileExtensions.Xml);
 

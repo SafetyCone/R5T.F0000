@@ -63,7 +63,7 @@ namespace R5T.F0000
         public string[] GetInputArguments()
         {
             var inputArguments = this.GetInputArguments_IncludingZeroth()
-                .SkipFirst()
+                .Skip_First()
                 .ToArray();
 
             return inputArguments;

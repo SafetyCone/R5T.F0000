@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using R5T.L0089.T000;
 using R5T.T0132;
-using R5T.T0221;
 
 
 namespace R5T.F0000
@@ -81,7 +81,7 @@ namespace R5T.F0000
 		public char Get_FirstLetter_Checked(string word)
 		{
 			var output = this.Has_FirstLetter(word)
-				.ResultOrExceptionIfNotFound("Word had no first letter.");
+				.Get_Result_OrExceptionIfNotFound("Word had no first letter.");
 
 			return output;
 		}

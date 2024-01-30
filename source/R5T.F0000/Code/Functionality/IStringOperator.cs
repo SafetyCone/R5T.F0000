@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
+using R5T.L0089.T000;
 using R5T.T0132;
-using R5T.T0221;
 
 
 namespace R5T.F0000
@@ -148,7 +148,7 @@ namespace R5T.F0000
                 character,
                 @string);
 
-            return WasFoundOperator.Instance.ResultOrExceptionIfNotFound(
+            return Instances.WasFoundOperator.Get_Result_OrExceptionIfNotFound(
                 lastIndexWasFound,
                 () => new ArgumentException($"Character '{character}' not found in string.", nameof(character)));
         }
@@ -309,11 +309,11 @@ namespace R5T.F0000
         }
 
         /// <summary>
-        /// A quality-of-life overload for <see cref="IsNotNullAndNotEmpty(string)"/>.
+        /// A quality-of-life overload for <see cref="L0066.IStringOperator.Is_NotNullOrEmpty(string)"/>.
         /// </summary>
         public bool HasValue(string @string)
         {
-            var output = this.IsNotNullAndNotEmpty(@string);
+            var output = this.Is_NotNullOrEmpty(@string);
             return output;
         }
 
@@ -417,14 +417,6 @@ namespace R5T.F0000
         {
             var output = this.WasFound(index);
             return output;
-        }
-
-        public bool IsNotNullAndNotEmpty(string @string)
-        {
-            var isNullOrEmpty = this.Is_NullOrEmpty(@string);
-
-            var isNotNullAndNotEmpty = !isNullOrEmpty;
-            return isNotNullAndNotEmpty;
         }
 
         public WasFound<int> LastIndexOf(
@@ -540,7 +532,7 @@ namespace R5T.F0000.Internal
         {
             var wasFound = F0000.StringOperator.Instance.WasFound(indexOrNotFound);
 
-            var output = T0221.WasFound.From(
+            var output = L0089.T000.WasFound.From(
                 wasFound,
                 indexOrNotFound);
 

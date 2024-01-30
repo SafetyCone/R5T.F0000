@@ -1,7 +1,5 @@
 ﻿using System;
 
-using R5T.Z0000;
-
 
 namespace R5T.F0000
 {
@@ -11,11 +9,11 @@ namespace R5T.F0000
         public static IArrayOperator ArrayOperator => F0000.ArrayOperator.Instance;
         public static IAssemblyFileNameOperator AssemblyFileNameOperator => F0000.AssemblyFileNameOperator.Instance;
         public static IBooleanOperator BooleanOperator => F0000.BooleanOperator.Instance;
-        public static ICharacterIndexes CharacterIndexes => Z0000.CharacterIndexes.Instance;
-        public static ICharacterNames CharacterNames => Z0000.CharacterNames.Instance;
+        public static Z0000.ICharacterIndexes CharacterIndexes => Z0000.CharacterIndexes.Instance;
+        public static Z0000.ICharacterNames CharacterNames => Z0000.CharacterNames.Instance;
         public static ICharacterOperator CharacterOperator => F0000.CharacterOperator.Instance;
-        public static ICharacters Characters => Z0000.Characters.Instance;
-        public static ICharacterSets CharacterSets => Z0000.CharacterSets.Instance;
+        public static Z0000.ICharacters Characters => Z0000.Characters.Instance;
+        public static Z0000.ICharacterSets CharacterSets => Z0000.CharacterSets.Instance;
         public static ICommandLineArgumentsOperator CommandLineArgumentsOperator => F0000.CommandLineArgumentsOperator.Instance;
         public static ICommandLineOperator CommandLineOperator => F0000.CommandLineOperator.Instance;
         public static IComparisonOperator ComparisonOperator => F0000.ComparisonOperator.Instance;

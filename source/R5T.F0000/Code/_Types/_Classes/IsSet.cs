@@ -15,7 +15,7 @@ namespace R5T.F0000
         private T zValue;
         public T Value
         {
-            get => this.zValue;
+            readonly get => this.zValue;
             set
             {
                 this.WasSet = true;

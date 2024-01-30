@@ -13,46 +13,6 @@ namespace R5T.F0000
 	public partial interface IFileOperator : IFunctionalityMarker,
         L0053.IFileOperator
 	{
-		/// <summary>
-		/// Actually reads all lines. The <see cref="File.ReadLines(string)"/> method omits blank lines, instead adding the new line character to the previous line!
-		/// </summary>
-		public async Task<string[]> ActuallyReadAllLines(string filePath)
-		{
-			var text = await File.ReadAllTextAsync(filePath);
-
-            var lines = this.GetLinesFromText(text);
-            return lines;
-        }
-
-        /// <inheritdoc cref="ActuallyReadAllLines(string)"/>
-        public string[] ActuallyReadAllLines_Synchronous(string filePath)
-        {
-            var text = File.ReadAllText(filePath);
-
-			var lines = this.GetLinesFromText(text);
-			return lines;
-        }
-
-		public string[] GetLinesFromText(string text)
-		{
-            if (Instances.StringOperator.Is_Empty(text))
-            {
-                return Array.Empty<string>();
-            }
-
-            var lines = text.Split(
-                new[]
-                {
-                    Strings.Instance.NewLine_NonWindows,
-                    Strings.Instance.NewLine_Windows,
-                },
-                StringSplitOptions.None);
-
-            return lines;
-        }
-
-        
-
         public async Task CopyToFile(
 			string filePath,
 			Stream stream)
@@ -63,20 +23,6 @@ namespace R5T.F0000
 			await stream.CopyToAsync(fileStream);
         }
 
-		public bool HasByteOrderMark(
-			string filePath)
-        {
-			var bytes = this.Read_Bytes_Synchronous(filePath);
-
-			var byteOrderMark = Instances.Values.ByteOrderMark;
-
-			var hasByteOrderMark = Instances.EnumerableOperator.StartsWith(
-				bytes,
-				byteOrderMark);
-
-			return hasByteOrderMark;
-        }
-
 		public StreamWriter NewWrite_Text(
 			string filePath,
             bool overwrite = IValues.Default_OverwriteValue_Constant)
@@ -85,22 +31,6 @@ namespace R5T.F0000
 				filePath);
 
 			return output;
-		}
-
-        /// <summary>
-        /// Ease of use name for the <see cref="ActuallyReadAllLines(string)"/> method.
-        /// </summary>
-        public async Task<string[]> ReadAllLines(string filePath)
-        {
-            var lines = await this.ActuallyReadAllLines(filePath);
-            return lines;
-        }
-
-        /// <inheritdoc cref="ReadAllLines(string)"/>
-        public string[] ReadAllLines_Synchronous(string filePath)
-		{
-			var lines = this.ActuallyReadAllLines_Synchronous(filePath);
-			return lines;
 		}
 
 		public Task<byte[]> ReadBytes(string filePath)

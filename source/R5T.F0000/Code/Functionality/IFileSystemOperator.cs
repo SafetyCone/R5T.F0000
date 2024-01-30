@@ -34,111 +34,13 @@ namespace R5T.F0000
         /// </summary>
         public void CreateDirectory_NonIdempotent(string directoryPath)
         {
-            var directoryExists = this.DirectoryExists(directoryPath);
+            var directoryExists = this.Exists_Directory(directoryPath);
             if(directoryExists)
             {
                 throw new Exception("Directory already existed.");
             }
 
             this.Create_Directory_OkIfAlreadyExists(directoryPath);
-        }
-
-        public bool DirectoryExists(string directoryPath)
-        {
-			var output = Directory.Exists(directoryPath);
-			return output;
-        }
-
-        /// <summary>
-        /// Non-idempotently deletes a directory.
-        /// An exception is thrown if the directory does not exist.
-        /// </summary>
-        public void DeleteDirectory_NonIdempotent(string directoryPath)
-        {
-            if (!this.DirectoryExists(directoryPath))
-            {
-                throw new DirectoryNotFoundException(directoryPath);
-            }
-
-            this.DeleteDirectory_Robust(directoryPath);
-        }
-
-        public void DeleteDirectory_Idempotent(string directoryPath)
-        {
-            if (this.DirectoryExists(directoryPath))
-            {
-                this.DeleteDirectory_Robust(directoryPath);
-            }
-        }
-
-        public void DeleteDirectory_OkIfNotExists(string directoryPath)
-        {
-            this.DeleteDirectory_Idempotent(directoryPath);
-        }
-
-        public void DeleteFile_OkIfNotExists(string filePath)
-        {
-            var directoryForFileDirectoryPath = PathOperator.Instance.GetFileParentDirectoryPath(filePath);
-
-            var directoryExists = this.DirectoryExists(directoryForFileDirectoryPath);
-            if (!directoryExists)
-            {
-                // No need to delete file if directory containing it does not exist!
-                return;
-            }
-
-            File.Delete(filePath);
-        }
-
-        /// <summary>
-        /// Deletes a directory path.
-        /// The <see cref="System.IO.Directory.Delete(string)"/> method throws a <see cref="System.IO.DirectoryNotFoundException"/> if attempting to delete a non-existent directory. This is annoying.
-        /// All you really want is the directory to not exist, so this method simply takes care of checking if the directory exists.
-        /// Also annoying, you need to specify the recursive option to delete a directory with anything in it. This method also takes care of specifying true for the recursive option.
-        /// Even more annoying, even after specifying the recursive option, the system method will not delete read-only files. Thus this method disables read-only options on all files recursively.
-        /// </summary>
-        public void DeleteDirectory_Robust(string directoryPath)
-        {
-            if (this.DirectoryExists(directoryPath))
-            {
-                this.DisableReadOnly(directoryPath);
-
-                this.DeleteDirectory_NonRobust(directoryPath);
-            }
-        }
-
-        public void DeleteDirectory_NonRobust(string directoryPath)
-        {
-            Directory.Delete(directoryPath, true);
-        }
-
-        public void DisableReadOnly(string directoryPath)
-        {
-            var directoryInfo = new DirectoryInfo(directoryPath);
-
-            this.DisableReadOnly(directoryInfo);
-        }
-
-        /// <summary>
-        /// Remove the read-only attribute from all files.
-        /// </summary>
-        /// <remarks>
-        /// Adapted from: https://stackoverflow.com/questions/1982209/cannot-programatically-delete-svn-working-copy
-        /// </remarks>
-        public void DisableReadOnly(DirectoryInfo directoryInfo)
-        {
-            foreach (var file in directoryInfo.GetFiles())
-            {
-                if (file.IsReadOnly)
-                {
-                    file.IsReadOnly = false;
-                }
-            }
-
-            foreach (var subdirectory in directoryInfo.GetDirectories())
-            {
-                this.DisableReadOnly(subdirectory);
-            }
         }
 
         public IEnumerable<string> EnumerateAllChildDirectoryPaths(string directoryPath)
@@ -304,7 +206,7 @@ namespace R5T.F0000
         public async Task ClearDirectory(
             string directoryPath)
         {
-            FileSystemOperator.Instance.DeleteDirectory_OkIfNotExists(
+            FileSystemOperator.Instance.Delete_Directory_OkIfNotExists(
                 directoryPath);
 
             // Wait for the file-system to process the deletion.
@@ -317,7 +219,7 @@ namespace R5T.F0000
         public void ClearDirectory_Synchronous(
             string directoryPath)
         {
-            FileSystemOperator.Instance.DeleteDirectory_OkIfNotExists(
+            FileSystemOperator.Instance.Delete_Directory_OkIfNotExists(
                 directoryPath);
 
             // Wait for the file-system to process the deletion.
@@ -360,35 +262,11 @@ namespace R5T.F0000
         }
 
         /// <summary>
-        /// Tests whether a file exists, and if it doesn't, throws a <see cref="FileNotFoundException"/>.
-        /// </summary>
-        public void VerifyFileExists(string filePath)
-        {
-            var fileExists = this.Exists_File(filePath);
-            if(!fileExists)
-            {
-                throw new FileNotFoundException("File did not exists.", filePath);
-            }
-        }
-
-        /// <summary>
-        /// Tests whether a file exists, and if it does, throws an <see cref="Exception"/>.
-        /// </summary>
-        public void VerifyFileDoesNotExists(string filePath)
-        {
-            var fileExists = this.Exists_File(filePath);
-            if (fileExists)
-            {
-                throw new Exception($"File exists:\n{filePath}");
-            }
-        }
-
-        /// <summary>
         /// Tests whether a directory exists, and if it does, throws a <see cref="Exception"/>.
         /// </summary>
         public void Verify_DirectoryDoesNotExists(string filePath)
         {
-            var fileExists = this.DirectoryExists(filePath);
+            var fileExists = this.Exists_Directory(filePath);
             if (fileExists)
             {
                 throw new Exception($"Directory exists:\n{filePath}");

@@ -2,8 +2,8 @@ using System;
 using System.Linq;
 using System.Reflection;
 
+using R5T.L0089.T000;
 using R5T.T0132;
-using R5T.T0221;
 
 
 namespace R5T.F0000
@@ -62,7 +62,7 @@ namespace R5T.F0000
 				typeInfo,
 				methodName);
 
-			var method = WasFoundOperator.Instance.ResultOrExceptionIfNotFound(
+			var method = Instances.WasFoundOperator.Get_Result_OrExceptionIfNotFound(
 				hasMethod,
 				$"{methodName}: method with name not found on type '{this.Get_NamespacedTypeName(typeInfo)}'.");
 
