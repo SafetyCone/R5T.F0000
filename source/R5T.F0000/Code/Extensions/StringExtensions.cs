@@ -29,18 +29,6 @@ namespace System.Linq
 
             return output;
         }
-
-        public static IEnumerable<string> OrderAlphabetically(this IEnumerable<string> strings)
-        {
-            var output = Instances.StringOperator.OrderAlphabetically(strings);
-            return output;
-        }
-
-        public static IEnumerable<string> OrderAlphabetically_OnlyIfDebug(this IEnumerable<string> strings)
-        {
-            var output = Instances.StringOperator.OrderAlphabetically_OnlyIfDebug(strings);
-            return output;
-        }
     }
 }
 

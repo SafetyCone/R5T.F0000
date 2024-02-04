@@ -38,20 +38,7 @@ namespace R5T.F0000
             return output;
         }
 
-        public string GetAttributeNameFromAttributeTypeName(
-            string attributeTypeName)
-        {
-            var hasAttributeTypeNameSuffix = this.HasAttributeTypeNameSuffix(attributeTypeName);
-            if (hasAttributeTypeNameSuffix)
-            {
-                var output = this.GetNonAttributeSuffixedTypeName(attributeTypeName);
-                return output;
-            }
-            else
-            {
-                throw new ArgumentException($"Attribute type name '{attributeTypeName}' did not have attribute suffix.");
-            }
-        }
+        
 
         public string GetAttributeSuffixedTypeName(string typeName)
         {
@@ -102,22 +89,13 @@ namespace R5T.F0000
             var isAttributeSuffixedTypeName = this.Is_AttributeSuffixedTypeName(typeName);
             if (isAttributeSuffixedTypeName)
             {
-                var output = this.GetNonAttributeSuffixedTypeName(typeName);
+                var output = this.Get_NonAttributeSuffixedTypeName(typeName);
                 return output;
             }
             else
             {
                 return typeName;
             }
-        }
-
-        public string GetNonAttributeSuffixedTypeName(string attributeSuffixedTypeName)
-        {
-            var output = Instances.StringOperator.Except_Ending(
-                attributeSuffixedTypeName,
-                TypeNameAffixes.Instance.AttributeSuffix);
-
-            return output;
         }
 
         /// <summary>
@@ -158,24 +136,6 @@ namespace R5T.F0000
 
 			return interfaceTypeName;
 		}
-
-        /// <summary>
-        /// Quality-of-life overload for <see cref="Is_AttributeSuffixedTypeName(string)"/>.
-        /// </summary>
-        public bool HasAttributeTypeNameSuffix(string typeName)
-        {
-            var output = this.Is_AttributeSuffixedTypeName(typeName);
-            return output;
-        }
-
-        public bool Is_AttributeSuffixedTypeName(string typeName)
-        {
-            var output = Instances.StringOperator.EndsWith(
-                typeName,
-                TypeNameAffixes.Instance.AttributeSuffix);
-
-            return output;
-        }
 
         public bool Is_InterfaceTypeName(string typeName)
         {

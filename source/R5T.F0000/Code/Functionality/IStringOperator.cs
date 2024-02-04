@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -439,12 +438,6 @@ namespace R5T.F0000
             return lastIndexOf;
         }            
 
-        public string Lower(string @string)
-        {
-            var output = @string.ToLowerInvariant();
-            return output;
-        }
-
         /// <summary>
         /// Appends the new-line separator to the string to make the string be a line.
         /// (Lines end with a new-line separator.)
@@ -473,23 +466,6 @@ namespace R5T.F0000
         public bool NotFound(int index)
         {
             var output = index == Instances.String.IndexOfNotFound;
-            return output;
-        }
-
-        public IEnumerable<string> OrderAlphabetically(IEnumerable<string> items)
-        {
-            var output = items.OrderBy(x => x);
-            return output;
-        }
-
-        public IEnumerable<string> OrderAlphabetically_OnlyIfDebug(IEnumerable<string> items)
-        {
-            var output = items
-#if DEBUG
-                .OrderAlphabetically()
-#endif
-                ;
-
             return output;
         }
 

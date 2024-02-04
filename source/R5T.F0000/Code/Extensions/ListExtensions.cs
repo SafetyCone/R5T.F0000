@@ -10,18 +10,6 @@ namespace System
 {
     public static class ListExtensions
     {
-        public static void AddRange<T>(this IList<T> list,
-            IEnumerable<T> items)
-        {
-            Instances.ListOperator.Add_Range(list, items);
-        }
-
-        public static void AddRange<T>(this IList<T> list,
-            params T[] items)
-        {
-            Instances.ListOperator.Add_Range(list, items);
-        }
-
         public static WasFound<T> HasNth<T>(this IList<T> list, int n)
         {
             var output = Instances.ListOperator.HasNth(list, n);
