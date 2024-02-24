@@ -43,7 +43,7 @@ namespace R5T.F0000
         //}
 
         public UnhandledValueException(TValue value)
-            : this(Internal.ExceptionOperator.Instance.Get_UnhandledValueExceptionMessage(value))
+            : this(Instances.ExceptionMessageOperator.Get_UnhandledValueExceptionMessage(value))
         {
             this.Value = value;
         }

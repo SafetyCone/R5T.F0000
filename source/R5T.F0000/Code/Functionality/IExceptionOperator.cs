@@ -53,7 +53,7 @@ namespace R5T.F0000
 			return output;
 		}
 
-		public UnhandledValueException<TValue> Get_UnhandledValueException<TValue>(TValue value)
+		new public UnhandledValueException<TValue> Get_UnhandledValueException<TValue>(TValue value)
 		{
 			return new UnhandledValueException<TValue>(value);
 		}
@@ -73,31 +73,4 @@ namespace R5T.F0000
 			return exception;
 		}
 	}
-}
-
-
-namespace R5T.F0000.Internal
-{
-	[FunctionalityMarker]
-	public partial interface IExceptionOperator : IFunctionalityMarker
-	{
-        public string Get_UnhandledValueExceptionMessage<TValue>(TValue value)
-        {
-            var typeName = Instances.TypeOperator.Get_TypeNameOf(value);
-
-			var output = this.Get_UnhandledValueExceptionMessage(
-				value,
-				typeName);
-
-			return output;
-        }
-
-        public string Get_UnhandledValueExceptionMessage<TValue>(
-			TValue value,
-			string typeName)
-        {
-            var message = $"Unhandled value:\nt'{value}': value\nt{typeName}: type name";
-            return message;
-        }
-    }
 }
