@@ -31,17 +31,6 @@ namespace R5T.F0000
             return formatString;
         }
 
-        public string Format(
-            string template,
-            params object[] objects)
-        {
-            var output = System.String.Format(
-                template,
-                objects);
-
-            return output;
-        }
-
         public string FormatStructuredString(
             string structuredString,
             params object[] arguments)

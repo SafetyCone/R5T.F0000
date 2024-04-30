@@ -6,15 +6,9 @@ using R5T.T0132;
 namespace R5T.F0000
 {
     [FunctionalityMarker]
-    public partial interface IDoubleOperator : IFunctionalityMarker
+    public partial interface IDoubleOperator : IFunctionalityMarker,
+        L0066.IDoubleOperator
     {
-        /// <summary>
-        /// Converts a double to a string representation with three decimal places.
-        /// </summary>
-        public string ToString_WithThreeDecimalPlaces(double value)
-        {
-            var output = $"{value:0.000}";
-            return output;
-        }
+        
     }
 }

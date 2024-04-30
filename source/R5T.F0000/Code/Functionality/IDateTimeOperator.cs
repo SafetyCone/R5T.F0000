@@ -13,17 +13,6 @@ namespace R5T.F0000
 	public partial interface IDateTimeOperator : IFunctionalityMarker,
         L0053.IDateTimeOperator
 	{
-        public string Format(
-            DateTime dateTime,
-            string formatTemplate)
-        {
-            var output = Instances.StringOperator.Format(
-                formatTemplate,
-                dateTime);
-
-            return output;
-        }
-
         public DateTime From_YYYYMMDD(string YYYYMMDD)
         {
             var output = DateTime.ParseExact(YYYYMMDD, "yyyyMMdd", CultureInfo.InvariantCulture);

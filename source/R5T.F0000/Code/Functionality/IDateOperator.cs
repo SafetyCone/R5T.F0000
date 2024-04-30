@@ -7,7 +7,8 @@ using R5T.L0089.T000;
 namespace R5T.F0000
 {
 	[FunctionalityMarker]
-	public partial interface IDateOperator : IFunctionalityMarker
+	public partial interface IDateOperator : IFunctionalityMarker,
+        L0066.IDateOperator
 	{
         public DateTime From_YYYYMMDD(string yyyymmdd)
         {
@@ -145,12 +146,6 @@ namespace R5T.F0000
             return output;
         }
 
-        public string GetYYYYMMDDFormatTemplate()
-        {
-            var yyyyMMddFormatTemplate = $"{{0:{Instances.DateTimeFormats.YYYYMMDD}}}";
-            return yyyyMMddFormatTemplate;
-        }
-
         public bool IsDefault(DateTime dateTime)
         {
             var output = dateTime == default;
@@ -165,48 +160,6 @@ namespace R5T.F0000
                 out var dateTime);
 
             var output = WasFound.From(isYYYYMMDD, dateTime);
-            return output;
-        }
-
-        public string ToString_YYYYMMDD(DateTime date)
-        {
-            var formatTemplate = this.GetYYYYMMDDFormatTemplate();
-
-            var output = Instances.DateTimeOperator.Format(
-                date,
-                formatTemplate);
-
-            return output;
-        }
-
-        /// <summary>
-        /// Chooses <see cref="ToString_YYYYMMDD_HHMMSS_Space(DateTime)"/> as the default.
-        /// </summary>
-        public string ToString_YYYYMMDD_HHMMSS(DateTime dateTime)
-        {
-            var output = this.ToString_YYYYMMDD_HHMMSS_Space(dateTime);
-            return output;
-        }
-
-        public string ToString_YYYYMMDD_HHMMSS_Dash(DateTime dateTime)
-        {
-            var formatTemplate = Instances.DateTimeFormatTemplates.YYYYMMDD_HHMMSS_Dashed;
-
-            var output = Instances.DateTimeOperator.Format(
-                dateTime,
-                formatTemplate);
-
-            return output;
-        }
-
-        public string ToString_YYYYMMDD_HHMMSS_Space(DateTime dateTime)
-        {
-            var formatTemplate = Instances.DateTimeFormatTemplates.YYYYMMDD_HHMMSS;
-
-            var output = Instances.DateTimeOperator.Format(
-                dateTime,
-                formatTemplate);
-
             return output;
         }
 

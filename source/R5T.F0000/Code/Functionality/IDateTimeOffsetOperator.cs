@@ -47,7 +47,7 @@ namespace R5T.F0000
 
 		public TimeSpan GetLocalOffsetFromUtc()
         {
-			var currentOffset = Instances.TimeSpanOperator.GetOffsetFromUtc();
+			var currentOffset = Instances.TimeSpanOperator.Get_OffsetFromUtc();
 			return currentOffset;
 		}
 	}
