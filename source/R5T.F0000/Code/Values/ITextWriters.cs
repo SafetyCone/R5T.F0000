@@ -7,8 +7,9 @@ using R5T.T0131;
 namespace R5T.F0000
 {
     [ValuesMarker]
-    public partial interface ITextWriters : IValuesMarker
+    public partial interface ITextWriters : IValuesMarker,
+        L0066.ITextWriters
     {
-        public TextWriter Console => System.Console.Out;
+        
     }
 }

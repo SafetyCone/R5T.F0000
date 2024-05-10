@@ -11,7 +11,7 @@ public static class HashSetExtensions
     /// </summary>
     public static HashSet<T> AddRange<T>(this HashSet<T> hashSet, IEnumerable<T> items)
     {
-        return HashSetOperator.Instance.AddRange(hashSet, items);
+        return HashSetOperator.Instance.Add_Range(hashSet, items);
     }
 
     /// <summary>
@@ -20,7 +20,7 @@ public static class HashSetExtensions
     /// </summary>
     public static HashSet<T> AddRangeKeepLast<T>(this HashSet<T> hashSet, IEnumerable<T> items)
     {
-        return HashSetOperator.Instance.AddRangeKeepLast(hashSet, items);
+        return HashSetOperator.Instance.Add_Range_KeepLast(hashSet, items);
     }
 
     /// <summary>
@@ -28,11 +28,11 @@ public static class HashSetExtensions
     /// </summary>
     public static HashSet<T> AddRangeKeepFirst<T>(this HashSet<T> hashSet, IEnumerable<T> items)
     {
-        return HashSetOperator.Instance.AddRangeKeepFirst(hashSet, items);
+        return HashSetOperator.Instance.Add_Range_KeepFirst(hashSet, items);
     }
 
     public static void AddRangeThrowIfDuplicate<T>(this HashSet<T> hashSet, IEnumerable<T> items)
     {
-        HashSetOperator.Instance.AddRangeThrowIfDuplicate(hashSet, items);
+        HashSetOperator.Instance.Add_Range_ThrowIfDuplicate(hashSet, items);
     }
 }
