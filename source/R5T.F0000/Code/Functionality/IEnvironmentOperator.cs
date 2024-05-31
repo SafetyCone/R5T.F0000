@@ -7,14 +7,9 @@ using R5T.T0132;
 namespace R5T.F0000
 {
 	[FunctionalityMarker]
-	public partial interface IEnvironmentOperator : IFunctionalityMarker
+	public partial interface IEnvironmentOperator : IFunctionalityMarker,
+        L0066.IEnvironmentOperator
 	{
-		public string GetCurrentDirectory()
-        {
-			var output = Environment.CurrentDirectory;
-			return output;
-        }
-
 		/// <summary>
 		/// Returns true if the DEBUG preprocessor context symbol was defined during compilation of the currently executing code.
         /// False otherwise.

@@ -14,19 +14,6 @@ namespace R5T.F0000
 		L0053.IXElementOperator
 	{
 		/// <summary>
-		/// Creates an <see cref="XElement"/> with the child name, adds it to the parent, and returns the child.
-		/// </summary>
-		/// <returns>The child <see cref="XElement"/>.</returns>
-		public XElement AddChild(XElement parentElement, string childName)
-		{
-			var child = this.Create_Element_FromName(childName);
-
-			parentElement.Add(child);
-
-			return child;
-		}
-
-		/// <summary>
 		/// Uses the <see cref="XName.LocalName"/>.
 		/// </summary>
 		public IEnumerable<XElement> WhereNameIs(
@@ -129,22 +116,6 @@ namespace R5T.F0000
 
 			var wasFound = WasFound.From(outputOrDefault);
 			return wasFound;
-		}
-
-		public bool HasChild_Any<TElement>(TElement element, string childName)
-			where TElement : XElement
-		{
-			// If empty, shortcut.
-			if (!element.HasElements)
-			{
-				return false;
-			}
-
-			var output = element.Elements()
-				.Where(xElement => xElement.Name.LocalName == childName)
-				.Any();
-
-			return output;
 		}
 
 		/// <summary>

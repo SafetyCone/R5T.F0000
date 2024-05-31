@@ -12,7 +12,8 @@ using R5T.T0132;
 namespace R5T.F0000
 {
 	[FunctionalityMarker]
-	public partial interface IXmlOperator : IFunctionalityMarker
+	public partial interface IXmlOperator : IFunctionalityMarker,
+		L0066.IXmlOperator
 	{
 		private static Implementations.IXmlOperator Implementations { get; } = F0000.Implementations.XmlOperator.Instance;
 
@@ -226,23 +227,8 @@ namespace R5T.F0000
 			return output;
         }
 
-		public XDocument Load_XDocument(string xmlFilePath)
-        {
-			var xDocument = XDocument.Load(xmlFilePath, LoadOptions.None);
-			return xDocument;
-        }
-
 		/// <summary>
-		/// Chooses <see cref="Load_XDocument(string)"/> as the default.
-		/// </summary>
-		public XDocument Load(string xmlFilePath)
-        {
-			var xDocument = this.Load_XDocument(xmlFilePath);
-			return xDocument;
-        }
-
-		/// <summary>
-		/// Quality-of-life overload for <see cref="Write(XDocument, string)"/>.
+		/// Quality-of-life overload for <see cref="L0066.IXmlOperator.Write(XDocument, string)"/>.
 		/// </summary>
 		public void Save(
 			XDocument xDocument,
@@ -251,139 +237,6 @@ namespace R5T.F0000
 			this.Write(
 				xDocument,
 				xmlFilePath);
-        }
-
-		/// <summary>
-		/// Chooses <see cref="WriteToFile_EmptyIsOk(XDocument, string, SaveOptions)"/> as the default.
-		/// </summary>
-		public void Write(
-			XDocument xDocument,
-			string xmlFilePath)
-        {
-			this.WriteToFile_EmptyIsOk_Synchronous(
-				xDocument,
-				xmlFilePath);
-        }
-
-        /// <inheritdoc cref="WriteToFile_EmptyIsOk(XDocument, string, SaveOptions)"/>
-        public async Task WriteToWriter_EmptyIsOk(
-            XDocument xDocument,
-            TextWriter writer,
-			SaveOptions saveOptions = SaveOptions.None)
-        {
-            if (xDocument.Root is null)
-            {
-                if (xDocument.Declaration is null)
-                {
-					await writer.WriteAsync(Instances.Strings.Empty);
-                }
-                else
-                {
-                    var text = xDocument.Declaration.ToString();
-
-					await writer.WriteAsync(text);
-                }
-            }
-            else
-            {
-                await xDocument.SaveAsync(
-                    writer,
-                    saveOptions,
-                    CancellationToken.None);
-            }
-        }
-
-        /// <inheritdoc cref="WriteToFile_EmptyIsOk(XDocument, string, SaveOptions)"/>
-        public void WriteToWriter_EmptyIsOk_Synchronous(
-            XDocument xDocument,
-            TextWriter writer,
-			SaveOptions saveOptions = SaveOptions.None)
-        {
-            if (xDocument.Root is null)
-            {
-                if (xDocument.Declaration is null)
-                {
-                    writer.Write(Instances.Strings.Empty);
-                }
-                else
-                {
-                    var text = xDocument.Declaration.ToString();
-
-                    writer.Write(text);
-                }
-            }
-            else
-            {
-                xDocument.Save(
-                    writer,
-                    saveOptions);
-            }
-        }
-
-		public string WriteToString_Synchronous(
-			XDocument xDocument,
-			SaveOptions saveOptions = SaveOptions.None)
-		{
-			var stringBuilder = new StringBuilder();
-			var writer = new StringWriter(stringBuilder);
-
-			this.WriteToWriter_EmptyIsOk_Synchronous(
-				xDocument,
-                writer,
-				saveOptions);
-
-			var output = stringBuilder.ToString();
-			return output;
-		}
-
-        /// <summary>
-        /// XML files *must* have a root: https://www.w3schools.com/xml/xml_syntax.asp
-        /// So if the document has no root, saving the document results in an <see cref="InvalidOperationException"/>: Token EndDocument in state Document would result in an invalid XML document.
-        /// This method will allow writing an empty document.
-        /// If the document has no root, just the declaration is written.
-        /// If the document also has no declaration, nothing is written.
-        /// </summary>
-        public async Task WriteToFile_EmptyIsOk(
-            XDocument xDocument,
-			string xmlFilePath,
-            SaveOptions saveOptions = SaveOptions.None)
-        {
-            using var fileStream = Instances.FileStreamOperator.Open_Write(xmlFilePath);
-			using var writer = new StreamWriter(fileStream);
-
-			await this.WriteToWriter_EmptyIsOk(
-				xDocument,
-				writer,
-				saveOptions);
-        }
-
-		/// <inheritdoc cref="WriteToFile_EmptyIsOk(XDocument, string, SaveOptions)"/>
-        public void WriteToFile_EmptyIsOk_Synchronous(
-			XDocument xDocument,
-			string xmlFilePath,
-			SaveOptions saveOptions = SaveOptions.None)
-        {
-			if (xDocument.Root is null)
-            {
-				if(xDocument.Declaration is null)
-                {
-					Instances.FileOperator.WriteAnEmptyFile_Synchronous(xmlFilePath);
-                }
-                else
-                {
-					var text = xDocument.Declaration.ToString();
-
-					Instances.FileOperator.Write_Text_Synchronous(
-						xmlFilePath,
-						text); 
-                }
-            }
-			else
-            {
-				xDocument.Save(
-					xmlFilePath,
-					saveOptions);
-            }
         }
 	}
 }

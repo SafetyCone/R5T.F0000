@@ -10,7 +10,8 @@ using R5T.T0132;
 namespace R5T.F0000
 {
 	[FunctionalityMarker]
-	public partial interface IAssemblyOperator : IFunctionalityMarker
+	public partial interface IAssemblyOperator : IFunctionalityMarker,
+        L0066.IAssemblyOperator
 	{
         public void ForTypes(
             Assembly assembly,

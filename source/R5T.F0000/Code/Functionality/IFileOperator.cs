@@ -58,30 +58,6 @@ namespace R5T.F0000
             StreamWriterOperator.Instance.WriteAllLines_Synchronous(filePath, lines, overwrite);
 		}
 
-		/// <summary>
-		/// Creates a file with nothing in it.
-		/// </summary>
-		public async Task WriteAnEmptyFile(string textFilePath)
-        {
-            FileSystemOperator.Instance.Ensure_DirectoryExists_ForFilePath(textFilePath);
-
-            await this.WriteText(
-				textFilePath,
-				Instances.Strings.Empty);
-        }
-
-        /// <summary>
-        /// Creates a file with nothing in it.
-        /// </summary>
-        public void WriteAnEmptyFile_Synchronous(string textFilePath)
-        {
-            FileSystemOperator.Instance.Ensure_DirectoryExists_ForFilePath(textFilePath);
-
-            this.Write_Text_Synchronous(
-                textFilePath,
-                Instances.Strings.Empty);
-        }
-
         /// <summary>
         /// Writes the provided texts (and only the provided text, with no trailing blank line) to a file.
         /// Texts are written sequentially, with no separating lines.

@@ -100,35 +100,13 @@ namespace R5T.F0000
             return output;
         }
 
+        [Obsolete("Use R5T.L0066.IFileSystemOperator.Enumerate_Files()}")]
         public IEnumerable<FileInfo> EnumerateFiles(
             string directoryPath,
-            Func<DirectoryInfo, bool> subDirectoryRecursionPredicate)
-        {
-            var directoryInfo = new DirectoryInfo(directoryPath);
-
-            foreach (var fileInfo in directoryInfo.GetFiles())
-            {
-                yield return fileInfo;
-            }
-
-            foreach (var subDirectoryInfo in directoryInfo.GetDirectories())
-            {
-                var recurseInfoSubDirectory = subDirectoryRecursionPredicate(subDirectoryInfo);
-                if (recurseInfoSubDirectory)
-                {
-                    var subDirectoryPath = subDirectoryInfo.GetDirectoryPath();
-
-                    var subFiles = this.EnumerateFiles(
-                        subDirectoryPath,
-                        subDirectoryRecursionPredicate);
-
-                    foreach (var subFile in subFiles)
-                    {
-                        yield return subFile;
-                    }
-                }
-            }
-        }
+            Func<DirectoryInfo, bool> descendantDirectoryRecursionPredicate)
+            => this.Enumerate_Files_FileInfoOutput(
+                directoryPath,
+                descendantDirectoryRecursionPredicate);
 
         public string[] FindChildFilesInDirectoryByFileExtension(
             string directoryPath,
@@ -191,12 +169,12 @@ namespace R5T.F0000
         /// </summary>
         public DateTime GetLastModifiedTime_ForDirectory_Local(
             string directoryPath,
-            Func<DirectoryInfo, bool> subDirectoryRecursionPredicate)
+            Func<DirectoryInfo, bool> descendantDirectoryRecursionPredicate)
         {
-            var output = this.EnumerateFiles(
+            var output = this.Enumerate_Files_FileInfoOutput(
                 directoryPath,
-                subDirectoryRecursionPredicate)
-                .OrderByDescending(x => x.LastWriteTimeUtc)
+                descendantDirectoryRecursionPredicate)
+                .Order_ByWriteTime_Descending()
                 .First()
                 .LastWriteTime;
 

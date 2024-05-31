@@ -37,7 +37,7 @@ namespace R5T.F0000
         public static IExitCodes ExitCodes => F0000.ExitCodes.Instance;
         public static IExitCodeOperator ExitCodeOperator => F0000.ExitCodeOperator.Instance;
         public static IFileExtensionOperator FileExtensionOperator => F0000.FileExtensionOperator.Instance;
-        public static IFileExtensions FileExtensions => F0000.FileExtensions.Instance;
+        public static Z0072.Z002.IFileExtensions FileExtensions => Z0072.Z002.FileExtensions.Instance;
         public static IFileNameOperator FileNameOperator => F0000.FileNameOperator.Instance;
         public static IFileOperator FileOperator => F0000.FileOperator.Instance;
         public static IFileStreamOperator FileStreamOperator => F0000.FileStreamOperator.Instance;

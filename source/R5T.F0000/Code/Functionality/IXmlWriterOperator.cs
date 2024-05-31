@@ -8,7 +8,8 @@ using R5T.T0132;
 namespace R5T.F0000
 {
 	[FunctionalityMarker]
-	public partial interface IXmlWriterOperator : IFunctionalityMarker
+	public partial interface IXmlWriterOperator : IFunctionalityMarker,
+        L0066.IXmlWriterOperator
 	{
         /// <summary>
         /// The System XML writer includes an XML declaration by default, however this is often not desired.
@@ -27,26 +28,6 @@ namespace R5T.F0000
         public XmlWriter NewOmitDeclaration(Stream stream)
         {
             var settings = Instances.XmlWriterSettingsOperator.GetNoDeclaration();
-
-            var writer = XmlWriter.Create(stream, settings);
-            return writer;
-        }
-
-        /// <summary>
-        /// Gets the standard XML writer.
-        /// </summary>
-        public XmlWriter New_Synchronous(Stream stream)
-        {
-            var settings = Instances.XmlWriterSettingsOperator.GetStandardSettings();
-
-            var writer = XmlWriter.Create(stream, settings);
-            return writer;
-        }
-
-        /// <inheritdoc cref="New_Synchronous(Stream)"/>
-        public XmlWriter New(Stream stream)
-        {
-            var settings = Instances.XmlWriterSettingsOperator.GetStandardSettings();
 
             var writer = XmlWriter.Create(stream, settings);
             return writer;
