@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
+
 using R5T.T0132;
 
 
 namespace R5T.F0000
 {
     [FunctionalityMarker]
-    public partial interface IMachineNameOperator : IFunctionalityMarker
+    public partial interface IMachineNameOperator : IFunctionalityMarker,
+        L0066.IMachineNameOperator
     {
         public string GetMachineName()
         {
