@@ -53,6 +53,7 @@ namespace R5T.F0000
         public static INamespacedTypeNameOperator NamespacedTypeNameOperator => F0000.NamespacedTypeNameOperator.Instance;
         public static INowOperator NowOperator => F0000.NowOperator.Instance;
         public static IObjectOperator ObjectOperator => F0000.ObjectOperator.Instance;
+        public static IOrderOperator OrderOperator => F0000.OrderOperator.Instance;
         public static IPathOperator PathOperator => F0000.PathOperator.Instance;
         public static ISearchPatterns SearchPatterns => F0000.SearchPatterns.Instance;
         public static ISearchPatternGenerator SearchPatternGenerator => F0000.SearchPatternGenerator.Instance;

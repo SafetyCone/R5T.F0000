@@ -146,27 +146,6 @@ namespace System.Linq
             return output;
         }
 
-        public static IEnumerable<T> OrderByNames<T>(this IEnumerable<T> items,
-            Func<T, string> nameSelector,
-            IEnumerable<string> orderedNames)
-        {
-            var output = OrderOperator.Instance.OrderByNames(
-                items,
-                nameSelector,
-                orderedNames);
-
-            return output;
-        }
-
-        public static IEnumerable<T> OrderByNames<T>(this IEnumerable<T> items,
-            Func<T, string> nameSelector,
-            params string[] orderedNames)
-        {
-            return items.OrderByNames(
-                nameSelector,
-                orderedNames.AsEnumerable());
-        }
-
         public static bool StartsWith<T>(this IEnumerable<T> enumerable,
             IEnumerable<T> start,
             Framework.IEqualityComparer<T> equalityComparer)
