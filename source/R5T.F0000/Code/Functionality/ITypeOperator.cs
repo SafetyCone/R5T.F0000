@@ -12,22 +12,6 @@ namespace R5T.F0000
 	public partial interface ITypeOperator : IFunctionalityMarker,
 		L0053.ITypeOperator
 	{
-		/// <summary>
-		/// Quality-of-life overload for <see cref="L0053.ITypeOperator.Get_NamespacedTypeName(Type)"/>.
-		/// </summary>
-		public string GetNamespacedTypeName_ForType(Type type)
-        {
-			return this.Get_NamespacedTypeName(type);
-        }
-
-		/// <summary>
-		/// Quality-of-life overload for <see cref="L0053.ITypeInfoOperator.Get_NamespacedTypeName(TypeInfo)"/>.
-		/// </summary>
-		public string GetNamespacedTypeName_ForTypeInfo(TypeInfo typeInfo)
-		{
-			return this.Get_NamespacedTypeName(typeInfo);
-		}
-
 		public string GetNameOf<T>()
         {
 			var type = this.Get_TypeOf<T>();

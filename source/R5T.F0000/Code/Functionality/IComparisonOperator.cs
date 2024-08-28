@@ -6,18 +6,9 @@ using R5T.T0132;
 namespace R5T.F0000
 {
 	[FunctionalityMarker]
-	public partial interface IComparisonOperator : IFunctionalityMarker
+	public partial interface IComparisonOperator : IFunctionalityMarker,
+        L0066.IComparisonOperator
 	{
-        public bool IsEqualResult(int comparisonResult)
-        {
-            var output = comparisonResult == Instances.ComparisonResults.EqualTo;
-            return output;
-        }
 
-        public bool IsNotEqualResult(int comparisonResult)
-        {
-            var output = !this.IsEqualResult(comparisonResult);
-            return output;
-        }
     }
 }

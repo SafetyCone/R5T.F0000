@@ -13,15 +13,7 @@ namespace R5T.F0000
 	public partial interface IAssemblyOperator : IFunctionalityMarker,
         L0066.IAssemblyOperator
 	{
-        public void ForTypes(
-            Assembly assembly,
-            Func<TypeInfo, bool> typeSelector,
-            Action<TypeInfo> action)
-        {
-            var types = this.SelectTypes(assembly, typeSelector);
-
-            types.ForEach(typeInfo => action(typeInfo));
-        }
+        
 
         public void ForAllTypes(
             Assembly assembly,
@@ -34,16 +26,7 @@ namespace R5T.F0000
                 action);
         }
 
-        public IEnumerable<TypeInfo> SelectTypes(
-            Assembly assembly,
-            Func<TypeInfo, bool> typeSelector)
-        {
-            var output = assembly.DefinedTypes
-                .Where(typeSelector)
-                ;
-
-            return output;
-        }
+        
 
         public TypeInfo GetType(
             Assembly assembly,
@@ -64,7 +47,7 @@ namespace R5T.F0000
             Assembly assembly,
             string namespacedTypeName)
         {
-            var typeOrDefault = this.SelectTypes(
+            var typeOrDefault = this.Select_Types(
                 assembly,
                 TypeOperator.Instance.WhereNamespacedTypeNameIs(namespacedTypeName))
                 .SingleOrDefault();

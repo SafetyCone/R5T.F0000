@@ -27,6 +27,12 @@ namespace R5T.F0000.Extensions
         {
             return Instances.EnumerableOperator.Append(enumerable, itemConstructor);
         }
+
+        public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> pairs)
+        {
+            var output = EnumerableOperator.Instance.ToDictionary(pairs);
+            return output;
+        }
     }
 }
 
@@ -187,12 +193,6 @@ namespace System.Linq
                 enumerable,
                 transformer);
 
-            return output;
-        }
-
-        public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> pairs)
-        {
-            var output = EnumerableOperator.Instance.ToDictionary(pairs);
             return output;
         }
 

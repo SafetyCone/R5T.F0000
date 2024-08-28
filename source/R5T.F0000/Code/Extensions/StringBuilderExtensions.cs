@@ -11,7 +11,7 @@ namespace System
     {
         public static string GetString(this StringBuilder stringBuilder, Action<StringBuilder> modifier)
         {
-            var output = Instances.StringOperator.GetString(stringBuilder, modifier);
+            var output = Instances.StringOperator.Get_String(stringBuilder, modifier);
             return output;
         }
     }

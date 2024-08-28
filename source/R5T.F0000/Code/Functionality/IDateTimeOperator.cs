@@ -13,12 +13,6 @@ namespace R5T.F0000
 	public partial interface IDateTimeOperator : IFunctionalityMarker,
         L0053.IDateTimeOperator
 	{
-        public DateTime From_YYYYMMDD(string YYYYMMDD)
-        {
-            var output = DateTime.ParseExact(YYYYMMDD, "yyyyMMdd", CultureInfo.InvariantCulture);
-            return output;
-        }
-
         public DateTime From_YYYYMMDD_HHMMSS(string yyyymmdd_hhmmss)
         {
             var output = Instances.DateTimeOperator.ParseExact(
@@ -33,12 +27,6 @@ namespace R5T.F0000
 			var output = dateTime.Date;
 			return output;
 		}
-
-        public DateTime Get_Zero()
-        {
-            var output = new DateTime();
-            return output;
-        }
 
         public DateTime Get_Today()
         {
@@ -68,18 +56,6 @@ namespace R5T.F0000
             return output;
         }
 
-        public DateTime ParseExact(
-            string dateTimeString,
-            string format)
-        {
-            var dateTime = DateTime.ParseExact(
-                dateTimeString,
-                format,
-                Instances.FormatProviders.Default);
-
-            return dateTime;
-        }
-
         /// <summary>
         /// Oldest first, to youngest last.
         /// </summary>
@@ -95,27 +71,6 @@ namespace R5T.F0000
 		public IEnumerable<DateTime> OrderReverseChronologically(IEnumerable<DateTime> dates)
 		{
 			var output = dates.OrderByDescending(x => x);
-			return output;
-		}
-
-		public string ToString_MMM_DD_YYYY(DateTime dateTime)
-		{
-			var output = $"{dateTime:MMM dd, yyyy}";
-			return output;
-		}
-
-		public string ToString_YYYY_MM_DD(DateTime dateTime)
-		{
-			var output = $"{dateTime:yyyy-MM-dd}";
-			return output;
-		}
-
-		/// <summary>
-		/// Example output: 20221014 151201
-		/// </summary>
-		public string ToString_YYYYMMDD_HHMMSS(DateTime dateTime)
-		{
-			var output = $"{dateTime:yyyyMMdd HHmmss}";
 			return output;
 		}
 

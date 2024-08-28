@@ -216,15 +216,6 @@ namespace R5T.F0000
 			return output;
 		}
 
-		public Dictionary<TKey, TValue> ToDictionary<TKey, TValue>(IEnumerable<KeyValuePair<TKey, TValue>> pairs)
-		{
-			var output = pairs.ToDictionary(
-				pair => pair.Key,
-				pair => pair.Value);
-
-			return output;
-		}
-
 		/// <summary>
 		/// Zips two enumerable sequences together.
 		/// If the two sequences are of unequal length, an exception is thrown.

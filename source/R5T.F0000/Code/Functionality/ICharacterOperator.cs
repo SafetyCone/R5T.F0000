@@ -350,23 +350,5 @@ namespace R5T.F0000
             var output = characters.OrderBy(x => x);
             return output;
         }
-
-        /// <summary>
-        /// Chooses the invariant lowering operation as default.
-        /// </summary>
-        public char ToLower(char character)
-        {
-            var output = Char.ToLowerInvariant(character);
-            return output;
-        }
-
-        /// <summary>
-        /// Chooses the invariant uppering operation as default.
-        /// </summary>
-        public char ToUpper(char character)
-        {
-            var output = Char.ToUpperInvariant(character);
-            return output;
-        }
     }
 }

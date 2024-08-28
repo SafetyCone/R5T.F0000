@@ -8,57 +8,43 @@ namespace R5T.F0000.F001
 	[FunctionalityMarker]
 	public partial interface IDateOperator : IFunctionalityMarker,
 		F0000.IDateOperator
+
 	{
+#pragma warning disable IDE1006 // Naming Styles
+		public F0000.IDateOperator _F0000 => F0000.DateOperator.Instance;
+        public L0072.IDateOperator _L0072 => L0072.DateOperator.Instance;
+#pragma warning restore IDE1006 // Naming Styles
+
+
+		[Obsolete("See R5T.L0072.IDateOperator")]
 		public new DateOnly GetToday_Local()
-        {
-			var todayLocalDateTime = Instances.F0000_DateOperator.GetToday_Local();
+			=> _L0072.GetToday_Local();
 
-			var todayLocal = Instances.DateOnlyOperator.From_DateTime(todayLocalDateTime);
-			return todayLocal;
-        }
-
+		[Obsolete("See R5T.L0072.IDateOperator")]
 		public new DateOnly GetToday_Utc()
-		{
-			var todayUtcDateTime = Instances.F0000_DateOperator.GetToday_Utc();
+			=> _L0072.GetToday_Utc();
 
-			var todayUtc = Instances.DateOnlyOperator.From_DateTime(todayUtcDateTime);
-			return todayUtc;
-		}
+        /// <summary>
+        /// Chooses <see cref="GetToday_Local"/> as the default.
+        /// </summary>
+        [Obsolete("See R5T.L0072.IDateOperator")]
+        public new DateOnly GetToday()
+			=> this.GetToday_Local();
 
-		/// <summary>
-		/// Chooses <see cref="GetToday_Local"/> as the default.
-		/// </summary>
-		public new DateOnly GetToday()
-        {
-			var today = this.GetToday_Local();
-			return today;
-        }
+        [Obsolete("See R5T.L0072.IDateOperator")]
+        public new DateOnly GetTomorrow_Local()
+			=> _L0072.GetTomorrow_Local();
 
-
-		public new DateOnly GetTomorrow_Local()
-		{
-			var todayLocalDateTime = Instances.F0000_DateOperator.GetTomorrow_Local();
-
-			var todayLocal = Instances.DateOnlyOperator.From_DateTime(todayLocalDateTime);
-			return todayLocal;
-		}
-
-		public new DateOnly GetTomorrow_Utc()
-		{
-			var todayUtcDateTime = Instances.F0000_DateOperator.GetTomorrow_Utc();
-
-			var todayUtc = Instances.DateOnlyOperator.From_DateTime(todayUtcDateTime);
-			return todayUtc;
-		}
+        [Obsolete("See R5T.L0072.IDateOperator")]
+        public new DateOnly GetTomorrow_Utc()
+			=> _L0072.GetTomorrow_Utc();
 
 		/// <summary>
 		/// Chooses <see cref="GetTomorrow_Local"/> as the default.
 		/// </summary>
+		[Obsolete("See R5T.L0072.IDateOperator")]
 		public new DateOnly GetTomorrow()
-		{
-			var today = this.GetTomorrow_Local();
-			return today;
-		}
+			=> this.GetTomorrow_Local();
 
 		public string ToString_YYYY_MM_DD_Dash(DateOnly date)
         {

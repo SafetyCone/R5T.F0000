@@ -160,14 +160,6 @@ namespace R5T.F0000
             return stringComparison;
         }
 
-        public string GetString(StringBuilder stringBuilder, Action<StringBuilder> modifier)
-        {
-            modifier(stringBuilder);
-
-            var output = stringBuilder.ToString();
-            return output;
-        }
-
         /// <summary>
         /// Gets the beginning substring up to, but excluding, the first occurrence of the specified character.
         /// </summary>

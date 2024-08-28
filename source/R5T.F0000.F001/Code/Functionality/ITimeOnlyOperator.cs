@@ -14,8 +14,8 @@ namespace R5T.F0000.F001
             var timeIsAfterNow = this.TimeIsAfterNow_Local(localTime, localNow);
 
             var dateForNextTime = timeIsAfterNow
-                ? Instances.DateOperator.GetToday_Local()
-                : Instances.DateOperator.GetTomorrow_Local();
+                ? Instances.DateOperator_L0072.GetToday_Local()
+                : Instances.DateOperator_L0072.GetTomorrow_Local();
                 ;
 
             return dateForNextTime;

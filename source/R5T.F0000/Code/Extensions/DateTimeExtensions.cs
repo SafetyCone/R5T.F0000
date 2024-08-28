@@ -35,7 +35,7 @@ namespace R5T.F0000.Extensions
 
         public static string ToYYYYMMDD_HHMMSS(this DateTime value)
         {
-            var output = Instances.DateOperator.ToString_YYYYMMDD_HHMMSS(value);
+            var output = Instances.DateTimeOperator.ToString_YYYYMMDD_HHMMSS(value);
             return output;
         }
     }

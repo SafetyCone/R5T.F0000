@@ -27,24 +27,6 @@ namespace R5T.F0000
             // Else, do nothing.
         }
 
-        /// <summary>
-        /// Adds the key-value pair if the key does not exist, else replaces the value for the given key if the key already exists.
-        /// </summary>
-        public void Add_OrReplace<TKey, TValue>(IDictionary<TKey, TValue> dictionary,
-            TKey key,
-            TValue value)
-        {
-            var hasKey = dictionary.ContainsKey(key);
-            if(hasKey)
-            {
-                dictionary[key] = value;
-            }
-            else
-            {
-                dictionary.Add(key, value);
-            }
-        }
-
         public void AddRange<TKey, TValue>(IDictionary<TKey, TValue> dictionary, IDictionary<TKey, TValue> values)
         {
             foreach (var pair in values)
