@@ -1,9 +1,12 @@
 ﻿using System;
 //using System.Runtime.Serialization;
 
+using R5T.T0142;
+
 
 namespace R5T.F0000
 {
+    [ExceptionTypeMarker]
     public class UnhandledValueException<TValue> : Exception
     {
         //protected const string ValuePropertyName = "Value";
