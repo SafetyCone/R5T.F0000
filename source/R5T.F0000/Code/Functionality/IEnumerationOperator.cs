@@ -35,14 +35,6 @@ namespace R5T.F0000
             return value;
         }
 
-        public TEnum[] Get_Values<TEnum>()
-        {
-            var array = Enum.GetValues(typeof(TEnum));
-
-            var values = array as TEnum[];
-            return values;
-        }
-
         public bool Is_Int32Based(Enum value)
         {
             var enumerationType = value.GetType();
