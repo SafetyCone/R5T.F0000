@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 
 using R5T.T0132;
+using R5T.T0143;
 
 
 namespace R5T.F0000
@@ -10,14 +11,21 @@ namespace R5T.F0000
 	public partial interface IExceptionOperator : IFunctionalityMarker,
 		L0053.IExceptionOperator
 	{
-		//private static Internal.IExceptionOperator Internal => F0000.Internal.ExceptionOperator.Instance;
+#pragma warning disable IDE1006 // Naming Styles
+
+        [Ignore]
+        public L0053.IExceptionOperator _L0053 => L0053.ExceptionOperator.Instance;
+
+#pragma warning restore IDE1006 // Naming Styles
+
+        //private static Internal.IExceptionOperator Internal => F0000.Internal.ExceptionOperator.Instance;
 
 
-		/// <summary>
-		/// <inheritdoc cref="L0066.Documentation.ArrayLengthsNotActuallyChecked" path="/summary"/>
-		/// Just gets the exception assuming that is the case.
-		/// </summary>
-		public Exception GetArrayLengthsUnequalException(Array a, Array b)
+        /// <summary>
+        /// <inheritdoc cref="L0066.Documentation.ArrayLengthsNotActuallyChecked" path="/summary"/>
+        /// Just gets the exception assuming that is the case.
+        /// </summary>
+        public Exception GetArrayLengthsUnequalException(Array a, Array b)
         {
 			var message = MessageOperator.Instance.GetUnequalArrayLengths(a, b);
 

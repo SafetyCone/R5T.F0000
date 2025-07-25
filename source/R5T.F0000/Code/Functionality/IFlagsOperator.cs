@@ -13,7 +13,7 @@ namespace R5T.F0000
     //  * https://journal.stuffwithstuff.com/2008/03/05/checking-flags-in-c-enums/
     [FunctionalityMarker]
     public partial interface IFlagsOperator : IFunctionalityMarker,
-        L0053.IFileOperator
+        L0066.IFileOperator
     {
         private static Implementations.IFlagsOperator Implementations => F0000.Implementations.FlagsOperator.Instance;
         private static Unchecked.IFlagsOperator Unchecked => F0000.Unchecked.FlagsOperator.Instance;

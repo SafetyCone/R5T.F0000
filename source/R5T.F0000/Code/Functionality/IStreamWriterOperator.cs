@@ -20,7 +20,7 @@ namespace R5T.F0000
             }
         }
 
-        public async Task WriteAllLinesOneByOne(string filePath, IEnumerable<string> lines, bool overwrite = IValues.Default_OverwriteValue_Constant)
+        public async Task WriteAllLinesOneByOne(string filePath, IEnumerable<string> lines, bool overwrite = IValues.Overwrite_Default_Constant)
         {
             using var streamWriter = this.New_Write(filePath, overwrite);
 
@@ -54,7 +54,7 @@ namespace R5T.F0000
             this.WriteAllLines_Synchronous(writer, lines, Instances.Strings.NewLine_ForEnvironment);
         }
 
-        public async Task WriteAllLines(string filePath, IEnumerable<string> lines, string lineSeparator, bool overwrite = IValues.Default_OverwriteValue_Constant)
+        public async Task WriteAllLines(string filePath, IEnumerable<string> lines, string lineSeparator, bool overwrite = IValues.Overwrite_Default_Constant)
         {
             using var writer = this.New_Write(filePath, overwrite);
 
@@ -62,20 +62,20 @@ namespace R5T.F0000
         }
 
         /// <inheritdoc cref="WriteAllLines_Synchronous(StreamWriter, IEnumerable{string}, string)"/>
-        public void WriteAllLines_Synchronous(string filePath, IEnumerable<string> lines, string lineSeparator, bool overwrite = IValues.Default_OverwriteValue_Constant)
+        public void WriteAllLines_Synchronous(string filePath, IEnumerable<string> lines, string lineSeparator, bool overwrite = IValues.Overwrite_Default_Constant)
         {
             using var writer = this.New_Write(filePath, overwrite);
 
             this.WriteAllLines_Synchronous(writer, lines, lineSeparator);
         }
 
-        public Task WriteAllLines(string filePath, IEnumerable<string> lines, bool overwrite = IValues.Default_OverwriteValue_Constant)
+        public Task WriteAllLines(string filePath, IEnumerable<string> lines, bool overwrite = IValues.Overwrite_Default_Constant)
         {
             return this.WriteAllLines(filePath, lines, Instances.Strings.NewLine_ForEnvironment, overwrite);
         }
 
         /// <inheritdoc cref="WriteAllLines_Synchronous(string, IEnumerable{string}, string, bool)"/>
-        public void WriteAllLines_Synchronous(string filePath, IEnumerable<string> lines, bool overwrite = IValues.Default_OverwriteValue_Constant)
+        public void WriteAllLines_Synchronous(string filePath, IEnumerable<string> lines, bool overwrite = IValues.Overwrite_Default_Constant)
         {
             this.WriteAllLines_Synchronous(filePath, lines, Instances.Strings.NewLine_ForEnvironment, overwrite);
         }

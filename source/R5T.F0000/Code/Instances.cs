@@ -31,7 +31,7 @@ namespace R5T.F0000
         public static IEnumerationOperator EnumerationOperator => F0000.EnumerationOperator.Instance;
         public static Unchecked.IEnumerationOperator EnumerationOperator_Unchecked => Unchecked.EnumerationOperator.Instance;
         public static IEnvironmentOperator EnvironmentOperator => F0000.EnvironmentOperator.Instance;
-        public static IExceptionMessageOperator ExceptionMessageOperator => F0000.ExceptionMessageOperator.Instance;
+        public static L0053.IExceptionMessageOperator ExceptionMessageOperator => L0053.ExceptionMessageOperator.Instance;
         public static IExceptionOperator ExceptionOperator => F0000.ExceptionOperator.Instance;
         public static IExecutablePathOperator ExecutablePathOperator => F0000.ExecutablePathOperator.Instance;
         public static IExitCodes ExitCodes => F0000.ExitCodes.Instance;
@@ -43,9 +43,10 @@ namespace R5T.F0000
         public static IFileStreamOperator FileStreamOperator => F0000.FileStreamOperator.Instance;
         public static IFileSystemOperator FileSystemOperator => F0000.FileSystemOperator.Instance;
         public static IFormatProviders FormatProviders => F0000.FormatProviders.Instance;
-        public static IGuidOperator GuidOperator => F0000.GuidOperator.Instance;
+        public static L0066.IGuidOperator GuidOperator => L0066.GuidOperator.Instance;
+        public static L0066.IHashSetOperator HashSetOperator => L0066.HashSetOperator.Instance;
         public static IIndex Index => F0000.Index.Instance;
-        public static IIndexOperator IndexOperator => F0000.IndexOperator.Instance;
+        public static L0066.IIndexOperator IndexOperator => L0066.IndexOperator.Instance;
         public static IIntegers Integers => F0000.Integers.Instance;
         public static IListOperator ListOperator => F0000.ListOperator.Instance;
         public static IMemoryStreamOperator MemoryStreamOperator => F0000.MemoryStreamOperator.Instance;
@@ -83,7 +84,7 @@ namespace R5T.F0000
         public static IXmlNamespaceNames XmlNamespaceNames => F0000.XmlNamespaceNames.Instance;
         public static IXmlOperator XmlOperator => F0000.XmlOperator.Instance;
         public static IXmlStrings XmlStrings => F0000.XmlStrings.Instance;
-        public static IXmlWriterSettingsOperator XmlWriterSettingsOperator => F0000.XmlWriterSettingsOperator.Instance;
+        public static L0066.IXmlWriterSettingsOperator XmlWriterSettingsOperator => L0066.XmlWriterSettingsOperator.Instance;
         public static IXPathGenerator XPathGenerator => F0000.XPathGenerator.Instance;
     }
 }

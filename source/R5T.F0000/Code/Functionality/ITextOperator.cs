@@ -34,7 +34,7 @@ namespace R5T.F0000
 				var isUppercase = Instances.CharacterOperator.Is_Uppercase(firstLetter);
 				if(!isUppercase)
 				{
-					var uppercaseLetter = Instances.CharacterOperator.ToUpper(firstLetter);
+					var uppercaseLetter = Instances.CharacterOperator.To_Upper(firstLetter);
 
 					var output = this.Replace_FirstLetter_Unchecked(
 						word,

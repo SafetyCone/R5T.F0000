@@ -53,7 +53,7 @@ namespace R5T.F0000.Extensions
 {
     public static class ListExtensions
     {
-        /// <inheritdoc cref="L0066.IListOperator.Get_First{T}(IList{T})"/>
+        /// <inheritdoc cref="F10Y.L0000.IListOperator.Get_First{T}(IList{T})"/>
         public static T Get_First<T>(this IList<T> list)
         {
             return Instances.ListOperator.Get_First(list);

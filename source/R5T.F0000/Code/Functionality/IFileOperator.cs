@@ -5,14 +5,23 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using R5T.T0132;
+using R5T.T0143;
 
 
 namespace R5T.F0000
 {
 	[FunctionalityMarker]
 	public partial interface IFileOperator : IFunctionalityMarker,
-        L0053.IFileOperator
+        L0066.IFileOperator
 	{
+#pragma warning disable IDE1006 // Naming Styles
+
+        [Ignore]
+        public L0066.IFileOperator _L0066 => L0066.FileOperator.Instance;
+
+#pragma warning restore IDE1006 // Naming Styles
+
+
         public async Task CopyToFile(
 			string filePath,
 			Stream stream)
@@ -25,7 +34,7 @@ namespace R5T.F0000
 
 		public StreamWriter NewWrite_Text(
 			string filePath,
-            bool overwrite = IValues.Default_OverwriteValue_Constant)
+            bool overwrite = IValues.Overwrite_Default_Constant)
 		{
 			var output = StreamWriterOperator.Instance.New_Write(
 				filePath);
@@ -51,7 +60,7 @@ namespace R5T.F0000
 		public void WriteAllLines_Synchronous(
 			string filePath,
 			IEnumerable<string> lines,
-			bool overwrite = IValues.Default_OverwriteValue_Constant)
+			bool overwrite = IValues.Overwrite_Default_Constant)
 		{
             FileSystemOperator.Instance.Ensure_DirectoryExists_ForFilePath(filePath);
 

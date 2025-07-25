@@ -85,7 +85,7 @@ namespace R5T.F0000
                 .SelectMany(pair => EnumerableOperator.Instance.From(pair.Key)
                     .AppendRange(pair.Value
                         .Select(x => $"\t{x}")))
-                .Now();
+                .ToArray();
 
             return output;
         }

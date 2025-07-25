@@ -1,15 +1,24 @@
 using System;
 
 using R5T.T0132;
+using R5T.T0143;
 
 
 namespace R5T.F0000
 {
 	[FunctionalityMarker]
 	public partial interface IEnumerationOperator : IFunctionalityMarker,
-        L0053.IEnumerationOperator
+        L0066.IEnumerationOperator
 	{
-        private static Unchecked.IEnumerationOperator Unchecked => F0000.Unchecked.EnumerationOperator.Instance;
+#pragma warning disable IDE1006 // Naming Styles
+
+        [Ignore]
+        public L0066.IEnumerationOperator _L0066 => L0066.EnumerationOperator.Instance;
+
+        [Ignore]
+        public Unchecked.IEnumerationOperator _Unchecked => Unchecked.EnumerationOperator.Instance;
+
+#pragma warning restore IDE1006 // Naming Styles
 
 
         public TEnum From_Int32<TEnum>(int value)
@@ -17,7 +26,7 @@ namespace R5T.F0000
         {
             this.Verify_IsInt32Based<TEnum>();
 
-            var output = Unchecked.From_Int32<TEnum>(value);
+            var output = _Unchecked.From_Int32<TEnum>(value);
             return output;
         }
 
@@ -75,7 +84,7 @@ namespace R5T.F0000
         {
             this.Verify_IsInt32Based(value);
 
-            var output = Unchecked.To_Int32(value);
+            var output = _Unchecked.To_Int32(value);
             return output;
         }
 

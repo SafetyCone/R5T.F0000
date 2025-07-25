@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using R5T.F0000.Extensions;
+
 using R5T.T0132;
+using R5T.T0143;
 
 using Glossary = R5T.Y0000.Glossary;
 
@@ -15,6 +16,13 @@ namespace R5T.F0000
     public interface ICharacterOperator : IFunctionalityMarker,
         L0053.ICharacterOperator
     {
+#pragma warning disable IDE1006 // Naming Styles
+
+        [Ignore]
+        public L0053.IStringOperator _L0053 => L0053.StringOperator.Instance;
+
+#pragma warning restore IDE1006 // Naming Styles
+
         /// <summary>
         /// Describes a character with its string representation, three-digit numeric value, and name. Example: 'b': 062, "lower-case b".
         /// </summary>

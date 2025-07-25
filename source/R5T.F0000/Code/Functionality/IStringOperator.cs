@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 
 using R5T.L0089.T000;
 using R5T.T0132;
+using R5T.T0143;
 
 
 namespace R5T.F0000
@@ -13,7 +14,17 @@ namespace R5T.F0000
 	public interface IStringOperator : IFunctionalityMarker,
         L0053.IStringOperator
 	{
-        private static Internal.IStringOperator Internal => F0000.Internal.StringOperator.Instance;
+#pragma warning disable IDE1006 // Naming Styles
+
+        [Ignore]
+        public new Internal.IStringOperator _Internal => Internal.StringOperator.Instance;
+
+        [Ignore]
+        public L0053.IStringOperator _L0053 => L0053.StringOperator.Instance;
+
+
+#pragma warning restore IDE1006 // Naming Styles
+
 
 
         public string Convert_StructuredString_ToFormatString(string structuredString)
@@ -91,7 +102,7 @@ namespace R5T.F0000
         /// Gets the first character of the string.
         /// </summary>
         /// <remarks>
-        /// This must duplicate <see cref="L0066.IListOperator.Get_First{T}(IList{T})"/> because string does not actually implement <see cref="IList{T}"/> of <see cref="char"/>
+        /// This must duplicate <see cref="F10Y.L0000.IListOperator.Get_First{T}(IList{T})"/> because string does not actually implement <see cref="IList{T}"/> of <see cref="char"/>
         /// (because it does not implement <see cref="Array"/> of <see cref="char"/>).
         /// </remarks>
         public char Get_First(string @string)
@@ -314,7 +325,7 @@ namespace R5T.F0000
                 token,
                 @string);
 
-            var output = Internal.WasFound(indexOrNotFound);
+            var output = _Internal.WasFound(indexOrNotFound);
             return output;
         }
 
@@ -326,7 +337,7 @@ namespace R5T.F0000
                 character,
                 @string);
 
-            var output = Internal.WasFound(indexOrNotFound);
+            var output = _Internal.WasFound(indexOrNotFound);
             return output;
         }
 
@@ -340,7 +351,7 @@ namespace R5T.F0000
                 @string,
                 startIndex);
 
-            var output = Internal.WasFound(indexOrNotFound);
+            var output = _Internal.WasFound(indexOrNotFound);
             return output;
         }
 
@@ -380,7 +391,7 @@ namespace R5T.F0000
                 @string,
                 searchCharacters);
 
-            var output = Internal.WasFound(indexOrNotFound);
+            var output = _Internal.WasFound(indexOrNotFound);
             return output;
         }
 
@@ -407,7 +418,7 @@ namespace R5T.F0000
                 character,
                 @string);
 
-            var output = Internal.WasFound(lastIndexOrNotFound);
+            var output = _Internal.WasFound(lastIndexOrNotFound);
             return output;
         }
 
