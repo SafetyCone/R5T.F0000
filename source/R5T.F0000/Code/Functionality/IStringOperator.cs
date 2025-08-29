@@ -79,25 +79,6 @@ namespace R5T.F0000
             return output;
         }
 
-        public int Get_CountOf(
-            char character,
-            string @string)
-        {
-            var count = 0;
-
-            for (int iCharacter = 0; iCharacter < @string.Length; iCharacter++)
-            {
-                var currentCharacter = @string[iCharacter];
-
-                if(currentCharacter == character)
-                {
-                    count++;
-                }
-            }
-
-            return count;
-        }
-
         /// <summary>
         /// Gets the first character of the string.
         /// </summary>
@@ -255,7 +236,7 @@ namespace R5T.F0000
         }
 
         /// <summary>
-        /// Chooses <see cref="L0066.IStringOperator.Get_Substring_From_Exclusive(int, string)"/> as the default.
+        /// Chooses <see cref="F10Y.L0000.IStringOperator.Get_Substring_From_Exclusive(int, string)"/> as the default.
         /// </summary>
         public string Get_Substring_Exclusive(
             int startIndex_Exclusive,

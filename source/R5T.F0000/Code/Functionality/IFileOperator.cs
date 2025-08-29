@@ -32,6 +32,9 @@ namespace R5T.F0000
 			await stream.CopyToAsync(fileStream);
         }
 
+        public bool Exists(string filePath)
+            => Instances.FileSystemOperator.Exists_File(filePath);
+
 		public StreamWriter NewWrite_Text(
 			string filePath,
             bool overwrite = IValues.Overwrite_Default_Constant)

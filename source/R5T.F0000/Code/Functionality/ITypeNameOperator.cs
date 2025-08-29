@@ -165,7 +165,7 @@ namespace R5T.F0000
             var firstCharacterIsInterfaceNamePrefix = typeName.First() == TypeNameAffixes.Instance.InterfacePrefix_Character;
 
             // 3) Is the second character also capitalized (allowing for ImageData to be a class, while IImageData would be an interface)?
-            var secondCharacter = typeName.Second();
+            var secondCharacter = Instances.EnumerableOperator.Get_Second(typeName);
             var secondCharacterIsAlsoCapitalized = Char.IsUpper(secondCharacter);
 
             var output = true
@@ -187,7 +187,7 @@ namespace R5T.F0000
             }
 
             // 1) Is the first character of the type name capitalized?
-            var firstCharacter = typeName.Second();
+            var firstCharacter = Instances.EnumerableOperator.Get_Second(typeName);
             var firstCharacterIsCapitalized = CharacterOperator.Instance.Is_Capitalized(firstCharacter);
 
             var output = true
