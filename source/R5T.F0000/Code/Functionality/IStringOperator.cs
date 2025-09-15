@@ -96,7 +96,7 @@ namespace R5T.F0000
         /// Gets the first character of the string.
         /// </summary>
         /// <remarks>
-        /// This must duplicate <see cref="L0066.IListOperator.Get_Second{T}(IList{T})"/> because string does not actually implement <see cref="IList{T}"/> of <see cref="char"/>
+        /// This must duplicate <see cref="F10Y.L0000.IListOperator.Get_Second{T}(IList{T})"/> because string does not actually implement <see cref="IList{T}"/> of <see cref="char"/>
         /// (because it does not implement <see cref="Array"/> of <see cref="char"/>).
         /// </remarks>
         public char Get_Second(string @string)

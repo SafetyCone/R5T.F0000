@@ -53,16 +53,5 @@ namespace R5T.F0000.Extensions
 {
     public static class ListExtensions
     {
-        /// <inheritdoc cref="F10Y.L0000.IListOperator.Get_First{T}(IList{T})"/>
-        public static T Get_First<T>(this IList<T> list)
-        {
-            return Instances.ListOperator.Get_First(list);
-        }
-
-        /// <inheritdoc cref="L0066.IListOperator.Get_Second{T}(IList{T})"/>
-        public static T Get_Second<T>(this IList<T> list)
-        {
-            return Instances.ListOperator.Get_Second(list);
-        }
     }
 }

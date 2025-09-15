@@ -56,7 +56,7 @@ namespace R5T.F0000.Extensions
                 value);
         }
 
-        /// <inheritdoc cref="L0066.IDictionaryOperator.Add_OrReplace{TKey, TValue}(IDictionary{TKey, TValue}, TKey, TValue)"/>
+        /// <inheritdoc cref="F10Y.L0000.IDictionaryOperator.Add_OrReplace{TKey, TValue}(IDictionary{TKey, TValue}, TKey, TValue)"/>
         public static void Add_OrReplace<TKey, TValue>(this IDictionary<TKey, TValue> dictionary,
             TKey key,
             TValue value)
