@@ -281,7 +281,7 @@ namespace R5T.F0000
         }
 
         /// <summary>
-        /// A quality-of-life overload for <see cref="L0066.IStringOperator.Is_NotNullOrEmpty(string)"/>.
+        /// A quality-of-life overload for <see cref="F10Y.L0000.IStringOperator.Is_NotNullOrEmpty(string)"/>.
         /// </summary>
         public bool HasValue(string @string)
         {
