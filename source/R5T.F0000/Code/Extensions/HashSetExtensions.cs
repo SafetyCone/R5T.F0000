@@ -49,7 +49,7 @@ public static class HashSetExtensions
 
     public static void AddRangeThrowIfDuplicate<T>(this HashSet<T> hashSet,
         IEnumerable<T> items)
-        => Instances.HashSetOperator.Add_Range_ThrowIfDuplicate(
+        => Instances.HashSetOperator.Add_Range_ExceptionIfDuplicate(
             hashSet,
             items);
 }
